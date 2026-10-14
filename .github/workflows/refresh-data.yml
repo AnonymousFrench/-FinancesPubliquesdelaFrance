@@ -1,0 +1,33 @@
+# Rafraîchit chaque lundi les séries « État de la France » (Eurostat, Insee, Banque mondiale, FMI, Réserve fédérale)
+# et l'instantané des sondages, puis pousse un commit si quelque chose a changé : Vercel redéploie alors le site.
+name: Rafraîchir les données
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run etat
+      - run: npm run polls
+      - name: Vérifier que le site compile
+        run: npx vite build
+      - name: Publier si les données ont changé
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add src/data/etat-series.json data-raw/etat.json src/data/polls-snapshot.json
+          if git diff --cached --quiet; then echo "Aucun changement."; else git commit -m "Données : rafraîchissement hebdomadaire" && git push; fi

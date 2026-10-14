@@ -83,7 +83,8 @@ for (const s of SPECS) {
   } catch (e) { console.log('ÉCHEC', s.id, e.message) }
 }
 const file = new URL('../data-raw/etat.json', import.meta.url)
-const prev = test && fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : {}
+// Une source indisponible ne doit pas effacer les données déjà publiées : on part toujours de la version précédente.
+const prev = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : {}
 fs.writeFileSync(file, JSON.stringify({ ...prev, ...res }))
 
 // Version allégée pour le site : années ≥ 1960, 3 chiffres significatifs, population en millions.

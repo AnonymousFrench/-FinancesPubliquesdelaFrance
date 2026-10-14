@@ -1,6 +1,6 @@
 # Finances publiques de la France
 
-Dette, déficit, recettes et dépenses de la France à partir des données officielles, budget de l’État ligne par ligne, simulateur des programmes de la présidentielle 2027 et sondages en direct.
+Dette, déficit, recettes et dépenses de la France à partir des données officielles, budget de l’État ligne par ligne, simulateur des programmes de la présidentielle 2027, sondages en direct et « État de la France » : 26 indicateurs macroéconomiques sur longue période comparés à l’UE, aux États-Unis et à la Chine.
 
 ## Lancer en local
 
@@ -21,6 +21,7 @@ Importer le dépôt dans Vercel (préréglage Vite, sortie `dist`). Définir la 
 - `src/data/data.js` : chiffres curés et sourcés (Insee, COFOG, AFT, loi de finances 2026).
 - `src/data/election2027.js` : scénario de référence, plan du gouvernement et une entrée par parti (mesures, analyses indépendantes, sources).
 - `src/data/polls-snapshot.json` : instantané de secours des sondages (Wikipédia), rafraîchi par `npm run polls` et à chaque build ; le site charge la version en direct.
+- `src/data/etat-series.json` : séries de l’« État de la France » (Eurostat, Insee, Banque mondiale, FMI, Réserve fédérale, Nations unies), rafraîchies par `npm run etat` (liste dans `scripts/etat-specs.json`).
 - `public/og.png` : image d’aperçu, régénérée par `npm run og`.
 
 ## Moteur de projection

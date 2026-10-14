@@ -8,6 +8,9 @@ import { Sparkline } from '../lib/charts.jsx'
 import { fmt, bn, pct, unitBn } from '../lib/format.js'
 import { T } from '../i18n.js'
 import { dt } from '../data/dataEn.js'
+import { withLang } from '../routes.js'
+import { getLang } from '../i18n.js'
+const lp = p => withLang(p, getLang())
 
 const i = apu.years.length - 1
 const Y = +apu.years[i]
@@ -17,7 +20,7 @@ const years = apu.years.map(Number)
 // Chaque ligne : [libellé, montant, libellé court, couleur?]
 const revenueLines = () => {
   const L = [
-    [T('Impôts sur la production et les importations (TVA, accises…)', 'Production and import taxes (VAT, excise…)'), apu.impotsProduction[i], T('Impôts sur la production (TVA…)', 'Production taxes (VAT…)')],
+    [T('Impôts sur la production et les importations (TVA, accises…)', 'Production and import taxes (VAT, excise…)'), apu.impotsProduction[i], T('TVA et taxes sur la production', 'VAT and production taxes')],
     [T('Cotisations sociales', 'Social contributions'), apu.cotisationsSociales[i]],
     [T('Impôts sur le revenu et le patrimoine (IR, CSG, IS)', 'Income and wealth taxes (income tax, CSG, corporate tax)'), apu.impotsRevenuPatrimoine[i], T('Impôts sur le revenu et le patrimoine', 'Income and wealth taxes')],
     [T('Ventes de services', 'Sales of services'), apu.ventes[i]],
@@ -114,16 +117,16 @@ export default function Overview() {
         sub={T(`Pour 100 € de recettes, ${fmt(apu.depenses[i] / apu.recettes[i] * 100)} € de dépenses. La dette a augmenté de ${bn(apu.dette[i] - apu.dette[i - 1])} en ${Y}.`, `For every €100 of revenue, €${fmt(apu.depenses[i] / apu.recettes[i] * 100)} of spending. Debt rose by ${bn(apu.dette[i] - apu.dette[i - 1])} in ${Y}.`)}
         src={[SRC.eurostatMain, SRC.inseeDebtQ]}>
         <div className="tiles flow">
-          <Tile href="/recettes" title={T('Recettes', 'Revenue')} value={fmt(apu.recettes[i])} unit sub={`${pct(apu.recettesPct[i])} ${gdp} · ${years[0]}-${Y}`} color="var(--green)" tone="good"
+          <Tile href={lp('/recettes')} title={T('Recettes', 'Revenue')} value={fmt(apu.recettes[i])} unit sub={`${pct(apu.recettesPct[i])} ${gdp} · ${years[0]}-${Y}`} color="var(--green)" tone="good"
             spark={apu.recettesPct} items={[[T('Cotisations sociales', 'Social contributions'), bn(apu.cotisationsSociales[i], 0)], [T('Taxe sur la valeur ajoutée', 'Value-added tax (VAT)'), bn(apu.tva[i], 0)], [T('Impôts sur revenus et sociétés', 'Income and corporate taxes'), bn(apu.impotsRevenuPatrimoine[i], 0)]]} />
           <span className="eq-op">−</span>
-          <Tile href="/depenses" title={T('Dépenses', 'Spending')} value={fmt(apu.depenses[i])} unit sub={`${pct(apu.depensesPct[i])} ${gdp} · ${years[0]}-${Y}`} color="var(--blue)" tone="blue"
+          <Tile href={lp('/depenses')} title={T('Dépenses', 'Spending')} value={fmt(apu.depenses[i])} unit sub={`${pct(apu.depensesPct[i])} ${gdp} · ${years[0]}-${Y}`} color="var(--blue)" tone="blue"
             spark={apu.depensesPct} items={[[T('Prestations sociales', 'Social benefits'), bn(apu.prestationsSociales[i], 0)], [T('Rémunérations', 'Public pay'), bn(apu.remunerations[i], 0)], [T('Investissement', 'Investment'), bn(apu.fbcf[i], 0)]]} />
           <span className="eq-op">=</span>
-          <Tile href="/financement" title={T('Déficit', 'Deficit')} value={'−' + fmt(gap)} unit sub={`${pct(-apu.soldePct[i])} ${gdp} · ${T('financé par l’emprunt', 'financed by borrowing')}`} color="var(--orange)" tone="bad"
+          <Tile href={lp('/financement')} title={T('Déficit', 'Deficit')} value={'−' + fmt(gap)} unit sub={`${pct(-apu.soldePct[i])} ${gdp} · ${T('financé par l’emprunt', 'financed by borrowing')}`} color="var(--orange)" tone="bad"
             spark={apu.soldePct.map(v => -v)} items={[[T('À emprunter en 2026', 'To borrow in 2026'), bn(need, 0)], [T('dont dette à rembourser', 'of which maturing debt'), bn(financing2026.needs[0].v, 0)], [T('Obligation à 10 ans (OAT)', '10-year bond (OAT)'), pct(aft.spot10.v, 2)]]} />
           <span className="eq-op">→</span>
-          <Tile href="/dette" title={T('Dette', 'Debt')} value={fmt(debtLatest.total, 0)} unit sub={`${pct(debtLatest.pct)} ${gdp} · ${dl}`} color="var(--red)" tone="bad"
+          <Tile href={lp('/dette')} title={T('Dette', 'Debt')} value={fmt(debtLatest.total, 0)} unit sub={`${pct(debtLatest.pct)} ${gdp} · ${dl}`} color="var(--red)" tone="bad"
             spark={[...apu.dettePct, debtLatest.pct]} items={[[T('Intérêts ', 'Interest ') + Y, bn(apu.interets[i])], [T('Taux moyen', 'Average rate'), pct(apu.tauxApparent[i], 2)], [T('Hausse en ', 'Rise in ') + Y, bn(apu.dette[i] - apu.dette[i - 1], 0)]]} />
         </div>
       </Card>

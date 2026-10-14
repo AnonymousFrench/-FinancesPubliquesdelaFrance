@@ -6,7 +6,7 @@
   "scripts": {
     "data": "node scripts/build-data.mjs",
     "polls": "node scripts/fetch-polls.mjs",
-    "dev": "vite --host",
+    "dev": "vite",
     "prebuild": "node scripts/fetch-polls.mjs",
     "build": "vite build && node scripts/seo.mjs",
     "preview": "vite preview --host",

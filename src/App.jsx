@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useEffect, useState } from 'react'
 import Overview from './components/Overview.jsx'
 import { apu } from './data/apu.js'
 import { debtLatest } from './data/data.js'
-import { ROUTES, SECTIONS, ALIAS, routeOf, rLabel, rTitle, rDescription, sLabel, siteName } from './routes.js'
+import { ROUTES, SECTIONS, ALIAS, routeOf, rLabel, rTitle, rDescription, sLabel, siteName, langOf, withLang } from './routes.js'
 import { fmt, pct, bn } from './lib/format.js'
 import { T, getLang, setLang } from './i18n.js'
 import { Analytics } from '@vercel/analytics/react'
@@ -39,7 +39,7 @@ function setMeta(r) {
   document.title = r.path === '/' ? rTitle(r) : `${rTitle(r)} | ${siteName()}`
   document.querySelector('meta[name="description"]')?.setAttribute('content', rDescription(r))
   const canon = document.querySelector('link[rel="canonical"]')
-  if (canon) canon.setAttribute('href', new URL(r.path, canon.href).href)
+  if (canon) canon.setAttribute('href', new URL(withLang(r.path, getLang()), canon.href).href)
 }
 
 // Drapeaux du sélecteur de langue.
@@ -56,19 +56,28 @@ const FlagEN = () => (
 
 export default function App() {
   const [route, setRoute] = useState(() => routeOf(location.pathname) || ROUTES[0])
+  // Langue : l'adresse fait foi (/en/...). Ancien paramètre ?lang=en et préférence enregistrée redirigés vers la bonne adresse.
   const [lang, setLangState] = useState(() => {
     const q = new URLSearchParams(location.search).get('lang')
-    if (q === 'en' || q === 'fr') setLang(q)
-    else setLang(getLang())
-    return getLang()
+    const stored = getLang()
+    const l = langOf(location.pathname) === 'en' ? 'en' : q === 'en' || q === 'fr' ? q : stored
+    setLang(l)
+    const r = routeOf(location.pathname) || ROUTES[0]
+    const want = withLang(r.path, l)
+    if (want !== location.pathname || q) history.replaceState(null, '', want + location.hash)
+    return l
   })
-  const switchLang = l => { setLang(l); setLangState(l) }
+  const switchLang = l => { setLang(l); setLangState(l); history.pushState(null, '', withLang(route.path, l)) }
 
   useEffect(() => {
     // Anciennes adresses en #ancre -> vraie page.
     const h = location.hash.slice(1)
-    if (ALIAS[h]) { history.replaceState(null, '', ALIAS[h]); setRoute(routeOf(ALIAS[h])) }
-    const onPop = () => setRoute(routeOf(location.pathname) || ROUTES[0])
+    if (ALIAS[h]) { history.replaceState(null, '', withLang(ALIAS[h], getLang())); setRoute(routeOf(ALIAS[h])) }
+    const onPop = () => {
+      const l = langOf(location.pathname)
+      if (l !== getLang()) { setLang(l); setLangState(l) }
+      setRoute(routeOf(location.pathname) || ROUTES[0])
+    }
     // Navigation interne sans rechargement pour tous les liens du site.
     const onClick = e => {
       const a = e.target.closest('a[href^="/"]')
@@ -76,7 +85,7 @@ export default function App() {
       const r = routeOf(a.getAttribute('href'))
       if (!r) return
       e.preventDefault()
-      history.pushState(null, '', r.path)
+      history.pushState(null, '', withLang(r.path, getLang()))
       setRoute(r)
       scrollTo({ top: 0 })
     }
@@ -89,26 +98,25 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <a href="/" className="brand"><span className="flag" aria-hidden="true"><i /><i /><i /></span>{siteName()}</a>
+        <a href={withLang('/', lang)} className="brand"><span className="flag" aria-hidden="true"><i /><i /><i /></span>{siteName()}</a>
+        <span className="langs" role="group" aria-label={T('Langue', 'Language')}>
+          <button className={lang === 'fr' ? 'on' : ''} onClick={() => switchLang('fr')} title="Français" aria-label="Français" aria-pressed={lang === 'fr'}><FlagFR /></button>
+          <button className={lang === 'en' ? 'on' : ''} onClick={() => switchLang('en')} title="English" aria-label="English" aria-pressed={lang === 'en'}><FlagEN /></button>
+        </span>
         <div className="banner">
           <span>{T('Dépenses', 'Spending')} <b>{bn(apu.depenses[i], 0)}</b> {pct(apu.depensesPct[i])} {T('du PIB', 'of GDP')}</span>
           <span>{T('Recettes', 'Revenue')} <b className="good">{bn(apu.recettes[i], 0)}</b></span>
           <span>{T('Déficit', 'Deficit')} <b className="bad">{pct(-apu.soldePct[i])}</b></span>
           <span>{T('Dette', 'Debt')} <b className="bad">{bn(debtLatest.total, 0)}</b> {pct(debtLatest.pct)}</span>
           <span>{T('Intérêts', 'Interest')} <b>{bn(apu.interets[i])}</b></span>
-          <span className="banner-src">{apu.years[i]} · Eurostat, Insee, AFT</span>
-          <span className="langs" role="group" aria-label={T('Langue', 'Language')}>
-            <button className={lang === 'fr' ? 'on' : ''} onClick={() => switchLang('fr')} title="Français" aria-label="Français" aria-pressed={lang === 'fr'}><FlagFR /></button>
-            <button className={lang === 'en' ? 'on' : ''} onClick={() => switchLang('en')} title="English" aria-label="English" aria-pressed={lang === 'en'}><FlagEN /></button>
-          </span>
         </div>
       </header>
       <nav aria-label={T('Rubriques', 'Sections')}>
-        {SECTIONS.map(x => <a key={x.id} href={x.path} className={x.id === route.section ? 'on' : ''} aria-current={x.id === route.section ? 'page' : undefined}>{sLabel(x)}</a>)}
+        {SECTIONS.map(x => <a key={x.id} href={withLang(x.path, lang)} className={x.id === route.section ? 'on' : ''} aria-current={x.id === route.section ? 'page' : undefined}>{sLabel(x)}</a>)}
       </nav>
       {ROUTES.filter(r => r.section === route.section).length > 1 && (
         <nav className="subnav" aria-label={sLabel(SECTIONS.find(x => x.id === route.section))}>
-          {ROUTES.filter(r => r.section === route.section).map(r => <a key={r.id} href={r.path} className={(r.id === route.id ? 'on' : '') + (r.badge ? ' ' + r.badge : '')} aria-current={r.id === route.id ? 'page' : undefined}>{rLabel(r)}</a>)}
+          {ROUTES.filter(r => r.section === route.section).map(r => <a key={r.id} href={withLang(r.path, lang)} className={(r.id === route.id ? 'on' : '') + (r.badge ? ' ' + r.badge : '')} aria-current={r.id === route.id ? 'page' : undefined}>{rLabel(r)}</a>)}
         </nav>
       )}
       <main key={lang}>

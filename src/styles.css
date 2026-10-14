@@ -13,9 +13,9 @@ code { font-size: 12.5px; background: var(--soft); padding: 1px 5px; border-radi
 .up { color: var(--red) } .dn { color: var(--green) } .r { text-align: right }
 
 .app { max-width: 1180px; margin: 0 auto; padding: 22px 16px 18px }
-header { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px }
+header { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; position: relative }
+header .brand { padding-right: 76px }
 .brand { display: inline-flex; align-items: center; gap: 9px; font-size: 21px; font-weight: 700; letter-spacing: -.015em; color: var(--tx); text-decoration: none !important }
-.banner-src { font-size: 11px; color: #9aa4b2; margin-left: auto }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0 }
 .loading { color: var(--mut); min-height: 200px }
 h1 { font-size: 21px; margin: 0; letter-spacing: -.015em; display: flex; align-items: center; gap: 9px }
@@ -348,7 +348,7 @@ footer.disclaimer a { color: inherit; text-decoration: underline }
 .card.group > .ctl-row + .card { border-top: 0; padding-top: 0 }
 
 /* Sélecteur de langue */
-.langs { display: inline-flex; gap: 4px; margin-left: 10px }
+.langs { display: inline-flex; gap: 4px; position: absolute; top: 4px; right: 0 }
 .langs button { display: inline-flex; padding: 3px 4px; border: 1.5px solid transparent; border-radius: 6px; background: none; cursor: pointer; opacity: .55; line-height: 0 }
 .langs button:hover { opacity: 1 }
 .langs button.on { opacity: 1; border-color: var(--tx) }
@@ -380,3 +380,5 @@ a.ind:hover { border-color: #c7ccd4 }
 .ind-c { display: flex; gap: 5px; letter-spacing: -.01em; color: var(--tx) } .ind-c span, .ind-c i { color: var(--mut); font-style: normal } .ind-c .fr { color: var(--blue) } .ind-c .us { color: #b76a14 } .ind-c i.up { color: var(--red) }
 .ind-key.tog { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 1px 9px; cursor: pointer; margin-left: 4px } .ind-key.tog:hover { border-color: #c7ccd4 } .ind-key.tog.off { opacity: .45; text-decoration: line-through }
 .ind-c .cn { color: #b00e28 }
+.h4-note { float: right; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--mut); font-size: 11px }
+.bar-v { overflow: hidden; text-overflow: ellipsis }

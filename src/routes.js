@@ -2,8 +2,8 @@
 // Partagé par l'application et scripts/seo.mjs (les pages statiques référencées sont en français).
 import { T } from './i18n.js'
 
-export const SITE_NAME = 'Finances publiques de la France'
-export const SITE_NAME_EN = 'French public finances'
+export const SITE_NAME = 'État des finances'
+export const SITE_NAME_EN = 'État des finances'
 export const siteName = () => T(SITE_NAME, SITE_NAME_EN)
 
 // Deux rubriques principales, chacune déclinée en sous-pages.
@@ -69,7 +69,12 @@ export const ALIAS = {
   election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france',
 }
 
+// Langue portée par l'adresse : /en/... pour l'anglais, sans préfixe pour le français.
+export const langOf = path => (/^\/en(\/|$)/.test(path) ? 'en' : 'fr')
+export const stripLang = path => path.replace(/^\/en(?=\/|$)/, '') || '/'
+export const withLang = (path, lang) => (lang === 'en' ? '/en' + (path === '/' ? '' : path) : path)
+
 export const routeOf = path => {
-  const p = path.replace(/\/+$/, '') || '/'
+  const p = stripLang(path).replace(/\/+$/, '') || '/'
   return ROUTES.find(r => r.path === p) || (p === '/carte' ? ROUTES[0] : undefined)
 }

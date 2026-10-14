@@ -10,6 +10,9 @@ import { Card, Kpi, Seg } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, signed, unitBn } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
+import { withLang } from '../routes.js'
+import { getLang } from '../i18n.js'
+const lp = p => withLang(p, getLang())
 
 const S = k => SOURCES[k]
 const PROJ = YEARS.filter(y => y >= 2026)
@@ -124,7 +127,7 @@ function Intro({ onPick }) {
       </div>
       {blackout
         ? <p className="mentions">{T(`Sondages suspendus la veille et le jour du ${blackout.label} (loi du 19 juillet 1977), jusqu’au ${blackout.end}.`, `Polls suspended the day before and the day of the ${blackout.labelEn} (law of 19 July 1977), until ${blackout.endEn}.`)}</p>
-        : <><div className="poll-meta"><PollStatus state={state} /><a href="/sondages-presidentielle-2027">{T('Tous les sondages →', 'All polls →')}</a></div><PollMentions /></>}
+        : <><div className="poll-meta"><PollStatus state={state} /><a href={lp('/sondages-presidentielle-2027')}>{T('Tous les sondages →', 'All polls →')}</a></div><PollMentions /></>}
     </Card>
   )
 }

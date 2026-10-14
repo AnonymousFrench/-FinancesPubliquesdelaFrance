@@ -3,6 +3,9 @@ import { THEMES, COUNT, series } from '../data/etat.js'
 import { Card } from './ui.jsx'
 import { fmt, pct, signed } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
+import { withLang } from '../routes.js'
+import { getLang } from '../i18n.js'
+const lp = p => withLang(p, getLang())
 
 const FR_C = 'var(--blue)', EU_C = '#9aa4b2', US_C = '#e08a2c', CN_C = '#c8102e', PAIR_C = 'var(--red)'
 const L = (fr, en) => T(fr, en)
@@ -59,7 +62,7 @@ function Trend({ fr, eu, us, cn, pair, zero, onHover, hover }) {
   const hv = hover != null && fr.find(p => p[0] === hover)
   return (
     <div ref={ref} className="ind-trend">
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} onPointerMove={move} onPointerDown={move} onPointerLeave={() => onHover(null)}>
+      <svg aria-hidden="true" width={W} height={H} viewBox={`0 0 ${W} ${H}`} onPointerMove={move} onPointerDown={move} onPointerLeave={() => onHover(null)}>
         {zero && lo < 0 && <line x1={pad} x2={W - pad} y1={Y(0)} y2={Y(0)} className="ind-zero" />}
         {eu.length > 1 && <path d={d(eu)} fill="none" stroke={EU_C} strokeWidth={1.3} strokeDasharray="3 2" />}
         {us.length > 1 && <path d={d(us)} fill="none" stroke={US_C} strokeWidth={1.3} />}
@@ -102,7 +105,7 @@ function Indicator({ m, show }) {
     : pair.length ? <><span className="fr">{L('naissances', 'births')}</span><i className="up">{L('décès', 'deaths')} {val(m, pair.at(-1)[1])}</i></> : cmp(null)
   const Tag = m.link ? 'a' : 'div'
   return (
-    <Tag className="ind" href={m.link}>
+    <Tag className="ind" href={m.link && lp(m.link)}>
       <div className="ind-h"><span>{L(m.fr, m.en)}</span><em>{latest ? qLabel : last[0]}</em></div>
       <div className="ind-v">
         <b>{val(m, head)}</b>{suffix && <small>{suffix}</small>}

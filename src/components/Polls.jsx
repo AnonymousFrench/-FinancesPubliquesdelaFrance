@@ -142,7 +142,7 @@ function PollsLive() {
 
       <div className="grid2 flat poll-top">
         <div>
-          <h4>{inst ? T(`Intentions de vote, ${inst}`, `Voting intentions, ${inst}`) : T(`Intentions de vote, moyenne sur ${WINDOW} jours`, `Voting intentions, ${WINDOW}-day average`)}</h4>
+          <h4>{inst ? T(`Intentions de vote, ${inst}`, `Voting intentions, ${inst}`) : T(`Intentions de vote, moyenne sur ${WINDOW} jours`, `Voting intentions, ${WINDOW}-day average`)}<span className="h4-note">{T('écart ', 'change ')}{view.deltaLabel}</span></h4>
           <div className="bars ranking">
             {view.rows.map(r => {
               const pv = view.prev(r.name), d = pv != null ? r.v - pv : null
@@ -150,7 +150,7 @@ function PollsLive() {
                 <div key={r.name} className="bar-row">
                   <span className="bar-n"><i className="dot-c" style={{ background: colorOf(r.party) }} />{r.name} <span className="mut">({r.party})</span></span>
                   <span className="bar-t"><span className="bar-f" style={{ width: `${r.v / max * 100}%`, background: colorOf(r.party) }} /></span>
-                  <span className="bar-v"><b>{pct(r.v, r.v % 1 ? 1 : (inst ? 0 : 1))}</b><span className={'bar-p ' + (d == null ? '' : d > 0.25 ? 'dn' : d < -0.25 ? 'up' : '')}>{d == null ? T('nouveau', 'new') : Math.abs(d) < 0.05 ? T(`stable ${view.deltaLabel}`, `unchanged ${view.deltaLabel}`) : `${signed(d)} pt ${view.deltaLabel}`}</span></span>
+                  <span className="bar-v"><b>{pct(r.v, r.v % 1 ? 1 : (inst ? 0 : 1))}</b><span className={'bar-p ' + (d == null ? '' : d > 0.25 ? 'dn' : d < -0.25 ? 'up' : '')}>{d == null ? T('nouveau', 'new') : Math.abs(d) < 0.05 ? T('stable', 'unchanged') : `${signed(d)} pt`}</span></span>
                 </div>
               )
             })}
