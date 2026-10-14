@@ -35,8 +35,9 @@ export const reviewBy = (q, r) => {
 }
 // Note d'explication d'une analyse indépendante (dans la langue courante).
 export const reviewNoteText = (q, r) => {
-  if (!isEn()) return q.reviewNote(r)
+  if (!isEn()) return q.reviewNote ? q.reviewNote(r) : r.note || ''
   const e = P(q)
+  if (!e.reviewNote) return r.note || ''
   if (r.net2031 != null) { const v = r.net2031; return e.reviewNote(`${v >= 0 ? '+' : '−'}€${Math.abs(v)}`) }
   return e.reviewNote(e.reviewNotes[r.id])
 }
