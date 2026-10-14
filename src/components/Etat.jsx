@@ -140,7 +140,7 @@ function Sources() {
 
 export default function Etat() {
   // Comparaisons affichées : clic sur la légende pour masquer ou réafficher l’UE, les États-Unis ou la Chine.
-  const [show, setShow] = useState({ eu: true, us: true, cn: false })
+  const [show, setShow] = useState({ eu: true, us: false, cn: false })
   const toggle = k => setShow(v => ({ ...v, [k]: !v[k] }))
   return (
     <Card title={T('L’état de la France en chiffres', 'France in figures')}
