@@ -34,6 +34,6 @@ const iconIos = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><re
 
 const png = (svg, width) => new Resvg(svg, { fitTo: { mode: 'width', value: width }, font: { loadSystemFonts: true } }).render().asPng()
 fs.writeFileSync('public/og.png', png(og, 1200))
-fs.writeFileSync('public/favicon.svg', icon)
+fs.writeFileSync('public/flag.svg', icon)
 fs.writeFileSync('public/apple-touch-icon.png', png(iconIos, 180))
 console.log('public/og.png, favicon.svg, apple-touch-icon.png')
