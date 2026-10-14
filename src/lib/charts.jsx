@@ -113,7 +113,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
             return (
               <g key={s.name}>
                 {s.line !== false && p.length > 1 && <path d={'M' + p.map(([xv, yv]) => `${X(xv)},${YL(yv)}`).join('L')} fill="none" stroke={s.color} strokeWidth={s.width || 2} strokeDasharray={s.dash ? '6 4' : null} strokeLinejoin="round" strokeLinecap="round" />}
-                {(s.dots || s.line === false) && p.map(([xv, yv]) => <circle key={xv} cx={X(xv)} cy={YL(yv)} r={s.line === false ? 5 : 3} fill={s.line === false ? 'var(--card)' : s.color} stroke={s.color} strokeWidth={s.line === false ? 2.5 : 0} />)}
+                {(s.dots || s.line === false) && p.map(([xv, yv], di) => <circle key={xv + "_" + di} cx={X(xv)} cy={YL(yv)} r={s.line === false ? 5 : 3} fill={s.line === false ? 'var(--card)' : s.color} stroke={s.color} strokeWidth={s.line === false ? 2.5 : 0} />)}
               </g>
             )
           })}
