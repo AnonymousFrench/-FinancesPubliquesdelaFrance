@@ -48,7 +48,8 @@ const FACTS = {
     `Taux de l’OAT à 10 ans : ${nf(aft.spot10.v, 2)} % au ${aft.spot10.date}.`,
   ],
   presidentielle: ORDER.map(id => { const q = parties[id]; return `${q.candidate} (${q.name}) : ${q.headline.slice(0, 2).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}.` }),
-  sondages: avg.rows.slice(0, 8).map(r => `${r.name} (${r.party}) : ${nf(r.v, 1)} % d’intentions de vote au premier tour.`),
+  // Pas de chiffres de sondage dans le HTML statique : il resterait servi pendant la période de réserve.
+  sondages: [`Moyenne des sondages ${avg.n ? `de ${avg.n} instituts ` : ''}mise à jour en direct, hypothèses de second tour et dynamique de campagne.`],
 }
 
 const jsonld = r => JSON.stringify({

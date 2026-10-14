@@ -29,7 +29,7 @@ export default function Financing() {
         <p className="hint">Plus de la moitié des {bn(need, 0)} sert à <b>rembourser</b> de la dette ancienne.</p>
       </Card>
 
-      <Card title="Le taux qui décide de tout : l’OAT à 10 ans depuis 1993" sub="Taux mensuel (courbe) et déficit public en % du PIB (barres)" src={[SRC.eurostatRates, SRC.eurostatMain]}>
+      <Card title="Le taux qui décide de tout : l’OAT à 10 ans depuis 1993" sub="Taux annuel, moyenne de chaque mois (courbe) ; déficit public en % du PIB (barres)" src={[SRC.eurostatRates, SRC.eurostatMain]}>
         <LineChart height={300}
           series={[{ name: 'Taux à 10 ans', color: 'var(--blue)', points: pts.map(([d, v]) => [+d.slice(0, 4) + (+d.slice(5, 7) - 1) / 12, v]) }]}
           bars={{ name: 'Déficit, % du PIB', color: 'var(--red)', sameScale: true, values: years.map((y, k) => [y + 0.5, -apu.soldePct[k]]) }}
@@ -39,10 +39,10 @@ export default function Financing() {
           markers={[{ x: 2008.7, label: 'Lehman', side: 'l' }, { x: 2015.2, label: 'QE de la BCE', side: 'r' }, { x: 2022.5, label: 'Hausses BCE', side: 'l' }]}
         />
         <div className="kpis k4">
-          <Kpi label="Plus bas historique" value={pct(lo[1], 2)} sub={month(lo[0])} />
-          <Kpi label="Plus haut depuis 1993" value={pct(hi[1], 2)} sub={month(hi[0])} />
-          <Kpi label="Dernière moyenne mensuelle" value={pct(last[1], 2)} sub={month(last[0])} tone="warn" />
-          <Kpi label="Taux au jour le jour (AFT)" value={pct(aft.spot10.v, 2)} sub={`${aft.spot10.date}${prevHigh ? `, plus haut depuis ${month(prevHigh[0])}` : ''}`} tone="bad" />
+          <Kpi label="Plus bas depuis 1993" value={pct(lo[1], 2)} sub={`moyenne de ${month(lo[0])}`} />
+          <Kpi label="Plus haut depuis 1993" value={pct(hi[1], 2)} sub={`moyenne de ${month(hi[0])}`} />
+          <Kpi label="Dernier mois publié" value={pct(last[1], 2)} sub={`moyenne de ${month(last[0])} (Eurostat)`} tone="warn" />
+          <Kpi label="Dernière cotation (AFT)" value={pct(aft.spot10.v, 2)} sub={`le ${aft.spot10.date}${prevHigh ? `, plus haut depuis ${month(prevHigh[0])}` : ''}`} tone="bad" />
         </div>
       </Card>
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { usePolls, today, daysBefore } from '../lib/usePolls.js'
-import { average, trend, WIKI_PAGE } from '../lib/polls.js'
+import { average, trend, WIKI_PAGE, pollBlackout, marginOfError, COMMISSION_URL } from '../lib/polls.js'
 import { SOURCES } from '../data/election2027.js'
 import { Card } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
@@ -27,7 +27,32 @@ export function PollStatus({ state }) {
   )
 }
 
+// Période de réserve : aucun sondage la veille et le jour du scrutin (loi du 19 juillet 1977).
+export function BlackoutNotice({ b }) {
+  return (
+    <Card title="Sondages suspendus" className="blackout">
+      <p className="sub">Conformément à la loi du 19 juillet 1977, aucun sondage ne peut être publié, diffusé ni commenté la veille et le jour du {b.label}. Les sondages reviennent le {b.end}.</p>
+    </Card>
+  )
+}
+
+// Mentions exigées pour la publication d'un sondage (loi du 19 juillet 1977, art. 2).
+export function PollMentions() {
+  return (
+    <p className="mentions">
+      Sondages réalisés par les instituts cités, selon la méthode des quotas. Marge d’erreur indiquée par référence à la méthode aléatoire, à 95 %, pour un score de 50 %.
+      Commanditaires, questions posées et notices : <a href={COMMISSION_URL} target="_blank" rel="noreferrer">Commission des sondages</a>.
+      Les moyennes sont calculées par ce site à partir de ces sondages et ne constituent pas un sondage.
+    </p>
+  )
+}
+
 export default function Polls() {
+  const b = pollBlackout()
+  return b ? <BlackoutNotice b={b} /> : <PollsLive />
+}
+
+function PollsLive() {
   const state = usePolls()
   const { first, second } = state.data
   const t = today()
@@ -66,7 +91,7 @@ export default function Polls() {
   return (
     <>
       <Card title="Sondages de la présidentielle 2027"
-        sub={`Premier tour : moyenne du dernier sondage de chaque institut sur ${WINDOW} jours. Marge d’erreur ± 2 à 3 points.`}
+        sub={`Premier tour : moyenne du dernier sondage de chaque institut sur ${WINDOW} jours.`}
         right={<div className="countdown"><b>J−{days}</b><span>1er tour le 18 avril 2027</span></div>}
         src={[SRC_WIKI, SOURCES.votons]}>
         <div className="poll-meta"><PollStatus state={state} /><span className="mut">{now.pollsters.join(' · ')}</span></div>
@@ -103,6 +128,7 @@ export default function Polls() {
             ))}
           </div>
         </div>
+        <PollMentions />
       </Card>
 
       <Card title="Dynamique de la campagne" sub={`Moyenne glissante sur ${WINDOW} jours.`} src={SRC_WIKI}>
@@ -117,17 +143,18 @@ export default function Polls() {
       <Card title="Derniers sondages" sub="Premier tour, hypothèse principale de chaque enquête." src={SRC_WIKI}>
         <div className="t-wrap">
           <table className="t">
-            <thead><tr><th>Institut</th><th>Fin du terrain</th><th>Échantillon</th>{cols.map(c => <th key={c}>{c}</th>)}</tr></thead>
+            <thead><tr><th>Institut</th><th>Fin du terrain</th><th>Échantillon</th><th>Marge d’erreur</th>{cols.map(c => <th key={c}>{c}</th>)}</tr></thead>
             <tbody>
               {latest.map((p, k) => (
                 <tr key={k}>
-                  <td>{p.pollster}</td><td>{dateFr(p.date)}</td><td>{p.sample ? fmt(p.sample, 0) : '–'}</td>
+                  <td>{p.pollster}</td><td>{dateFr(p.date)}</td><td>{p.sample ? fmt(p.sample, 0) : '–'}</td><td>{p.sample ? `± ${fmt(marginOfError(p.sample), 1)} pt` : '–'}</td>
                   {cols.map(c => { const r = p.results.find(x => x.name === c); return <td key={c}>{r ? pct(r.v, r.v % 1 ? 1 : 0) : '–'}</td> })}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <PollMentions />
       </Card>
 
     </>

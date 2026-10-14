@@ -89,6 +89,7 @@ export default function App() {
         <h1 className="sr-only">{route.title}</h1>
         <Boundary key={route.id}><Suspense fallback={<div className="card loading">Chargement…</div>}><View /></Suspense></Boundary>
       </main>
+      <footer className="disclaimer">Site indépendant, sans lien avec un parti. Projections illustratives, non des prévisions. Hébergement : Vercel Inc., Covina (CA), États-Unis.</footer>
     </div>
   )
 }

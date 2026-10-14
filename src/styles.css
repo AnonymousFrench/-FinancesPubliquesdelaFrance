@@ -284,3 +284,9 @@ nav.subnav a.on { background: var(--tx); border-color: var(--tx); color: #fff; f
 .mini-v b { font-size: 19px; font-variant-numeric: tabular-nums; letter-spacing: -.01em } .mini-v span { font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums }
 @media (max-width: 960px) { .multi { grid-template-columns: repeat(2, 1fr) } }
 @media (max-width: 560px) { .multi { grid-template-columns: 1fr } }
+
+/* Mentions légales des sondages, réserve électorale, pied de page */
+.mentions { font-size: 11px; line-height: 1.45; color: #9aa4b2; margin: 10px 0 0 } .mentions a { color: inherit; text-decoration: underline }
+.blackout { border-left: 3px solid var(--orange) }
+footer.disclaimer { font-size: 11px; line-height: 1.45; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #9aa4b2; border-top: 1px solid var(--line); margin-top: 28px; padding-top: 10px }
+@media (max-width: 760px) { footer.disclaimer { white-space: normal } }

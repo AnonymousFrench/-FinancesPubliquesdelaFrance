@@ -2,8 +2,8 @@ import React, { useMemo, useState } from 'react'
 import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
 import { usePolls, pollOf } from '../lib/usePolls.js'
-import { WIKI_PAGE } from '../lib/polls.js'
-import { PollStatus } from './Polls.jsx'
+import { WIKI_PAGE, pollBlackout } from '../lib/polls.js'
+import { PollStatus, PollMentions } from './Polls.jsx'
 import { Card, Kpi, Seg } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, signed } from '../lib/format.js'
@@ -93,6 +93,7 @@ export default function Election() {
 
 function Intro({ onPick }) {
   const state = usePolls()
+  const blackout = pollBlackout()
   return (
     <Card title="Présidentielle 2027 : les programmes face à la dette"
       sub="Six programmes, un même modèle, comparés à la politique inchangée jusqu’en 2032."
@@ -106,14 +107,16 @@ function Intro({ onPick }) {
               <span className="cand-pos">{q.position}</span>
               <b className="cand-name">{q.candidate}</b>
               <span className="cand-party">{q.name}</span>
-              <span className="cand-poll">{pct(v)}{d != null && (Math.abs(d) < 0.05 ? <em className="mut">=</em> : <em className={d > 0 ? 'dn' : 'up'}>{d > 0 ? '▲' : '▼'} {fmt(Math.abs(d))}</em>)}</span>
-              <span className="cand-bar"><i style={{ width: `${v / 36 * 100}%` }} /></span>
+              {!blackout && <><span className="cand-poll">{pct(v)}{d != null && (Math.abs(d) < 0.05 ? <em className="mut">=</em> : <em className={d > 0 ? 'dn' : 'up'}>{d > 0 ? '▲' : '▼'} {fmt(Math.abs(d))}</em>)}</span>
+              <span className="cand-bar"><i style={{ width: `${v / 36 * 100}%` }} /></span></>}
               <span className="cand-seats">{q.deputies} députés</span>
             </button>
           )
         })}
       </div>
-      <div className="poll-meta"><PollStatus state={state} /><a href="/sondages-presidentielle-2027">Tous les sondages →</a></div>
+      {blackout
+        ? <p className="mentions">Sondages suspendus la veille et le jour du {blackout.label} (loi du 19 juillet 1977), jusqu’au {blackout.end}.</p>
+        : <><div className="poll-meta"><PollStatus state={state} /><a href="/sondages-presidentielle-2027">Tous les sondages →</a></div><PollMentions /></>}
     </Card>
   )
 }
