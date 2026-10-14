@@ -166,8 +166,8 @@ export function trend(polls, names, { from, to, stepDays = 7, windowDays = 45 } 
 // La veille et le jour de chaque tour, aucun sondage ne peut être publié, diffusé ni commenté.
 // Du samedi 0 h au dimanche 20 h, heure de Paris. Dates à confirmer par le décret de convocation des électeurs.
 export const BLACKOUTS = [
-  { from: '2027-04-16T22:00:00Z', to: '2027-04-18T18:00:00Z', label: 'premier tour', end: 'dimanche 18 avril à 20 h' },
-  { from: '2027-04-30T22:00:00Z', to: '2027-05-02T18:00:00Z', label: 'second tour', end: 'dimanche 2 mai à 20 h' },
+  { from: '2027-04-16T22:00:00Z', to: '2027-04-18T18:00:00Z', label: 'premier tour', end: 'dimanche 18 avril à 20 h', labelEn: 'first round', endEn: 'Sunday 18 April at 8 pm' },
+  { from: '2027-04-30T22:00:00Z', to: '2027-05-02T18:00:00Z', label: 'second tour', end: 'dimanche 2 mai à 20 h', labelEn: 'second round', endEn: 'Sunday 2 May at 8 pm' },
 ]
 export const pollBlackout = (now = new Date()) => BLACKOUTS.find(b => now >= new Date(b.from) && now < new Date(b.to)) || null
 

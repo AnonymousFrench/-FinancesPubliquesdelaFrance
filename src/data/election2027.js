@@ -22,7 +22,6 @@ export const SOURCES = {
   montaigneNfp: { label: 'Institut Montaigne, chiffrage du programme du NFP (juin 2024)', url: 'https://www.institutmontaigne.org/legislatives-2024/nouveau-front-populaire/synthese' },
   asteresNfp: { label: 'Asterès, note sur le chiffrage du NFP (juin 2024)', url: 'https://asteres.fr/site/wp-content/uploads/2024/06/ASTERES_NFP2.pdf' },
   lfiFB: { label: 'Simulateur France Budget, « Programme LFI 2027 »', url: 'https://francebudget.fr/scenarios/lfi-2027' },
-  votons: { label: 'Votons (votons-2027.fr) : candidats, positionnement, sièges à l’Assemblée', url: 'https://votons-2027.fr/candidats' },
   horFI: { label: 'franceinfo, le « budget alternatif » d’Horizons (13 oct. 2026)', url: 'https://www.franceinfo.fr/economie/budget/horizons-propose-un-budget-alternatif-avec-10-milliards-d-economies-supplementaires_8234875.html' },
   horFB: { label: 'Simulateur France Budget, « Programme Horizons 2027 »', url: 'https://francebudget.fr/scenarios/horizons-2027' },
   horEuronews: { label: 'Euronews, Édouard Philippe mise sur le travail et la baisse des dépenses (9 oct. 2026)', url: 'https://fr.euronews.com/2026/10/09/presidentielle-2027-edouard-philippe-mise-sur-le-travail-et-la-reduction-des-depenses-publ' },
@@ -35,7 +34,9 @@ export const SOURCES = {
   psInvestir: { label: 'Investirmag, contre-budget 2027 du PS (16 sept. 2026)', url: 'https://www.investirmag.fr/contre-budget-socialiste-smic-a-1-700-eur-csg-progressive-taxe-zucman/' },
   psSelectra: { label: 'Selectra, le détail du contre-budget 2027 des députés socialistes', url: 'https://selectra.info/finance/actualites/marche/csg-progressive-2027-salaire-net-smic' },
   psFB: { label: 'Simulateur France Budget, « Programme PS 2027 »', url: 'https://francebudget.fr/scenarios/ps-2027' },
-  psVotons: { label: 'Votons, le programme de Raphaël Glucksmann (78 mesures sourcées)', url: 'https://votons-2027.fr/candidats/glucksmann/programme' },
+  psPP: { label: 'Place publique, programme de Raphaël Glucksmann', url: 'https://place-publique.eu' },
+  wikiFR: { label: 'Wikipédia, fiches des candidats (fonctions, âge)', url: 'https://fr.wikipedia.org/wiki/%C3%89lection_pr%C3%A9sidentielle_fran%C3%A7aise_de_2027' },
+  assemblee: { label: 'Assemblée nationale, composition des groupes (députés)', url: 'https://www.assemblee-nationale.fr' },
   ifrap22: { label: 'iFRAP, chiffrage du programme Mélenchon 2022', url: 'https://www.ifrap.org/budget-et-fiscalite/chiffrage-du-programme-de-jean-luc-melenchon' },
 }
 
@@ -73,7 +74,8 @@ export const governmentPlan = {
 // ---------- Partis ----------
 export const parties = {
   rn: {
-    id: 'rn', name: 'Rassemblement national', short: 'RN', color: '#1b2a6b', site: 'rnSite', status: 'ready',
+    id: 'rn', name: 'Rassemblement national', short: 'RN', color: '#1b2a6b', status: 'ready', officialSite: 'https://rassemblementnational.fr',
+    profile: { age: 57, role: 'Députée du Pas-de-Calais', wiki: 'Marine_Le_Pen' },
     candidate: 'Marine Le Pen', pollName: 'Le Pen', position: 'Extrême droite', poll: 33.9, pollDelta: 1.9, deputies: 121,
     document: 'Contre-budget et trajectoire des finances publiques 2027-2032, présentés par Marine Le Pen et Jean-Philippe Tanguy le 6 octobre 2026. Le document complet n’était pas en ligne lors de la construction de cette page : les montants viennent de la presse et de l’analyse de l’Institut de l’Entreprise.',
     headline: [
@@ -131,16 +133,17 @@ export const parties = {
     ],
     measuresNote: 'Les montants par catégorie sont ceux recalculés par l’Institut de l’Entreprise à partir des chiffres du RN (69,3 Md€ nets en 2027, 140,3 Md€ en 2031, contre 141,7 Md€ annoncés), interpolés entre les deux et maintenus en 2032. Les lignes « mixtes » sont réparties à parts égales entre dépenses et recettes.',
     measuresSrc: ['rnPge', 'rnState'],
-    src: ['rnPress', 'rnPge', 'rnState', 'rnFB', 'votons'],
+    src: ['rnPress', 'rnPge', 'rnState', 'rnFB'],
   },
 
   lfi: {
-    id: 'lfi', name: 'La France insoumise', short: 'LFI', color: '#c0392b', site: 'lfiSite', status: 'ready',
+    id: 'lfi', name: 'La France insoumise', short: 'LFI', color: '#c0392b', status: 'ready', officialSite: 'https://lafranceinsoumise.fr',
+    profile: { age: 74, role: 'Député, fondateur de LFI', wiki: 'Jean-Luc_Mélenchon' },
     candidate: 'Jean-Luc Mélenchon', pollName: 'Mélenchon', position: 'Gauche radicale', poll: 16.7, pollDelta: 1.8, deputies: 70,
     document: 'Le programme 2027 de LFI (« L’Avenir en commun », édition 2025 ; une 5e édition de 1 069 mesures est annoncée) n’a pas encore de chiffrage publié. Cet onglet utilise le cadrage chiffré publié par LFI pour le programme du Nouveau Front populaire de 2024, toujours mis en avant dans son programme, avec les mêmes trois phases décalées à mi-2027. Des sites de suivi citent +250 Md€ de dépenses et +267 Md€ de recettes pour l’édition 2025 ; ces chiffres sont introuvables sur les sites de LFI.',
     headline: [
-      ['Dépenses nouvelles', '+150 Md€ par an en 3e année'],
-      ['Recettes nouvelles', '+150 Md€ par an en 3e année'],
+      ['Dépenses nouvelles', '+150 Md€ par an en troisième année'],
+      ['Recettes nouvelles', '+150 Md€ par an en troisième année'],
       ['Effet net annoncé', 'équilibré (+5 Md€ la 1re année)'],
       ['Objectif de déficit / dette', 'aucun publié'],
       ['Retraites', 'retour à 60 ans, financé par des cotisations'],
@@ -208,11 +211,12 @@ export const parties = {
     ],
     measuresNote: 'Montants de LFI, selon ses trois phases (première année, fin de 2e année, fin de 4e année), interpolés entre elles et maintenus après 2030. Totaux par phase : dépenses −25 / −100 / −150, recettes +30 / +100 / +150.',
     measuresSrc: ['lfiNfp'],
-    src: ['lfiNfp', 'lfiAec', 'ifrapNfp', 'montaigneNfp', 'asteresNfp', 'lfiFB', 'votons'],
+    src: ['lfiNfp', 'lfiAec', 'ifrapNfp', 'montaigneNfp', 'asteresNfp', 'lfiFB'],
   },
 
   hor: {
-    id: 'hor', name: 'Horizons', short: 'HOR', color: '#0e9aa7', site: 'horFB', status: 'ready',
+    id: 'hor', name: 'Horizons', short: 'HOR', color: '#0e9aa7', status: 'ready', officialSite: 'https://horizonsleparti.fr',
+    profile: { age: 55, role: 'Maire du Havre, ancien Premier ministre', wiki: 'Édouard_Philippe' },
     candidate: 'Édouard Philippe', pollName: 'Philippe', position: 'Centre droit', poll: 14.4, pollDelta: 2.2, deputies: 35,
     document: 'Le programme d’Édouard Philippe fixe un déficit de 2 % du PIB en 2032, sans nouvel impôt et avec une règle d’or constitutionnelle, mais ne publie pas de total d’économies. Détaillés ici : la réforme des retraites (65 ans, 45 annuités), l’assurance chômage, le « deal fiscal » des entreprises et les 10 Md€ d’économies 2027 du budget alternatif d’Horizons (13 oct. 2026). Le reste de l’effort nécessaire pour atteindre 2 % figure sur une ligne non détaillée.',
     headline: [
@@ -261,11 +265,12 @@ export const parties = {
     ],
     measuresNote: 'Montants des retraites et de l’assurance chômage : équipe du candidat et France Budget ; économies 2027 sur l’État et le social : budget alternatif d’Horizons. La ligne non détaillée est calculée pour que le plan annoncé atteigne 2 % en 2032.',
     measuresSrc: ['horFI', 'horFB', 'horEuronews'],
-    src: ['horFI', 'horEuronews', 'ifrapComp', 'horFB', 'votons'],
+    src: ['horFI', 'horEuronews', 'ifrapComp', 'horFB'],
   },
 
   lr: {
-    id: 'lr', name: 'Les Républicains', short: 'LR', color: '#2d6cdf', site: 'lrPS', status: 'ready',
+    id: 'lr', name: 'Les Républicains', short: 'LR', color: '#2d6cdf', status: 'ready', officialSite: 'https://republicains.fr',
+    profile: { age: 65, role: 'Ancien ministre de l’Intérieur, sénateur', wiki: 'Bruno_Retailleau' },
     candidate: 'Bruno Retailleau', pollName: 'Retailleau', position: 'Droite', poll: 8.1, pollDelta: 1.7, deputies: 47,
     document: 'Plan de Bruno Retailleau présenté le 12 octobre 2026 : 197 Md€ d’économies sur cinq ans (État 96 Md€, social 91 Md€, collectivités 10 Md€), dont 51 Md€ rendus en baisses d’impôts, pour un excédent primaire en 2030, un déficit sous 3 % en 2031 et 2,2 % en fin de mandat. Les lignes détaillées ci-dessous totalisent 202 Md€, un peu plus que les 197 Md€ annoncés.',
     headline: [
@@ -311,11 +316,12 @@ export const parties = {
     ],
     measuresNote: 'Les montants sont les niveaux 2032 annoncés par LR, construits linéairement depuis 2027 (environ un cinquième la première année) ; les baisses d’impôts arrivent en début de mandat comme annoncé. France Budget n’encode pas les 150 Md€ d’économies non ventilées, d’où son déficit bien plus élevé.',
     measuresSrc: ['lrPS', 'lrFB'],
-    src: ['lrPS', 'ifrapComp', 'lrFB', 'votons'],
+    src: ['lrPS', 'ifrapComp', 'lrFB'],
   },
 
   re: {
-    id: 're', name: 'Renaissance', short: 'RE', color: '#e0a100', site: 'reJDD', status: 'ready',
+    id: 're', name: 'Renaissance', short: 'RE', color: '#e0a100', status: 'ready', officialSite: 'https://parti-renaissance.fr',
+    profile: { age: 37, role: 'Ancien Premier ministre, secrétaire général de Renaissance', wiki: 'Gabriel_Attal' },
     candidate: 'Gabriel Attal', pollName: 'Attal', position: 'Centre', poll: 9.1, pollDelta: 3.4, deputies: 90,
     document: 'Le plan de Gabriel Attal : environ 150 Md€ d’économies d’ici 2032, aux deux tiers sur les dépenses sociales, sans hausse d’impôts ; un déficit sous 3 % « avant 2032 » et l’équilibre en 2037, inscrit dans la Constitution. Peu de lignes sont détaillées : 100 000 départs volontaires de fonctionnaires, l’assurance chômage et une « année blanche » des prestations dans le budget 2028.',
     headline: [
@@ -353,11 +359,12 @@ export const parties = {
     ],
     measuresNote: 'Les économies atteignent 150 Md€ en 2032 : 19 Md€ détaillés, 131 Md€ non détaillés (aux deux tiers sociaux, comme annoncé). Les mesures détaillées démarrent avec le premier budget complet, celui de 2028. Non modélisés : la baisse des cotisations salariales (« droit au brut », non chiffrée par le parti) et la revalorisation des enseignants.',
     measuresSrc: ['reJDD', 'reMoneyvox', 'reFB'],
-    src: ['reJDD', 'reMoneyvox', 'ifrapComp', 'reFB', 'votons'],
+    src: ['reJDD', 'reMoneyvox', 'ifrapComp', 'reFB'],
   },
 
   ps: {
-    id: 'ps', name: 'PS – Place publique', short: 'PS-PP', color: '#d6457a', site: 'psVotons', status: 'ready',
+    id: 'ps', name: 'PS – Place publique', short: 'PS-PP', color: '#d6457a', status: 'ready', officialSite: 'https://place-publique.eu',
+    profile: { age: 46, role: 'Eurodéputé, cofondateur de Place publique', wiki: 'Raphaël_Glucksmann' },
     candidate: 'Raphaël Glucksmann', pollName: 'Glucksmann', position: 'Centre gauche', poll: 9.5, pollDelta: -2.0, deputies: 68,
     document: 'Raphaël Glucksmann a remporté la primaire PS / Place publique le 11 octobre 2026 ; son programme (78 mesures) n’est pas chiffré. Le cadrage chiffré utilisé ici est le contre-budget 2027 des députés socialistes (16 septembre 2026) : environ 39,5 Md€ de recettes nouvelles portées par un impôt plancher de 2 % sur les patrimoines de plus de 100 M€, 17,5 Md€ d’économies et de lutte contre la fraude, 22 Md€ de dépenses nouvelles et une CSG progressive, pour un déficit réduit d’environ 24 Md€ en 2027. L’abrogation de la réforme des retraites de 2023, inscrite au programme de Raphaël Glucksmann, est ajoutée.',
     headline: [
@@ -390,12 +397,12 @@ export const parties = {
       { label: 'Simulateur France Budget', deficit: { 2027: 6.0, 2028: 5.3, 2029: 5.5, 2030: 5.7 }, debt: { 2027: 121, 2028: 122, 2029: 124, 2030: 126 }, src: 'psFB' },
     ],
     measuresNote: 'Les montants du contre-budget sont annuels dès 2027 et maintenus ensuite ; l’abrogation de la réforme des retraites monte en charge jusqu’en 2032. France Budget modélise le projet de Raphaël Glucksmann (SMIC, retraites, impôt sur la fortune, point d’indice) plutôt que ce contre-budget.',
-    measuresSrc: ['psInvestir', 'psSelectra', 'psVotons'],
-    src: ['psInvestir', 'psSelectra', 'psVotons', 'ifrapComp', 'psFB', 'votons'],
+    measuresSrc: ['psInvestir', 'psSelectra', 'psPP'],
+    src: ['psInvestir', 'psSelectra', 'psPP', 'ifrapComp', 'psFB'],
   },
 }
 
-// ---------- Règle commune ----------
+// ---------- Barème commun ----------
 // Une même décote appliquée aux gains de tous les partis, selon le type de mesure ; les coûts comptent toujours en entier.
 export const RULE = {
   A: { share: 0.8, label: 'Documentée', note: 'chiffrée et juridiquement simple : une économie identifiée, un impôt sur une assiette connue' },
@@ -403,14 +410,14 @@ export const RULE = {
   C: { share: 0.2, label: 'Juridiquement fragile', note: 'suppose l’UE, une révision constitutionnelle ou une coordination internationale, ou n’économise rien pour l’ensemble des APU' },
   D: { share: 0, label: 'Non détaillée', note: 'totaux annoncés sans mesure derrière, effets retour de la croissance' },
 }
-export const STANDARD = { id: 'standard', label: 'Règle commune', by: 'règle commune' }
+export const STANDARD = { id: 'standard', label: 'Barème commun', by: 'barème commun' }
 export const reviewsOf = party => [...party.reviews, STANDARD]
 export const KIND = { spending: 'dépense', revenue: 'recette', mixed: 'mixte' }
 
-// De gauche à droite, selon le classement de Votons.
+// De gauche à droite.
 export const ORDER = ['lfi', 'ps', 're', 'hor', 'lr', 'rn']
 
-// Coefficient de crédibilité par mesure pour une analyse donnée : règle commune, coefficients explicites coûts/gains,
+// Coefficient de crédibilité par mesure pour une analyse donnée : barème commun, coefficients explicites coûts/gains,
 // ou (RN) un gain net 2031 reproduit par une décote uniforme des gains, les coûts comptant en entier.
 export function reviewCredibility(party, reviewId) {
   if (reviewId === 'standard' || !party.reviews.length) return Object.fromEntries(party.measures.map(m => [m.id, m.cost ? 1 : RULE[m.cls]?.share ?? 1]))

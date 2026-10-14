@@ -5,7 +5,9 @@ import { cofog, cofogMeta, natureCols, missionsLfi, byLevel2025, deficitBySub, S
 import { Card, DrillList, Seg } from './ui.jsx'
 import { LineChart, StackedH } from '../lib/charts.jsx'
 import { spendingLines } from './Overview.jsx'
-import { bn, eur, fmt, pct, signed } from '../lib/format.js'
+import { bn, eur, fmt, pct, signed, label, unitBn } from '../lib/format.js'
+import { T } from '../i18n.js'
+import { dt } from '../data/dataEn.js'
 
 const i = apu.years.length - 1
 const Y = apu.years[i]
@@ -14,13 +16,16 @@ const C = ['#2148c0', '#e1000f', '#f28c28', '#2a9d8f', '#8e7cc3', '#f4a582', '#9
 
 // Missions de transit ou comptes spéciaux plutôt que dépenses de politique publique du budget général.
 const SPECIAL = /^(Pensions|Avances|Prêts|Participations financières|Contrôle de la circulation|Financement des aides aux collectivités|Gestion du patrimoine immobilier|Développement agricole|Audiovisuel public)/
-const kind = m => m.type === 'BA' ? 'budget annexe' : SPECIAL.test(m.nom) ? 'compte spécial' : null
+const kind = m => m.type === 'BA' ? dt('budget annexe') : SPECIAL.test(m.nom) ? dt('compte spécial') : null
 
+// Missions et ministères traduits en anglais ; programmes, actions et sous-actions gardent leur intitulé officiel.
+const ap = label
+const mission = s => dt(ap(s))
 const toRows = list => list.map(m => ({
-  name: m.nom, value: m.cp, tag: kind(m), note: m.ministere,
+  name: mission(m.nom), value: m.cp, tag: kind(m), note: dt(ap(m.ministere)),
   children: m.programmes.map(p => ({
-    name: p.nom, value: p.cp, tag: 'P' + p.code,
-    children: p.actions.map(a => ({ name: a.nom, value: a.cp, children: a.sousActions.map(s => ({ name: s.nom, value: s.cp })) })),
+    name: ap(p.nom), value: p.cp, tag: 'P' + p.code,
+    children: p.actions.map(a => ({ name: ap(a.nom), value: a.cp, children: a.sousActions.map(s => ({ name: ap(s.nom), value: s.cp })) })),
   })),
 }))
 
@@ -32,14 +37,15 @@ function StateBudget() {
   const results = useMemo(() => {
     const s = q.trim().toLowerCase()
     if (s.length < 3) return null
+    const has = (...t) => t.some(x => x.toLowerCase().includes(s))
     const out = []
     for (const m of list) {
-      if (m.nom.toLowerCase().includes(s)) out.push({ level: 'mission', name: m.nom, v: m.cp, path: [] })
+      if (has(m.nom, mission(m.nom))) out.push({ level: T('mission', 'mission'), name: mission(m.nom), v: m.cp, path: [] })
       for (const p of m.programmes) {
-        if (p.nom.toLowerCase().includes(s)) out.push({ level: 'programme', name: p.nom, v: p.cp, path: [m.nom] })
+        if (has(p.nom)) out.push({ level: T('programme', 'programme'), name: ap(p.nom), v: p.cp, path: [mission(m.nom)] })
         for (const a of p.actions) {
-          if (a.nom.toLowerCase().includes(s)) out.push({ level: 'action', name: a.nom, v: a.cp, path: [m.nom, p.nom] })
-          for (const sa of a.sousActions) if (sa.nom.toLowerCase().includes(s)) out.push({ level: 'sous-action', name: sa.nom, v: sa.cp, path: [m.nom, p.nom, a.nom] })
+          if (has(a.nom)) out.push({ level: T('action', 'action'), name: ap(a.nom), v: a.cp, path: [mission(m.nom), ap(p.nom)] })
+          for (const sa of a.sousActions) if (has(sa.nom)) out.push({ level: T('sous-action', 'sub-action'), name: ap(sa.nom), v: sa.cp, path: [mission(m.nom), ap(p.nom), ap(a.nom)] })
         }
       }
     }
@@ -47,13 +53,13 @@ function StateBudget() {
   }, [q, scope])
 
   return (
-    <Card title="Budget de l’État 2025, jusqu’à la plus petite ligne publiée"
-      sub={`PLF 2025 : ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sous-actions`}
-      right={<Seg small value={scope} onChange={setScope} options={[['Budget général', 'general'], ['Tous les comptes', 'all']]} />}
+    <Card title={T('Budget de l’État 2025, jusqu’à la plus petite ligne publiée', 'State budget 2025, down to the smallest published line')}
+      sub={T(`PLF 2025 : ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sous-actions`, `2025 draft budget: ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sub-actions`)}
+      right={<Seg small value={scope} onChange={setScope} options={[[T('Budget général', 'General budget'), 'general'], [T('Tous les comptes', 'All accounts'), 'all']]} />}
       src={SRC.plf25dest}>
       <div className="search">
-        <input value={q} onChange={e => setQ(e.target.value)} placeholder="Chercher une ligne du budget (ex. : porte-avions, école, police, bourses…)" />
-        {results && <span className="mut">{results.length}{results.length === 50 ? '+' : ''} résultat(s)</span>}
+        <input value={q} onChange={e => setQ(e.target.value)} placeholder={T('Chercher une ligne du budget (ex. : porte-avions, école, police, bourses…)', 'Search a budget line (e.g. porte-avions, école, police, bourses…)')} />
+        {results && <span className="mut">{results.length}{results.length === 50 ? '+' : ''} {T('résultat(s)', 'result(s)')}</span>}
       </div>
       {results ? (
         <div className="bars">
@@ -63,13 +69,13 @@ function StateBudget() {
               <span className="bar-v">{eur(r.v)}</span>
             </div>
           ))}
-          {!results.length && <p className="hint">Aucune ligne ne correspond. La recherche porte sur les missions, programmes, actions et sous-actions.</p>}
+          {!results.length && <p className="hint">{T('Aucune ligne ne correspond. La recherche porte sur les missions, programmes, actions et sous-actions.', 'No line matches. Search covers missions, programmes, actions and sub-actions; programme-level labels are in French.')}</p>}
         </div>
       ) : (
         <>
           <DrillList rows={toRows(list)} total={total} fmt={eur} />
           <p className="hint">
-            {scope === 'all' ? 'Inclut 134 Md€ d’avances aux collectivités, pour l’essentiel leurs propres impôts transitant par l’État.' : 'Montants du projet de loi, avant amendements.'}
+            {scope === 'all' ? T('Inclut 134 Md€ d’avances aux collectivités, pour l’essentiel leurs propres impôts transitant par l’État.', 'Includes €134bn of advances to local authorities, mostly their own taxes passing through the State.') : T('Montants du projet de loi, avant amendements.', 'Draft-bill amounts, before amendments. Programme, action and sub-action labels keep their official French names.')}
           </p>
         </>
       )}
@@ -82,48 +88,48 @@ function Lfi2026() {
   const max = Math.max(...moves.map(m => Math.abs(m.d)))
   const Row = ({ m }) => (
     <div className="bar-row">
-      <span className="bar-n" title={m.name}>{m.name}</span>
+      <span className="bar-n" title={mission(m.name)}>{mission(m.name)}</span>
       <span className="bar-t"><span className="bar-f" style={{ width: `${Math.abs(m.d) / max * 100}%`, background: m.d > 0 ? 'var(--red)' : 'var(--green)' }} /></span>
       <span className={'bar-v ' + (m.d > 0 ? 'up' : 'dn')}>{signed(m.d)}</span>
     </div>
   )
   return (
-    <Card title="Ce qui change en 2026" sub="Variation des plafonds par mission, loi de finances 2026 vs 2025, Md€" src={SRC.lfi2026}>
+    <Card title={T('Ce qui change en 2026', 'What changes in 2026')} sub={T('Variation des plafonds par mission, loi de finances 2026 vs 2025, Md€', `Change in mission ceilings, 2026 budget law vs 2025, ${unitBn()}`)} src={SRC.lfi2026}>
       <div className="grid2 flat">
-        <div><h4>Principales hausses</h4><div className="bars">{moves.slice(0, 5).map(m => <Row key={m.name} m={m} />)}</div></div>
-        <div><h4>Principales baisses</h4><div className="bars">{moves.slice(-5).reverse().map(m => <Row key={m.name} m={m} />)}</div></div>
+        <div><h4>{T('Principales hausses', 'Largest increases')}</h4><div className="bars">{moves.slice(0, 5).map(m => <Row key={m.name} m={m} />)}</div></div>
+        <div><h4>{T('Principales baisses', 'Largest cuts')}</h4><div className="bars">{moves.slice(-5).reverse().map(m => <Row key={m.name} m={m} />)}</div></div>
       </div>
     </Card>
   )
 }
 
 function ByNature() {
-  const rows = spendingLines().map(([name, value, color]) => ({ name, value, color }))
+  const rows = spendingLines().map(([name, value, , color]) => ({ name, value, color }))
   return (
     <>
-      <Card title={`Dépenses par nature : ${bn(apu.depenses[i])} en ${Y}`} sub={`${pct(apu.depensesPct[i])} du PIB`} src={SRC.eurostatMain}>
+      <Card title={T(`Dépenses par nature : ${bn(apu.depenses[i])} en ${Y}`, `Spending by nature: ${bn(apu.depenses[i])} in ${Y}`)} sub={T(`${pct(apu.depensesPct[i])} du PIB`, `${pct(apu.depensesPct[i])} of GDP`)} src={SRC.eurostatMain}>
         <DrillList rows={rows} total={apu.depenses[i]} fmt={v => bn(v)} />
       </Card>
       <div className="grid2">
-        <Card title="Trente ans de dépenses" sub="Md€ courants" src={SRC.eurostatMain}>
+        <Card title={T('Trente ans de dépenses', 'Thirty years of spending')} sub={T('Md€ courants', 'current €bn')} src={SRC.eurostatMain}>
           <LineChart height={250}
             series={[
-              { name: 'Total des dépenses', color: 'var(--tx)', width: 2.5, points: years.map((y, k) => [y, apu.depenses[k]]) },
-              { name: 'Prestations en espèces', color: C[1], points: years.map((y, k) => [y, apu.prestationsSociales[k]]) },
-              { name: 'Rémunérations', color: C[0], points: years.map((y, k) => [y, apu.remunerations[k]]) },
-              { name: 'Investissement', color: C[3], points: years.map((y, k) => [y, apu.fbcf[k]]) },
-              { name: 'Intérêts', color: '#7a5af8', points: years.map((y, k) => [y, apu.interets[k]]) },
+              { name: T('Total des dépenses', 'Total spending'), color: 'var(--tx)', width: 2.5, points: years.map((y, k) => [y, apu.depenses[k]]) },
+              { name: T('Prestations en espèces', 'Cash benefits'), color: C[1], points: years.map((y, k) => [y, apu.prestationsSociales[k]]) },
+              { name: T('Rémunérations', 'Public pay'), color: C[0], points: years.map((y, k) => [y, apu.remunerations[k]]) },
+              { name: T('Investissement', 'Investment'), color: C[3], points: years.map((y, k) => [y, apu.fbcf[k]]) },
+              { name: T('Intérêts', 'Interest'), color: '#7a5af8', points: years.map((y, k) => [y, apu.interets[k]]) },
             ]}
             axes={{ left: { fmt: v => fmt(v, 0), tipFmt: v => bn(v) } }}
             markers={[{ x: 2020, label: 'Covid', side: 'l' }]}
           />
         </Card>
-        <Card title="Qui dépense" sub={`Dépenses par niveau d’administration, ${Y}, Md€`} src={SRC.insee2106}>
-          <StackedH segs={byLevel2025.spending.map((s, k) => ({ ...s, color: [C[0], C[1], C[2]][k] }))} fmt={v => fmt(v, 0)} height={40} />
-          <h4>Solde par sous-secteur (Md€)</h4>
-          <table className="t"><thead><tr><th></th><th>2024</th><th>2025</th><th>Écart</th></tr></thead><tbody>
-            {deficitBySub.map(r => <tr key={r.name}><td>{r.name}</td><td>{signed(r.y2024)}</td><td>{signed(r.y2025)}</td><td className={r.y2025 > r.y2024 ? 'dn' : 'up'}>{signed(r.y2025 - r.y2024)}</td></tr>)}
-            <tr className="tot"><td>Total</td><td>−169,1</td><td>−152,5</td><td className="dn">+16,6</td></tr>
+        <Card title={T('Qui dépense', 'Who spends it')} sub={T(`Dépenses par niveau d’administration, ${Y}, Md€`, `Spending by level of government, ${Y}, ${unitBn()}`)} src={SRC.insee2106}>
+          <StackedH segs={byLevel2025.spending.map((s, k) => ({ ...s, name: dt(s.name), color: [C[0], C[1], C[2]][k] }))} fmt={v => fmt(v, 0)} height={40} />
+          <h4>{T('Solde par sous-secteur (Md€)', `Balance by sub-sector (${unitBn()})`)}</h4>
+          <table className="t"><thead><tr><th></th><th>2024</th><th>2025</th><th>{T('Écart', 'Change')}</th></tr></thead><tbody>
+            {deficitBySub.map(r => <tr key={r.name}><td>{dt(r.name)}</td><td>{signed(r.y2024)}</td><td>{signed(r.y2025)}</td><td className={r.y2025 > r.y2024 ? 'dn' : 'up'}>{signed(r.y2025 - r.y2024)}</td></tr>)}
+            <tr className="tot"><td>Total</td><td>{signed(-169.1)}</td><td>{signed(-152.5)}</td><td className="dn">{signed(16.6)}</td></tr>
           </tbody></table>
         </Card>
       </div>
@@ -136,24 +142,24 @@ function ByFunction() {
   const f = cofog.find(c => c.name === sel)
   return (
     <div className="grid2">
-      <Card title="Dépenses par fonction, 2024" sub={`${bn(cofogMeta.total, 0)}, ${pct(cofogMeta.pctGdp)} du PIB`} src={SRC.insee2093}>
+      <Card title={T('Dépenses par fonction, 2024', 'Spending by function, 2024')} sub={T(`${bn(cofogMeta.total, 0)}, ${pct(cofogMeta.pctGdp)} du PIB`, `${bn(cofogMeta.total, 0)}, ${pct(cofogMeta.pctGdp)} of GDP`)} src={SRC.insee2093}>
         <div className="bars">
           {cofog.map(c => (
             <div key={c.name} className={`bar-row click ${sel === c.name ? 'sel' : ''}`} onClick={() => setSel(c.name)}>
-              <span className="bar-n"><span className="caret none">▸</span>{c.name}</span>
+              <span className="bar-n"><span className="caret none">▸</span>{dt(c.name)}</span>
               <span className="bar-t"><span className="bar-f" style={{ width: `${c.total / cofog[0].total * 100}%` }} /></span>
-              <span className="bar-v">{fmt(c.total, 0)}<span className="bar-p">{fmt(c.total / cofogMeta.total * 100, 0)}&nbsp;%</span></span>
+              <span className="bar-v">{fmt(c.total, 0)}<span className="bar-p">{pct(c.total / cofogMeta.total * 100, 0)}</span></span>
             </div>
           ))}
         </div>
       </Card>
-      <Card title={f.name} sub={`${bn(f.total, 0)} en 2024`}>
-        <h4>Par nature de dépense</h4>
-        <StackedH segs={f.nature.map((v, k) => ({ name: natureCols[k], v, color: C[k % C.length] })).filter(s => s.v > 0)} fmt={v => fmt(v, 0)} />
-        <h4>Par niveau d’administration</h4>
-        <StackedH segs={f.level.map((v, k) => ({ name: cofogMeta.levels[k], v, color: [C[0], C[2], C[1]][k] })).filter(s => s.v > 0)} fmt={v => fmt(v, 0)} />
-        {f.sub && <><h4>Sous-postes connus</h4><DrillList rows={f.sub} total={f.total} fmt={v => bn(v, 0)} /></>}
-        {f.subNote && <p className="hint">{f.subNote}</p>}
+      <Card title={dt(f.name)} sub={T(`${bn(f.total, 0)} en 2024`, `${bn(f.total, 0)} in 2024`)}>
+        <h4>{T('Par nature de dépense', 'By nature of spending')}</h4>
+        <StackedH segs={f.nature.map((v, k) => ({ name: dt(natureCols[k]), v, color: C[k % C.length] })).filter(s => s.v > 0)} fmt={v => fmt(v, 0)} />
+        <h4>{T('Par niveau d’administration', 'By level of government')}</h4>
+        <StackedH segs={f.level.map((v, k) => ({ name: dt(cofogMeta.levels[k]), v, color: [C[0], C[2], C[1]][k] })).filter(s => s.v > 0)} fmt={v => fmt(v, 0)} />
+        {f.sub && <><h4>{T('Sous-postes connus', 'Known sub-items')}</h4><DrillList rows={f.sub.map(x => ({ ...x, name: dt(x.name) }))} total={f.total} fmt={v => bn(v, 0)} /></>}
+        {f.subNote && <p className="hint">{dt(f.subNote)}</p>}
       </Card>
     </div>
   )
@@ -163,7 +169,7 @@ export default function Spending() {
   const [view, setView] = useState('state')
   return (
     <>
-      <Seg value={view} onChange={setView} options={[['Budget de l’État', 'state'], ['Par nature', 'nature'], ['Par fonction', 'function']]} />
+      <Seg value={view} onChange={setView} options={[[T('Budget de l’État', 'State budget'), 'state'], [T('Par nature', 'By nature'), 'nature'], [T('Par fonction', 'By function'), 'function']]} />
       {view === 'state' && <><StateBudget /><Lfi2026 /></>}
       {view === 'nature' && <ByNature />}
       {view === 'function' && <ByFunction />}

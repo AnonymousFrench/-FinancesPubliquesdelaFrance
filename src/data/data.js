@@ -95,5 +95,5 @@ export const aft = {
     { year: 2027, v: 340.0, tag: 'prévision AFT' },
   ],
   rating: 'Moody’s Aa3, perspective négative (10 avr. 2026) ; prochaine revue le 23 oct. 2026.',
-  spread: [['Févr. 2026', '55 pb'], ['Fin juil. 2026', '74 pb'], ['Début oct. 2026', '> 100 pb (presse)']],
+  spread: [['Févr. 2026', '55 points de base'], ['Fin juil. 2026', '74 points de base'], ['Début oct. 2026', '> 100 points de base (presse)']],
 }

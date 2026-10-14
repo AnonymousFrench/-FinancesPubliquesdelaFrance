@@ -1,12 +1,15 @@
 import React, { useMemo, useState } from 'react'
 import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
+import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
 import { usePolls, pollOf } from '../lib/usePolls.js'
 import { WIKI_PAGE, pollBlackout } from '../lib/polls.js'
 import { PollStatus, PollMentions } from './Polls.jsx'
+import { usePhotos } from '../lib/usePhotos.js'
 import { Card, Kpi, Seg } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
-import { bn, fmt, pct, signed } from '../lib/format.js'
+import { bn, fmt, pct, signed, unitBn } from '../lib/format.js'
+import { T, isEn } from '../i18n.js'
 
 const S = k => SOURCES[k]
 const PROJ = YEARS.filter(y => y >= 2026)
@@ -16,28 +19,17 @@ const BASE_C = '#9aa4b2'
 const LIST = ORDER.map(id => parties[id])
 const at = (rows, y) => rows.find(r => r.year === y)
 const line = (key, rows, ref) => rows.filter(r => r.year >= 2025).map(r => [r.year, +(r[key] - (ref ? at(ref, r.year)[key] : 0)).toFixed(2)])
-const reviewName = (q, id) => (r => r.by || r.label)(reviewsOf(q).find(r => r.id === id) || reviewsOf(q)[0])
-const pctAxis = v => fmt(v, 0) + ' %'
+const reviewName = (q, id) => reviewBy(q, reviewsOf(q).find(r => r.id === id) || reviewsOf(q)[0])
+const pctAxis = v => pct(v, 0)
+const UNCH = () => T('Politique inchangée', 'Unchanged policy')
 
-function Slider({ label, value, min, max, step, onChange, fmtv, hint }) {
-  return (
-    <label className="sl">
-      <span className="sl-l">{label}<b>{fmtv(value)}</b></span>
-      <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(+e.target.value)} />
-      {hint && <span className="sl-h">{hint}</span>}
-    </label>
-  )
-}
-
-// Coefficients de crédibilité d'un parti selon la base choisie : tel qu'annoncé, analyse centrale ou règle commune.
+// Coefficients de crédibilité d'un parti selon la base choisie : tel qu'annoncé, analyse centrale ou barème commun.
 const credFor = (q, basis) => basis === 'claimed' ? {} : reviewCredibility(q, basis === 'standard' ? 'standard' : q.reviewDefault)
 
 export default function Election() {
   const [basis, setBasis] = useState('central')
   const [growthMode, setGrowthMode] = useState('consensus')
-  const [marketRate, setMarketRate] = useState(baseline.marketRate)
-  const [spreadBp, setSpreadBp] = useState(0)
-  const [multiplier, setMultiplier] = useState(0)
+  const marketRate = baseline.marketRate, spreadBp = 0, multiplier = 0
   const [pid, setPid] = useState('rn')
   const opts = { marketRate, spreadBp, multiplier, firstYearShare: FIRST_YEAR_SHARE }
   const growthOf = q => growthMode === 'party' && q.growthClaim ? q.growthClaim : baseline.growth
@@ -55,68 +47,84 @@ export default function Election() {
     <>
       <Intro onPick={pick} />
 
-      <div className="dd-head sec">
-        <h2>Comparer les programmes, 2027-2032</h2>
-      <div className="ctl-row">
-        <div className="ctl">
-          <span className="ctl-l">Mesures retenues</span>
-          <Seg small value={basis} onChange={setBasis} options={[['Telles qu’annoncées', 'claimed'], ['Analyse indépendante', 'central'], ['Règle commune', 'standard']]} />
-        </div>
-        <div className="ctl">
-          <span className="ctl-l">Croissance</span>
-          <Seg small value={growthMode} onChange={setGrowthMode} options={[['Consensus', 'consensus'], ['Hypothèses des partis', 'party']]} />
-        </div>
-        <details className="adv">
-          <summary>Taux et multiplicateur</summary>
-          <div className="sliders">
-            <Slider label="Taux des emprunts nouveaux" value={marketRate} min={2.5} max={6} step={0.1} onChange={setMarketRate} fmtv={v => pct(v)} />
-            <Slider label="Prime de risque" value={spreadBp} min={0} max={200} step={10} onChange={setSpreadBp} fmtv={v => `+${v} pb`} />
-            <Slider label="Multiplicateur budgétaire" value={multiplier} min={0} max={1} step={0.1} onChange={setMultiplier} fmtv={v => fmt(v)} />
+      <Card title={T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')} className="group">
+        <div className="ctl-row">
+          <div className="ctl">
+            <span className="ctl-l">{T('Mesures retenues', 'Measures counted')}</span>
+            <Seg small value={basis} onChange={setBasis} options={[[T('Telles qu’annoncées', 'As announced'), 'claimed'], [T('Analyse indépendante', 'Independent review'), 'central'], [T('Barème commun', 'Common scale'), 'standard']]} />
           </div>
-        </details>
-      </div>
-      </div>
-      <Impact runs={runs} base={base} basis={basis} />
-      <Trajectories runs={runs} base={base} />
-      <Size runs={runs} basis={basis} />
-      <Table runs={runs} base={base} basis={basis} />
+          <div className="ctl">
+            <span className="ctl-l">{T('Croissance', 'Growth')}</span>
+            <Seg small value={growthMode} onChange={setGrowthMode} options={[[T('Consensus', 'Consensus'), 'consensus'], [T('Hypothèses des partis', 'Party assumptions'), 'party']]} />
+          </div>
+        </div>
 
-      <div id="deep-dive" className="dd-head">
-        <h2>Zoom sur un programme</h2>
-        <Seg value={pid} onChange={setPid} options={LIST.map(q => [q.short, q.id])} />
-      </div>
-      <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />
+        <Impact runs={runs} base={base} basis={basis} />
+        <Trajectories runs={runs} base={base} />
+        <Size runs={runs} basis={basis} />
+        <Table runs={runs} base={base} basis={basis} />
+      </Card>
 
+      <Card title={T('Zoom sur un programme', 'Zoom on one programme')} sub={T('Choisissez un parti', 'Choose a party')} className="group" id="deep-dive">
+        <PartyPicker value={pid} onChange={setPid} />
+        <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />
+      </Card>
+    </>
+  )
+}
+
+// Sélecteur de parti : grands boutons avec portrait (ou pastille aux couleurs du parti).
+function Avatar({ q, photos, size = 38 }) {
+  const ph = photos[q.candidate]
+  return ph
+    ? <img className="pk-photo" src={ph.src} alt={q.candidate} loading="lazy" width={size} height={size} />
+    : <span className="pk-badge">{q.short}</span>
+}
+
+function PartyPicker({ value, onChange }) {
+  const photos = usePhotos()
+  return (
+    <>
+      <div className="picker" role="tablist" aria-label={T('Programme à détailler', 'Programme to detail')}>
+        {LIST.map(q => (
+          <button key={q.id} role="tab" aria-selected={value === q.id} className={value === q.id ? 'on' : ''} style={{ '--pc': q.color }} onClick={() => onChange(q.id)}>
+            <Avatar q={q} photos={photos} />
+            <span className="pk-t"><b>{q.candidate}</b><em>{pName(q)}</em></span>
+          </button>
+        ))}
+      </div>
+      <a className="photo-credit" href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer">{T('Photos : Wikimedia Commons', 'Photos: Wikimedia Commons')}</a>
     </>
   )
 }
 
 function Intro({ onPick }) {
   const state = usePolls()
+  const photos = usePhotos()
   const blackout = pollBlackout()
   return (
-    <Card title="Présidentielle 2027 : les programmes face à la dette"
-      sub="Six programmes, un même modèle, comparés à la politique inchangée jusqu’en 2032."
-      src={[{ label: 'Wikipédia, liste des sondages 2027', url: WIKI_PAGE }, S('votons')]}>
+    <Card title={T('Présidentielle 2027 : les programmes face à la dette', '2027 election: the programmes and the debt')}
+      sub={T('Six programmes, un même modèle, comparés à la politique inchangée jusqu’en 2032.', 'Six programmes, one model, compared with unchanged policy to 2032.')}
+      src={[{ label: 'Wikipédia, liste des sondages 2027', url: WIKI_PAGE }, S('wikiFR'), S('assemblee'), { label: 'photos Wikimedia Commons', url: 'https://commons.wikimedia.org/' }]}>
       <div className="cands">
         {LIST.map(q => {
           const p = pollOf(state.data, q.pollName)
           const v = p ? p.v : q.poll, d = p ? p.delta : q.pollDelta
           return (
-            <button key={q.id} className="cand" style={{ '--pc': q.color }} onClick={() => onPick(q.id)} title={`Zoom : ${q.name}`}>
-              <span className="cand-pos">{q.position}</span>
+            <button key={q.id} className="cand" style={{ '--pc': q.color }} onClick={() => onPick(q.id)} title={T(`Zoom : ${q.name}`, `Zoom: ${pName(q)}`)}>
+              <span className="cand-top"><span className="cand-pos">{pPosition(q)}</span>{photos[q.candidate] && <img className="cand-photo" src={photos[q.candidate].src} alt={q.candidate} loading="lazy" />}</span>
               <b className="cand-name">{q.candidate}</b>
-              <span className="cand-party">{q.name}</span>
+              <span className="cand-party">{pName(q)}</span>
               {!blackout && <><span className="cand-poll">{pct(v)}{d != null && (Math.abs(d) < 0.05 ? <em className="mut">=</em> : <em className={d > 0 ? 'dn' : 'up'}>{d > 0 ? '▲' : '▼'} {fmt(Math.abs(d))}</em>)}</span>
               <span className="cand-bar"><i style={{ width: `${v / 36 * 100}%` }} /></span></>}
-              <span className="cand-seats">{q.deputies} députés</span>
+              <span className="cand-seats">{q.deputies} {T('députés', 'deputies')}</span>
             </button>
           )
         })}
       </div>
       {blackout
-        ? <p className="mentions">Sondages suspendus la veille et le jour du {blackout.label} (loi du 19 juillet 1977), jusqu’au {blackout.end}.</p>
-        : <><div className="poll-meta"><PollStatus state={state} /><a href="/sondages-presidentielle-2027">Tous les sondages →</a></div><PollMentions /></>}
+        ? <p className="mentions">{T(`Sondages suspendus la veille et le jour du ${blackout.label} (loi du 19 juillet 1977), jusqu’au ${blackout.end}.`, `Polls suspended the day before and the day of the ${blackout.labelEn} (law of 19 July 1977), until ${blackout.endEn}.`)}</p>
+        : <><div className="poll-meta"><PollStatus state={state} /><a href="/sondages-presidentielle-2027">{T('Tous les sondages →', 'All polls →')}</a></div><PollMentions /></>}
     </Card>
   )
 }
@@ -133,13 +141,12 @@ function Impact({ runs, base, basis }) {
   const maxDebt = niceMax(Math.max(...rows.flatMap(r => [Math.abs(r.debt), Math.abs(r.cdebt)])))
   const ghost = basis !== 'claimed'
   return (
-    <Card title="Effet de chaque programme en 2032"
-      sub={`Écart avec la politique inchangée (déficit ${pct(b.deficitPct)}, dette ${pct(b.debtPct)} du PIB), en points de PIB.`}>
+    <Card>
       <div className="grid2 flat">
-        <Diverging title="Déficit 2032, points de PIB" rows={sorted.map(r => ({ q: r.q, v: r.def, g: ghost ? r.cdef : null }))} max={maxDef} />
-        <Diverging title="Dette 2032, points de PIB" rows={sorted.map(r => ({ q: r.q, v: r.debt, g: ghost ? r.cdebt : null }))} max={maxDebt} />
+        <Diverging title={T('Déficit 2032, points de PIB', '2032 deficit, points of GDP')} rows={sorted.map(r => ({ q: r.q, v: r.def, g: ghost ? r.cdef : null }))} max={maxDef} />
+        <Diverging title={T('Dette 2032, points de PIB', '2032 debt, points of GDP')} rows={sorted.map(r => ({ q: r.q, v: r.debt, g: ghost ? r.cdebt : null }))} max={maxDebt} />
       </div>
-      {ghost && <p className="hint"><span className="ghost-key" /> Contour : le programme tel qu’annoncé. 1 point de PIB ≈ 35 Md€.</p>}
+      {ghost && <p className="hint"><span className="ghost-key" /> {T('Contour : le programme tel qu’annoncé.', 'Outline: the programme as announced.')} {T(`1 point de PIB ≈ 35 Md€.`, `1 point of GDP ≈ €35bn.`)}</p>}
     </Card>
   )
 }
@@ -167,7 +174,7 @@ function Diverging({ title, rows, max }) {
           <span className={'div-v ' + (v < -0.05 ? 'dn' : v > 0.05 ? 'up' : 'mut')}>{signed(v)}</span>
         </div>
       ))}
-      <div className="div-foot"><span>◄ mieux</span><span>politique inchangée</span><span>pire ►</span></div>
+      <div className="div-foot"><span>{T('◄ mieux', '◄ better')}</span><span>{UNCH().toLowerCase()}</span><span>{T('pire ►', 'worse ►')}</span></div>
     </div>
   )
 }
@@ -180,9 +187,9 @@ function Trajectories({ runs, base }) {
   const hi = Math.ceil(Math.max(...vals) / (isDebt ? 10 : 2)) * (isDebt ? 10 : 2)
   const b32 = at(base, 2032)
   return (
-    <Card title="Trajectoires 2025-2032"
-      sub={`${isDebt ? 'Dette' : 'Déficit'} en % du PIB, même échelle pour tous. Pointillés : politique inchangée.`}
-      right={<Seg small value={metric} onChange={setMetric} options={[['Dette', 'debtPct'], ['Déficit', 'deficitPct']]} />}>
+    <Card title={T('Trajectoires 2025-2032', 'Trajectories 2025-2032')}
+      sub={T(`${isDebt ? 'Dette' : 'Déficit'} en % du PIB, même échelle pour tous. Pointillés : politique inchangée.`, `${isDebt ? 'Debt' : 'Deficit'} as % of GDP, same scale for all. Dashed: unchanged policy.`)}
+      right={<Seg small value={metric} onChange={setMetric} options={[[T('Dette', 'Debt'), 'debtPct'], [T('Déficit', 'Deficit'), 'deficitPct']]} />}>
       <div className="multi">
         {runs.map(({ q, rows }) => {
           const r = at(rows, 2032)
@@ -192,28 +199,28 @@ function Trajectories({ runs, base }) {
           return (
             <div key={q.id} className="mini">
               <div className="mini-h"><i style={{ background: q.color }} /><b>{q.short}</b><span>{q.candidate}</span></div>
-              <div className="mini-v"><b>{pct(r[metric])}</b><span className={tone}>{signed(dPts)} pt · {signed(dEur, 0)} Md€{isDebt ? '' : ' par an'}</span></div>
+              <div className="mini-v"><b>{pct(r[metric])}</b><span className={tone}>{signed(dPts)} pt · {isEn() ? `${signed(dEur, 0)}bn` : `${signed(dEur, 0)} Md€`}{isDebt ? '' : T(' par an', ' a year')}</span></div>
               <LineChart height={120} legend={false} yMin={lo} yMax={hi} xTicks={[2026, 2029, 2032]}
                 series={[
-                  { name: 'Politique inchangée', color: BASE_C, dash: true, width: 1.6, points: line(metric, base) },
+                  { name: UNCH(), color: BASE_C, dash: true, width: 1.6, points: line(metric, base) },
                   { name: q.short, color: q.color, width: 2.6, points: line(metric, rows) },
                 ]}
                 band={{ from: 0, to: 1, color: tone === 'dn' ? '#1a7f4b' : '#e1000f', opacity: 0.2, label: '' }}
-                refLines={isDebt ? [] : [{ y: 3, label: '3 %' }]}
+                refLines={isDebt ? [] : [{ y: 3, label: '3%' }]}
                 axes={{ left: { fmt: v => fmt(v, 0), tipFmt: v => pct(v) } }} />
             </div>
           )
         })}
       </div>
-      <p className="hint">Écart en 2032 avec la politique inchangée : <span className="dn">vert</span> = moins {isDebt ? 'de dette' : 'de déficit'}, <span className="up">rouge</span> = davantage.</p>
+      <p className="hint">{T('Écart en 2032 avec la politique inchangée : ', 'Gap in 2032 vs unchanged policy: ')}<span className="dn">{T('vert', 'green')}</span> = {isDebt ? T('moins de dette', 'less debt') : T('moins de déficit', 'less deficit')}, <span className="up">{T('rouge', 'red')}</span> = {T('davantage', 'more')}.</p>
     </Card>
   )
 }
 
 // Ampleur de la recomposition budgétaire : gains et coûts bruts annoncés pour 2032.
-const SIZE_CATS = [
-  ['cutsSpend', 'Baisses de dépenses', '#2a9d8f'], ['newRev', 'Recettes nouvelles', '#8cc084'],
-  ['taxCuts', 'Baisses d’impôts', '#f2a65a'], ['newSpend', 'Dépenses nouvelles', '#e07a5f'],
+const sizeCats = () => [
+  ['cutsSpend', T('Baisses de dépenses', 'Spending cuts'), '#2a9d8f'], ['newRev', T('Recettes nouvelles', 'New revenue'), '#8cc084'],
+  ['taxCuts', T('Baisses d’impôts', 'Tax cuts'), '#f2a65a'], ['newSpend', T('Dépenses nouvelles', 'New spending'), '#e07a5f'],
 ]
 function sizeOf(q) {
   const t = { cutsSpend: 0, newRev: 0, taxCuts: 0, newSpend: 0 }
@@ -231,10 +238,11 @@ function Size({ runs, basis }) {
   const data = runs.map(({ q, rows }) => ({ q, t: sizeOf(q), counted: at(rows, 2032).measures }))
   const max = niceMax(Math.max(...data.flatMap(d => [d.t.cutsSpend + d.t.newRev, d.t.taxCuts + d.t.newSpend])))
   const X = v => 50 + v / max * 50
+  const CATS = sizeCats()
   return (
-    <Card title="Ampleur des programmes"
-      sub="Montants bruts annoncés pour 2032, Md€ par an : coûts à gauche, gains à droite."
-      right={<div className="legend">{SIZE_CATS.map(([k, n, c]) => <span key={k}><i style={{ background: c }} />{n}</span>)}<span><i className="net-key" />Net annoncé</span>{basis !== 'claimed' && <span><i className="cnt-key" />Net retenu</span>}</div>}>
+    <Card title={T('Ampleur des programmes', 'Scale of the programmes')}
+      sub={T('Montants bruts annoncés pour 2032, Md€ par an : coûts à gauche, gains à droite.', `Gross amounts announced for 2032, ${unitBn()} a year: costs on the left, gains on the right.`)}
+      right={<div className="legend">{CATS.map(([k, n, c]) => <span key={k}><i style={{ background: c }} />{n}</span>)}<span><i className="net-key" />{T('Net annoncé', 'Net announced')}</span>{basis !== 'claimed' && <span><i className="cnt-key" />{T('Net retenu', 'Net counted')}</span>}</div>}>
       <div className="div size">
         <div className="div-axis"><span />{[-max, -max / 2, 0, max / 2, max].map(t => <em key={t} style={{ left: `${X(t)}%` }}>{signed(t, Number.isInteger(t) ? 0 : 1)}</em>)}</div>
         {data.map(({ q, t, counted }) => {
@@ -245,16 +253,16 @@ function Size({ runs, basis }) {
               <span className="div-l"><i style={{ background: q.color }} />{q.short}</span>
               <span className="div-track tall">
                 <span className="div-zero" />
-                {SIZE_CATS.slice(0, 2).map(([k, n, c]) => { const w = t[k] / max * 50; const el = <span key={k} className="seg-bar" title={`${n} : ${bn(t[k], 0)}`} style={{ left: `${right}%`, width: `${w}%`, background: c }} />; right += w; return el })}
-                {SIZE_CATS.slice(2).map(([k, n, c]) => { const w = t[k] / max * 50; left -= w; return <span key={k} className="seg-bar" title={`${n} : ${bn(t[k], 0)}`} style={{ left: `${left}%`, width: `${w}%`, background: c }} /> })}
-                <span className="net-mark" style={{ left: `${X(net)}%` }} title={`Net annoncé : ${signed(net, 0)} Md€`} />
-                {basis !== 'claimed' && <span className="cnt-mark" style={{ left: `${X(counted)}%`, background: q.color }} title={`Net retenu : ${signed(counted, 0)} Md€`} />}
+                {CATS.slice(0, 2).map(([k, n, c]) => { const w = t[k] / max * 50; const el = <span key={k} className="seg-bar" title={`${n}: ${bn(t[k], 0)}`} style={{ left: `${right}%`, width: `${w}%`, background: c }} />; right += w; return el })}
+                {CATS.slice(2).map(([k, n, c]) => { const w = t[k] / max * 50; left -= w; return <span key={k} className="seg-bar" title={`${n}: ${bn(t[k], 0)}`} style={{ left: `${left}%`, width: `${w}%`, background: c }} /> })}
+                <span className="net-mark" style={{ left: `${X(net)}%` }} title={`${T('Net annoncé', 'Net announced')}: ${signed(net, 0)} ${unitBn()}`} />
+                {basis !== 'claimed' && <span className="cnt-mark" style={{ left: `${X(counted)}%`, background: q.color }} title={`${T('Net retenu', 'Net counted')}: ${signed(counted, 0)} ${unitBn()}`} />}
               </span>
               <span className="div-v wide">{signed(net, 0)}<em>{basis !== 'claimed' ? ` → ${signed(counted, 0)}` : ''}</em></span>
             </div>
           )
         })}
-        <div className="div-foot"><span>◄ coûts</span><span /><span>gains ►</span></div>
+        <div className="div-foot"><span>{T('◄ coûts', '◄ costs')}</span><span /><span>{T('gains ►', 'gains ►')}</span></div>
       </div>
     </Card>
   )
@@ -262,12 +270,12 @@ function Size({ runs, basis }) {
 
 function Table({ runs, base, basis }) {
   const b = at(base, 2032)
-  const all = [{ name: 'Politique inchangée', rows: base, review: '–' }, ...runs.map(({ q, rows }) => ({ name: q.name, q, rows, review: basis === 'claimed' ? 'tel qu’annoncé' : reviewName(q, basis === 'standard' ? 'standard' : q.reviewDefault) }))]
+  const all = [{ name: UNCH(), rows: base, review: '–' }, ...runs.map(({ q, rows }) => ({ name: pName(q), q, rows, review: basis === 'claimed' ? T('tel qu’annoncé', 'as announced') : reviewName(q, basis === 'standard' ? 'standard' : q.reviewDefault) }))]
   return (
-    <Card title="2032 en chiffres">
+    <Card title={T('2032 en chiffres', '2032 in figures')}>
       <div className="t-wrap">
         <table className="t">
-          <thead><tr><th></th><th>Déficit</th><th>Écart</th><th>Dette</th><th>Écart</th><th>Dépenses</th><th>Recettes</th><th>Intérêts</th><th>Mesures nettes</th><th>Évalué par</th></tr></thead>
+          <thead><tr><th></th><th>{T('Déficit', 'Deficit')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dette', 'Debt')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dépenses', 'Spending')}</th><th>{T('Recettes', 'Revenue')}</th><th>{T('Intérêts', 'Interest')}</th><th>{T('Mesures nettes', 'Net measures')}</th><th>{T('Évalué par', 'Assessed by')}</th></tr></thead>
           <tbody>
             {all.map(({ name, q, rows, review }) => {
               const r = at(rows, 2032)
@@ -278,7 +286,7 @@ function Table({ runs, base, basis }) {
                   <td>{pct(r.deficitPct)}</td><td className={q ? (dd < -0.05 ? 'dn' : dd > 0.05 ? 'up' : '') : ''}>{q ? signed(dd) : '–'}</td>
                   <td>{pct(r.debtPct)}</td><td className={q ? (db < -0.05 ? 'dn' : db > 0.05 ? 'up' : '') : ''}>{q ? signed(db) : '–'}</td>
                   <td>{pct(r.spendingPct)}</td><td>{pct(r.revenuePct)}</td><td>{bn(r.interest, 0)}</td>
-                  <td>{q ? `${signed(r.measures, 0)} Md€` : '–'}</td><td className="mut">{review}</td>
+                  <td>{q ? (isEn() ? `${signed(r.measures, 0)}bn` : `${signed(r.measures, 0)} Md€`) : '–'}</td><td className="mut">{review}</td>
                 </tr>
               )
             })}
@@ -286,6 +294,33 @@ function Table({ runs, base, basis }) {
         </table>
       </div>
     </Card>
+  )
+}
+
+// Fiche candidat succincte : portrait, fonction, parti, sondage du moment et liens de référence.
+function Profile({ q }) {
+  const photos = usePhotos()
+  const state = usePolls()
+  const p = pollOf(state.data, q.pollName)
+  const blackout = pollBlackout()
+  const ph = photos[q.candidate]
+  return (
+    <div className="profile" style={{ '--pc': q.color }}>
+      {ph ? <img className="pf-photo" src={ph.src} alt={q.candidate} /> : <span className="pf-photo pf-ph">{q.short}</span>}
+      <div className="pf-main">
+        <b className="pf-name">{q.candidate}</b>
+        <span className="pf-role">{pRole(q)} · {q.profile.age} {T('ans', 'years old')}</span>
+        <span className="pf-party"><i style={{ background: q.color }} />{pName(q)} · {pPosition(q)}</span>
+        <span className="pf-links">
+          <a href={`https://fr.wikipedia.org/wiki/${q.profile.wiki}`} target="_blank" rel="noreferrer">{T('Wikipédia', 'Wikipedia (in French)')}</a>
+          <a href={q.officialSite} target="_blank" rel="noreferrer">{T('Site du parti', 'Party website')}</a>
+        </span>
+      </div>
+      <div className="pf-stats">
+        {!blackout && p && <span><b>{pct(p.v)}</b>{T('sondages 1er tour', 'first-round polls')}</span>}
+        <span><b>{q.deputies}</b>{T('députés', 'deputies')}</span>
+      </div>
+    </div>
   )
 }
 
@@ -308,93 +343,92 @@ function DeepDive({ q, basis, base, opts, growth }) {
   const b32 = at(base, 2032), s32 = at(scen, 2032)
   const tgtYear = Object.keys(q.targets.deficit).map(Number).sort().at(-1)
   const series = (key, rows) => rows.filter(r => r.year >= 2025).map(r => [r.year, +r[key].toFixed(2)])
-  const extSeries = metric => q.external.filter(e => e[metric]).map((e, k) => ({ name: e.label, color: ['#8e7cc3', '#f28c28'][k], line: false, points: pointsOf(e[metric]) }))
-  const note = preset === 'claimed' ? `Chaque mesure au montant du parti. ${q.growthNote}`
-    : preset === 'custom' ? 'Votre propre crédibilité pour chaque ligne, réglée dans le tableau ci-dessous.'
-    : review.id === 'standard' ? `Règle commune : chaque gain compte ${Object.entries(RULE).map(([k, r]) => `${Math.round(r.share * 100)} % (${k}, ${r.label.toLowerCase()})`).join(', ')} ; les coûts en entier. La classe de chaque mesure figure dans le tableau.`
-    : q.reviewNote(review)
+  const extSeries = metric => q.external.filter(e => e[metric]).map((e, k) => ({ name: extLabel(e.label), color: ['#8e7cc3', '#f28c28'][k], line: false, points: pointsOf(e[metric]) }))
+  const note = reviewNoteText(q, review)
+  const gdp = T('du PIB', 'of GDP')
 
   return (
     <>
-      <Card title={`${q.candidate} · ${q.name}`} tag={q.position} src={q.src.map(S)}>
-        <div className="claims">{q.headline.map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
-        <details className="about"><summary>À propos de ce chiffrage</summary><p className="sub">{q.document}</p></details>
+      <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)}>
+        <Profile q={q} />
+        <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
+        <details className="about"><summary>{T('À propos de ce chiffrage', 'About this costing')}</summary><p className="sub">{pDocument(q)}</p></details>
       </Card>
 
-      <section className="card">
+      <section className="card ctl-card">
         <div className="ctl-row">
           <div className="ctl">
-            <span className="ctl-l">Mesures</span>
-            <Seg small value={preset} onChange={v => { setPreset(v); setCustom(null) }} options={[[`Telles qu’annoncées (${q.short})`, 'claimed'], ['Analyse indépendante', 'review'], ['Personnalisé', 'custom']]} />
-            {preset === 'review' && <Seg small value={review.id} onChange={setReviewId} options={reviews.map(r => [r.label, r.id])} />}
+            <span className="ctl-l">{T('Mesures', 'Measures')}</span>
+            <Seg small value={preset} onChange={v => { setPreset(v); setCustom(null) }} options={[[T(`Telles qu’annoncées (${q.short})`, `As announced (${q.short})`), 'claimed'], [T('Analyse indépendante', 'Independent review'), 'review']]} />
+            {preset === 'review' && <Seg small value={review.id} onChange={setReviewId} options={reviews.map(r => [reviewLabel(q, r), r.id])} />}
           </div>
         </div>
         {preset === 'review' && review.id !== 'standard' && <p className="ctl-note">{note}</p>}
       </section>
 
       <div className="kpis">
-        <Kpi label="Déficit 2032" value={pct(s32.deficitPct)} sub={`politique inchangée ${pct(b32.deficitPct)} · ${signed(s32.deficitPct - b32.deficitPct)} pt`} tone={s32.deficitPct > 3 ? 'bad' : 'good'} />
-        <Kpi label={tgtYear ? `Déficit ${tgtYear} et objectif` : 'Objectif de déficit'} value={tgtYear ? pct(at(scen, tgtYear).deficitPct) : '–'} sub={tgtYear ? `objectif ${q.short} : ${pct(q.targets.deficit[tgtYear])}` : `aucun objectif publié par ${q.short}`} tone={tgtYear ? (at(scen, tgtYear).deficitPct > q.targets.deficit[tgtYear] + 0.05 ? 'bad' : 'good') : undefined} />
-        <Kpi label="Dette 2032" value={pct(s32.debtPct)} sub={`politique inchangée ${pct(b32.debtPct)}${q.targets.debt[2032] ? ` · objectif ${q.short} ${pct(q.targets.debt[2032], 0)}` : ''}`} tone={s32.debtPct > at(scen, 2026).debtPct ? 'bad' : 'good'} />
-        <Kpi label="Dépense publique 2032" value={pct(s32.spendingPct)} sub={`du PIB · inchangée ${pct(b32.spendingPct)}`} />
-        <Kpi label="Intérêts 2032" value={bn(s32.interest, 0)} sub={`inchangée ${bn(b32.interest, 0)} · 2025 : ${bn(base[0].interest, 0)}`} tone="warn" />
+        <Kpi label={T('Déficit 2032', '2032 deficit')} value={pct(s32.deficitPct)} sub={T(`politique inchangée ${pct(b32.deficitPct)} · ${signed(s32.deficitPct - b32.deficitPct)} pt`, `unchanged policy ${pct(b32.deficitPct)} · ${signed(s32.deficitPct - b32.deficitPct)} pt`)} tone={s32.deficitPct > 3 ? 'bad' : 'good'} />
+        <Kpi label={tgtYear ? T(`Déficit ${tgtYear} et objectif`, `${tgtYear} deficit vs target`) : T('Objectif de déficit', 'Deficit target')} value={tgtYear ? pct(at(scen, tgtYear).deficitPct) : '–'} sub={tgtYear ? T(`objectif ${q.short} : ${pct(q.targets.deficit[tgtYear])}`, `${q.short} target: ${pct(q.targets.deficit[tgtYear])}`) : T(`aucun objectif publié par ${q.short}`, `no target published by ${q.short}`)} tone={tgtYear ? (at(scen, tgtYear).deficitPct > q.targets.deficit[tgtYear] + 0.05 ? 'bad' : 'good') : undefined} />
+        <Kpi label={T('Dette 2032', '2032 debt')} value={pct(s32.debtPct)} sub={T(`politique inchangée ${pct(b32.debtPct)}${q.targets.debt[2032] ? ` · objectif ${q.short} ${pct(q.targets.debt[2032], 0)}` : ''}`, `unchanged policy ${pct(b32.debtPct)}${q.targets.debt[2032] ? ` · ${q.short} target ${pct(q.targets.debt[2032], 0)}` : ''}`)} tone={s32.debtPct > at(scen, 2026).debtPct ? 'bad' : 'good'} />
+        <Kpi label={T('Dépense publique 2032', '2032 public spending')} value={pct(s32.spendingPct)} sub={T(`du PIB · inchangée ${pct(b32.spendingPct)}`, `of GDP · unchanged ${pct(b32.spendingPct)}`)} />
+        <Kpi label={T('Intérêts 2032', '2032 interest')} value={bn(s32.interest, 0)} sub={T(`inchangée ${bn(b32.interest, 0)} · 2025 : ${bn(base[0].interest, 0)}`, `unchanged ${bn(b32.interest, 0)} · 2025: ${bn(base[0].interest, 0)}`)} tone="warn" />
       </div>
 
       <div className="grid2">
-        <Card title="Déficit, % du PIB" sub="Points : objectifs et autres projections.">
+        <Card title={T('Déficit, % du PIB', 'Deficit, % of GDP')} sub={T('Points : objectifs et autres projections.', 'Dots: targets and other projections.')}>
           <LineChart height={250} yMin={0}
             series={[
-              { name: 'Politique inchangée', color: BASE_C, dash: true, points: series('deficitPct', base) },
+              { name: UNCH(), color: BASE_C, dash: true, points: series('deficitPct', base) },
               { name: q.short, color: q.color, width: 2.8, points: series('deficitPct', scen) },
-              { name: `Objectifs ${q.short}`, color: q.color, line: false, points: pointsOf(q.targets.deficit) },
-              { name: governmentPlan.label, color: GOV, line: false, points: pointsOf(governmentPlan.deficit) },
+              { name: T(`Objectifs ${q.short}`, `${q.short} targets`), color: q.color, line: false, points: pointsOf(q.targets.deficit) },
+              { name: govLabel(), color: GOV, line: false, points: pointsOf(governmentPlan.deficit) },
               ...extSeries('deficit'),
             ].filter(x => x.points.length)}
-            refLines={[{ y: 3, label: 'Limite UE 3 %' }]} shade={{ from: 2026.5, to: 2032.5, label: 'Projection' }}
+            refLines={[{ y: 3, label: T('Limite UE 3 %', 'EU limit 3%') }]} shade={{ from: 2026.5, to: 2032.5, label: T('Projection', 'Projection') }}
             axes={{ left: { fmt: pctAxis, tipFmt: v => pct(v) } }} />
         </Card>
-        <Card title="Dette, % du PIB">
+        <Card title={T('Dette, % du PIB', 'Debt, % of GDP')}>
           <LineChart height={250}
             series={[
-              { name: 'Politique inchangée', color: BASE_C, dash: true, points: series('debtPct', base) },
+              { name: UNCH(), color: BASE_C, dash: true, points: series('debtPct', base) },
               { name: q.short, color: q.color, width: 2.8, points: series('debtPct', scen) },
-              { name: `Objectifs ${q.short}`, color: q.color, line: false, points: pointsOf(q.targets.debt) },
-              { name: governmentPlan.label, color: GOV, line: false, points: pointsOf(governmentPlan.debt) },
+              { name: T(`Objectifs ${q.short}`, `${q.short} targets`), color: q.color, line: false, points: pointsOf(q.targets.debt) },
+              { name: govLabel(), color: GOV, line: false, points: pointsOf(governmentPlan.debt) },
               ...extSeries('debt'),
             ].filter(x => x.points.length)}
-            shade={{ from: 2026.5, to: 2032.5, label: 'Projection' }}
+            shade={{ from: 2026.5, to: 2032.5, label: T('Projection', 'Projection') }}
             axes={{ left: { fmt: pctAxis, tipFmt: v => pct(v) } }} />
         </Card>
       </div>
 
       <div className="grid2">
-        <Card title="Dépenses et recettes, % du PIB" sub="Pointillés : politique inchangée.">
+        <Card title={T('Dépenses et recettes, % du PIB', 'Spending and revenue, % of GDP')} sub={T('Pointillés : politique inchangée.', 'Dashed: unchanged policy.')}>
           <LineChart height={220}
             series={[
-              { name: 'Dépenses', color: 'var(--blue)', width: 2.5, points: series('spendingPct', scen) },
-              { name: 'Dépenses, inchangée', color: 'var(--blue)', dash: true, width: 1.5, points: series('spendingPct', base) },
-              { name: 'Recettes', color: 'var(--green)', width: 2.5, points: series('revenuePct', scen) },
-              { name: 'Recettes, inchangée', color: 'var(--green)', dash: true, width: 1.5, points: series('revenuePct', base) },
+              { name: T('Dépenses', 'Spending'), color: 'var(--blue)', width: 2.5, points: series('spendingPct', scen) },
+              { name: T('Dépenses, inchangée', 'Spending, unchanged'), color: 'var(--blue)', dash: true, width: 1.5, points: series('spendingPct', base) },
+              { name: T('Recettes', 'Revenue'), color: 'var(--green)', width: 2.5, points: series('revenuePct', scen) },
+              { name: T('Recettes, inchangée', 'Revenue, unchanged'), color: 'var(--green)', dash: true, width: 1.5, points: series('revenuePct', base) },
             ]}
-            band={{ from: 0, to: 2, color: '#e1000f', label: 'Déficit' }}
-            shade={{ from: 2026.5, to: 2032.5, label: 'Projection' }}
+            band={{ from: 0, to: 2, color: '#e1000f', label: T('Déficit', 'Deficit') }}
+            shade={{ from: 2026.5, to: 2032.5, label: T('Projection', 'Projection') }}
             axes={{ left: { fmt: pctAxis, tipFmt: v => pct(v) } }} />
         </Card>
-        <Card title="Charge d’intérêts, Md€">
+        <Card title={T('Charge d’intérêts, Md€', `Interest bill, ${unitBn()}`)}>
           <LineChart height={220}
             series={[
-              { name: 'Politique inchangée', color: BASE_C, dash: true, points: series('interest', base) },
+              { name: UNCH(), color: BASE_C, dash: true, points: series('interest', base) },
               { name: q.short, color: q.color, width: 2.5, points: series('interest', scen) },
             ]}
-            shade={{ from: 2026.5, to: 2032.5, label: 'Projection' }}
+            shade={{ from: 2026.5, to: 2032.5, label: T('Projection', 'Projection') }}
             axes={{ left: { fmt: v => fmt(v, 0), tipFmt: v => bn(v) } }} />
         </Card>
       </div>
 
-      <Card title="Mesure par mesure" sub="Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail." src={q.measuresSrc.map(S)}>
+      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} src={q.measuresSrc.map(S)}>
         <div className="t-wrap">
           <table className="t mt">
-            <thead><tr><th>Mesure</th><th>Nature</th><th title="Classe selon la règle commune">Classe</th><th>2027</th><th>2032</th><th>Retenu</th><th>Modélisé 2032</th></tr></thead>
+            <thead><tr><th>{T('Mesure', 'Measure')}</th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
             <tbody>
               {q.measures.map(m => {
                 const c = cred[m.id] ?? 1
@@ -403,22 +437,22 @@ function DeepDive({ q, basis, base, opts, growth }) {
                 return (
                   <React.Fragment key={m.id}>
                     <tr className="click" onClick={() => setOpen(open === m.id ? null : m.id)}>
-                      <td><span className={'caret' + (open === m.id ? ' open' : '')}>▸</span>{m.name}{m.cost && <span className="tag">coût</span>}</td>
-                      <td className="mut">{KIND[m.kind]}</td>
-                      <td>{m.cost ? <span className="mut">–</span> : <span className={'cls cls-' + m.cls} title={`${RULE[m.cls].label} : ${RULE[m.cls].note}`}>{m.cls}</span>}</td>
+                      <td><span className={'caret' + (open === m.id ? ' open' : '')}>▸</span>{mName(q, m)}{m.cost && <span className="tag">{T('coût', 'cost')}</span>}</td>
+                      <td className="mut">{kindLabel(m.kind, KIND)}</td>
+                      <td>{m.cost ? <span className="mut">–</span> : <span className={'cls cls-' + m.cls} title={`${ruleLabel(m.cls)}: ${ruleNote(m.cls)}`}>{m.cls}</span>}</td>
                       <td className={path[2027] < 0 ? 'up' : ''}>{signed(path[2027])}</td>
                       <td className={path[2032] < 0 ? 'up' : ''}>{signed(path[2032])}</td>
                       <td onClick={e => e.stopPropagation()}>
-                        <span className="cred" title={m.cost ? 'Part du coût annoncé réellement dépensée (au-delà de 100 % : coût sous-estimé)' : 'Part du gain annoncé qui se réalise'}><input type="range" min={0} max={m.cost ? 2 : 1} step={0.05} value={c} onChange={e => setCred(m.id, +e.target.value)} /><b>{pct(c * 100, 0)}</b></span>
+                        <span className="cred" title={m.cost ? T('Part du coût annoncé réellement dépensée (au-delà de 100 % : coût sous-estimé)', 'Share of the announced cost actually spent (above 100%: cost underestimated)') : T('Part du gain annoncé qui se réalise', 'Share of the announced gain that materialises')}><input type="range" min={0} max={m.cost ? 2 : 1} step={0.05} value={c} onChange={e => setCred(m.id, +e.target.value)} /><b>{pct(c * 100, 0)}</b></span>
                       </td>
                       <td className={v < 0 ? 'up' : 'dn'}>{signed(v)}</td>
                     </tr>
-                    {open === m.id && <tr className="detail"><td colSpan={7}><p>{m.detail}</p><p className="warn">⚠ {m.flag}</p></td></tr>}
+                    {open === m.id && <tr className="detail"><td colSpan={7}><p>{mDetail(q, m)}</p><p className="warn">⚠ {mFlag(q, m)}</p></td></tr>}
                   </React.Fragment>
                 )
               })}
               <tr className="tot">
-                <td>Effet net</td><td></td><td></td>
+                <td>{T('Effet net', 'Net effect')}</td><td></td><td></td>
                 <td>{signed(q.measures.reduce((s, m) => s + interpolate(m.points)[2027], 0))}</td>
                 <td>{signed(q.measures.reduce((s, m) => s + interpolate(m.points)[2032], 0))}</td>
                 <td></td>
@@ -427,27 +461,27 @@ function DeepDive({ q, basis, base, opts, growth }) {
             </tbody>
           </table>
         </div>
-        <details className="about"><summary>Origine des montants</summary><p className="sub">{q.measuresNote}</p></details>
+        <details className="about"><summary>{T('Origine des montants', 'Where the amounts come from')}</summary><p className="sub">{pMeasuresNote(q)}</p></details>
       </Card>
 
-      <Card title="Année par année" sub={`${q.short}, administrations publiques`}>
+      <Card title={T('Année par année', 'Year by year')} sub={T(`${q.short}, administrations publiques`, `${q.short}, general government`)}>
         <div className="t-wrap">
           <table className="t">
             <thead><tr><th></th>{PROJ.map(y => <th key={y}>{y}</th>)}</tr></thead>
             <tbody>
               {[
-                ['Mesures nettes, Md€', r => r.year > 2026 ? fmt(r.measures) : '–'],
-                ['Recettes, % du PIB', r => fmt(r.revenuePct)],
-                ['Dépenses, % du PIB', r => fmt(r.spendingPct)],
-                ['dont intérêts', r => fmt(r.interestPct)],
-                ['Déficit, % du PIB', r => fmt(r.deficitPct)],
-                ['Déficit à politique inchangée', r => fmt(at(base, r.year).deficitPct)],
-                ['Dette, % du PIB', r => fmt(r.debtPct)],
-                ['Dette à politique inchangée', r => fmt(at(base, r.year).debtPct)],
-                ['Dette, Md€', r => fmt(r.debt, 0)],
-                ['Taux moyen de la dette', r => pct(r.rate * 100, 2)],
-              ].map(([label, f]) => (
-                <tr key={label} className={label.startsWith('Déficit, %') || label.startsWith('Dette, %') ? 'em' : label.includes('inchangée') || label.startsWith('dont') ? 'mutrow' : ''}>
+                [T('Mesures nettes, Md€', `Net measures, ${unitBn()}`), r => r.year > 2026 ? fmt(r.measures) : '–'],
+                [T('Recettes, % du PIB', 'Revenue, % of GDP'), r => fmt(r.revenuePct)],
+                [T('Dépenses, % du PIB', 'Spending, % of GDP'), r => fmt(r.spendingPct)],
+                [T('dont intérêts', 'of which interest'), r => fmt(r.interestPct), 'sub'],
+                [T('Déficit, % du PIB', 'Deficit, % of GDP'), r => fmt(r.deficitPct), 'em'],
+                [T('Déficit à politique inchangée', 'Deficit, unchanged policy'), r => fmt(at(base, r.year).deficitPct), 'sub'],
+                [T('Dette, % du PIB', 'Debt, % of GDP'), r => fmt(r.debtPct), 'em'],
+                [T('Dette à politique inchangée', 'Debt, unchanged policy'), r => fmt(at(base, r.year).debtPct), 'sub'],
+                [T('Dette, Md€', `Debt, ${unitBn()}`), r => fmt(r.debt, 0)],
+                [T('Taux moyen de la dette', 'Average rate on the debt'), r => pct(r.rate * 100, 2)],
+              ].map(([label, f, cls]) => (
+                <tr key={label} className={cls === 'em' ? 'em' : cls === 'sub' ? 'mutrow' : ''}>
                   <td>{label}</td>{scen.filter(r => r.year >= 2026).map(r => <td key={r.year}>{f(r)}</td>)}
                 </tr>
               ))}

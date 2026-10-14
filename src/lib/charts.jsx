@@ -185,8 +185,20 @@ export function Sparkline({ values, color = 'var(--blue)', w = 120, h = 30 }) {
 // items: [{ label, value, kind: 'delta' | 'total', sub, color }]
 export function Waterfall({ items, fmt = v => v, height = 240 }) {
   const [wrap, W] = useWidth()
-  const H = height, m = { l: 46, r: 14, t: 26, b: 42 }
-  const iw = W - m.l - m.r, ih = H - m.t - m.b
+  const m = { l: 46, r: 14, t: 26, b: 42 }
+  const iw = W - m.l - m.r
+  // Étiquettes passées à la ligne selon la largeur de colonne (mobile).
+  const wrap1 = (str, px, cw) => {
+    const max = Math.max(6, Math.floor((iw / items.length - 4) / cw)), out = []
+    let cur = ''
+    for (const w of String(str).split(' ')) { if (cur && (cur + ' ' + w).length > max) { out.push(cur); cur = w } else cur = cur ? cur + ' ' + w : w }
+    if (cur) out.push(cur)
+    return out
+  }
+  const lab = items.map(it => ({ l: wrap1(it.label, 12.5, 6.4), s: it.sub ? wrap1(it.sub, 11, 5.6) : [] }))
+  const nLines = Math.max(...lab.map(x => x.l.length + x.s.length))
+  m.b = Math.max(42, 12 + nLines * 14)
+  const H = height + (m.b - 42), ih = H - m.t - m.b
   let run = 0
   const bars = items.map(it => {
     const from = it.kind === 'total' ? 0 : run
@@ -209,8 +221,8 @@ export function Waterfall({ items, fmt = v => v, height = 240 }) {
           {i > 0 && <line x1={Xc(i - 1) + bw / 2} x2={Xc(i) - bw / 2} y1={Y(bars[i - 1].end)} y2={Y(bars[i - 1].end)} stroke="var(--mut)" strokeDasharray="3 3" opacity={0.6} />}
           <rect x={Xc(i) - bw / 2} width={bw} y={Y(b.hi)} height={Math.max(2, Y(b.lo) - Y(b.hi))} rx={3} fill={b.color} opacity={b.kind === 'total' ? 1 : 0.82} />
           <text x={Xc(i)} y={Y(b.hi) - 7} textAnchor="middle" className="wf-v">{fmt(b.value)}</text>
-          <text x={Xc(i)} y={H - 24} textAnchor="middle" className="wf-l">{b.label}</text>
-          {b.sub && <text x={Xc(i)} y={H - 9} textAnchor="middle" className="wf-s">{b.sub}</text>}
+          {lab[i].l.map((ln, k) => <text key={'l' + k} x={Xc(i)} y={H - m.b + 16 + k * 14} textAnchor="middle" className="wf-l">{ln}</text>)}
+          {lab[i].s.map((ln, k) => <text key={'s' + k} x={Xc(i)} y={H - m.b + 16 + (lab[i].l.length + k) * 14} textAnchor="middle" className="wf-s">{ln}</text>)}
         </g>
       ))}
     </svg></div>
