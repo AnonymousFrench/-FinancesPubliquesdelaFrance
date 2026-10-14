@@ -10,6 +10,7 @@ export const siteName = () => T(SITE_NAME, SITE_NAME_EN)
 export const SECTIONS = [
   { id: 'finances', label: 'Finances publiques', en: 'Public finances', path: '/' },
   { id: 'presidentielle', label: 'Présidentielle 2027', en: '2027 presidential election', path: '/presidentielle-2027' },
+  { id: 'etat', label: 'État de la France', en: 'State of France', path: '/etat-de-la-france' },
 ]
 
 export const ROUTES = [
@@ -48,6 +49,11 @@ export const ROUTES = [
     description: 'Moyenne des sondages de la présidentielle 2027 mise à jour en direct : intentions de vote au premier tour, hypothèses de second tour et dynamique de campagne.',
     en: { label: 'Polls', title: '2027 election polls: live average and trends',
       description: 'Live average of 2027 presidential election polls: first-round voting intentions, second-round matchups and campaign trends.' } },
+  { id: 'etat', section: 'etat', path: '/etat-de-la-france', label: 'État de la France',
+    title: 'État de la France : croissance, emploi, démographie et énergie depuis 1960',
+    description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, inflation, balance courante, démographie, pauvreté, énergie et climat.',
+    en: { label: 'State of France', title: 'State of France: growth, jobs, population and energy since 1960',
+      description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, inflation, current account, population, poverty, energy and climate.' } },
 ]
 
 // Libellés dans la langue courante.
@@ -60,7 +66,7 @@ export const sLabel = s => T(s.label, s.en)
 export const ALIAS = {
   overview: '/', 'vue-ensemble': '/', synthese: '/', map: '/', carte: '/', revenue: '/recettes', recettes: '/recettes', spending: '/depenses', depenses: '/depenses',
   debt: '/dette', dette: '/dette', financing: '/financement', financement: '/financement',
-  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027',
+  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france',
 }
 
 export const routeOf = path => {

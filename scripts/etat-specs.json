@@ -1,0 +1,254 @@
+[
+ {
+  "id": "gdpGrowth",
+  "es": "nama_10_gdp",
+  "f": {
+   "unit": "CLV_PCH_PRE",
+   "na_item": "B1GQ"
+  },
+  "us": {
+   "wb": "NY.GDP.MKTP.KD.ZG"
+  },
+  "cn": true
+ },
+ {
+  "id": "gdpPc",
+  "es": "nama_10_pc",
+  "f": {
+   "unit": "CLV20_EUR_HAB",
+   "na_item": "B1GQ"
+  }
+ },
+ {
+  "id": "productivity",
+  "es": "nama_10_lp_ulc",
+  "f": {
+   "unit": "I20",
+   "na_item": "RLPR_HW"
+  }
+ },
+ {
+  "id": "investment",
+  "es": "nama_10_gdp",
+  "f": {
+   "unit": "PC_GDP",
+   "na_item": "P51G"
+  },
+  "us": {
+   "wb": "NE.GDI.FTOT.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "saving",
+  "es": "nasa_10_ki",
+  "f": {
+   "unit": "PC",
+   "na_item": "SRG_S14_S15",
+   "sector": "S14_S15"
+  }
+ },
+ {
+  "id": "inflation",
+  "wb": "FP.CPI.TOTL.ZG",
+  "us": {
+   "wb": "FP.CPI.TOTL.ZG"
+  },
+  "cn": true
+ },
+ {
+  "id": "unemp",
+  "insee": "001688527",
+  "euSpec": {
+   "es": "une_rt_a",
+   "f": {
+    "age": "Y15-74",
+    "sex": "T",
+    "unit": "PC_ACT"
+   }
+  },
+  "us": {
+   "wb": "SL.UEM.TOTL.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "youthUnemp",
+  "es": "une_rt_a",
+  "f": {
+   "age": "Y15-24",
+   "sex": "T",
+   "unit": "PC_ACT"
+  },
+  "us": {
+   "wb": "SL.UEM.1524.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "empRate",
+  "es": "lfsi_emp_a",
+  "f": {
+   "indic_em": "EMP_LFS",
+   "age": "Y20-64",
+   "sex": "T",
+   "unit": "PC_POP"
+  }
+ },
+ {
+  "id": "currentAcc",
+  "wb": "BN.CAB.XOKA.GD.ZS",
+  "eu": false,
+  "us": {
+   "wb": "BN.CAB.XOKA.GD.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "tradeBal",
+  "wb": "NE.RSB.GNFS.ZS",
+  "eu": false,
+  "us": {
+   "wb": "NE.RSB.GNFS.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "manuf",
+  "wb": "NV.IND.MANF.ZS",
+  "us": {
+   "wb": "NV.IND.MANF.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "rd",
+  "es": "rd_e_gerdtot",
+  "f": {
+   "sectperf": "TOTAL",
+   "unit": "PC_GDP"
+  },
+  "us": {
+   "wb": "GB.XPD.RSDV.GD.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "pop",
+  "wb": "SP.POP.TOTL",
+  "eu": false
+ },
+ {
+  "id": "fertility",
+  "wb": "SP.DYN.TFRT.IN",
+  "us": {
+   "wb": "SP.DYN.TFRT.IN"
+  },
+  "cn": true
+ },
+ {
+  "id": "lifeExp",
+  "wb": "SP.DYN.LE00.IN",
+  "us": {
+   "wb": "SP.DYN.LE00.IN"
+  },
+  "cn": true
+ },
+ {
+  "id": "oldDep",
+  "wb": "SP.POP.DPND.OL",
+  "us": {
+   "wb": "SP.POP.DPND.OL"
+  },
+  "cn": true
+ },
+ {
+  "id": "births",
+  "wb": "SP.DYN.CBRT.IN"
+ },
+ {
+  "id": "deaths",
+  "wb": "SP.DYN.CDRT.IN"
+ },
+ {
+  "id": "poverty",
+  "es": "sdg_01_20",
+  "f": {
+   "unit": "PC"
+  }
+ },
+ {
+  "id": "taxBurden",
+  "es": "gov_10a_taxag",
+  "f": {
+   "na_item": "D2_D5_D91_D61_M_D995",
+   "unit": "PC_GDP",
+   "sector": "S13_S212"
+  }
+ },
+ {
+  "id": "ghg",
+  "es": "env_air_gge",
+  "f": {
+   "airpol": "GHG",
+   "src_crf": "TOTX4_MEMO",
+   "unit": "MIO_T"
+  },
+  "eu": false
+ },
+ {
+  "id": "energyDep",
+  "es": "nrg_ind_id",
+  "f": {
+   "siec": "TOTAL",
+   "unit": "PC"
+  },
+  "us": {
+   "wb": "EG.IMP.CONS.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "renew",
+  "es": "nrg_ind_ren",
+  "f": {
+   "nrg_bal": "REN",
+   "unit": "PC"
+  },
+  "us": {
+   "wb": "EG.FEC.RNEW.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "usDebt",
+  "us": {
+   "imf": "d"
+  },
+  "usOnly": true,
+  "cn": true
+ },
+ {
+  "id": "usSpend",
+  "us": {
+   "imf": "exp"
+  },
+  "usOnly": true,
+  "cn": true
+ },
+ {
+  "id": "usRate",
+  "us": {
+   "fred": "GS10"
+  },
+  "usOnly": true
+ },
+ {
+  "id": "gdpPcPpp",
+  "wb": "NY.GDP.PCAP.PP.KD",
+  "us": {
+   "wb": "NY.GDP.PCAP.PP.KD"
+  },
+  "cn": true
+ }
+]

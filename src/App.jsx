@@ -17,6 +17,7 @@ const VIEWS = {
   financement: lazy(() => import('./components/Financing.jsx')),
   presidentielle: lazy(() => import('./components/Election.jsx')),
   sondages: lazy(() => import('./components/Polls.jsx')),
+  etat: lazy(() => import('./components/Etat.jsx')),
 }
 
 class Boundary extends React.Component {

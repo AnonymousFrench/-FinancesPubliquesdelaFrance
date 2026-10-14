@@ -18,9 +18,17 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(
 const today = new Date().toISOString().slice(0, 10)
 const polls = JSON.parse(fs.readFileSync('src/data/polls-snapshot.json', 'utf8'))
 const avg = average(polls.first, today)
+const E = JSON.parse(fs.readFileSync('src/data/etat-series.json', 'utf8'))
+const lastOf = id => { const o = E[id].fr, y = Object.keys(o).sort().at(-1); return [y, o[y]] }
+const fact = (lbl, id, unit, d = 1) => { const [y, v] = lastOf(id); return `${lbl} : ${nf(v, d)}${unit} (${y}).` }
 
 // Contenu statique par rubrique : quelques faits clés, en texte, pour les moteurs et les aperçus.
 const FACTS = {
+  etat: [
+    fact('PIB par habitant', 'gdpPc', ' € constants de 2020', 0), fact('Taux de chômage', 'unemp', ' %'), fact('Inflation', 'inflation', ' %'),
+    fact('Balance courante', 'currentAcc', ' % du PIB'), fact('Fécondité', 'fertility', ' enfant par femme', 2), fact('Espérance de vie', 'lifeExp', ' ans'),
+    fact('Taux de pauvreté', 'poverty', ' %'), fact('Émissions de gaz à effet de serre', 'ghg', ' Mt CO2e', 0),
+  ],
   synthese: [
     `Dépenses publiques ${Y} : ${nf(apu.depenses[i], 1)} Md€, soit ${nf(apu.depensesPct[i], 1)} % du PIB.`,
     `Recettes publiques ${Y} : ${nf(apu.recettes[i], 1)} Md€, soit ${nf(apu.recettesPct[i], 1)} % du PIB.`,

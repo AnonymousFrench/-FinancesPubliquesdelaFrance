@@ -10,7 +10,8 @@
     "prebuild": "node scripts/fetch-polls.mjs",
     "build": "vite build && node scripts/seo.mjs",
     "preview": "vite preview --host",
-    "og": "node scripts/og-image.mjs"
+    "og": "node scripts/og-image.mjs",
+    "etat": "node scripts/fetch-etat.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

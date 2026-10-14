@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 // Width of a container in CSS pixels, so SVG text renders at its real size.
-function useWidth(fallback = 1000) {
+export function useWidth(fallback = 1000) {
   const ref = useRef(null)
   const [w, setW] = useState(fallback)
   useEffect(() => {

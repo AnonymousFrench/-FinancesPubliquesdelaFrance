@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { T, isEn } from '../i18n.js'
 import { SRC_EN } from '../data/sourcesEn.js'
 
-const srcLabel = l => (isEn() ? SRC_EN[l] || l : l)
+const srcLabel = l => (isEn() ? SRC_EN[l] || l.replace('Banque mondiale', 'World Bank').replace('Insee, série', 'Insee, series') : l)
 
 export function Card({ title, sub, children, src, right, tag, className, id }) {
   return (

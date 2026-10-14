@@ -359,3 +359,24 @@ footer.disclaimer a { color: inherit; text-decoration: underline }
 .picker button { overflow: hidden } .pk-t { min-width: 0 } .pk-t b, .pk-t em { overflow: hidden; text-overflow: ellipsis }
 @media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr) } .picker { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 @media (max-width: 760px) { .ranking .bar-row { grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px } .ranking .bar-row .bar-t { grid-column: 1 / -1; order: 3 } }
+
+/* État de la France : grille dense d'indicateurs */
+.etat { display: flex; flex-wrap: wrap; gap: 12px 10px; margin-top: 4px }
+.etat-t { min-width: 0 } .etat-t h4 { margin: 0 0 6px; font-size: 11.5px; font-weight: 650; text-transform: uppercase; letter-spacing: .04em; color: var(--mut) }
+.inds { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 8px }
+.ind { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line); border-radius: 10px; padding: 8px 9px 7px; color: var(--tx); text-decoration: none; background: var(--card) }
+a.ind:hover { border-color: #c7ccd4 }
+.ind-h { display: flex; justify-content: space-between; gap: 6px; font-size: 12px; font-weight: 600; line-height: 1.3 } .ind-h em { font-style: normal; font-weight: 400; color: var(--mut); font-size: 11px; white-space: nowrap }
+.ind-v { display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap; margin-top: 1px } .ind-v b { font-size: 18px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums }
+.ind-v small { font-size: 11px; color: var(--mut) } .ind-d { font-size: 10.5px; margin-left: auto; white-space: nowrap }
+.ind-trend { margin: 3px 0 2px; touch-action: pan-y } .ind-trend svg { display: block; cursor: crosshair }
+.ind-zero { stroke: var(--line); stroke-width: 1 } .ind-cursor { stroke: var(--mut); stroke-width: 1; opacity: .5 }
+.ind-f { font-size: 10.5px; color: var(--mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums } .ind-f b { color: var(--tx); font-weight: 600 } .ind-f i { font-style: normal }
+.ind-key { white-space: nowrap; margin-left: 6px } .ind-key i { display: inline-block; width: 14px; height: 2px; background: #9aa4b2; vertical-align: 3px; margin-right: 4px }
+.ind-key.dash i { background: repeating-linear-gradient(90deg, #9aa4b2 0 3px, transparent 3px 5px) }
+@media (max-width: 760px) { .etat-t { flex-basis: 100% !important } .inds { grid-template-columns: repeat(3, minmax(0, 1fr)) } }
+@media (max-width: 520px) { .inds { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px } .ind-d { margin-left: 0 } .ind-v b { font-size: 17px } }
+@media (max-width: 520px) { nav:not(.subnav) a { padding: 10px 8px; font-size: 13.5px } }
+.ind-c { display: flex; gap: 5px; letter-spacing: -.01em; color: var(--tx) } .ind-c span, .ind-c i { color: var(--mut); font-style: normal } .ind-c .fr { color: var(--blue) } .ind-c .us { color: #b76a14 } .ind-c i.up { color: var(--red) }
+.ind-key.tog { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 1px 9px; cursor: pointer; margin-left: 4px } .ind-key.tog:hover { border-color: #c7ccd4 } .ind-key.tog.off { opacity: .45; text-decoration: line-through }
+.ind-c .cn { color: #b00e28 }
