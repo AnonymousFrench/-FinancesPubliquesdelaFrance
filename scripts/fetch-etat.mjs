@@ -80,7 +80,11 @@ for (const s of SPECS) {
     const yrs = Object.keys(s.usOnly ? d.us : d.fr).sort()
     res[s.id] = d
     console.log('ok', s.id.padEnd(14), yrs[0], '→', yrs.at(-1), (s.usOnly ? d.us : d.fr)[yrs.at(-1)], d.eu ? 'EU ' + Object.keys(d.eu).length : '', d.us ? 'US ' + Object.keys(d.us).sort()[0] + '-' + Object.keys(d.us).sort().at(-1) : '', d.cn ? 'CN ' + Object.keys(d.cn).length : '')
-  } catch (e) { console.log('ÉCHEC', s.id, e.message) }
+  } catch (e) {
+    console.log('ÉCHEC', s.id, e.message)
+    // Dans GitHub Actions : avertissement visible dans le résumé de l'exécution (la donnée précédente est conservée).
+    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=Série non rafraîchie::${s.id} — ${e.message.slice(0, 150)}`)
+  }
 }
 const file = new URL('../data-raw/etat.json', import.meta.url)
 // Une source indisponible ne doit pas effacer les données déjà publiées : on part toujours de la version précédente.
