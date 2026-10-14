@@ -27,10 +27,13 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
   <text x="80" y="580" font-size="22" fill="#9aa4b2" font-family="${font}">Sources : Eurostat, Insee, Agence France Trésor, data.economie.gouv.fr</text>
 </svg>`
 
-const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#ffffff"/><rect x="5" y="8" width="7.4" height="16" fill="#000091"/><rect x="12.3" y="8" width="7.4" height="16" fill="#ffffff" stroke="#e4e7ec" stroke-width=".6"/><rect x="19.6" y="8" width="7.4" height="16" fill="#e1000f"/></svg>`
+const flag = '<rect x="3" y="8" width="8.67" height="16" fill="#000091"/><rect x="11.67" y="8" width="8.67" height="16" fill="#ffffff" stroke="#c7ccd4" stroke-width=".5"/><rect x="20.33" y="8" width="8.67" height="16" fill="#e1000f"/>'
+// Favicon : fond transparent. L'icône iOS garde un fond blanc (iOS n'accepte pas la transparence).
+const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">${flag}</svg>`
+const iconIos = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#ffffff"/>${flag}</svg>`
 
 const png = (svg, width) => new Resvg(svg, { fitTo: { mode: 'width', value: width }, font: { loadSystemFonts: true } }).render().asPng()
 fs.writeFileSync('public/og.png', png(og, 1200))
 fs.writeFileSync('public/favicon.svg', icon)
-fs.writeFileSync('public/apple-touch-icon.png', png(icon, 180))
+fs.writeFileSync('public/apple-touch-icon.png', png(iconIos, 180))
 console.log('public/og.png, favicon.svg, apple-touch-icon.png')
