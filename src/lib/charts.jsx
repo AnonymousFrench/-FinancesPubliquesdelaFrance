@@ -23,7 +23,7 @@ function useWidth(fallback = 1000) {
 //   markers:[{ x, label, side: 'l' | 'r' }]   refLines: [{ y, label }]
 //   shade:  { from, to, label }   (x-range shading, e.g. forecast years)
 // ─────────────────────────────────────────────────────────────
-export function LineChart({ series = [], bars, band, axes = {}, height = 260, markers = [], refLines = [], shade, xFmt = v => v, tipX, yMin, yMax, xTicks }) {
+export function LineChart({ series = [], bars, band, axes = {}, height = 260, markers = [], refLines = [], shade, xFmt = v => v, tipX, yMin, yMax, xTicks, legend = true }) {
   const [hover, setHover] = useState(null)
   const ref = useRef(null)
   const [wrap, W] = useWidth()
@@ -70,7 +70,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
 
   return (
     <div className="lc">
-      <div className="legend top">
+      {legend && <div className="legend top">
         {series.filter(s => !s.hideLegend).map(s => (
           <span key={s.name}>
             {s.line === false ? <i className="dot" style={{ background: s.color }} /> : <i className={s.dash ? 'dash' : ''} style={s.dash ? { borderColor: s.color } : { background: s.color }} />}
@@ -80,7 +80,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
         {bars && <span><i style={{ background: bars.color, opacity: 0.55 }} />{bars.name}</span>}
         {band && <span><i style={{ background: band.color, opacity: 0.25 }} />{band.label}</span>}
         {shade && <span><i style={{ background: 'var(--shade)' }} />{shade.label}</span>}
-      </div>
+      </div>}
       <div className="lc-plot" ref={wrap}>
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className="chart" onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
           {shade && <rect x={X(shade.from)} width={X(shade.to) - X(shade.from)} y={m.t} height={ih} fill="var(--shade)" />}
@@ -100,7 +100,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
             const pts = a.points.filter(valid).map(([xv, ya]) => { const pb = b.points.find(q => q[0] === xv); return pb && valid(pb) ? [xv, ya, pb[1]] : null }).filter(Boolean)
             if (pts.length < 2) return null
             const d = 'M' + pts.map(([xv, ya]) => `${X(xv)},${YL(ya)}`).join('L') + 'L' + pts.slice().reverse().map(([xv, , yb]) => `${X(xv)},${YL(yb)}`).join('L') + 'Z'
-            return <path d={d} fill={band.color} opacity={0.15} />
+            return <path d={d} fill={band.color} opacity={band.opacity ?? 0.15} />
           })()}
           {refLines.map(r => (
             <g key={r.label}>

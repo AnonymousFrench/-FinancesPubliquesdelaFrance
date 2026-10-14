@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-export function Card({ title, sub, children, src, right, tag, className }) {
+export function Card({ title, sub, children, src, right, tag, className, id }) {
   return (
-    <section className={'card' + (className ? ' ' + className : '')}>
+    <section className={'card' + (className ? ' ' + className : '')} id={id}>
       {(title || right) && (
         <div className="card-h">
           <div>
@@ -13,7 +13,7 @@ export function Card({ title, sub, children, src, right, tag, className }) {
         </div>
       )}
       {children}
-      {src && <p className="src">Source: {[].concat(src).map((s, i) => (
+      {src && <p className="src">Source{[].concat(src).length > 1 ? 's' : ''} : {[].concat(src).map((s, i) => (
         <React.Fragment key={i}>{i > 0 && ' · '}{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{s.label}</a> : s.label || s}</React.Fragment>
       ))}</p>}
     </section>
@@ -41,8 +41,8 @@ export function Seg({ options, value, onChange, small }) {
   )
 }
 
-// Expandable bar list. rows: [{ name, value, note?, tag?, color?, children?[] }]
-// Shares are relative to the parent level.
+// Liste de barres dépliable. rows : [{ name, value, note?, tag?, color?, children?[] }]
+// Les parts sont relatives au niveau parent.
 export function DrillList({ rows, total, fmt, defaultOpen = [] }) {
   const [open, setOpen] = useState(() => new Set(defaultOpen))
   const tot = total || rows.reduce((s, r) => s + Math.abs(r.value), 0) || 1
@@ -64,7 +64,7 @@ export function DrillList({ rows, total, fmt, defaultOpen = [] }) {
                 {r.note && <span className="bar-note"> · {r.note}</span>}
               </span>
               <span className="bar-t"><span className="bar-f" style={{ width: `${Math.abs(r.value) / max * 100}%`, background: r.color || (r.value < 0 ? 'var(--red)' : undefined) }} /></span>
-              <span className="bar-v">{fmt(r.value)}<span className="bar-p">{share < 0.001 ? '<0.1' : (share * 100).toFixed(share < 0.1 ? 1 : 0)}%</span></span>
+              <span className="bar-v">{fmt(r.value)}<span className="bar-p">{share < 0.001 ? '<0,1' : (share * 100).toFixed(share < 0.1 ? 1 : 0).replace('.', ',')}&nbsp;%</span></span>
             </div>
             {isOpen && (
               <div className="drill">
