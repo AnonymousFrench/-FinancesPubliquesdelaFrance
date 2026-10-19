@@ -4,7 +4,7 @@ import fs from 'node:fs'
 import { Resvg } from '@resvg/resvg-js'
 import { apu } from '../src/data/apu.js'
 import { debtLatest } from '../src/data/data.js'
-import { parties, ORDER } from '../src/data/election2027.js'
+import { parties, ORDER, SCORED } from '../src/data/election2027.js'
 
 const E = JSON.parse(fs.readFileSync('src/data/etat-series.json', 'utf8'))
 const lastOf = id => { const o = E[id].fr, y = Object.keys(o).sort().at(-1); return [y, o[y]] }
@@ -45,16 +45,17 @@ function images(en) {
       + stat(800, `${T('Intérêts', 'Interest')} ${Y}`, en ? `€${nf(apu.interets[i], 1)}bn` : `${nf(apu.interets[i], 1)} Md€`, T(`≈ ${Math.round(apu.interets[i] * 1000 / 365)} M€ par jour`, `≈ €${Math.round(apu.interets[i] * 1000 / 365)}m a day`), '#171a21'),
     src: T('Sources : Eurostat, Insee, Agence France Trésor, data.economie.gouv.fr', 'Sources: Eurostat, Insee, Agence France Trésor, data.economie.gouv.fr'),
   })
-  // Pas de chiffres de sondage dans l'image (période de réserve) : les six programmes et leur couleur.
+  // Pas de chiffres de sondage dans l'image (période de réserve) : les candidats suivis et leur couleur, sur deux lignes.
+  const perRow = Math.ceil(ORDER.length / 2)
   const chips = ORDER.map((id, k) => {
-    const q = parties[id], x = 80 + k * 175
-    return `<rect x="${x}" y="380" width="150" height="110" rx="14" fill="${q.color}" opacity=".12"/><rect x="${x}" y="380" width="8" height="110" rx="4" fill="${q.color}"/>
-      <text x="${x + 24}" y="432" font-size="34" font-weight="700" fill="#171a21" font-family="${font}">${esc(q.short)}</text>
-      <text x="${x + 24}" y="468" font-size="20" fill="#66707e" font-family="${font}">${esc(q.candidate.split(' ').slice(1).join(' '))}</text>`
+    const q = parties[id], row = Math.floor(k / perRow), x = 80 + (k % perRow) * 175, y = 350 + row * 82
+    return `<rect x="${x}" y="${y}" width="160" height="70" rx="12" fill="${q.color}" opacity=".12"/><rect x="${x}" y="${y}" width="7" height="70" rx="3" fill="${q.color}"/>
+      <text x="${x + 20}" y="${y + 32}" font-size="26" font-weight="700" fill="#171a21" font-family="${font}">${esc(q.short)}</text>
+      <text x="${x + 20}" y="${y + 57}" font-size="16" fill="#66707e" font-family="${font}">${esc(q.candidate.split(' ').slice(1).join(' '))}</text>`
   }).join('')
   const presidentielle = card({
     section: T('Présidentielle 2027', '2027 election'),
-    line1: T('Six programmes passés au même modèle :', 'Six programmes run through the same model:'),
+    line1: T(`${ORDER.length} candidats, ${SCORED.length} programmes chiffrés au même modèle :`, `${ORDER.length} candidates, ${SCORED.length} costed programmes, one model:`),
     line2: T('effet sur le déficit et la dette jusqu’en 2032', 'effect on the deficit and debt to 2032'),
     body: chips,
     src: T('Sources : programmes des partis, analyses indépendantes, Eurostat', 'Sources: party programmes, independent reviews, Eurostat'),

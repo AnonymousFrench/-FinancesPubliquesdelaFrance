@@ -166,6 +166,8 @@ input[type=range] { accent-color: var(--blue); width: 100% }
 .cand-poll em { font-style: normal; font-size: 11px; font-weight: 600 }
 .cand-bar { height: 5px; background: var(--soft); border-radius: 3px; overflow: hidden; margin: 2px 0 4px } .cand-bar i { display: block; height: 100%; background: var(--pc) }
 .cand-seats { font-size: 11.5px; color: var(--mut) }
+.cand-ns { font-style: normal; font-weight: 600 }
+.pledges { margin: 10px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.5 } .pledges li { margin: 4px 0 } .pledges b { margin-right: 4px }
 
 /* Election: diverging bars */
 .div { margin-top: 2px }

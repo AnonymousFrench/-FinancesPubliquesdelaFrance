@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 // Portraits des candidats : photo principale de leur article Wikipédia (Wikimedia Commons), chargée à la demande.
 // Les licences varient selon la photo (domaine public, CC BY, CC BY-SA) : l'auteur et la licence sont indiqués sur la page Wikimedia liée.
-const TITLES = ['Jean-Luc Mélenchon', 'Raphaël Glucksmann', 'Gabriel Attal', 'Édouard Philippe', 'Bruno Retailleau', 'Marine Le Pen']
+const TITLES = ['Nathalie Arthaud', 'Fabien Roussel', 'Jean-Luc Mélenchon', 'Marine Tondelier', 'Raphaël Glucksmann', 'Gabriel Attal', 'Édouard Philippe', 'Bruno Retailleau', 'Nicolas Dupont-Aignan', 'Marine Le Pen', 'Éric Zemmour']
 const URL = `https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&piprop=thumbnail|name&pithumbsize=160&redirects=1&format=json&formatversion=2&origin=*&titles=${encodeURIComponent(TITLES.join('|'))}`
 
 let cache = null

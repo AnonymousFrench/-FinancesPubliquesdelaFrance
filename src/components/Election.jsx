@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
-import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
-import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
+import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
+import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, pPledges, unscoredText, ageOf, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
 import { usePolls, pollOf } from '../lib/usePolls.js'
 import { WIKI_PAGE, pollBlackout } from '../lib/polls.js'
@@ -19,7 +19,12 @@ const PROJ = YEARS.filter(y => y >= 2026)
 const pointsOf = obj => Object.entries(obj).map(([y, v]) => [+y, v])
 const GOV = '#1a7f4b'
 const BASE_C = '#9aa4b2'
-const LIST = ORDER.map(id => parties[id])
+const LIST = ORDER.map(id => parties[id])          // tous les candidats suivis
+const SLIST = SCORED.map(id => parties[id])        // programmes chiffrés, modélisés
+const unscored = q => q.status === 'unscored'
+const WORDS = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix', 'onze', 'douze']
+const WORDS_EN = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve']
+const cap = w => w[0].toUpperCase() + w.slice(1)
 const at = (rows, y) => rows.find(r => r.year === y)
 const line = (key, rows, ref) => rows.filter(r => r.year >= 2025).map(r => [r.year, +(r[key] - (ref ? at(ref, r.year)[key] : 0)).toFixed(2)])
 const reviewName = (q, id) => reviewBy(q, reviewsOf(q).find(r => r.id === id) || reviewsOf(q)[0])
@@ -38,7 +43,7 @@ export default function Election() {
   const growthOf = q => growthMode === 'party' && q.growthClaim ? q.growthClaim : baseline.growth
 
   const base = useMemo(() => project(baseline, { marketRate }), [marketRate])
-  const runs = useMemo(() => LIST.map(q => ({
+  const runs = useMemo(() => SLIST.map(q => ({
     q,
     rows: project(baseline, { ...opts, measures: q.measures, growth: growthOf(q), credibility: credFor(q, basis) }),
     claimed: project(baseline, { ...opts, measures: q.measures, growth: growthOf(q) }),
@@ -70,7 +75,9 @@ export default function Election() {
 
       <Card title={T('Zoom sur un programme', 'Zoom on one programme')} sub={T('Choisissez un parti', 'Choose a party')} className="group" id="deep-dive">
         <PartyPicker value={pid} onChange={setPid} />
-        <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />
+        {unscored(parties[pid])
+          ? <UnscoredDive key={pid} q={parties[pid]} />
+          : <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />}
       </Card>
     </>
   )
@@ -107,8 +114,8 @@ function Intro({ onPick }) {
   const blackout = pollBlackout()
   return (
     <Card title={T('Présidentielle 2027 : les programmes face à la dette', '2027 election: the programmes and the debt')}
-      sub={T('Six programmes, un même modèle, comparés à la politique inchangée jusqu’en 2032.', 'Six programmes, one model, compared with unchanged policy to 2032.')}
-      src={[{ label: 'Wikipédia, liste des sondages 2027', url: WIKI_PAGE }, S('wikiFR'), S('assemblee'), { label: 'photos Wikimedia Commons', url: 'https://commons.wikimedia.org/' }]}>
+      sub={T(`${cap(WORDS[LIST.length])} candidats, dont ${WORDS[SLIST.length]} avec un programme chiffré, passés au même modèle et comparés à la politique inchangée jusqu’en 2032.`, `${cap(WORDS_EN[LIST.length])} candidates, ${WORDS_EN[SLIST.length]} of them with a costed programme, run through one model and compared with unchanged policy to 2032.`)}
+      src={[{ label: 'Wikipédia, liste des sondages 2027', url: WIKI_PAGE }, S('touteleurope'), S('wikiFR'), S('assemblee'), { label: 'photos Wikimedia Commons', url: 'https://commons.wikimedia.org/' }]}>
       <div className="cands">
         {LIST.map(q => {
           const p = pollOf(state.data, q.pollName)
@@ -120,7 +127,7 @@ function Intro({ onPick }) {
               <span className="cand-party">{pName(q)}</span>
               {!blackout && <><span className="cand-poll">{pct(v)}{d != null && (Math.abs(d) < 0.05 ? <em className="mut">=</em> : <em className={d > 0 ? 'dn' : 'up'}>{d > 0 ? '▲' : '▼'} {fmt(Math.abs(d))}</em>)}</span>
               <span className="cand-bar"><i style={{ width: `${v / 36 * 100}%` }} /></span></>}
-              <span className="cand-seats">{q.deputies} {T('députés', 'deputies')}</span>
+              <span className="cand-seats">{q.deputies} {T('députés', 'deputies')}{unscored(q) && <em className="cand-ns"> · {T('non chiffré', 'not costed')}</em>}</span>
             </button>
           )
         })}
@@ -312,7 +319,7 @@ function Profile({ q }) {
       {ph ? <img className="pf-photo" src={ph.src} alt={q.candidate} /> : <span className="pf-photo pf-ph">{q.short}</span>}
       <div className="pf-main">
         <b className="pf-name">{q.candidate}</b>
-        <span className="pf-role">{pRole(q)} · {q.profile.age} {T('ans', 'years old')}</span>
+        <span className="pf-role">{pRole(q)} · {ageOf(q.profile.born)} {T('ans', 'years old')}</span>
         <span className="pf-party"><i style={{ background: q.color }} />{pName(q)} · {pPosition(q)}</span>
         <span className="pf-links">
           <a href={`https://fr.wikipedia.org/wiki/${q.profile.wiki}`} target="_blank" rel="noreferrer">{T('Wikipédia', 'Wikipedia (in French)')}</a>
@@ -324,6 +331,20 @@ function Profile({ q }) {
         <span><b>{q.deputies}</b>{T('députés', 'deputies')}</span>
       </div>
     </div>
+  )
+}
+
+// Candidat sans programme chiffré : fiche, engagements principaux, sans projection.
+function UnscoredDive({ q }) {
+  const u = unscoredText()
+  return (
+    <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)}>
+      <Profile q={q} />
+      <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
+      <p className="ctl-note"><b>{u.title}.</b> {u.text}</p>
+      <p className="sub">{pDocument(q)}</p>
+      {pPledges(q).length > 0 && <ul className="pledges">{pPledges(q).map(([k, v]) => <li key={k}><b>{k}</b> {v}</li>)}</ul>}
+    </Card>
   )
 }
 
