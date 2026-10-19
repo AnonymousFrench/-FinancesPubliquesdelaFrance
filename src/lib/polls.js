@@ -8,7 +8,7 @@ export const parseUrl = () => `${API}?action=parse&page=${encodeURIComponent(WIK
 export const revUrl = () => `${API}?action=query&prop=revisions&titles=${encodeURIComponent(WIKI_TITLE)}&rvprop=timestamp|ids&format=json&formatversion=2&origin=*&redirects=1`
 
 // Candidats déclarés suivis : sert à choisir, pour chaque sondage, l'hypothèse correspondant au plateau actuel.
-export const DECLARED = ['Le Pen', 'Mélenchon', 'Philippe', 'Glucksmann', 'Attal', 'Retailleau', 'Zemmour', 'Tondelier', 'Roussel', 'Arthaud', 'Dupont-Aignan']
+export const DECLARED = ['Le Pen', 'Mélenchon', 'Philippe', 'Glucksmann', 'Attal', 'Retailleau', 'Zemmour', 'Tondelier', 'Roussel', 'Arthaud', 'Dupont-Aignan', 'Lisnard']
 
 const MONTHS = { janv: 1, janvier: 1, fevr: 2, fev: 2, fevrier: 2, mars: 3, avr: 4, avril: 4, mai: 5, juin: 6, juil: 7, juillet: 7, aout: 8, sept: 9, septembre: 9, oct: 10, octobre: 10, nov: 11, novembre: 11, dec: 12, decembre: 12 }
 const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()

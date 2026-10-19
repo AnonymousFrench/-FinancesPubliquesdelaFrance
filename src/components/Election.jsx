@@ -66,6 +66,9 @@ export default function Election() {
             <Seg small value={growthMode} onChange={setGrowthMode} options={[[T('Consensus', 'Consensus'), 'consensus'], [T('Hypothèses des partis', 'Party assumptions'), 'party']]} />
           </div>
         </div>
+        {basis === 'central' && <p className="ctl-note">{T(
+          'Analyse indépendante : pour chaque programme, une synthèse ligne par ligne établie par cette page à partir des évaluations publiées (Institut de l’Entreprise, Terra Nova, Institut Montaigne, iFRAP, France Budget, Conseil d’analyse économique, Cour des comptes…). Les mêmes règles valent pour tous : les coûts comptent en entier, ou davantage quand les évaluations les jugent sous-estimés ; les économies sans mesure détaillée ne sont pas retenues ; les autres sont ramenées aux montants que les évaluations jugent atteignables. Le détail et les sources figurent dans la fiche de chaque candidat.',
+          'Independent review: for each programme, a line-by-line synthesis built by this page from published assessments (Institut de l’Entreprise, Terra Nova, Institut Montaigne, iFRAP, France Budget, Conseil d’analyse économique, Cour des comptes…). The same rules apply to all: costs count in full, or more when assessments find them understated; savings with no detailed measure are not retained; the others are brought down to the amounts assessments judge achievable. Details and sources are in each candidate’s deep dive.')}</p>}
 
         <Impact runs={runs} base={base} basis={basis} />
         <Trajectories runs={runs} base={base} />
