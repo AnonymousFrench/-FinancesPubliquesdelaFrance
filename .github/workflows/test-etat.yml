@@ -1,0 +1,22 @@
+# Temporaire : collecte des nouvelles séries « État de la France » sur la branche etat-indicateurs, pour vérification.
+name: Test collecte État de la France
+on:
+  push:
+    branches: [etat-indicateurs]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: node scripts/fetch-etat.mjs
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add src/data/etat-series.json data-raw/etat.json
+          git diff --cached --quiet || (git commit -m "Test : séries collectées [skip ci]" && git push)
