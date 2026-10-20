@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE, STALE_DAYS } from '../data/election2027.js'
+import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
 import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, pPledges, unscoredText, ageOf, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
 import { usePolls, pollOf } from '../lib/usePolls.js'
@@ -338,17 +338,10 @@ function Profile({ q }) {
   )
 }
 
-// Date de la dernière vérification du programme ; signalée si elle date de plus de STALE_DAYS jours.
+// Date de la dernière vérification du programme et de ses analyses.
 function Checked({ q }) {
   if (!q.checked) return null
-  const age = Math.floor((Date.now() - new Date(q.checked + 'T00:00:00Z').getTime()) / 864e5)
-  const stale = age > STALE_DAYS
-  return (
-    <span className={'pf-checked' + (stale ? ' stale' : '')}>
-      {T(`Programme et analyses vérifiés le ${dateFr(q.checked)}`, `Programme and reviews checked on ${dateFr(q.checked)}`)}
-      {stale && T(` : vérification de plus de ${STALE_DAYS} jours, des annonces récentes peuvent manquer.`, `: more than ${STALE_DAYS} days old, recent announcements may be missing.`)}
-    </span>
-  )
+  return <span className="pf-checked">{T(`Programme et analyses vérifiés le ${dateFr(q.checked)}`, `Programme and reviews checked on ${dateFr(q.checked)}`)}</span>
 }
 
 // Candidat sans programme chiffré : fiche, engagements principaux, sans projection.

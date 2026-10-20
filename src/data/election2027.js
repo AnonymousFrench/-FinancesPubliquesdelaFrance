@@ -738,7 +738,7 @@ export const parties = {
   },
 }
 
-// Date de la dernière vérification d'un programme (champ `checked` de chaque parti). Au-delà, la fiche le signale.
+// Délai au-delà duquel scripts/check-election.mjs signale une vérification ancienne (champ `checked` de chaque parti).
 export const STALE_DAYS = 14
 
 // ---------- Barème commun ----------
