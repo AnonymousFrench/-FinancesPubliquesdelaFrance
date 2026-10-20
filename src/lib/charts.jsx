@@ -73,7 +73,8 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
       {legend && <div className="legend top">
         {series.filter(s => !s.hideLegend).map(s => (
           <span key={s.name}>
-            {s.line === false ? <i className="dot" style={{ background: s.color }} /> : <i className={s.dash ? 'dash' : ''} style={s.dash ? { borderColor: s.color } : { background: s.color }} />}
+            {/* Même marqueur que sur le graphique : cercle creux pour les points, trait plein ou pointillé pour les courbes. */}
+            {s.line === false ? <i className="dot" style={{ borderColor: s.color }} /> : <i className={s.dash ? 'dash' : 'line'} style={s.dash ? { borderColor: s.color } : { background: s.color }} />}
             {s.name}
           </span>
         ))}

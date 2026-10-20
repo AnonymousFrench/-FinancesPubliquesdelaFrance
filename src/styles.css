@@ -101,7 +101,8 @@ h4 { margin: 14px 0 6px; font-size: 11px; color: var(--mut); text-transform: upp
 .legend.top { justify-content: flex-end; margin: 0 2px 4px; font-size: 11.5px }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2.5px; margin-right: 5px; vertical-align: -1px }
 .legend i.dash { background: none; border-top: 2.5px dashed; height: 0; border-radius: 0; width: 14px; vertical-align: 3px }
-.legend i.dot { border-radius: 50%; width: 9px; height: 9px }
+.legend i.dot { border-radius: 50%; width: 10px; height: 10px; box-sizing: border-box; background: var(--card); border: 2.5px solid }
+.legend i.line { width: 14px; height: 3px; border-radius: 2px; vertical-align: 3px }
 .axis-labels { display: flex; justify-content: space-between; color: var(--mut); font-size: 11.5px; margin-top: 2px }
 .tip { position: absolute; top: 4px; transform: translateX(12px); background: #14181f; color: #fff; border-radius: 8px; padding: 7px 10px; font-size: 12px; pointer-events: none; min-width: 170px; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); z-index: 2 }
 .tip.flip { transform: translateX(calc(-100% - 12px)) }
