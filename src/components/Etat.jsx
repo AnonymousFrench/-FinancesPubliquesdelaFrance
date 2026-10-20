@@ -36,6 +36,7 @@ function val(m, v) {
 function delta(m, a, b) {
   if (m.unit === 'pct') return `${signed(b - a, Math.abs(b - a) >= 10 ? 0 : m.d === 2 ? 2 : 1)} pt`
   if (m.suffix?.[0] === '‰') return `${signed(b - a)} pt`
+  if (m.abs) return `${signed(b - a, m.d)} pt${m.suffix ? '' : Math.abs(b - a) >= 2 ? 's' : ''}`
   const g = (b / a - 1) * 100
   return (g >= 0.5 ? '+' : '') + pct(g, 0)
 }
@@ -84,7 +85,8 @@ function Indicator({ m, show }) {
   if (!fr.length) return null
   // Comparaisons limitées à la période couverte par la série française.
   const span = p => p.filter(q => q[0] >= fr[0][0])
-  const eu = show.eu ? span(pts(s.eu)) : [], us = show.us ? span(pts(s.us)) : [], cn = show.cn ? span(pts(s.cn)) : [], pair = m.pair ? span(pts(series(m.pair)?.fr)) : []
+  // vs : comparaison avec une autre population française (nés en France) à la place de l'UE, toujours affichée.
+  const eu = m.vs ? span(pts(s.vs)) : show.eu ? span(pts(s.eu)) : [], us = show.us ? span(pts(s.us)) : [], cn = show.cn ? span(pts(s.cn)) : [], pair = m.pair ? span(pts(series(m.pair)?.fr)) : []
   const first = fr[0], last = fr.at(-1)
   const at = (p, y) => p.find(q => q[0] === y)?.[1]
   const latest = s.latest // dernier trimestre publié (chômage)
@@ -98,7 +100,7 @@ function Indicator({ m, show }) {
     const e = v(eu), u = v(us), c = v(cn)
     // Taux sans le signe % (l'unité figure déjà sur la valeur principale) pour tenir sur une ligne.
     const cv = x => m.unit === 'pct' ? fmt(x, m.d) : val(m, x)
-    return <>{e != null && <span>{L('UE', 'EU')} {cv(e)}</span>}{u != null && <span className="us">USA {cv(u)}</span>}{c != null && <span className="cn">{L('Chine', 'China')} {cv(c)}</span>}</>
+    return <>{e != null && <span>{m.vs ? L(m.vs[0], m.vs[1]) : L('UE', 'EU')} {cv(e)}</span>}{u != null && <span className="us">USA {cv(u)}</span>}{c != null && <span className="cn">{L('Chine', 'China')} {cv(c)}</span>}</>
   }
   const line1 = hover != null
     ? <><b>{hover}</b><span className="fr">{val(m, at(fr, hover))}</span>{pair.length ? <i className="up">{L('décès', 'deaths')} {val(m, at(pair, hover))}</i> : null}{cmp(hover)}</>
@@ -122,13 +124,14 @@ function Indicator({ m, show }) {
 
 // Sources regroupées par producteur, chaque jeu de données lié.
 function Sources() {
-  const all = [...new Map(THEMES.flatMap(t => t.items.flatMap(m => [m.src, m.srcEu, m.srcUs].filter(Boolean))).map(x => [x.url, x])).values()]
+  const all = [...new Map(THEMES.flatMap(t => t.items.flatMap(m => [m.src, m.srcEu, m.srcUs, m.srcX].filter(Boolean))).map(x => [x.url, x])).values()]
   const groups = [
     ['Eurostat', 'Eurostat', x => x.label.startsWith('Eurostat'), x => x.label.replace('Eurostat ', '')],
     ['Banque mondiale', 'World Bank', x => x.label.startsWith('Banque'), x => x.label.replace('Banque mondiale, WDI ', '')],
-    ['Insee', 'Insee', x => x.label.startsWith('Insee'), x => x.label.replace('Insee, série ', '')],
+    ['Insee', 'Insee', x => x.label.startsWith('Insee'), x => x.label.replace('Insee, série ', '').replace('Insee, ', '')],
     ['FMI', 'IMF', x => x.label.startsWith('FMI'), x => x.label.replace('FMI ', '')],
     ['Réserve fédérale', 'Federal Reserve', x => x.label.startsWith('Réserve'), x => x.label.replace('Réserve fédérale ', '')],
+    ['OCDE', 'OECD', x => x.label.startsWith('OCDE'), x => x.label.replace('OCDE, ', '')],
   ]
   const un = <a href="https://population.un.org/wpp/" target="_blank" rel="noreferrer">World Population Prospects</a>
   return (
@@ -149,6 +152,7 @@ export default function Etat() {
         {THEMES.map(t => (
           <section key={t.id} className="etat-t" style={{ flexGrow: t.items.length, flexBasis: t.items.length * 184 }}>
             <h4>{T(t.fr, t.en)}</h4>
+            {t.note && <p className="etat-note">{T(t.note[0], t.note[1])}</p>}
             <div className="inds" style={{ '--n': t.items.length }}>{t.items.map(m => <Indicator key={m.id} m={m} show={show} />)}</div>
           </section>
         ))}

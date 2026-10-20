@@ -50,10 +50,10 @@ export const ROUTES = [
     en: { label: 'Polls', title: '2027 election polls: live average and trends',
       description: 'Live average of 2027 presidential election polls: first-round voting intentions, second-round matchups and campaign trends.' } },
   { id: 'etat', section: 'etat', path: '/etat-de-la-france', label: 'État de la France',
-    title: 'État de la France : croissance, emploi, démographie et énergie depuis 1960',
-    description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, inflation, balance courante, démographie, pauvreté, énergie et climat.',
-    en: { label: 'State of France', title: 'State of France: growth, jobs, population and energy since 1960',
-      description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, inflation, current account, population, poverty, energy and climate.' } },
+    title: 'État de la France : croissance, emploi, démographie, immigration et énergie depuis 1960',
+    description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, heures travaillées, écart de taux avec l’Allemagne, défense, démographie, immigration, pauvreté, inégalités, énergie et climat.',
+    en: { label: 'State of France', title: 'State of France: growth, jobs, population, immigration and energy since 1960',
+      description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, hours worked, spread over Germany, defence, population, immigration, poverty, inequality, energy and climate.' } },
 ]
 
 // Libellés dans la langue courante.

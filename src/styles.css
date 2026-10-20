@@ -390,3 +390,4 @@ a.ind:hover { border-color: #c7ccd4 }
 .pf-checked { display: block; font-size: 11.5px; color: #6b7480; margin-top: 3px }
 .copy-link { font-size: 12px; padding: 5px 10px; white-space: nowrap }
 .drill-note { font-size: 11.5px; color: #6b7480; margin: 2px 0 6px; font-style: italic }
+.etat-note { font-size: 11.5px; color: #6b7480; margin: -2px 0 8px; line-height: 1.4 }

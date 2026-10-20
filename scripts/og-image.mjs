@@ -65,7 +65,7 @@ function images(en) {
   const [gy, gv] = lastOf('gdpPcPpp'), [, fv] = lastOf('fertility'), u = E.unemp.latest
   const etat = card({
     section: T('État de la France', 'State of France'),
-    line1: T('26 indicateurs macroéconomiques depuis 1960,', '26 macroeconomic indicators since 1960,'),
+    line1: T('41 indicateurs depuis 1960, dont l’immigration,', '41 indicators since 1960, including immigration,'),
     line2: T('comparés à l’UE, aux États-Unis et à la Chine', 'compared with the EU, the US and China'),
     body: stat(80, `${T('PIB par habitant', 'GDP per person')} ${gy}`, en ? `$${nf(gv)}` : `${nf(gv)} $`, T('parité de pouvoir d’achat', 'purchasing power parity'), '#2148c0')
       + stat(470, T('Chômage', 'Unemployment'), pc(u.v), u.period.replace(/(\d{4})-Q(\d)/, en ? 'Q$2 $1' : 'T$2 $1'), '#e1000f')
