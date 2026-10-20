@@ -5,7 +5,8 @@ import fs from 'node:fs'
 const ES = 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/'
 const WB = 'https://api.worldbank.org/v2/country/'
 
-async function eurostat(ds, filters, geos = ['FR', 'EU27_2020']) {
+// sub : nombre de périodes infra-annuelles (2 semestres, 4 trimestres) ; l'année est la moyenne des périodes, années complètes seulement.
+async function eurostat(ds, filters, geos = ['FR', 'EU27_2020'], sub = 0) {
   const q = new URLSearchParams()
   for (const [k, v] of Object.entries(filters)) q.append(k, v)
   for (const g of geos) q.append('geo', g)
@@ -20,13 +21,18 @@ async function eurostat(ds, filters, geos = ['FR', 'EU27_2020']) {
   const out = {}
   for (const g of geos) {
     out[g] = {}
+    const by = {}
     for (const [t, ti] of Object.entries(timeIdx)) {
       const k = (geoIdx[g] ?? -1) * stride(gPos) + ti * stride(tPos)
       const v = j.value[k]
-      if (geoIdx[g] != null && v != null) out[g][t.slice(0, 4)] = v
+      if (geoIdx[g] != null && v != null) (by[t.slice(0, 4)] ||= []).push(v)
+    }
+    for (const [y, v] of Object.entries(by)) {
+      if (sub && v.length !== sub) continue
+      out[g][y] = sub ? +(v.reduce((a, b) => a + b) / v.length).toFixed(4) : v.at(-1)
     }
   }
-  return { fr: out.FR, eu: geos.length > 1 ? out.EU27_2020 : null, updated: j.updated?.slice(0, 10) }
+  return { fr: out.FR, eu: geos.includes('EU27_2020') ? out.EU27_2020 : null, other: out, updated: j.updated?.slice(0, 10) }
 }
 
 async function worldbank(code, countries = ['FRA', 'EUU']) {
@@ -65,13 +71,33 @@ async function foreign(u, iso = 'USA') {
   }
 }
 
+// Variantes d'une série Eurostat : écart avec un autre pays (minus), rapport à une autre série (div),
+// comparaison avec une autre population du même pays (vsF : filtres modifiés, par exemple nés en France).
+async function eurostatSpec(s) {
+  const geos = s.eu === false ? ['FR'] : ['FR', 'EU27_2020']
+  if (s.minus) {
+    const d = await eurostat(s.es, s.f, ['FR', s.minus], s.sub)
+    const o = d.other[s.minus]
+    return { fr: Object.fromEntries(Object.entries(d.fr).filter(([y]) => o[y] != null).map(([y, v]) => [y, +(v - o[y]).toFixed(3)])), eu: null, updated: d.updated }
+  }
+  const d = await eurostat(s.es, s.f, geos, s.sub)
+  if (s.div) {
+    const q = await eurostat(s.div.es || s.es, s.div.f, geos, s.sub)
+    const ratio = (a, b) => a && b && Object.fromEntries(Object.entries(a).filter(([y]) => b[y]).map(([y, v]) => [y, +(v / b[y] * (s.scale || 1)).toFixed(4)]))
+    d.fr = ratio(d.fr, q.fr); d.eu = ratio(d.eu, q.eu)
+  }
+  if (s.vsF) d.vs = (await eurostat(s.es, { ...s.f, ...s.vsF }, ['FR'], s.sub)).fr
+  delete d.other
+  return d
+}
+
 const test = process.argv[2]
 const SPECS = JSON.parse(fs.readFileSync(new URL('./etat-specs.json', import.meta.url)))
 const res = {}
 for (const s of SPECS) {
   if (test && s.id !== test) continue
   try {
-    const d = s.usOnly ? { fr: {}, us: await foreign(s.us), ...(s.cn ? { cn: await foreign(s.us, 'CHN') } : {}) } : s.insee ? await insee(s.insee) : s.wb ? await worldbank(s.wb, s.eu === false ? ['FRA'] : undefined) : await eurostat(s.es, s.f, s.eu === false ? ['FR'] : undefined)
+    const d = s.usOnly ? { fr: {}, us: await foreign(s.us), ...(s.cn ? { cn: await foreign(s.us, 'CHN') } : {}) } : s.insee ? await insee(s.insee) : s.wb ? await worldbank(s.wb, s.eu === false ? ['FRA'] : undefined) : await eurostatSpec(s)
     if (s.us && !s.usOnly) d.us = await foreign(s.us)
     else if (!s.us) delete d.us
     delete d.raw
@@ -100,7 +126,7 @@ for (const [k, d] of Object.entries(all)) {
   const pick = o => o && Object.fromEntries(Object.entries(o).filter(([y]) => +y >= 1960).sort().map(([y, v]) => [y, round(v / div)]))
   const maxY = Object.keys(d.fr).length ? +Object.keys(d.fr).sort().at(-1) + 1 : new Date().getFullYear() - 1
   const cut = o => o && Object.fromEntries(Object.entries(o).filter(([y]) => +y <= maxY))
-  slim[k] = { fr: pick(d.fr), eu: pick(d.eu), ...(d.us ? { us: cut(pick(d.us)) } : {}), ...(d.cn && Object.keys(d.cn).length ? { cn: cut(pick(d.cn)) } : {}), ...(d.latest ? { latest: d.latest } : {}) }
+  slim[k] = { fr: pick(d.fr), eu: pick(d.eu), ...(d.vs ? { vs: pick(d.vs) } : {}), ...(d.us ? { us: cut(pick(d.us)) } : {}), ...(d.cn && Object.keys(d.cn).length ? { cn: cut(pick(d.cn)) } : {}), ...(d.latest ? { latest: d.latest } : {}) }
 }
 fs.writeFileSync(new URL('../src/data/etat-series.json', import.meta.url), JSON.stringify(slim))
 console.log('écrit src/data/etat-series.json', (JSON.stringify(slim).length / 1024).toFixed(0) + ' Ko')

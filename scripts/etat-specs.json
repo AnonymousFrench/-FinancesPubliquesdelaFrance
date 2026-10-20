@@ -250,5 +250,170 @@
    "wb": "NY.GDP.PCAP.PP.KD"
   },
   "cn": true
+ },
+ {
+  "id": "hours",
+  "es": "nama_10_a10_e",
+  "f": {
+   "na_item": "EMP_DC",
+   "nace_r2": "TOTAL",
+   "unit": "THS_HW"
+  },
+  "div": {
+   "f": {
+    "na_item": "EMP_DC",
+    "nace_r2": "TOTAL",
+    "unit": "THS_PER"
+   }
+  }
+ },
+ {
+  "id": "emp55",
+  "es": "lfsi_emp_a",
+  "f": {
+   "indic_em": "EMP_LFS",
+   "age": "Y55-64",
+   "sex": "T",
+   "unit": "PC_POP"
+  }
+ },
+ {
+  "id": "defence",
+  "wb": "MS.MIL.XPND.GD.ZS",
+  "us": {
+   "wb": "MS.MIL.XPND.GD.ZS"
+  },
+  "cn": true
+ },
+ {
+  "id": "elecPrice",
+  "es": "nrg_pc_204",
+  "f": {
+   "product": "6000",
+   "nrg_cons": "KWH2500-4999",
+   "unit": "KWH",
+   "tax": "I_TAX",
+   "currency": "EUR"
+  },
+  "sub": 2
+ },
+ {
+  "id": "netMig",
+  "es": "demo_gind",
+  "f": {
+   "indic_de": "CNMIGRATRT"
+  }
+ },
+ {
+  "id": "bankrupt",
+  "es": "sts_rb_q",
+  "f": {
+   "indic_bt": "BKRT",
+   "nace_r2": "B-S_X_O_S94",
+   "s_adj": "SCA",
+   "unit": "I21"
+  },
+  "sub": 4
+ },
+ {
+  "id": "medianInc",
+  "es": "ilc_di03",
+  "f": {
+   "indic_il": "MED_E",
+   "age": "TOTAL",
+   "sex": "T",
+   "unit": "EUR"
+  }
+ },
+ {
+  "id": "gini",
+  "es": "ilc_di12",
+  "f": {}
+ },
+ {
+  "id": "spread",
+  "es": "irt_lt_mcby_a",
+  "f": {
+   "int_rt": "MCBY"
+  },
+  "minus": "DE",
+  "eu": false
+ },
+ {
+  "id": "immShare",
+  "es": "migr_pop3ctb",
+  "f": {
+   "c_birth": "FOR",
+   "age": "TOTAL",
+   "sex": "T",
+   "unit": "NR"
+  },
+  "div": {
+   "es": "demo_pjan",
+   "f": {
+    "age": "TOTAL",
+    "sex": "T",
+    "unit": "NR"
+   }
+  },
+  "scale": 100
+ },
+ {
+  "id": "immHigh",
+  "es": "edat_lfs_9912",
+  "f": {
+   "isced11": "ED5-8",
+   "age": "Y25-64",
+   "sex": "T",
+   "c_birth": "FOR",
+   "unit": "PC"
+  },
+  "vsF": {
+   "c_birth": "NAT"
+  },
+  "eu": false
+ },
+ {
+  "id": "immLow",
+  "es": "edat_lfs_9912",
+  "f": {
+   "isced11": "ED0-2",
+   "age": "Y25-64",
+   "sex": "T",
+   "c_birth": "FOR",
+   "unit": "PC"
+  },
+  "vsF": {
+   "c_birth": "NAT"
+  },
+  "eu": false
+ },
+ {
+  "id": "immEmp",
+  "es": "lfsa_ergacob",
+  "f": {
+   "age": "Y20-64",
+   "sex": "T",
+   "c_birth": "FOR",
+   "unit": "PC"
+  },
+  "vsF": {
+   "c_birth": "NAT"
+  },
+  "eu": false
+ },
+ {
+  "id": "immPov",
+  "es": "ilc_li32",
+  "f": {
+   "c_birth": "FOR",
+   "age": "Y_GE18",
+   "sex": "T",
+   "unit": "PC"
+  },
+  "vsF": {
+   "c_birth": "NAT"
+  },
+  "eu": false
  }
 ]
