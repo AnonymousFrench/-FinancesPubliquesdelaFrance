@@ -81,13 +81,17 @@ w('taux.js',
 export const oat10 = ${JSON.stringify(oat10)}
 `);
 
-// ---------- Budget de l'État : mission → programme → action → sous-action (PLF 2025) ----------
-const csv = fs.readFileSync('data-raw/plf25-destination.csv', 'utf8').replace(/^\uFEFF/, '');
+// ---------- Budget de l'État : mission → programme → action → sous-action ----------
+// PLF 2027 : fichiers tirés du projet de loi (scripts/plf-pdf.py), au niveau programme, tant que le fichier open data
+// détaillé (actions, sous-actions) n'est pas publié. Pour revenir à un fichier open data, changer PLF et SRC_LABEL.
+const PLF = '27', PLF_YEAR = '20' + PLF
+const FROM_PDF = !fs.readFileSync(`data-raw/plf${PLF}-destination.csv`, 'utf8').split('\n')[1]?.split(';')[9]
+const csv = fs.readFileSync(`data-raw/plf${PLF}-destination.csv`, 'utf8').replace(/^\uFEFF/, '');
 const rows = csv.split('\n').slice(1).filter(Boolean).map(l => {
   // séparateur ';' — libellés entre guillemets non échappés dans ce fichier
   const p = l.split(';');
   return {
-    type: p[2], minCode: p[3], min: p[4], codeM: p[5], mission: p[6],
+    type: p[2] === 'BA' ? 'BA' : p[2] === 'BG' ? 'BG' : 'CS', minCode: p[3], min: p[4], codeM: p[5], mission: p[6],
     codeP: p[7], programme: p[8], codeA: p[9], action: p[10],
     codeS: p[11], sousAction: p[12], titre: p[14],
     ae: +(p[15] || 0), cp: +(p[16] || 0),
@@ -96,13 +100,14 @@ const rows = csv.split('\n').slice(1).filter(Boolean).map(l => {
 const missions = new Map();
 for (const r of rows) {
   if (!missions.has(r.codeM)) missions.set(r.codeM, {
-    code: r.codeM, nom: r.mission, type: r.type === 'BA' ? 'BA' : 'BG', ministere: r.min, cp: 0, ae: 0, programmes: new Map(),
+    code: r.codeM, nom: r.mission, type: r.type, ministere: r.min, cp: 0, ae: 0, programmes: new Map(),
   });
   const m = missions.get(r.codeM);
   m.cp += r.cp; m.ae += r.ae;
   if (!m.programmes.has(r.codeP)) m.programmes.set(r.codeP, { code: r.codeP, nom: r.programme, cp: 0, ae: 0, actions: new Map() });
   const p = m.programmes.get(r.codeP);
   p.cp += r.cp; p.ae += r.ae;
+  if (!r.codeA) continue // fichier tiré du projet de loi : pas de niveau action
   if (!p.actions.has(r.codeA)) p.actions.set(r.codeA, { code: r.codeA, nom: r.action, cp: 0, ae: 0, sousActions: [] });
   const a = p.actions.get(r.codeA);
   a.cp += r.cp; a.ae += r.ae;
@@ -121,14 +126,16 @@ const tree = [...missions.values()].map(m => ({
 const totalBG = Math.round(rows.filter(r => r.type === 'BG').reduce((s, r) => s + r.cp, 0));
 const totalBA = Math.round(rows.filter(r => r.type !== 'BG').reduce((s, r) => s + r.cp, 0));
 w('budget-etat.js',
-  `// Généré — source data.economie.gouv.fr « PLF 2025 – Dépenses selon destination » (crédits de paiement, €)
-// Nomenclature : mission → programme → action → sous-action. PLF = projet de loi (avant amendements).
+  `// Généré par scripts/build-data.mjs. Source : ${FROM_PDF ? `projet de loi de finances pour ${PLF_YEAR}, états B, C et D (crédits par mission et programme)` : `data.economie.gouv.fr « PLF ${PLF_YEAR} – Dépenses selon destination »`} (€)
+// Nomenclature : mission → programme${FROM_PDF ? '' : ' → action → sous-action'}. PLF = projet de loi (avant amendements).
+export const budgetYear = ${PLF_YEAR}
+export const budgetDepth = ${FROM_PDF ? "'programme'" : "'sous-action'"}
 export const budgetTotal = { BG: ${totalBG}, BA: ${totalBA}, tout: ${totalBG + totalBA} }
 export const missions = ${JSON.stringify(tree)}
 `);
 
-// ---------- Recettes du budget de l'État (PLF 2025) ----------
-const csv2 = fs.readFileSync('data-raw/plf25-recettes.csv', 'utf8').replace(/^\uFEFF/, '');
+// ---------- Recettes du budget de l'État ----------
+const csv2 = fs.readFileSync(`data-raw/plf${PLF}-recettes.csv`, 'utf8').replace(/^\uFEFF/, '');
 const rrows = csv2.split('\n').slice(1).filter(Boolean).map(l => {
   const p = l.split(';');
   return { type: p[1], code: p[2], lib: p[3], montant: +(p[4] || 0) };
@@ -142,7 +149,8 @@ for (const r of rrows) {
 }
 const recettes = [...recTypes.values()].map(t => ({ ...t, montant: Math.round(t.montant) })).sort((a, b) => b.montant - a.montant);
 w('recettes-etat.js',
-  `// Généré — source data.economie.gouv.fr « PLF 2025 – Recettes du budget général » (€)
+  `// Généré par scripts/build-data.mjs. Source : ${FROM_PDF ? `projet de loi de finances pour ${PLF_YEAR}, état A (voies et moyens)` : `data.economie.gouv.fr « PLF ${PLF_YEAR} – Recettes du budget général »`} (€)
+export const recettesYear = ${PLF_YEAR}
 export const recettesEtat = ${JSON.stringify(recettes)}
 `);
 

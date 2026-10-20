@@ -44,3 +44,10 @@ Sources récentes en priorité ; dater chaque source dans son libellé.
 
 Branche `maj-programmes-AAAA-MM-JJ`, titre « Programmes : mise à jour du JJ mois », description : changements par candidat,
 sources, effet sur les projections 2032 (avant / après), points incertains. Ne pas fusionner.
+
+## Budget de l'État (onglets Dépenses et Recettes)
+
+Depuis le 20 octobre 2026, l'explorateur et le tableau des recettes utilisent le PLF 2027, tiré du texte du projet de loi
+(états A à D) avec `python3 scripts/plf-pdf.py <PLF.pdf> 2027`, puis `npm run data`. Le niveau action et sous-action
+reviendra quand data.economie.gouv.fr publiera le fichier « Dépenses selon destination » : le placer dans
+`data-raw/plf27-destination.csv` (même format que `plf25-destination.csv`) et relancer `npm run data`.

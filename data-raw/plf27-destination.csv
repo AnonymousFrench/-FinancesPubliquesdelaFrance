@@ -1,0 +1,183 @@
+﻿exercice;loi;typebudget;ministere;libelle_ministere;mission;libelle_mission;programme;libelle_programme;action;libelle_action;sous_action;libelle_sous_action;categorie;titre;autorisation_engagement;credit_de_paiement
+2027;PLF;BG;;;AA;Action extérieure de l’État;105;Action de la France en Europe et dans le monde;;;;;;;2681809076;2691569457
+2027;PLF;BG;;;AA;Action extérieure de l’État;185;Diplomatie culturelle et d’influence;;;;;;;606126220;606126220
+2027;PLF;BG;;;AA;Action extérieure de l’État;151;Français à l’étranger et affaires consulaires;;;;;;;166473620;166684620
+2027;PLF;BG;;;AB;Administration générale et territoriale de l’État;354;Administration territoriale de l’État;;;;;;;2867343824;2754602290
+2027;PLF;BG;;;AB;Administration générale et territoriale de l’État;232;Vie politique;;;;;;;587023619;587980174
+2027;PLF;BG;;;AB;Administration générale et territoriale de l’État;216;Conduite et pilotage des politiques de l’intérieur;;;;;;;1768767371;2174119829
+2027;PLF;BG;;;AC;Agriculture et alimentation;;Compétitivité et durabilité de l’agriculture et de l’agroalimentaire;;;;;;;2057056982;2111239345
+2027;PLF;BG;;;AC;Agriculture et alimentation;206;Sécurité et qualité sanitaires de l’alimentation;;;;;;;822700202;819608657
+2027;PLF;BG;;;AC;Agriculture et alimentation;215;Conduite et pilotage des politiques de l’agriculture;;;;;;;637989867;653940810
+2027;PLF;BG;;;AD;Aide publique au développement;110;Aide économique et financière au développement;;;;;;;678408758;1090913775
+2027;PLF;BG;;;AD;Aide publique au développement;365;Renforcement des fonds propres de l’Agence française de développement;;;;;;;115000000;115000000
+2027;PLF;BG;;;AD;Aide publique au développement;209;Solidarité à l’égard des pays en développement;;;;;;;769194672;1226866646
+2027;PLF;BG;;;AD;Aide publique au développement;370;Restitution des « biens mal acquis »;;;;;;;22000000;0
+2027;PLF;BG;;;AD;Aide publique au développement;384;Fonds de solidarité pour le développement;;;;;;;887151885;738000000
+2027;PLF;BG;;;VA;Cohésion des territoires;177;Hébergement, parcours vers le logement et insertion des personnes vulnérables;;;;;;;3255255007;3261443368
+2027;PLF;BG;;;VA;Cohésion des territoires;109;Aide à l’accès au logement;;;;;;;16520517313;16520517313
+2027;PLF;BG;;;VA;Cohésion des territoires;135;Urbanisme, territoires et amélioration de l’habitat;;;;;;;5835051779;1793940209
+2027;PLF;BG;;;VA;Cohésion des territoires;112;Impulsion et coordination de la politique d’aménagement du territoire;;;;;;;343971782;319784139
+2027;PLF;BG;;;VA;Cohésion des territoires;147;Politique de la ville;;;;;;;619066960;619066960
+2027;PLF;BG;;;CA;Conseil et contrôle de l’État;165;Conseil d’État et autres juridictions administratives;;;;;;;567031730;560765599
+2027;PLF;BG;;;CA;Conseil et contrôle de l’État;126;Conseil économique, social et environnemental;;;;;;;33956438;34002566
+2027;PLF;BG;;;CA;Conseil et contrôle de l’État;164;Cour des comptes et autres juridictions financières;;;;;;;267149258;263804959
+2027;PLF;BG;;;PC;Crédits non répartis;551;Provision relative aux rémunérations publiques;;;;;;;60000000;60000000
+2027;PLF;BG;;;PC;Crédits non répartis;552;Dépenses accidentelles et imprévisibles;;;;;;;425000000;125000000
+2027;PLF;BG;;;CB;Culture;175;Patrimoines;;;;;;;1089308081;1116268560
+2027;PLF;BG;;;CB;Culture;131;Création;;;;;;;1019231644;962958529
+2027;PLF;BG;;;CB;Culture;361;Transmission des savoirs et démocratisation de la culture;;;;;;;721933265;712039934
+2027;PLF;BG;;;CB;Culture;224;Soutien aux politiques du ministère de la culture;;;;;;;859069696;857929871
+2027;PLF;BG;;;DA;Défense;144;Environnement et prospective de la politique de défense;;;;;;;2812721242;2633211519
+2027;PLF;BG;;;DA;Défense;178;Préparation et emploi des forces;;;;;;;18792071475;17407123018
+2027;PLF;BG;;;DA;Défense;212;Soutien de la politique de la défense;;;;;;;27214237167;26158231408
+2027;PLF;BG;;;DA;Défense;146;Équipement des forces;;;;;;;39602221697;26954874852
+2027;PLF;BG;;;DC;Direction de l’action du Gouvernement;129;Coordination du travail gouvernemental;;;;;;;814256761;826556672
+2027;PLF;BG;;;DC;Direction de l’action du Gouvernement;308;Protection des droits et libertés;;;;;;;138446803;139887697
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;203;Infrastructures et services de transports;;;;;;;4525120211;4835605550
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;;Mer, pêche et aquaculture;;;;;;;331699766;324780568
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;113;Paysages, eau et biodiversité;;;;;;;369839583;388186306
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;159;Expertise, information géographique et météorologie;;;;;;;641851542;641851542
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;181;Prévention des risques;;;;;;;2225328812;1575599011
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;174;Énergie, climat et après-mines;;;;;;;1251260465;1227419465
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;345;Service public de l’énergie;;;;;;;10749607515;9491607515
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;217;Conduite et pilotage des politiques de l’écologie, du développement et de la mobilité durables;;;;;;;3142628296;3198232258
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;380;Fonds d’accélération de la transition écologique dans les territoires;;;;;;;984600000;981383852
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;235;Sûreté nucléaire et radioprotection;;;;;;;337015633;343625159
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;;Ecologie – mise en extinction du plan de relance;;;;;;;0;0
+2027;PLF;BG;;;TA;Écologie, développement et mobilité durables;;Forêt;;;;;;;417043794;405131982
+2027;PLF;BG;;;DB;Économie;134;Développement des entreprises et régulations;;;;;;;2321923611;2157968666
+2027;PLF;BG;;;DB;Économie;343;Plan France Très haut débit;;;;;;;3135000;192013496
+2027;PLF;BG;;;DB;Économie;220;Statistiques et études économiques;;;;;;;494213338;491980558
+2027;PLF;BG;;;DB;Économie;305;Stratégies économiques;;;;;;;654208580;656208759
+2027;PLF;BG;;;DB;Économie;;Financement des opérations patrimoniales en 2027 sur le compte d’affectation spéciale « Participations financières de l’État »;;;;;;;0;0
+2027;PLF;BG;;;EB;Engagements financiers de l’État;117;Charge de la dette et trésorerie de l’État (crédits évaluatifs);;;;;;;72373000000;72373000000
+2027;PLF;BG;;;EB;Engagements financiers de l’État;355;Charge de la dette de SNCF Réseau reprise par l’État (crédits évaluatifs);;;;;;;561000000;561000000
+2027;PLF;BG;;;EB;Engagements financiers de l’État;114;Appels en garantie de l’État (crédits évaluatifs);;;;;;;1120547282;1120547282
+2027;PLF;BG;;;EB;Engagements financiers de l’État;145;Épargne;;;;;;;84112341;84112341
+2027;PLF;BG;;;EB;Engagements financiers de l’État;344;Fonds de soutien relatif aux prêts et contrats financiers structurés à risque;;;;;;;0;175490116
+2027;PLF;BG;;;EB;Engagements financiers de l’État;;Soutien financier au nouveau nucléaire français;;;;;;;137820000;137820000
+2027;PLF;BG;;;EB;Engagements financiers de l’État;;Dotation du Mécanisme européen de stabilité;;;;;;;0;0
+2027;PLF;BG;;;EB;Engagements financiers de l’État;;Augmentation de capital de la Banque européenne d’investissement;;;;;;;0;0
+2027;PLF;BG;;;EC;Enseignement scolaire;140;Enseignement scolaire public du premier degré;;;;;;;28524973930;28524973930
+2027;PLF;BG;;;EC;Enseignement scolaire;141;Enseignement scolaire public du second degré;;;;;;;40283734388;40283677823
+2027;PLF;BG;;;EC;Enseignement scolaire;230;Vie de l’élève;;;;;;;8245177340;8252517134
+2027;PLF;BG;;;EC;Enseignement scolaire;139;Enseignement privé du premier et du second degrés;;;;;;;8939683705;8939648669
+2027;PLF;BG;;;EC;Enseignement scolaire;;Conduite et soutien des politiques de l’enseignement, de la recherche, de la jeunesse, de la vie associative et des sports;;;;;;;2984463261;3087222108
+2027;PLF;BG;;;EC;Enseignement scolaire;143;Enseignement technique agricole;;;;;;;1772643788;1771859532
+2027;PLF;BG;;;GA;Gestion des finances publiques et lutte contre les fraudes;156;Gestion fiscale et financière de l’État et du secteur public local;;;;;;;8207808301;8203334692
+2027;PLF;BG;;;GA;Gestion des finances publiques et lutte contre les fraudes;218;Conduite et pilotage des politiques économiques et financières;;;;;;;1021623875;1039794663
+2027;PLF;BG;;;GA;Gestion des finances publiques et lutte contre les fraudes;302;Facilitation et sécurisation des échanges;;;;;;;1869168041;1841541081
+2027;PLF;BG;;;IA;Immigration, asile et intégration;303;Immigration et asile;;;;;;;1897971865;1723707422
+2027;PLF;BG;;;IA;Immigration, asile et intégration;104;Intégration et accès à la nationalité française;;;;;;;363974858;363889193
+2027;PLF;BG;;;AV;Investir pour la France de 2030;421;Soutien des progrès de l’enseignement et de la recherche;;;;;;;0;81000000
+2027;PLF;BG;;;AV;Investir pour la France de 2030;422;Valorisation de la recherche;;;;;;;0;25200000
+2027;PLF;BG;;;AV;Investir pour la France de 2030;423;Accélération de la modernisation des entreprises;;;;;;;0;0
+2027;PLF;BG;;;AV;Investir pour la France de 2030;424;Financement des investissements stratégiques;;;;;;;0;3238670000
+2027;PLF;BG;;;AV;Investir pour la France de 2030;425;Financement structurel des écosystèmes d’innovation;;;;;;;0;655000000
+2027;PLF;BG;;;JA;Justice;166;Justice judiciaire;;;;;;;4761866801;4813406204
+2027;PLF;BG;;;JA;Justice;107;Administration pénitentiaire;;;;;;;5030867512;5790230570
+2027;PLF;BG;;;JA;Justice;182;Protection judiciaire de la jeunesse;;;;;;;1195031764;1173355630
+2027;PLF;BG;;;JA;Justice;101;Accès au droit et à la justice;;;;;;;832771821;832851612
+2027;PLF;BG;;;JA;Justice;310;Conduite et pilotage de la politique de la justice;;;;;;;886358448;815572013
+2027;PLF;BG;;;JA;Justice;335;Conseil supérieur de la magistrature;;;;;;;5441208;6382776
+2027;PLF;BG;;;MA;Médias, livre et industries culturelles;180;Presse et médias;;;;;;;363312610;362329698
+2027;PLF;BG;;;MA;Médias, livre et industries culturelles;334;Livre et industries culturelles;;;;;;;338621270;350196403
+2027;PLF;BG;;;MB;Monde combattant, mémoire et liens avec la Nation;169;Reconnaissance et réparation en faveur du monde combattant, mémoire et liens avec la Nation;;;;;;;1528492345;1528492345
+2027;PLF;BG;;;MB;Monde combattant, mémoire et liens avec la Nation;158;Indemnisation des victimes des persécutions antisémites et des actes de barbarie pendant la seconde guerre mondiale;;;;;;;74044710;74044710
+2027;PLF;BG;;;OA;Outre-mer;138;Emploi outre-mer;;;;;;;2284077387;2264741612
+2027;PLF;BG;;;OA;Outre-mer;123;Conditions de vie outre-mer;;;;;;;1007697822;1191748579
+2027;PLF;BG;;;OA;Outre-mer;162;Interventions territoriales de l’État;;;;;;;330671803;283298781
+2027;PLF;BG;;;PB;Pouvoirs publics;501;Présidence de la République;;;;;;;122563852;122563852
+2027;PLF;BG;;;PB;Pouvoirs publics;511;Assemblée nationale;;;;;;;619800520;619800520
+2027;PLF;BG;;;PB;Pouvoirs publics;521;Sénat;;;;;;;360540300;360540300
+2027;PLF;BG;;;PB;Pouvoirs publics;541;La Chaîne parlementaire;;;;;;;35596900;35596900
+2027;PLF;BG;;;PB;Pouvoirs publics;;Indemnités des représentants français au Parlement européen;;;;;;;0;0
+2027;PLF;BG;;;PB;Pouvoirs publics;531;Conseil constitutionnel;;;;;;;20000000;20000000
+2027;PLF;BG;;;PB;Pouvoirs publics;;Haute Cour;;;;;;;0;0
+2027;PLF;BG;;;PB;Pouvoirs publics;533;Cour de justice de la République;;;;;;;5480000;880000
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;150;Formations supérieures et recherche universitaire;;;;;;;15643093575;15786054527
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;231;Vie étudiante;;;;;;;3361217042;3330717209
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;172;Recherches scientifiques et technologiques pluridisciplinaires;;;;;;;8556290955;8431090298
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;193;Recherche spatiale;;;;;;;1963820579;1963820579
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;190;Recherche dans les domaines de l’énergie, du développement et de la mobilité durables;;;;;;;1490796157;1535011256
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;192;Recherche et enseignement supérieur en matière économique et industrielle;;;;;;;580921736;580921736
+2027;PLF;BG;;;RA;Recherche et enseignement supérieur;142;Enseignement supérieur et recherche agricoles;;;;;;;443441538;426890820
+2027;PLF;BG;;;RB;Régimes sociaux et de retraite;198;Régimes sociaux et de retraite des transports terrestres;;;;;;;3856323110;3856323110
+2027;PLF;BG;;;RB;Régimes sociaux et de retraite;197;Régimes de retraite et de sécurité sociale des marins;;;;;;;786911970;786911970
+2027;PLF;BG;;;RB;Régimes sociaux et de retraite;195;Régimes de retraite des mines, de la SEITA, et divers;;;;;;;998980968;998980968
+2027;PLF;BG;;;RB;Régimes sociaux et de retraite;;Compensation des exonérations relatives au taux de contribution employeur du CAS « Pensions »;;;;;;;630877815;630877815
+2027;PLF;BG;;;RC;Relations avec les collectivités territoriales;119;Concours financiers aux collectivités territoriales et à leurs groupements;;;;;;;3722284595;3602082392
+2027;PLF;BG;;;RC;Relations avec les collectivités territoriales;122;Concours spécifiques et administration;;;;;;;399591261;389159647
+2027;PLF;BG;;;RD;Remboursements et dégrèvements;200;Remboursements et dégrèvements d’impôts d’État (crédits évaluatifs);;;;;;;140193417535;140193417535
+2027;PLF;BG;;;RD;Remboursements et dégrèvements;201;Remboursements et dégrèvements d’impôts locaux (crédits évaluatifs);;;;;;;4312420666;4312420666
+2027;PLF;BG;;;SA;Santé;204;Prévention, sécurité sanitaire et offre de soins;;;;;;;309333278;310733258
+2027;PLF;BG;;;SA;Santé;183;Protection maladie;;;;;;;1216300000;1216300000
+2027;PLF;BG;;;SA;Santé;379;Reversement à la sécurité sociale des recettes de la Facilité pour la Relance et la Résilience (FRR) européenne au titre du volet « Ségur investissement » du plan national de relance et de résilience (PNRR);;;;;;;242000000;242000000
+2027;PLF;BG;;;SB;Sécurités;176;Police nationale;;;;;;;14485360764;14145443750
+2027;PLF;BG;;;SB;Sécurités;152;Gendarmerie nationale;;;;;;;12451940379;11314541261
+2027;PLF;BG;;;SB;Sécurités;207;Sécurité et éducation routières;;;;;;;78622634;77115152
+2027;PLF;BG;;;SB;Sécurités;161;Sécurité civile;;;;;;;2062286568;1098278791
+2027;PLF;BG;;;SE;Solidarité, insertion et égalité des chances;304;Inclusion sociale et protection des personnes;;;;;;;14782780574;14783380574
+2027;PLF;BG;;;SE;Solidarité, insertion et égalité des chances;157;Handicap et dépendance;;;;;;;17297262506;17296002573
+2027;PLF;BG;;;SE;Solidarité, insertion et égalité des chances;137;Égalité entre les femmes et les hommes;;;;;;;106279485;106279485
+2027;PLF;BG;;;SF;Sport, jeunesse et vie associative;219;Sport;;;;;;;484448932;500807155
+2027;PLF;BG;;;SF;Sport, jeunesse et vie associative;163;Jeunesse et vie associative;;;;;;;637938336;637938336
+2027;PLF;BG;;;SF;Sport, jeunesse et vie associative;;Jeux olympiques et paralympiques d’hiver 2030;;;;;;;61600000;112300000
+2027;PLF;BG;;;TR;Transformation et fonction publiques;348;Performance et résilience des bâtiments de l’État et de ses opérateurs;;;;;;;57141756;237026648
+2027;PLF;BG;;;TR;Transformation et fonction publiques;;Accès, qualité et transformation des services publics;;;;;;;44856031;52519031
+2027;PLF;BG;;;TR;Transformation et fonction publiques;148;Fonction publique;;;;;;;225146712;226847712
+2027;PLF;BG;;;TB;Travail, emploi et administration des ministères sociaux;102;Accès et retour à l’emploi;;;;;;;6456723359;6479147409
+2027;PLF;BG;;;TB;Travail, emploi et administration des ministères sociaux;103;Accompagnement des mutations économiques et développement de l’emploi;;;;;;;10537359273;10234834400
+2027;PLF;BG;;;TB;Travail, emploi et administration des ministères sociaux;111;Amélioration de la qualité de l’emploi et des relations du travail;;;;;;;82663545;82140463
+2027;PLF;BG;;;TB;Travail, emploi et administration des ministères sociaux;155;Soutien des ministères sociaux;;;;;;;2010427106;2055866633
+2027;PLF;BA;;;XC;Contrôle et exploitation aériens;613;Soutien aux prestations de l’aviation civile;;;;;;;1810702719;1804235106
+2027;PLF;BA;;;XC;Contrôle et exploitation aériens;612;Navigation aérienne;;;;;;;801562339;765662339
+2027;PLF;BA;;;XC;Contrôle et exploitation aériens;614;Transports aériens, surveillance et certification;;;;;;;59042968;53448377
+2027;PLF;BA;;;XJ;Publications officielles et information administrative;623;Édition et diffusion;;;;;;;53053618;47484399
+2027;PLF;BA;;;XJ;Publications officielles et information administrative;624;Pilotage et ressources humaines;;;;;;;100649105;100483105
+2027;PLF;CAS;;;YE;Contrôle de la circulation et du stationnement routiers;751;Structures et dispositifs de sécurité routière;;;;;;;303540107;303540107
+2027;PLF;CAS;;;YE;Contrôle de la circulation et du stationnement routiers;753;Contrôle et modernisation de la politique de la circulation et du stationnement routiers;;;;;;;26180665;26180665
+2027;PLF;CAS;;;YE;Contrôle de la circulation et du stationnement routiers;754;Contribution à l’équipement des collectivités territoriales pour l’amélioration des transports en commun, de la sécurité et de la circulation routières;;;;;;;836914974;836914974
+2027;PLF;CAS;;;YE;Contrôle de la circulation et du stationnement routiers;755;Désendettement de l’État;;;;;;;778207619;778207619
+2027;PLF;CAS;;;YF;Développement agricole et rural;775;Développement et transfert en agriculture;;;;;;;67930000;67930000
+2027;PLF;CAS;;;YF;Développement agricole et rural;776;Recherche appliquée et innovation en agriculture;;;;;;;91070000;91070000
+2027;PLF;CAS;;;YK;Financement des aides aux collectivités pour l’électrification rurale;793;Électrification rurale;;;;;;;355300000;355300000
+2027;PLF;CAS;;;YK;Financement des aides aux collectivités pour l’électrification rurale;794;Opérations de maîtrise de la demande d’électricité, de production d’électricité par des énergies renouvelables ou de production de proximité dans les zones non interconnectées;;;;;;;3000000;3000000
+2027;PLF;CAS;;;YB;Gestion du patrimoine immobilier de l’État;;Contribution des cessions immobilières au désendettement de l’État;;;;;;;0;0
+2027;PLF;CAS;;;YB;Gestion du patrimoine immobilier de l’État;723;Opérations immobilières et entretien des bâtiments de l’État;;;;;;;240000000;197000000
+2027;PLF;CAS;;;YC;Participations financières de l’État;731;Opérations en capital intéressant les participations financières de l’État;;;;;;;2916948530;2916948530
+2027;PLF;CAS;;;YC;Participations financières de l’État;732;Désendettement de l’État et d’établissements publics de l’État;;;;;;;95813812;95813812
+2027;PLF;CAS;;;YD;Pensions;741;Pensions civiles et militaires de retraite et allocations temporaires d’invalidité;;;;;;;66628110439;66628110439
+2027;PLF;CAS;;;YD;Pensions;742;Ouvriers des établissements industriels de l’État;;;;;;;2075491072;2075491072
+2027;PLF;CAS;;;YD;Pensions;743;Pensions militaires d’invalidité et des victimes de guerre et autres pensions;;;;;;;1094301072;1094301072
+2027;PLF;CAS;;;CAS06;Accords monétaires internationaux;;Relations avec l’Union monétaire ouest-africaine;;;;;;;0;0
+2027;PLF;CAS;;;CAS06;Accords monétaires internationaux;;Relations avec l’Union monétaire d’Afrique centrale;;;;;;;0;0
+2027;PLF;CAS;;;CAS06;Accords monétaires internationaux;;Relations avec l’Union des Comores;;;;;;;0;0
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;372;France Télévisions;;;;;;;2378650000;2378650000
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;373;ARTE France;;;;;;;298114886;298114886
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;374;Radio France;;;;;;;645600000;645600000
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;375;France Médias Monde;;;;;;;306983551;306983551
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;376;Institut national de l’audiovisuel;;;;;;;102923318;102923318
+2027;PLF;CAS;;;AQ;Avances à l’audiovisuel public;377;TV5 Monde;;;;;;;84242456;84242456
+2027;PLF;CAS;;;ZC;Avances aux collectivités territoriales et aux collectivités régies par les articles 73, 74 et 76 de la Constitution;832;Avances aux collectivités et établissements publics, à la Nouvelle-Calédonie et aux collectivités régies par l’article 74 de la Constitution;;;;;;;206000000;206000000
+2027;PLF;CAS;;;ZC;Avances aux collectivités territoriales et aux collectivités régies par les articles 73, 74 et 76 de la Constitution;833;Avances sur le montant des impositions revenant aux régions, départements, communes, établissements et divers organismes;;;;;;;140226061986;140226061986
+2027;PLF;CAS;;;ZC;Avances aux collectivités territoriales et aux collectivités régies par les articles 73, 74 et 76 de la Constitution;;Avances remboursables de droits de mutation à titre onéreux destinées à soutenir les départements et d’autres collectivités affectés par les conséquences économiques de l’épidémie de covid-19;;;;;;;0;0
+2027;PLF;CAS;;;ZC;Avances aux collectivités territoriales et aux collectivités régies par les articles 73, 74 et 76 de la Constitution;;Avances sur le montant des produits d’accise sur les énergies revenant aux régions, départements et divers organismes;;;;;;;7050256234;7050256234
+2027;PLF;CAS;;;ZE;Prêts à des États étrangers;851;Prêts du Trésor à des États étrangers en vue de faciliter la vente de biens et de services concourant au développement du commerce extérieur de la France;;;;;;;600000000;664899306
+2027;PLF;CAS;;;ZE;Prêts à des États étrangers;852;Prêts à des États étrangers pour consolidation de dettes envers la France;;;;;;;11018639;11018639
+2027;PLF;CAS;;;ZE;Prêts à des États étrangers;853;Prêts à l’Agence française de développement en vue de favoriser le développement économique et social dans des États étrangers;;;;;;;0;115000000
+2027;PLF;CAS;;;ZE;Prêts à des États étrangers;;Prêts aux États membres de l’Union européenne dont la monnaie est l’euro;;;;;;;0;0
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;861;Prêts et avances pour le logement des agents de l’État;;;;;;;50000;50000
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;862;Prêts pour le développement économique et social;;;;;;;100000000;100000000
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;;Soutien à la filière nickel en Nouvelle Calédonie;;;;;;;130000000;130000000
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;;Prêts octroyés dans le cadre des programmes des investissements d’avenir;;;;;;;0;0
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;869;Prêts à la société concessionnaire de la liaison express entre Paris et l’aéroport Paris - Charles-de-Gaulle;;;;;;;0;121785310
+2027;PLF;CAS;;;ZF;Prêts et avances à des particuliers ou à des organismes privés;;Avances remboursables et prêts bonifiés aux entreprises touchées par la crise de la covid-19 ou par le conflit en Ukraine;;;;;;;0;0
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;821;Avances à l’Agence de services et de paiement, au titre du préfinancement des aides communautaires de la politique agricole commune;;;;;;;9000000000;9000000000
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;823;Avances à des organismes distincts de l’État et gérant des services publics;;;;;;;360000000;360000000
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;824;Prêts et avances à des services de l’État;;;;;;;30000000;30000000
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;825;Avances à l’Office national d’indemnisation des accidents médicaux, des affections iatrogènes et des infections nosocomiales (ONIAM) au titre de l’indemnisation des victimes du Benfluorex;;;;;;;15000000;15000000
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;;Prêts aux exploitants d’aéroports touchés par la crise de covid-19 au titre des dépenses de sûreté-sécurité;;;;;;;0;0
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;;Prêts destinés à soutenir Île-de-France Mobilités à la suite des conséquences de l’épidémie de la covid-19;;;;;;;0;0
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;;Prêts destinés à soutenir les autorités organisatrices de la mobilité à la suite des conséquences de l’épidémie de la covid-19;;;;;;;0;0
+2027;PLF;CAS;;;ZB;Prêts et avances à divers services de l’État ou organismes gérant des services publics;830;Prêts à FranceAgriMer au titre des préfinancements de fonds européens;;;;;;;10000000;10000000

@@ -1,6 +1,6 @@
 import React from 'react'
 import { apu } from '../data/apu.js'
-import { recettesEtat } from '../data/recettes-etat.js'
+import { recettesEtat, recettesYear } from '../data/recettes-etat.js'
 import { byLevel2025, SRC } from '../data/data.js'
 import { Card, DrillList } from './ui.jsx'
 import { LineChart, StackedH } from '../lib/charts.jsx'
@@ -66,7 +66,7 @@ export default function Revenue() {
         </Card>
       </div>
 
-      <Card title={T('Recettes du budget de l’État, ligne par ligne (PLF 2025)', 'State budget revenue, line by line (2025 draft budget)')} sub={T('L’État seul. Lignes négatives : reversées aux collectivités et à l’UE.', 'State only. Negative lines: passed on to local authorities and the EU.')} src={SRC.plf25rec}>
+      <Card title={T(`Recettes du budget de l’État, ligne par ligne (PLF ${recettesYear})`, `State budget revenue, line by line (${recettesYear} draft budget)`)} sub={T('L’État seul. Lignes négatives : reversées aux collectivités et à l’UE, ou remboursements et dégrèvements d’impôts.', 'State only. Negative lines: passed on to local authorities and the EU, or tax refunds and rebates.')} src={recettesYear === 2025 ? SRC.plf25rec : SRC[`plf${String(recettesYear).slice(2)}rec`]}>
         <DrillList rows={stateTree()} fmt={eur} />
       </Card>
     </>

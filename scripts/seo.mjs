@@ -8,6 +8,7 @@ import { apu } from '../src/data/apu.js'
 import { debtLatest, aft, financing2026 } from '../src/data/data.js'
 import { parties, ORDER, SOURCES } from '../src/data/election2027.js'
 import { average } from '../src/lib/polls.js'
+import { budgetYear, budgetDepth, budgetTotal } from '../src/data/budget-etat.js'
 
 const SITE = (process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'https://www.etatdesfinances.fr')).replace(/\/$/, '')
 if (!process.env.SITE_URL && !process.env.VERCEL_PROJECT_PRODUCTION_URL) console.warn(`seo : SITE_URL non défini, adresse par défaut ${SITE}`)
@@ -44,7 +45,7 @@ const FACTS = {
   depenses: [
     `Dépenses publiques ${Y} : ${nf(apu.depenses[i], 1)} Md€.`,
     `Prestations sociales en espèces : ${nf(apu.prestationsSociales[i], 1)} Md€. Rémunérations des agents publics : ${nf(apu.remunerations[i], 1)} Md€.`,
-    `Budget de l’État détaillé par mission, programme, action et sous-action (PLF 2025).`,
+    `Budget de l’État ${budgetYear} détaillé par mission${budgetDepth === 'programme' ? ' et programme' : ', programme, action et sous-action'} (PLF ${budgetYear}) : ${nf(budgetTotal.BG / 1e9, 1)} Md€ de crédits de paiement au budget général.`,
   ],
   dette: [
     `Dette publique au ${debtLatest.label} : ${nf(debtLatest.total, 1)} Md€ (${nf(debtLatest.pct, 1)} % du PIB).`,

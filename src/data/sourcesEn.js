@@ -7,6 +7,8 @@ export const SRC_EN = {
   'Insee, Informations rapides : dette trimestrielle des APU, T2 2026 (30 sept. 2026)': 'Insee, Informations rapides: quarterly general government debt, Q2 2026 (30 Sep 2026)',
   'Insee Première n° 2093 (févr. 2026) : dépenses par fonction (COFOG) 2024, provisoire': 'Insee Première no. 2093 (Feb 2026): spending by function (COFOG) 2024, provisional',
   'data.economie.gouv.fr : PLF 2025, dépenses selon destination (mission › programme › action › sous-action)': 'data.economie.gouv.fr: 2025 draft budget, spending by destination (mission › programme › action › sub-action)',
+  'Projet de loi de finances pour 2027 (1er oct. 2026), états B, C et D : crédits par mission et programme': '2027 draft budget bill (1 Oct 2026), tables B, C and D: appropriations by mission and programme',
+  'Projet de loi de finances pour 2027 (1er oct. 2026), état A : voies et moyens': '2027 draft budget bill (1 Oct 2026), table A: revenue estimates',
   'data.economie.gouv.fr : PLF 2025, recettes du budget général': 'data.economie.gouv.fr: 2025 draft budget, general budget revenue',
   'Loi de finances initiale pour 2026 (loi 2026-103 du 19 févr. 2026) : tableau de financement et plafonds par mission': '2026 initial budget law (law 2026-103 of 19 Feb 2026): financing table and mission ceilings',
   'Agence France Trésor : programme de financement et bulletin mensuel': 'Agence France Trésor: financing programme and monthly bulletin',

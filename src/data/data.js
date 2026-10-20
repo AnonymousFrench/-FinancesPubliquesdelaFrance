@@ -9,6 +9,8 @@ export const SRC = {
   inseeDebtQ: { label: 'Insee, Informations rapides : dette trimestrielle des APU, T2 2026 (30 sept. 2026)', url: 'https://www.insee.fr/fr/statistiques/series/102760712' },
   insee2093: { label: 'Insee Première n° 2093 (févr. 2026) : dépenses par fonction (COFOG) 2024, provisoire', url: 'https://www.insee.fr/fr/statistiques/8573552' },
   plf25dest: { label: 'data.economie.gouv.fr : PLF 2025, dépenses selon destination (mission › programme › action › sous-action)', url: 'https://data.economie.gouv.fr/explore/dataset/plf25-depenses-2025-selon-destination/' },
+  plf27loi: { label: 'Projet de loi de finances pour 2027 (1er oct. 2026), états B, C et D : crédits par mission et programme', url: 'https://www.budget.gouv.fr/documentation/documents-budgetaires' },
+  plf27rec: { label: 'Projet de loi de finances pour 2027 (1er oct. 2026), état A : voies et moyens', url: 'https://www.budget.gouv.fr/documentation/documents-budgetaires' },
   plf25rec: { label: 'data.economie.gouv.fr : PLF 2025, recettes du budget général', url: 'https://data.economie.gouv.fr/explore/dataset/plf25-recettes-du-budget-general/' },
   lfi2026: { label: 'Loi de finances initiale pour 2026 (loi 2026-103 du 19 févr. 2026) : tableau de financement et plafonds par mission', url: 'https://www.legifrance.gouv.fr/' },
   aft: { label: 'Agence France Trésor : programme de financement et bulletin mensuel', url: 'https://www.aft.gouv.fr/' },
