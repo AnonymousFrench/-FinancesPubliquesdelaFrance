@@ -1,0 +1,44 @@
+# Mise à jour des programmes de la présidentielle 2027
+
+Procédure suivie par la tâche planifiée (chaque lundi, puis aussi chaque jeudi de février à avril 2027).
+Elle prépare une pull request ; rien n'est publié tant que Thibault ne l'a pas fusionnée.
+
+## Fichiers
+
+- `src/data/election2027.js` : données des partis (mesures, montants, analyses, sources, date `checked`).
+- `src/data/election2027.en.js` : textes anglais, mêmes clés (nom, détail et signalement de chaque mesure, notes des analyses).
+- `src/data/sourcesEn.js` : libellé anglais de chaque nouvelle source (clé = libellé français exact).
+- `src/lib/polls.js` (`DECLARED`) et `src/lib/usePhotos.js` (`TITLES`) : à compléter pour un nouveau candidat.
+
+## Ce qu'on cherche, pour chaque candidat
+
+1. Programme ou chiffrage nouveau publié par le parti ou le candidat (site officiel, conférence de presse, livre).
+2. Analyse indépendante nouvelle : Institut de l'Entreprise, Terra Nova, Institut Montaigne, iFRAP, Fipeco, OFCE,
+   Rexecode, Conseil d'analyse économique, Cour des comptes, HCFP, France Budget, presse économique citant des économistes.
+3. Changement de statut : candidature déclarée ou retirée, investiture, ralliement, entrée dans les sondages.
+
+Sources récentes en priorité ; dater chaque source dans son libellé.
+
+## Règles de la « Synthèse des analyses » (identiques pour tous)
+
+- Montants du parti tels qu'annoncés dans `points` ; la vue « telles qu'annoncées » doit rester fidèle au parti.
+- La synthèse (`reviews[].cred`, coefficient par mesure) : coûts comptés en entier, ou plus quand une évaluation
+  les juge sous-estimés (ex. retraites RN 200 %) ; économies sans mesure détaillée à 0 ; autres économies ramenées
+  au montant qu'une évaluation juge atteignable (ex. non-remplacement de fonctionnaires 50 %, précédent RGPP ;
+  impôt plancher sur les grandes fortunes 35 %, CAE ; contribution à l'UE 0, unanimité).
+- Chaque coefficient s'appuie sur une source citée dans le signalement de la mesure (`flag`) et dans la note de la synthèse.
+- Nos propres estimations sont toujours signalées « Notre estimation ».
+- Mettre à jour la ligne « Effet net jugé crédible en 2032 » du bandeau (FR et EN) avec la sortie de `scripts/check-election.mjs`.
+- Ne jamais écrire de tiret cadratin (—) dans les textes.
+
+## Contrôles avant la pull request
+
+1. `node scripts/check-election.mjs` : aucune erreur ; relire les projections et expliquer tout écart notable.
+2. `npm run build`.
+3. `npx vite preview --port 4174 --strictPort` en arrière-plan, puis `python3 scripts/check-pages.py`.
+4. Mettre `checked` à la date du jour pour chaque candidat vérifié, même sans changement.
+
+## Pull request
+
+Branche `maj-programmes-AAAA-MM-JJ`, titre « Programmes : mise à jour du JJ mois », description : changements par candidat,
+sources, effet sur les projections 2032 (avant / après), points incertains. Ne pas fusionner.

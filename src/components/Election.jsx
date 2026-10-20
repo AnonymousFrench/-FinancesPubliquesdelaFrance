@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
+import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE, STALE_DAYS } from '../data/election2027.js'
 import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, pPledges, unscoredText, ageOf, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
 import { usePolls, pollOf } from '../lib/usePolls.js'
@@ -8,7 +8,7 @@ import { PollStatus, PollMentions } from './Polls.jsx'
 import { usePhotos } from '../lib/usePhotos.js'
 import { Card, Kpi, Seg } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
-import { bn, fmt, pct, signed, unitBn } from '../lib/format.js'
+import { bn, fmt, pct, signed, unitBn, dateFr } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
 import { withLang } from '../routes.js'
 import { getLang } from '../i18n.js'
@@ -328,12 +328,26 @@ function Profile({ q }) {
           <a href={`https://fr.wikipedia.org/wiki/${q.profile.wiki}`} target="_blank" rel="noreferrer">{T('Wikipédia', 'Wikipedia (in French)')}</a>
           <a href={q.officialSite} target="_blank" rel="noreferrer">{T('Site du parti', 'Party website')}</a>
         </span>
+        <Checked q={q} />
       </div>
       <div className="pf-stats">
         {!blackout && p && <span><b>{pct(p.v)}</b>{T('sondages 1er tour', 'first-round polls')}</span>}
         <span><b>{q.deputies}</b>{T('députés', 'deputies')}</span>
       </div>
     </div>
+  )
+}
+
+// Date de la dernière vérification du programme ; signalée si elle date de plus de STALE_DAYS jours.
+function Checked({ q }) {
+  if (!q.checked) return null
+  const age = Math.floor((Date.now() - new Date(q.checked + 'T00:00:00Z').getTime()) / 864e5)
+  const stale = age > STALE_DAYS
+  return (
+    <span className={'pf-checked' + (stale ? ' stale' : '')}>
+      {T(`Programme et analyses vérifiés le ${dateFr(q.checked)}`, `Programme and reviews checked on ${dateFr(q.checked)}`)}
+      {stale && T(` : vérification de plus de ${STALE_DAYS} jours, des annonces récentes peuvent manquer.`, `: more than ${STALE_DAYS} days old, recent announcements may be missing.`)}
+    </span>
   )
 }
 
