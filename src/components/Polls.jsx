@@ -45,18 +45,21 @@ export function PollMentions() {
     <p className="mentions">
       {T('Sondages réalisés par les instituts cités, selon la méthode des quotas. Marge d’erreur indiquée par référence à la méthode aléatoire, à 95 %, pour un score de 50 %.', 'Polls carried out by the institutes named, using the quota method. Margin of error given by reference to random sampling, at 95%, for a 50% score.')}{' '}
       {T('Commanditaires, questions posées et notices : ', 'Sponsors, questions asked and methodology notices: ')}<a href={COMMISSION_URL} target="_blank" rel="noreferrer">{T('Commission des sondages', 'Commission des sondages (polling commission)')}</a>.{' '}
-      {T('Les moyennes sont calculées par ce site à partir de ces sondages et ne constituent pas un sondage.', 'Averages are computed by this site from these polls and are not themselves a poll.')}
+      {T('Les moyennes sont calculées par ce site à partir de ces sondages et ne constituent pas un sondage ; les sondages commandés par un parti ou un candidat en sont exclus.', 'Averages are computed by this site from these polls and are not themselves a poll; polls commissioned by a party or candidate are left out.')}
     </p>
   )
 }
 
 // Description de la source choisie, affichée en ligne sous le sélecteur (rien ne se superpose).
 function SourceNote({ name }) {
-  if (!name) return <p className="note-line">{T(`Pour chaque institut, son dernier sondage des ${WINDOW} derniers jours : chaque institut compte une fois, quel que soit le nombre de ses publications. Choisissez un institut pour le voir seul.`, `For each institute, its latest poll of the last ${WINDOW} days: each institute counts once, however often it publishes. Pick an institute to see it on its own.`)}</p>
+  if (!name) return <p className="note-line">{T(`Pour chaque institut, son dernier sondage des ${WINDOW} derniers jours : chaque institut compte une fois, quel que soit le nombre de ses publications. Choisissez un institut pour le voir seul. Les sondages commandés par un parti ou un candidat sont exclus.`, `For each institute, its latest poll of the last ${WINDOW} days: each institute counts once, however often it publishes. Pick an institute to see it on its own. Polls commissioned by a party or candidate are left out.`)}</p>
   const f = INSTITUTES[name]
   return (
     <p className="note-line">
-      <b>{name}</b> · {f ? T(f.about, f.aboutEn) : T('Institut de sondage.', 'Polling institute.')} {T(INSTITUTE_STANCE, INSTITUTE_STANCE_EN)}
+      <b>{name}</b> · {f ? T(f.about, f.aboutEn) : T('Institut de sondage.', 'Polling institute.')}
+      {f?.owner && <> {T(`Propriétaire : ${f.owner}.`, `Owner: ${f.ownerEn}.`)}</>}
+      {f?.clients && <> {T(`Principaux commanditaires de ses sondages présidentiels en 2026 : ${f.clients}.`, `Main buyers of its 2026 presidential polls: ${f.clients}.`)}</>}
+      {' '}{T(INSTITUTE_STANCE, INSTITUTE_STANCE_EN)}
       {f?.wiki && <> <a href={`https://fr.wikipedia.org/wiki/${f.wiki}`} target="_blank" rel="noreferrer">{T('Wikipédia', 'Wikipedia (in French)')}</a></>}
     </p>
   )
@@ -120,7 +123,7 @@ function PollsLive() {
     const g = new Map()
     for (const p of second) { if (inst && p.pollster !== inst) continue; if (!g.has(p.hypothesis)) g.set(p.hypothesis, []); g.get(p.hypothesis).push(p) }
     return [...g.entries()].map(([h, ps]) => {
-      const recent = inst ? [] : ps.filter(p => p.date >= daysBefore(t, WINDOW))
+      const recent = inst ? [] : ps.filter(p => p.date >= daysBefore(t, WINDOW) && !p.partySponsor)
       const use = recent.length ? recent : ps.slice(0, 1)
       const [a, b] = ps[0].results
       const avg = k => use.reduce((s, p) => s + p.results[k].v, 0) / use.length
@@ -185,11 +188,13 @@ function PollsLive() {
         <h3>{T('Derniers sondages', 'Latest polls')} <span className="sec-s">{inst ? inst : T('tous instituts', 'all institutes')}{T(', hypothèse principale', ', main scenario')}</span></h3>
         <div className="t-wrap">
           <table className="t">
-            <thead><tr><th>{T('Institut', 'Institute')}</th><th>{T('Fin du terrain', 'Fieldwork end')}</th><th>{T('Échantillon', 'Sample')}</th><th>{T('Marge d’erreur', 'Margin of error')}</th>{cols.map(c => <th key={c}>{c}</th>)}</tr></thead>
+            <thead><tr><th>{T('Institut', 'Institute')}</th><th>{T('Commanditaire', 'Commissioned by')}</th><th>{T('Fin du terrain', 'Fieldwork end')}</th><th>{T('Échantillon', 'Sample')}</th><th>{T('Marge d’erreur', 'Margin of error')}</th>{cols.map(c => <th key={c}>{c}</th>)}</tr></thead>
             <tbody>
               {latest.map((p, k) => (
                 <tr key={k}>
-                  <td>{p.pollster}</td><td>{dateFr(p.date)}</td><td>{p.sample ? fmt(p.sample, 0) : '–'}</td><td>{p.sample ? `± ${fmt(marginOfError(p.sample), 1)} pt` : '–'}</td>
+                  <td>{p.pollster}</td>
+                  <td className="poll-sp">{p.sponsor || <a href={COMMISSION_URL} target="_blank" rel="noreferrer" title={T('Voir la notice de la Commission des sondages', 'See the Commission des sondages notice')}>{T('notice', 'notice')}</a>}{p.partySponsor && <em className="poll-party">{T('parti · hors moyenne', 'party · not averaged')}</em>}</td>
+                  <td>{dateFr(p.date)}</td><td>{p.sample ? fmt(p.sample, 0) : '–'}</td><td>{p.sample ? `± ${fmt(marginOfError(p.sample), 1)} pt` : '–'}</td>
                   {cols.map(c => { const r = p.results.find(x => x.name === c); return <td key={c}>{r ? pct(r.v, r.v % 1 ? 1 : 0) : '–'}</td> })}
                 </tr>
               ))}

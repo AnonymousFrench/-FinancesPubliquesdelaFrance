@@ -384,3 +384,5 @@ a.ind:hover { border-color: #c7ccd4 }
 .ind-c .cn { color: #b00e28 }
 .h4-note { float: right; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--mut); font-size: 11px }
 .bar-v { overflow: hidden; text-overflow: ellipsis }
+.poll-sp { color: #5b6573; font-size: 12px; max-width: 200px }
+.poll-party { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; background: #fdecea; color: #b42318; font-style: normal; font-size: 11px; font-weight: 600 }

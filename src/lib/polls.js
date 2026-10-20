@@ -49,6 +49,41 @@ function cellValue(text) {
   return p ? { v, name: p[1].trim(), party: p[2].trim() } : { v, name: rest }
 }
 
+// ---------- Commanditaires ----------
+// La loi du 19 juillet 1977 impose de publier le nom de l'acheteur de chaque sondage. Wikipédia le donne dans la cellule
+// de l'institut (« Ifop pour LCI ») ou dans la note de référence de la ligne. On en tire le commanditaire, et on signale
+// les sondages commandés par un parti ou un candidat : ils sont affichés mais exclus des moyennes.
+const MEDIA = ['La Tribune Dimanche', 'Le Journal du dimanche', 'JDD', 'LCI', 'Le Figaro', 'Sud Radio', 'BFMTV', 'BFM TV', 'BFM Business', 'RMC', 'La Tribune', 'Le Point', 'Politico', 'CNews', 'Europe 1', 'Ouest-France', 'franceinfo', 'France Info', 'France Télévisions', 'France 2', 'France Inter', 'Radio France', 'Le Monde', 'Les Échos', 'Les Echos', 'Le Parisien', 'Aujourd’hui en France', 'Challenges', 'M6', 'RTL', 'TF1', 'L’Express', 'Marianne', 'Public Sénat', 'LCP', 'Libération', 'L’Opinion', 'L’Humanité', 'Valeurs actuelles', 'L’Obs', 'Le Nouvel Obs', 'La Croix', '20 Minutes', 'Paris Match', 'HuffPost', 'Le HuffPost', 'Mediapart', 'Atlantico', 'Contexte', 'La Dépêche', 'Nice-Matin', 'Sud Ouest', 'Le Dauphiné libéré', 'Arte', 'TV5Monde', 'Canal+', 'C8', 'Le JDD']
+export const PARTIES = [
+  ['RN', /Rassemblement national|\bRN\b|Front national/i], ['LFI', /France insoumise|\bLFI\b/i], ['LR', /Les Républicains|\bLR\b/], ['RE', /Renaissance|Ensemble pour la République/],
+  ['HOR', /\bHorizons\b/], ['REC', /Reconquête/i], ['PS', /Parti socialiste|\bPS\b/], ['PP', /Place publique/i], ['LE', /Les Écologistes|\bEELV\b/i],
+  ['DLF', /Debout la France/i], ['NÉ', /Nouvelle Énergie/i], ['PCF', /Parti communiste|\bPCF\b/], ['LO', /Lutte ouvrière/i], ['MoDem', /\bMoDem\b|Mouvement démocrate/i],
+  ['candidat', /équipe de campagne|\bcomité de soutien\b/i],
+]
+const POLLSTER_RE = /(Ifop|Fiducial|Elabe|OpinionWay|Harris|Toluna|Interactive|Ipsos|bva|Odoxa|Cluster ?17|YouGov|Verian|CSA|Viavoice|Kantar)\s*$/i
+const apos = s => s.replace(/['ʼ]/g, '’')
+export function sponsorFrom(text) {
+  const t = apos(clean(text || ''))
+  if (!t) return null
+  const mediaIn = str => { const f = MEDIA.filter(x => str.includes(apos(x))); return f.filter(x => !f.some(y => y !== x && y.includes(x))).sort((x, y) => str.indexOf(apos(x)) - str.indexOf(apos(y))) }
+  // Segments qui désignent l'acheteur : « pour X », « commandé par X », « à la demande de X ».
+  const re = /(?:\bpour(?: le compte d[eu’]| l’)?|commandée? par|à la demande d[eu’])\s+(.{2,100}?)(?=[.;:()\[\]«»"]|\s[-–]\s|\s(?:réalisée?|publiée?|du|auprès|entre|sur|en)\s|$)/gi
+  for (const m of t.matchAll(re)) {
+    const who = m[1].trim()
+    // Un parti n'est retenu comme acheteur que dans une formule explicite (« commandé par », « réalisé pour »,
+    // « pour le compte de ») ou juste après le nom d'un institut (« Ifop pour le RN ») : un titre d'article
+    // comme « un record pour le RN » ne doit pas exclure un sondage.
+    const before = t.slice(Math.max(0, m.index - 25), m.index)
+    const explicit = /command|demande|compte/i.test(m[0]) || /réalisée?\s*$/i.test(before) || POLLSTER_RE.test(before)
+    const party = explicit ? PARTIES.find(([, rx]) => rx.test(who))?.[0] || null : null
+    const media = mediaIn(who)
+    if (party) return { sponsor: who.slice(0, 60), party }
+    if (media.length) return { sponsor: media.join(', '), party: null }
+  }
+  const media = mediaIn(t)
+  return media.length ? { sponsor: media.join(', '), party: null } : null
+}
+
 // Table HTML -> grille (rowspan/colspan dépliés), chaque case gardant sa cellule d'origine.
 function grid(table) {
   const g = []
@@ -67,6 +102,20 @@ function grid(table) {
 
 export function parsePolls(doc) {
   const first = [], second = []
+  const notes = new Map([...doc.querySelectorAll('li[id^="cite_note"]')].map(li => [li.id, li.textContent]))
+  // Commanditaire d'une ligne : texte de la cellule de l'institut, puis notes de référence des trois premières cellules.
+  const rowSponsor = row => {
+    try {
+      const cells = [...new Set(row.slice(0, 3).map(x => x?.cell).filter(Boolean))]
+      const texts = []
+      for (const c of cells) {
+        texts.push(c.textContent)
+        for (const a of c.querySelectorAll('a[href*="#cite_note"]')) texts.push(notes.get(decodeURIComponent(a.getAttribute('href').split('#')[1])) || '')
+      }
+      for (const tx of texts) { const s = sponsorFrom(tx); if (s) return s }
+    } catch { /* structure inattendue : pas de commanditaire */ }
+    return null
+  }
   let round = 0, year = null, headingMonth = null, hypothesis = null
   for (const el of doc.querySelectorAll('h2, h3, h4, table.wikitable')) {
     if (el.tagName !== 'TABLE') {
@@ -86,7 +135,7 @@ export function parsePolls(doc) {
     for (let r = h + 1; r < g.length; r++) {
       const row = g[r]
       if (!row || !row[0] || !row[3] || row[0].cell === row[3].cell) continue // ligne d'événement
-      const pollster = clean(row[0].cell.textContent), date = endDate(row[1]?.cell.textContent, year, headingMonth)
+      const pollster = clean(row[0].cell.textContent).replace(/\s+pour\s.*$/i, ''), date = endDate(row[1]?.cell.textContent, year, headingMonth)
       if (!pollster || !date || /sondeur/i.test(pollster)) continue
       const results = []
       const seen = new Set()
@@ -100,7 +149,7 @@ export function parsePolls(doc) {
       })
       if (results.length < (round === 1 ? 4 : 2)) continue
       const key = row[0].r0 + '|' + pollster + '|' + date
-      if (!groups.has(key)) groups.set(key, { pollster, date, sample: +clean(row[2]?.cell.textContent).replace(/\D/g, '') || null, rows: [] })
+      if (!groups.has(key)) { const sp = rowSponsor(row); groups.set(key, { pollster, date, sample: +clean(row[2]?.cell.textContent).replace(/\D/g, '') || null, sponsor: sp?.sponsor || null, partySponsor: sp?.party || null, rows: [] }) }
       groups.get(key).rows.push(results)
     }
     for (const gr of groups.values()) {
@@ -108,9 +157,9 @@ export function parsePolls(doc) {
         // Hypothèse principale : celle qui contient le plus de candidats déclarés (la première en cas d'égalité).
         const score = rs => rs.filter(x => DECLARED.includes(x.name)).length
         const best = gr.rows.reduce((a, b) => score(b) > score(a) ? b : a)
-        first.push({ pollster: gr.pollster, date: gr.date, sample: gr.sample, results: best })
+        first.push({ pollster: gr.pollster, date: gr.date, sample: gr.sample, sponsor: gr.sponsor, partySponsor: gr.partySponsor, results: best })
       } else {
-        for (const rs of gr.rows) if (rs.length === 2) second.push({ pollster: gr.pollster, date: gr.date, sample: gr.sample, hypothesis, results: rs })
+        for (const rs of gr.rows) if (rs.length === 2) second.push({ pollster: gr.pollster, date: gr.date, sample: gr.sample, sponsor: gr.sponsor, partySponsor: gr.partySponsor, hypothesis, results: rs })
       }
     }
   }
@@ -132,10 +181,12 @@ const day = d => new Date(d + 'T00:00:00Z').getTime()
 const DAY = 864e5
 
 // Moyenne du dernier sondage de chaque institut sur une fenêtre glissante.
+// Les sondages commandés par un parti ou un candidat sont exclus.
 export function average(polls, asOf, windowDays = 45) {
   const end = day(asOf), start = end - windowDays * DAY
   const latest = new Map()
   for (const p of polls) {
+    if (p.partySponsor) continue
     const t = day(p.date)
     if (t > end || t < start) continue
     if (!latest.has(p.pollster) || p.date > latest.get(p.pollster).date) latest.set(p.pollster, p)
