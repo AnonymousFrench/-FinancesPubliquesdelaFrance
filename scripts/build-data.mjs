@@ -104,8 +104,9 @@ for (const r of rows) {
   });
   const m = missions.get(r.codeM);
   m.cp += r.cp; m.ae += r.ae;
-  if (!m.programmes.has(r.codeP)) m.programmes.set(r.codeP, { code: r.codeP, nom: r.programme, cp: 0, ae: 0, actions: new Map() });
-  const p = m.programmes.get(r.codeP);
+  const pk = r.codeP || r.programme // programme sans numéro connu (fichier tiré du projet de loi) : clé = libellé
+  if (!m.programmes.has(pk)) m.programmes.set(pk, { code: r.codeP, nom: r.programme, cp: 0, ae: 0, actions: new Map() });
+  const p = m.programmes.get(pk);
   p.cp += r.cp; p.ae += r.ae;
   if (!r.codeA) continue // fichier tiré du projet de loi : pas de niveau action
   if (!p.actions.has(r.codeA)) p.actions.set(r.codeA, { code: r.codeA, nom: r.action, cp: 0, ae: 0, sousActions: [] });
@@ -123,6 +124,32 @@ const tree = [...missions.values()].map(m => ({
     actions: [...p.actions.values()].map(a => ({ ...a, cp: Math.round(a.cp), ae: Math.round(a.ae), sousActions: a.sousActions.map(s => ({ ...s, cp: Math.round(s.cp), ae: Math.round(s.ae) })) })),
   })).sort((a, b) => b.cp - a.cp),
 })).sort((a, b) => b.cp - a.cp);
+// En attendant le fichier détaillé de l'année : actions et sous-actions du PLF 2025 sous chaque programme reconnu
+// (même numéro de programme), marquées detailYear: 2025. Leurs montants sont ceux de 2025.
+if (FROM_PDF) {
+  const old = fs.readFileSync('data-raw/plf25-destination.csv', 'utf8').replace(/^\uFEFF/, '').split('\n').slice(1).filter(Boolean).map(l => l.split(';'))
+  const byProg = new Map()
+  for (const p of old) {
+    const codeP = p[7], codeA = p[9], codeS = p[11], cp = +(p[16] || 0), ae = +(p[15] || 0)
+    if (!codeA) continue
+    if (!byProg.has(codeP)) byProg.set(codeP, new Map())
+    const acts = byProg.get(codeP)
+    if (!acts.has(codeA)) acts.set(codeA, { code: codeA, nom: p[10], cp: 0, ae: 0, sousActions: [] })
+    const a = acts.get(codeA); a.cp += cp; a.ae += ae
+    if (codeS) { // une sous-action apparaît sur plusieurs lignes (titre, catégorie) : on les additionne
+      const sa = a.sousActions.find(x => x.code === codeS) || (a.sousActions.push({ code: codeS, nom: p[12], cp: 0, ae: 0 }), a.sousActions.at(-1))
+      sa.cp += cp; sa.ae += ae; a.hasSous = true
+    }
+  }
+  let n = 0
+  for (const m of tree) for (const p of m.programmes) {
+    const acts = p.code && byProg.get(p.code)
+    if (!acts) continue
+    p.detailYear = 2025; n++
+    p.actions = [...acts.values()].map(a => ({ ...a, cp: Math.round(a.cp), ae: Math.round(a.ae), sousActions: a.sousActions.map(x => ({ ...x, cp: Math.round(x.cp), ae: Math.round(x.ae) })).sort((x, y) => y.cp - x.cp) })).sort((a, b) => b.cp - a.cp)
+  }
+  console.log(`détail 2025 rattaché à ${n} programmes`)
+}
 const totalBG = Math.round(rows.filter(r => r.type === 'BG').reduce((s, r) => s + r.cp, 0));
 const totalBA = Math.round(rows.filter(r => r.type !== 'BG').reduce((s, r) => s + r.cp, 0));
 w('budget-etat.js',

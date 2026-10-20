@@ -45,7 +45,8 @@ export function Seg({ options, value, onChange, small }) {
   )
 }
 
-// Liste de barres dépliable. rows : [{ name, value, note?, tag?, color?, children?[] }]
+// Liste de barres dépliable. rows : [{ name, value, note?, tag?, color?, children?[], childNote? }]
+// childNote : phrase affichée en tête du niveau déplié (ex. détail d'une autre année).
 // Les parts sont relatives au niveau parent.
 export function DrillList({ rows, total, fmt, defaultOpen = [] }) {
   const [open, setOpen] = useState(() => new Set(defaultOpen))
@@ -72,6 +73,7 @@ export function DrillList({ rows, total, fmt, defaultOpen = [] }) {
             </div>
             {isOpen && (
               <div className="drill">
+                {r.childNote && <p className="drill-note">{r.childNote}</p>}
                 <DrillList rows={r.children} fmt={fmt} />
               </div>
             )}

@@ -26,7 +26,8 @@ const toRows = list => list.map(m => ({
   name: mission(m.nom), value: m.cp, tag: kind(m), note: m.ministere ? dt(ap(m.ministere)) : undefined,
   children: m.programmes.map(p => ({
     name: ap(p.nom), value: p.cp, tag: p.code ? 'P' + p.code : undefined,
-    children: p.actions.length === 0 ? undefined : p.actions.map(a => ({ name: ap(a.nom), value: a.cp, children: a.sousActions.map(s => ({ name: ap(s.nom), value: s.cp })) })),
+    childNote: p.detailYear ? T(`Détail par action : PLF ${p.detailYear}, montants de ${p.detailYear}, en attendant le détail ${budgetYear}. Les parts portent sur le total ${p.detailYear} du programme.`, `Breakdown by action: ${p.detailYear} draft budget, ${p.detailYear} amounts, until the ${budgetYear} detail is published. Shares are of the programme’s ${p.detailYear} total.`) : undefined,
+    children: p.actions.length === 0 ? undefined : p.actions.map(a => ({ name: ap(a.nom), value: a.cp, tag: p.detailYear ? String(p.detailYear) : undefined, children: a.sousActions.map(s => ({ name: ap(s.nom), value: s.cp, tag: p.detailYear ? String(p.detailYear) : undefined })) })),
   })),
 }))
 
@@ -46,8 +47,9 @@ function StateBudget() {
       for (const p of m.programmes) {
         if (has(p.nom)) out.push({ level: T('programme', 'programme'), name: ap(p.nom), v: p.cp, path: [mission(m.nom)] })
         for (const a of p.actions) {
-          if (has(a.nom)) out.push({ level: T('action', 'action'), name: ap(a.nom), v: a.cp, path: [mission(m.nom), ap(p.nom)] })
-          for (const sa of a.sousActions) if (has(sa.nom)) out.push({ level: T('sous-action', 'sub-action'), name: ap(sa.nom), v: sa.cp, path: [mission(m.nom), ap(p.nom), ap(a.nom)] })
+          const y = p.detailYear ? ` ${p.detailYear}` : ''
+          if (has(a.nom)) out.push({ level: T('action', 'action') + y, name: ap(a.nom), v: a.cp, path: [mission(m.nom), ap(p.nom)] })
+          for (const sa of a.sousActions) if (has(sa.nom)) out.push({ level: T('sous-action', 'sub-action') + y, name: ap(sa.nom), v: sa.cp, path: [mission(m.nom), ap(p.nom), ap(a.nom)] })
         }
       }
     }
@@ -56,9 +58,9 @@ function StateBudget() {
 
   return (
     <Card title={deep ? T(`Budget de l’État ${budgetYear}, jusqu’à la plus petite ligne publiée`, `State budget ${budgetYear}, down to the smallest published line`) : T(`Budget de l’État ${budgetYear}, par mission et programme`, `State budget ${budgetYear}, by mission and programme`)}
-      sub={deep ? T(`PLF ${budgetYear} : ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sous-actions`, `${budgetYear} draft budget: ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sub-actions`) : T(`PLF ${budgetYear} : ${bn(total / 1e9)}, ${list.length} missions › programmes`, `${budgetYear} draft budget: ${bn(total / 1e9)}, ${list.length} missions › programmes`)}
+      sub={deep ? T(`PLF ${budgetYear} : ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sous-actions`, `${budgetYear} draft budget: ${bn(total / 1e9)}, ${list.length} missions › programmes › actions › sub-actions`) : T(`PLF ${budgetYear} : ${bn(total / 1e9)}, ${list.length} missions › programmes ; actions et sous-actions du PLF 2025`, `${budgetYear} draft budget: ${bn(total / 1e9)}, ${list.length} missions › programmes; actions and sub-actions from the 2025 draft budget`)}
       right={<Seg small value={scope} onChange={setScope} options={[[T('Budget général', 'General budget'), 'general'], [T('Tous les comptes', 'All accounts'), 'all']]} />}
-      src={deep ? SRC.plf25dest : SRC.plf27loi}>
+      src={deep ? SRC.plf25dest : [SRC.plf27loi, SRC.plf25dest]}>
       <div className="search">
         <input value={q} onChange={e => setQ(e.target.value)} placeholder={T('Chercher une ligne du budget (ex. : porte-avions, école, police, bourses…)', 'Search a budget line (e.g. porte-avions, école, police, bourses…)')} />
         {results && <span className="mut">{results.length}{results.length === 50 ? '+' : ''} {T('résultat(s)', 'result(s)')}</span>}
@@ -71,14 +73,14 @@ function StateBudget() {
               <span className="bar-v">{eur(r.v)}</span>
             </div>
           ))}
-          {!results.length && <p className="hint">{deep ? T('Aucune ligne ne correspond. La recherche porte sur les missions, programmes, actions et sous-actions.', 'No line matches. Search covers missions, programmes, actions and sub-actions; programme-level labels are in French.') : T('Aucune ligne ne correspond. La recherche porte sur les missions et les programmes.', 'No line matches. Search covers missions and programmes; programme labels are in French.')}</p>}
+          {!results.length && <p className="hint">{deep ? T('Aucune ligne ne correspond. La recherche porte sur les missions, programmes, actions et sous-actions.', 'No line matches. Search covers missions, programmes, actions and sub-actions; programme-level labels are in French.') : T('Aucune ligne ne correspond. La recherche porte sur les missions et programmes 2027, et sur les actions et sous-actions 2025.', 'No line matches. Search covers 2027 missions and programmes, and 2025 actions and sub-actions; programme-level labels are in French.')}</p>}
         </div>
       ) : (
         <>
           <DrillList rows={toRows(list)} total={total} fmt={eur} />
           <p className="hint">
             {scope === 'all' ? T(`Inclut ${bn(advances / 1e9, 0)} d’avances aux collectivités, pour l’essentiel leurs propres impôts transitant par l’État.`, `Includes ${bn(advances / 1e9, 0)} of advances to local authorities, mostly their own taxes passing through the State.`) : T('Montants du projet de loi, avant amendements.', 'Draft-bill amounts, before amendments. Programme labels keep their official French names.')}
-            {!deep && T(' Le détail par action et sous-action sera ajouté quand le ministère publiera le fichier ouvert correspondant ; les crédits du titre 2 (personnel) incluent les cotisations de retraite des fonctionnaires.', ' Detail by action and sub-action will be added when the ministry publishes the matching open-data file; staff credits (title 2) include civil servants’ pension contributions.')}
+            {!deep && T(' Sous chaque programme, le détail par action et sous-action est celui du PLF 2025 (marqué 2025), en attendant que le ministère publie le fichier détaillé 2027 ; les crédits du titre 2 (personnel) incluent les cotisations de retraite des fonctionnaires.', ' Under each programme, the breakdown by action and sub-action is from the 2025 draft budget (marked 2025), until the ministry publishes the detailed 2027 file; staff credits (title 2) include civil servants’ pension contributions.')}
           </p>
         </>
       )}
