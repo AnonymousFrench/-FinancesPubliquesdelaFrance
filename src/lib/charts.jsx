@@ -80,7 +80,6 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
         ))}
         {bars && <span><i style={{ background: bars.color, opacity: 0.55 }} />{bars.name}</span>}
         {band && <span><i style={{ background: band.color, opacity: 0.25 }} />{band.label}</span>}
-        {shade && <span><i style={{ background: 'var(--shade)' }} />{shade.label}</span>}
       </div>}
       <div className="lc-plot" ref={wrap}>
         <svg ref={ref} viewBox={`0 0 ${W} ${H}`} className="chart" onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
