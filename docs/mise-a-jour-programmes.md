@@ -16,7 +16,9 @@ Elle prépare une pull request ; rien n'est publié tant que Thibault ne l'a pas
 
 1. Programme ou chiffrage nouveau publié par le parti ou le candidat (site officiel, conférence de presse, livre).
 2. Analyse indépendante nouvelle : Institut de l'Entreprise, Terra Nova, Institut Montaigne, iFRAP, Fipeco, OFCE,
-   Rexecode, Conseil d'analyse économique, Cour des comptes, HCFP, France Budget, presse économique citant des économistes.
+   Rexecode, Conseil d'analyse économique, Cour des comptes, HCFP, Unédic, COR, presse économique citant des économistes.
+   **Ne jamais utiliser France Budget (francebudget.fr)**, ni aucun simulateur dont l'auteur et le financement ne sont pas
+   publics : ni comme analyse indépendante, ni pour un chiffrage de mesure, ni sur les graphiques (décision du 20 oct. 2026).
 3. Changement de statut : candidature déclarée ou retirée, investiture, ralliement, entrée dans les sondages.
 
 Sources récentes en priorité ; dater chaque source dans son libellé.
