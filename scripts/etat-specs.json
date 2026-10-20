@@ -289,7 +289,7 @@
   "id": "elecPrice",
   "es": "nrg_pc_204",
   "f": {
-   "product": "6000",
+   "siec": "E7000",
    "nrg_cons": "KWH2500-4999",
    "unit": "KWH",
    "tax": "I_TAX",
@@ -319,16 +319,19 @@
   "id": "medianInc",
   "es": "ilc_di03",
   "f": {
-   "indic_il": "MED_E",
    "age": "TOTAL",
    "sex": "T",
+   "statinfo": "MED_EI",
    "unit": "EUR"
   }
  },
  {
   "id": "gini",
   "es": "ilc_di12",
-  "f": {}
+  "f": {
+   "age": "TOTAL",
+   "statinfo": "GINI_HND"
+  }
  },
  {
   "id": "spread",
