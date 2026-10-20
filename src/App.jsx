@@ -64,10 +64,12 @@ export default function App() {
     setLang(l)
     const r = routeOf(location.pathname) || ROUTES[0]
     const want = withLang(r.path, l)
-    if (want !== location.pathname || q) history.replaceState(null, '', want + location.hash)
+    const sp = new URLSearchParams(location.search); sp.delete('lang')
+    const search = sp.toString() ? '?' + sp : ''
+    if (want !== location.pathname || q) history.replaceState(null, '', want + search + location.hash)
     return l
   })
-  const switchLang = l => { setLang(l); setLangState(l); history.pushState(null, '', withLang(route.path, l)) }
+  const switchLang = l => { setLang(l); setLangState(l); history.pushState(null, '', withLang(route.path, l) + location.search) }
 
   useEffect(() => {
     // Anciennes adresses en #ancre -> vraie page.
@@ -89,8 +91,10 @@ export default function App() {
       setRoute(r)
       scrollTo({ top: 0 })
     }
-    addEventListener('popstate', onPop); document.addEventListener('click', onClick)
-    return () => { removeEventListener('popstate', onPop); document.removeEventListener('click', onClick) }
+    // Une vue qui change elle-même l'adresse (fiche candidat) le signale pour mettre à jour le titre et la langue.
+    const onRoute = () => setRoute(routeOf(location.pathname) || ROUTES[0])
+    addEventListener('popstate', onPop); document.addEventListener('click', onClick); addEventListener('routechange', onRoute)
+    return () => { removeEventListener('popstate', onPop); document.removeEventListener('click', onClick); removeEventListener('routechange', onRoute) }
   }, [])
   useEffect(() => setMeta(route), [route, lang])
 
@@ -121,7 +125,7 @@ export default function App() {
       )}
       <main key={lang}>
         <h1 className="sr-only">{rTitle(route)}</h1>
-        <Boundary key={route.id}><Suspense fallback={<div className="card loading">{T('Chargement…', 'Loading…')}</div>}><View /></Suspense></Boundary>
+        <Boundary key={route.id}><Suspense fallback={<div className="card loading">{T('Chargement…', 'Loading…')}</div>}><View route={route} /></Suspense></Boundary>
       </main>
       <footer className="disclaimer"><span>{T('Site indépendant, sans lien avec un parti. Projections illustratives, non des prévisions. Hébergeur : Vercel Inc.', 'Independent site, not affiliated with any party. Projections are illustrative, not forecasts. Host: Vercel Inc.')}</span><a href="https://www.linkedin.com/in/thibaultmaillet/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true" style={{ verticalAlign: '-1px', marginRight: 4 }}><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Contact</a></footer>
       <Analytics />

@@ -8,7 +8,9 @@ Elle prépare une pull request ; rien n'est publié tant que Thibault ne l'a pas
 - `src/data/election2027.js` : données des partis (mesures, montants, analyses, sources, date `checked`).
 - `src/data/election2027.en.js` : textes anglais, mêmes clés (nom, détail et signalement de chaque mesure, notes des analyses).
 - `src/data/sourcesEn.js` : libellé anglais de chaque nouvelle source (clé = libellé français exact).
-- `src/lib/polls.js` (`DECLARED`) et `src/lib/usePhotos.js` (`TITLES`) : à compléter pour un nouveau candidat.
+- Pour un nouveau candidat : `src/lib/polls.js` (`DECLARED`), `src/lib/usePhotos.js` (`TITLES`), `src/routes.js` (`CANDIDATES`,
+  qui donne l'adresse /presidentielle-2027/<nom> de sa fiche), puis `npm run og` pour son image de partage
+  (ne garder que les images og-presidentielle* et og-<nom>*, annuler les autres).
 
 ## Ce qu'on cherche, pour chaque candidat
 

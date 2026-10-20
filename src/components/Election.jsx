@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { baseline, governmentPlan, parties, reviewCredibility, reviewsOf, RULE, ORDER, SCORED, SOURCES, KIND, FIRST_YEAR_SHARE } from '../data/election2027.js'
 import { pName, pPosition, pRole, pDocument, pHeadline, pGrowthNote, pMeasuresNote, pPledges, unscoredText, ageOf, mName, mDetail, mFlag, ruleLabel, ruleNote, kindLabel, govLabel, extLabel, reviewLabel, reviewBy, reviewNoteText } from '../data/electionText.js'
 import { project, interpolate, YEARS } from '../lib/projection.js'
@@ -10,7 +10,7 @@ import { Card, Kpi, Seg } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, signed, unitBn, dateFr } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
-import { withLang } from '../routes.js'
+import { withLang, candidatePath, CANDIDATES, ELECTION_PATH } from '../routes.js'
 import { getLang } from '../i18n.js'
 const lp = p => withLang(p, getLang())
 
@@ -34,11 +34,47 @@ const UNCH = () => T('Politique inchangée', 'Unchanged policy')
 // Coefficients de crédibilité d'un parti selon la base choisie : tel qu'annoncé, analyse centrale ou barème commun.
 const credFor = (q, basis) => basis === 'claimed' ? {} : reviewCredibility(q, basis === 'standard' ? 'standard' : q.reviewDefault)
 
-export default function Election() {
-  const [basis, setBasis] = useState('central')
-  const [growthMode, setGrowthMode] = useState('consensus')
+// ---------- Adresse partageable ----------
+// Le candidat est dans le chemin (/presidentielle-2027/le-pen), les vues dans les paramètres :
+// ?vue=annonce|bareme (comparaison), ?croissance=partis, ?analyse=<analyse ou « annonce »> (fiche).
+const VUE = { claimed: 'annonce', central: null, standard: 'bareme' }
+const VUE_IN = { annonce: 'claimed', bareme: 'standard' }
+const param = k => new URLSearchParams(location.search).get(k)
+function setParams(obj) {
+  const sp = new URLSearchParams(location.search)
+  for (const [k, v] of Object.entries(obj)) v == null ? sp.delete(k) : sp.set(k, v)
+  const s = sp.toString()
+  history.replaceState(null, '', location.pathname + (s ? '?' + s : '') + location.hash)
+}
+const pidFromPath = () => CANDIDATES.find(c => location.pathname.replace(/\/+$/, '').endsWith(`${ELECTION_PATH}/${c.slug}`))?.id
+
+function CopyLink() {
+  const [done, setDone] = useState(false)
+  const copy = () => {
+    const ok = () => { setDone(true); setTimeout(() => setDone(false), 1800) }
+    try { navigator.clipboard.writeText(location.href).then(ok, () => {}) } catch { /* presse-papiers indisponible */ }
+  }
+  return <button className="btn copy-link" onClick={copy} title={T('Copier l’adresse de cette vue', 'Copy the link to this view')}>{done ? T('Lien copié', 'Link copied') : T('Copier le lien', 'Copy link')}</button>
+}
+
+export default function Election({ route }) {
+  const [basis, setBasisState] = useState(() => VUE_IN[param('vue')] || 'central')
+  const [growthMode, setGrowthState] = useState(() => (param('croissance') === 'partis' ? 'party' : 'consensus'))
+  const setBasis = v => { setBasisState(v); setParams({ vue: VUE[v], analyse: null }) }
+  const setGrowthMode = v => { setGrowthState(v); setParams({ croissance: v === 'party' ? 'partis' : null }) }
   const marketRate = baseline.marketRate, spreadBp = 0, multiplier = 0
-  const [pid, setPid] = useState('rn')
+  const [pid, setPidState] = useState(() => pidFromPath() || 'rn')
+  // Choisir un candidat change l'adresse (nouvelle entrée d'historique) ; l'en-tête met à jour le titre de la page.
+  const setPid = id => {
+    if (id === pid && pidFromPath() === id) return
+    setPidState(id)
+    const sp = new URLSearchParams(location.search); sp.delete('analyse')
+    const s = sp.toString()
+    history.pushState(null, '', withLang(candidatePath(id), getLang()) + (s ? '?' + s : ''))
+    dispatchEvent(new Event('routechange'))
+  }
+  // Retour arrière ou lien interne : l'adresse fait foi.
+  useEffect(() => { if (route?.candidate && route.candidate !== pid) setPidState(route.candidate) }, [route?.candidate])
   const opts = { marketRate, spreadBp, multiplier, firstYearShare: FIRST_YEAR_SHARE }
   const growthOf = q => growthMode === 'party' && q.growthClaim ? q.growthClaim : baseline.growth
 
@@ -76,7 +112,7 @@ export default function Election() {
         <Table runs={runs} base={base} basis={basis} />
       </Card>
 
-      <Card title={T('Zoom sur un programme', 'Zoom on one programme')} sub={T('Choisissez un parti', 'Choose a party')} className="group" id="deep-dive">
+      <Card title={T('Zoom sur un programme', 'Zoom on one programme')} sub={T('Choisissez un parti', 'Choose a party')} className="group" id="deep-dive" right={<CopyLink />}>
         <PartyPicker value={pid} onChange={setPid} />
         {unscored(parties[pid])
           ? <UnscoredDive key={pid} q={parties[pid]} />
@@ -359,8 +395,12 @@ function UnscoredDive({ q }) {
 }
 
 function DeepDive({ q, basis, base, opts, growth }) {
-  const [preset, setPreset] = useState(basis === 'claimed' ? 'claimed' : 'review')
-  const [reviewId, setReviewId] = useState(basis === 'standard' ? 'standard' : q.reviewDefault)
+  // Vue d'arrivée : paramètre ?analyse= de l'adresse s'il correspond à ce programme, sinon la vue de la comparaison.
+  const fromUrl = param('analyse'), known = fromUrl && reviewsOf(q).some(r => r.id === fromUrl)
+  const [preset, setPresetState] = useState(fromUrl === 'annonce' ? 'claimed' : known ? 'review' : basis === 'claimed' ? 'claimed' : 'review')
+  const [reviewId, setReviewState] = useState(known ? fromUrl : basis === 'standard' ? 'standard' : q.reviewDefault)
+  const setPreset = v => { setPresetState(v); if (v !== 'custom') setParams({ analyse: v === 'claimed' ? 'annonce' : reviewId === q.reviewDefault ? null : reviewId }) }
+  const setReviewId = v => { setReviewState(v); setParams({ analyse: v === q.reviewDefault ? null : v }) }
   const [custom, setCustom] = useState(null)
   const [open, setOpen] = useState(null)
   const reviews = reviewsOf(q)

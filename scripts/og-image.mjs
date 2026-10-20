@@ -5,6 +5,8 @@ import { Resvg } from '@resvg/resvg-js'
 import { apu } from '../src/data/apu.js'
 import { debtLatest } from '../src/data/data.js'
 import { parties, ORDER, SCORED } from '../src/data/election2027.js'
+import { EN } from '../src/data/election2027.en.js'
+import { candidateOf } from '../src/routes.js'
 
 const E = JSON.parse(fs.readFileSync('src/data/etat-series.json', 'utf8'))
 const lastOf = id => { const o = E[id].fr, y = Object.keys(o).sort().at(-1); return [y, o[y]] }
@@ -73,6 +75,22 @@ function images(en) {
   return { finances, presidentielle, etat }
 }
 
+// Une image par fiche candidat, sans chiffre (rien qui vieillisse entre deux régénérations) : nom, parti, couleur.
+function candidateImage(id, en) {
+  const q = parties[id], T = (fr, e) => (en ? e : fr), costed = q.status !== 'unscored'
+  const party = en ? EN.parties[id].name : q.name, pos = en ? EN.parties[id].position : q.position
+  const body = `<rect x="80" y="360" width="1040" height="150" rx="16" fill="${q.color}" opacity=".10"/><rect x="80" y="360" width="10" height="150" rx="4" fill="${q.color}"/>
+    <text x="120" y="425" font-size="52" font-weight="700" fill="#171a21" font-family="${font}">${esc(q.candidate)}</text>
+    <text x="120" y="478" font-size="28" fill="#66707e" font-family="${font}">${esc(`${party} (${q.short}) · ${pos}`)}</text>`
+  return card({
+    section: T('Présidentielle 2027', '2027 election'),
+    line1: costed ? T('Programme chiffré, analyses indépendantes ligne par ligne :', 'Costed programme, line-by-line independent reviews:') : T('Profil et engagements principaux :', 'Profile and main pledges:'),
+    line2: costed ? T('effet sur le déficit et la dette jusqu’en 2032', 'effect on the deficit and debt to 2032') : T('aucun chiffrage publié par le candidat', 'no costing published by the candidate'),
+    body,
+    src: T('Sources : programme du parti, analyses indépendantes, Eurostat', 'Sources: party programme, independent reviews, Eurostat'),
+  })
+}
+
 const png = (svg, width) => new Resvg(svg, { fitTo: { mode: 'width', value: width }, font: { loadSystemFonts: true } }).render().asPng()
 for (const en of [false, true]) {
   for (const [sec, svg] of Object.entries(images(en))) {
@@ -81,6 +99,12 @@ for (const en of [false, true]) {
     console.log(f)
   }
 }
+
+for (const en of [false, true]) for (const id of ORDER) {
+  const f = `public/og-${candidateOf(id).slug}${en ? '-en' : ''}.png`
+  fs.writeFileSync(f, png(candidateImage(id, en), 1200))
+}
+console.log(`fiches candidats : ${ORDER.length * 2} images`)
 
 const flag = '<rect x="3" y="8" width="8.67" height="16" fill="#000091"/><rect x="11.67" y="8" width="8.67" height="16" fill="#ffffff" stroke="#c7ccd4" stroke-width=".5"/><rect x="20.33" y="8" width="8.67" height="16" fill="#e1000f"/>'
 // Favicon : fond transparent. L'icône iOS garde un fond blanc (iOS n'accepte pas la transparence).

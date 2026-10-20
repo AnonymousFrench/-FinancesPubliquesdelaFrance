@@ -3,10 +3,10 @@
 // plus sitemap.xml, robots.txt et 404.html.
 // Adresse du site : variable SITE_URL, sinon le domaine de production Vercel, sinon une valeur par défaut.
 import fs from 'node:fs'
-import { ROUTES, SITE_NAME, withLang } from '../src/routes.js'
+import { ROUTES, SITE_NAME, withLang, CANDIDATE_ROUTES, candidateOf } from '../src/routes.js'
 import { apu } from '../src/data/apu.js'
 import { debtLatest, aft, financing2026 } from '../src/data/data.js'
-import { parties, ORDER } from '../src/data/election2027.js'
+import { parties, ORDER, SOURCES } from '../src/data/election2027.js'
 import { average } from '../src/lib/polls.js'
 
 const SITE = (process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'https://www.etatdesfinances.fr')).replace(/\/$/, '')
@@ -56,6 +56,7 @@ const FACTS = {
     `Taux de l’OAT à 10 ans : ${nf(aft.spot10.v, 2)} % au ${aft.spot10.date}.`,
   ],
   presidentielle: ORDER.map(id => { const q = parties[id]; return `${q.candidate} (${q.name}) : ${q.headline.slice(0, 2).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}.` }),
+  // Fiche candidat : bandeau chiffré, présentation du chiffrage et sources (texte du parti, pas de sondage).
   // Pas de chiffres de sondage dans le HTML statique : il resterait servi pendant la période de réserve.
   sondages: [`Moyenne des sondages ${avg.n ? `de ${avg.n} instituts ` : ''}mise à jour en direct, hypothèses de second tour et dynamique de campagne.`],
 }
@@ -65,7 +66,9 @@ const jsonld = (r, en) => JSON.stringify({
   '@graph': [
     { '@type': 'WebSite', '@id': `${SITE}/#site`, url: `${SITE}/`, name: SITE_NAME, inLanguage: 'fr-FR' },
     { '@type': 'WebPage', '@id': `${SITE}${withLang(r.path, en ? 'en' : 'fr')}#page`, url: `${SITE}${withLang(r.path, en ? 'en' : 'fr')}`, name: en ? r.en.title : r.title, description: en ? r.en.description : r.description, inLanguage: en ? 'en' : 'fr-FR', isPartOf: { '@id': `${SITE}/#site` }, dateModified: today,
-      breadcrumb: { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: SITE_NAME, item: `${SITE}/` }, ...(r.path === '/' ? [] : [{ '@type': 'ListItem', position: 2, name: en ? r.en.label : r.label, item: `${SITE}${withLang(r.path, en ? 'en' : 'fr')}` }])] } },
+      breadcrumb: { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: SITE_NAME, item: `${SITE}/` },
+        ...(r.path === '/' ? [] : [{ '@type': 'ListItem', position: 2, name: en ? r.en.label : r.label, item: `${SITE}${withLang(r.candidate ? '/presidentielle-2027' : r.path, en ? 'en' : 'fr')}` }]),
+        ...(r.candidate ? [{ '@type': 'ListItem', position: 3, name: candidateOf(r.candidate).name, item: `${SITE}${withLang(r.path, en ? 'en' : 'fr')}` }] : [])] } },
     { '@type': 'Dataset', name: 'État des finances : finances publiques et indicateurs de la France', description: 'Recettes, dépenses, déficit, dette et charge d’intérêts des administrations publiques françaises, budget de l’État par mission, projections des programmes présidentiels 2027.',
       url: `${SITE}/`, inLanguage: 'fr-FR', spatialCoverage: 'France', temporalCoverage: '1995/2032',
       isBasedOn: ['https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table', 'https://www.insee.fr/fr/statistiques/series/102760712', 'https://www.aft.gouv.fr/', 'https://data.economie.gouv.fr/'],
@@ -73,13 +76,24 @@ const jsonld = (r, en) => JSON.stringify({
   ],
 }).replace(/</g, '\\u003c')
 
+// Contenu lisible d'une fiche candidat : bandeau, présentation, sources, liens vers les autres fiches.
+const candidateFacts = (r, en) => {
+  const q = parties[r.candidate]
+  const items = (en ? [] : q.headline.map(([k, v]) => `<li>${esc(k)} : ${esc(v)}</li>`)).join('')
+  const doc = en ? '' : `<p>${esc(q.document)}</p>`
+  const src = q.src.filter(k => SOURCES[k]).map(k => `<li><a href="${esc(SOURCES[k].url)}" rel="noopener">${esc(SOURCES[k].label)}</a></li>`).join('')
+  const others = CANDIDATE_ROUTES.filter(x => x.candidate !== r.candidate).map(x => `<a href="${withLang(x.path, en ? 'en' : 'fr')}">${esc(candidateOf(x.candidate).name)}</a>`).join(' · ')
+  return `<ul>${items}</ul>${doc}${src ? `<h2>${en ? 'Sources' : 'Sources'}</h2><ul>${src}</ul>` : ''}<p>${en ? 'Other candidates' : 'Autres candidats'} : ${others}</p>`
+}
+const candidateLinks = en => `<h2>${en ? 'Candidates' : 'Candidats'}</h2><ul>${CANDIDATE_ROUTES.map(x => `<li><a href="${withLang(x.path, en ? 'en' : 'fr')}">${esc(en ? x.en.title : x.title)}</a></li>`).join('')}</ul>`
+
 const prerender = (r, en) => `
 <div class="app prerender"><header><a href="${withLang('/', en ? 'en' : 'fr')}" class="brand">${SITE_NAME}</a></header>
 <nav aria-label="${en ? 'Sections' : 'Rubriques'}">${ROUTES.map(x => `<a href="${withLang(x.path, en ? 'en' : 'fr')}"${x.id === r.id ? ' class="on"' : ''}>${esc(en ? x.en.label : x.label)}</a>`).join('')}</nav>
-<main><h1>${esc(en ? r.en.title : r.title)}</h1><p>${esc(en ? r.en.description : r.description)}</p>${en ? '' : `<ul>${(FACTS[r.id] || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>`}</main></div>`
+<main><h1>${esc(en ? r.en.title : r.title)}</h1><p>${esc(en ? r.en.description : r.description)}</p>${r.candidate ? candidateFacts(r, en) : `${en ? '' : `<ul>${(FACTS[r.id] || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>`}${r.id === 'presidentielle' ? candidateLinks(en) : ''}`}</main></div>`
 
 const tpl = fs.readFileSync('dist/index.html', 'utf8')
-const ogOf = (r, en) => `/og${r.section === 'finances' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
+const ogOf = (r, en) => r.candidate ? `/og-${candidateOf(r.candidate).slug}${en ? '-en' : ''}.png` : `/og${r.section === 'finances' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
 const page = (r, { noindex = false, en = false } = {}) => {
   const url = `${SITE}${withLang(r.path, en ? 'en' : 'fr')}`
   const t = en ? r.en.title : r.title, d = en ? r.en.description : r.description
@@ -108,11 +122,16 @@ for (const r of ROUTES) {
   fs.writeFileSync(r.path === '/' ? 'dist/index.html' : `dist${r.path}.html`, page(r))
   fs.writeFileSync(r.path === '/' ? 'dist/en.html' : `dist/en${r.path}.html`, page(r, { en: true }))
 }
+fs.mkdirSync('dist/presidentielle-2027', { recursive: true }); fs.mkdirSync('dist/en/presidentielle-2027', { recursive: true })
+for (const r of CANDIDATE_ROUTES) {
+  fs.writeFileSync(`dist${r.path}.html`, page(r))
+  fs.writeFileSync(`dist/en${r.path}.html`, page(r, { en: true }))
+}
 fs.writeFileSync('dist/404.html', page({ ...ROUTES[0], title: 'Page introuvable' }, { noindex: true }))
 fs.writeFileSync('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${ROUTES.flatMap(r => ['fr', 'en'].map(l => `  <url><loc>${SITE}${withLang(r.path, l)}</loc><xhtml:link rel="alternate" hreflang="fr" href="${SITE}${r.path}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${withLang(r.path, 'en')}"/><lastmod>${today}</lastmod><changefreq>${r.id === 'sondages' ? 'daily' : 'weekly'}</changefreq><priority>${r.path === '/' ? '1.0' : r.id === 'presidentielle' || r.id === 'sondages' ? '0.9' : '0.7'}</priority></url>`)).join('\n')}
+${[...ROUTES, ...CANDIDATE_ROUTES].flatMap(r => ['fr', 'en'].map(l => `  <url><loc>${SITE}${withLang(r.path, l)}</loc><xhtml:link rel="alternate" hreflang="fr" href="${SITE}${r.path}"/><xhtml:link rel="alternate" hreflang="en" href="${SITE}${withLang(r.path, 'en')}"/><lastmod>${today}</lastmod><changefreq>${r.id === 'sondages' ? 'daily' : 'weekly'}</changefreq><priority>${r.path === '/' ? '1.0' : r.candidate ? '0.8' : r.id === 'presidentielle' || r.id === 'sondages' ? '0.9' : '0.7'}</priority></url>`)).join('\n')}
 </urlset>
 `)
 fs.writeFileSync('dist/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`)
-console.log(`seo : ${ROUTES.length} pages × 2 langues, sitemap et robots.txt pour ${SITE}`)
+console.log(`seo : ${ROUTES.length} pages et ${CANDIDATE_ROUTES.length} fiches candidats × 2 langues, sitemap et robots.txt pour ${SITE}`)

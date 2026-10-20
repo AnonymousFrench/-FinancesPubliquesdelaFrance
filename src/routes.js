@@ -74,7 +74,46 @@ export const langOf = path => (/^\/en(\/|$)/.test(path) ? 'en' : 'fr')
 export const stripLang = path => path.replace(/^\/en(?=\/|$)/, '') || '/'
 export const withLang = (path, lang) => (lang === 'en' ? '/en' + (path === '/' ? '' : path) : path)
 
+// ---------- Fiches candidats : une adresse par candidat, /presidentielle-2027/<nom> ----------
+// Liste courte pour ne pas charger les données des programmes dans la page d'accueil ; scripts/check-election.mjs
+// vérifie qu'elle correspond à ORDER et aux noms de src/data/election2027.js.
+export const ELECTION_PATH = '/presidentielle-2027'
+export const CANDIDATES = [
+  { id: 'lo', slug: 'arthaud', name: 'Nathalie Arthaud', party: 'Lutte ouvrière', partyEn: 'Lutte ouvrière', costed: false },
+  { id: 'pcf', slug: 'roussel', name: 'Fabien Roussel', party: 'Parti communiste français', partyEn: 'French Communist Party', costed: false },
+  { id: 'lfi', slug: 'melenchon', name: 'Jean-Luc Mélenchon', party: 'La France insoumise', partyEn: 'La France insoumise', costed: true },
+  { id: 'eco', slug: 'tondelier', name: 'Marine Tondelier', party: 'Les Écologistes', partyEn: 'Les Écologistes (Greens)', costed: true },
+  { id: 'ps', slug: 'glucksmann', name: 'Raphaël Glucksmann', party: 'PS – Place publique', partyEn: 'PS – Place publique', costed: true },
+  { id: 're', slug: 'attal', name: 'Gabriel Attal', party: 'Renaissance', partyEn: 'Renaissance', costed: true },
+  { id: 'hor', slug: 'philippe', name: 'Édouard Philippe', party: 'Horizons', partyEn: 'Horizons', costed: true },
+  { id: 'lr', slug: 'retailleau', name: 'Bruno Retailleau', party: 'Les Républicains', partyEn: 'Les Républicains', costed: true },
+  { id: 'ne', slug: 'lisnard', name: 'David Lisnard', party: 'Nouvelle Énergie', partyEn: 'Nouvelle Énergie', costed: true },
+  { id: 'dlf', slug: 'dupont-aignan', name: 'Nicolas Dupont-Aignan', party: 'Debout la France', partyEn: 'Debout la France', costed: true },
+  { id: 'rn', slug: 'le-pen', name: 'Marine Le Pen', party: 'Rassemblement national', partyEn: 'National Rally', costed: true },
+  { id: 'rec', slug: 'zemmour', name: 'Éric Zemmour', party: 'Reconquête', partyEn: 'Reconquête', costed: true },
+]
+export const candidateOf = id => CANDIDATES.find(c => c.id === id)
+export const candidatePath = id => `${ELECTION_PATH}/${candidateOf(id).slug}`
+const candidateRoute = c => {
+  const base = ROUTES.find(r => r.id === 'presidentielle')
+  const enName = c.name, poss = /s$/.test(enName) ? '’' : '’s'
+  return {
+    ...base, path: candidatePath(c.id), candidate: c.id,
+    title: c.costed ? `Programme de ${c.name} pour 2027 : chiffrage et impact sur la dette` : `${c.name}, présidentielle 2027 : programme et engagements`,
+    description: c.costed
+      ? `Le programme présidentiel 2027 de ${c.name} (${c.party}) passé au même modèle que les autres candidats : mesures chiffrées, analyses indépendantes ligne par ligne, effet sur le déficit et la dette jusqu’en 2032.`
+      : `${c.name} (${c.party}) à la présidentielle 2027 : profil, engagements principaux et pourquoi le programme n’est pas chiffré, à côté des autres candidats.`,
+    en: { ...base.en,
+      title: c.costed ? `${enName}${poss} 2027 programme: costing and impact on the debt` : `${enName}, 2027 election: programme and pledges`,
+      description: c.costed
+        ? `${enName}${poss} 2027 presidential programme (${c.partyEn}) run through the same model as the other candidates: costed measures, line-by-line independent reviews, effect on the deficit and debt to 2032.`
+        : `${enName} (${c.partyEn}) in the 2027 presidential election: profile, main pledges and why the programme is not costed, alongside the other candidates.` },
+  }
+}
+export const CANDIDATE_ROUTES = CANDIDATES.map(candidateRoute)
+
 export const routeOf = path => {
   const p = stripLang(path).replace(/\/+$/, '') || '/'
+  if (p.startsWith(ELECTION_PATH + '/')) return CANDIDATE_ROUTES.find(r => r.path === p)
   return ROUTES.find(r => r.path === p) || (p === '/carte' ? ROUTES[0] : undefined)
 }

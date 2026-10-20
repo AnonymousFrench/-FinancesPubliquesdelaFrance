@@ -35,4 +35,10 @@ for (const id of SCORED) {
   console.log(`${id.padEnd(4)} net 2032 annoncé ${net({}).toFixed(1).padStart(7)} | synthèse ${net(rv).toFixed(1).padStart(7)} | déficit ${r.deficitPct.toFixed(2)} % dette ${r.debtPct.toFixed(1)} %`)
 }
 for (const id of ORDER) { const d = parties[id].checked; if (!d) err(id, 'checked'); else if ((Date.now() - new Date(d)) / 864e5 > STALE_DAYS) console.log(`${id} : vérifié le ${d}, plus de ${STALE_DAYS} jours`) }
+const { CANDIDATES } = await import(new URL('../src/routes.js', import.meta.url).href)
+if (CANDIDATES.map(c => c.id).join() !== ORDER.join()) err('routes.js CANDIDATES ne suit pas ORDER')
+for (const c of CANDIDATES) { const q = parties[c.id]; if (!q) continue
+  if (c.name !== q.candidate) err(c.id, 'nom dans routes.js', c.name, '≠', q.candidate)
+  if (c.party !== q.name) err(c.id, 'parti dans routes.js', c.party, '≠', q.name)
+  if (c.costed !== (q.status !== 'unscored')) err(c.id, 'costed dans routes.js') }
 if (bad) process.exit(1)
