@@ -253,7 +253,6 @@ export default function Immigration() {
   const pl = data.permits.years.at(-1)
   return (
     <>
-      <Pyramid />
       <div className="kpis k4">
         <Kpi label={T(`Immigrés en ${y1}`, `Immigrants in ${y1}`)} value={mill(S.total[y1])} sub={T(`${pct(S.total[y1] / S.pop[y1] * 100, 1)} de la population`, `${pct(S.total[y1] / S.pop[y1] * 100, 1)} of the population`)} />
         <Kpi label={T(`Immigrés en ${y0}`, `Immigrants in ${y0}`)} value={mill(S.total[y0])} sub={T(`${pct(S.total[y0] / S.pop[y0] * 100, 1)} de la population`, `${pct(S.total[y0] / S.pop[y0] * 100, 1)} of the population`)} />
@@ -261,6 +260,7 @@ export default function Immigration() {
         <Kpi label={T(`Premiers titres de séjour en ${pl}`, `First residence permits in ${pl}`)} value={num(data.permits.total[pl])} sub={T('ressortissants hors UE', 'non-EU nationals')} />
       </div>
       <OriginMap />
+      <Pyramid />
       <div className="grid2">
         <Continents />
         <Permits />
