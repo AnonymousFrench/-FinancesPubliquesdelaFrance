@@ -1,0 +1,10 @@
+file:///home/runner/work/-FinancesPubliquesdelaFrance/-FinancesPubliquesdelaFrance/scripts/build-pyramid.mjs:51
+const tot = y => data[y].M.reduce((s, v) => s + v, 0) + data[y].F.reduce((s, v) => s + v, 0)
+                         ^
+
+TypeError: Cannot read properties of undefined (reading 'M')
+    at tot (file:///home/runner/work/-FinancesPubliquesdelaFrance/-FinancesPubliquesdelaFrance/scripts/build-pyramid.mjs:51:26)
+    at file:///home/runner/work/-FinancesPubliquesdelaFrance/-FinancesPubliquesdelaFrance/scripts/build-pyramid.mjs:52:181
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+
+Node.js v22.23.3
