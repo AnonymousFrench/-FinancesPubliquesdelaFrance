@@ -54,11 +54,11 @@ export const ROUTES = [
     description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, heures travaillées, écart de taux avec l’Allemagne, défense, démographie, immigration, pauvreté, inégalités, énergie et climat.',
     en: { label: 'Key metrics', title: 'State of France: growth, jobs, population, immigration and energy since 1960',
       description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, hours worked, spread over Germany, defence, population, immigration, poverty, inequality, energy and climate.' } },
-  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/immigration', label: 'Population',
-    title: 'Immigration en France : d’où viennent les immigrés depuis 1968',
-    description: 'Carte des pays de naissance des immigrés vivant en France de 1968 à 2024 (Insee), premiers titres de séjour par nationalité et par motif depuis 2008 (Eurostat), répartition par continent.',
-    en: { label: 'Population', title: 'Immigration in France: where immigrants have come from since 1968',
-      description: 'Map of the countries of birth of immigrants living in France from 1968 to 2024 (Insee), first residence permits by citizenship and reason since 2008 (Eurostat), split by continent.' } },
+  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/population', label: 'Population',
+    title: 'Population de la France : pyramide des âges depuis 1960 et origines des immigrés',
+    description: 'Pyramide des âges animée de 1960 aux projections 2070 (Eurostat), carte des pays de naissance des immigrés depuis 1968 (Insee), premiers titres de séjour par nationalité et par motif (Eurostat).',
+    en: { label: 'Population', title: 'France’s population: age pyramid since 1960 and where immigrants come from',
+      description: 'Animated age pyramid from 1960 to 2070 projections (Eurostat), map of immigrants’ countries of birth since 1968 (Insee), first residence permits by citizenship and reason (Eurostat).' } },
 ]
 
 // Libellés dans la langue courante.
@@ -71,7 +71,7 @@ export const sLabel = s => T(s.label, s.en)
 export const ALIAS = {
   overview: '/', 'vue-ensemble': '/', synthese: '/', map: '/', carte: '/', revenue: '/recettes', recettes: '/recettes', spending: '/depenses', depenses: '/depenses',
   debt: '/dette', dette: '/dette', financing: '/financement', financement: '/financement',
-  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france', immigration: '/etat-de-la-france/immigration',
+  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france', immigration: '/etat-de-la-france/population', population: '/etat-de-la-france/population',
 }
 
 // Langue portée par l'adresse : /en/... pour l'anglais, sans préfixe pour le français.
@@ -120,5 +120,6 @@ export const CANDIDATE_ROUTES = CANDIDATES.map(candidateRoute)
 export const routeOf = path => {
   const p = stripLang(path).replace(/\/+$/, '') || '/'
   if (p.startsWith(ELECTION_PATH + '/')) return CANDIDATE_ROUTES.find(r => r.path === p)
+  if (p === '/etat-de-la-france/immigration') return ROUTES.find(r => r.id === 'immigration') // ancienne adresse
   return ROUTES.find(r => r.path === p) || (p === '/carte' ? ROUTES[0] : undefined)
 }

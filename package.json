@@ -12,7 +12,7 @@
     "preview": "vite preview --host",
     "og": "node scripts/og-image.mjs",
     "etat": "node scripts/fetch-etat.mjs",
-    "immig": "node scripts/build-immig.mjs"
+    "immig": "node scripts/build-immig.mjs && node scripts/build-pyramid.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

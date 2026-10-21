@@ -4,6 +4,8 @@ import map from '../data/immig-map.json'
 import etatSeries from '../data/etat-series.json'
 import { Card, Kpi, Seg } from './ui.jsx'
 import { useWidth } from '../lib/charts.jsx'
+import { lerp, useTimeline, Timeline } from '../lib/timeline.jsx'
+import Pyramid from './Pyramid.jsx'
 import { fmt, pct } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
 
@@ -56,48 +58,16 @@ const KEYF = Object.fromEntries(Object.entries(MODES).map(([mode, m]) => {
   const ty = Object.keys(m.total).map(Number).sort((a, b) => a - b)
   return [mode, { years: m.years, vals, ty, tv: ty.map(y => m.total[y]) }]
 }))
-const lerp = (xs, vs, t) => {
-  if (t <= xs[0]) return vs[0]
-  for (let i = 0; i < xs.length - 1; i++) if (t <= xs[i + 1]) { const f = (t - xs[i]) / (xs[i + 1] - xs[i]); return vs[i] * (1 - f) + vs[i + 1] * f }
-  return vs.at(-1)
-}
-const nearest = (xs, t) => xs.reduce((b, y) => Math.abs(y - t) < Math.abs(b - t) ? y : b, xs[0])
-
 function OriginMap() {
   const [mode, setMode] = useState('stock')
   const [view, setView] = useState('world')
   const K = KEYF[mode], ys = K.years, y0 = ys[0], y1 = ys.at(-1)
-  const [t, setT] = useState(y1)
-  const [play, setPlay] = useState(false)
+  const { t, setT, play, setPlay } = useTimeline(ys)
   const [hover, setHover] = useState(null) // { c, x, y }
   const wrap = useRef(null)
-  const track = useRef(null)
-  const [tw, setTw] = useState(600)
-  useEffect(() => {
-    const ro = new ResizeObserver(([e]) => setTw(e.contentRect.width || 600))
-    ro.observe(track.current); return () => ro.disconnect()
-  }, [])
   const year = Math.round(t)
 
   useEffect(() => { setT(KEYF[mode].years.at(-1)); setPlay(false) }, [mode])
-  // Lecture : le temps avance en continu, la frise entière en une dizaine de secondes.
-  useEffect(() => {
-    if (!play) return
-    let raf, last = performance.now()
-    const speed = (y1 - y0) / 11
-    const tick = now => {
-      const dt = (now - last) / 1000; last = now
-      setT(v => {
-        const n = Math.min(y1, v + dt * speed)
-        if (n >= y1) setPlay(false)
-        return n
-      })
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [play, y0, y1])
-
   const rows = useMemo(() => Object.entries(K.vals).map(([c, v]) => ({ c, v: lerp(ys, v, t) })).filter(r => r.v >= 1).sort((a, b) => b.v - a.v), [mode, t])
   const total = lerp(K.ty, K.tv, t)
   const vb = viewOf(view), k = vb[2] / map.views.world[2] // rayon constant à l'écran quand on zoome
@@ -108,18 +78,6 @@ function OriginMap() {
     setHover({ c, x: e.clientX - r.left, y: e.clientY - r.top, w: r.width })
   }
   const top = rows.slice(0, 10), topMax = top[0]?.v || 1
-  // Relâcher le curseur ou mettre en pause : retour sur l'année publiée la plus proche.
-  const snap = () => setT(v => nearest(ys, v))
-  const key = e => {
-    const i = ys.indexOf(nearest(ys, t))
-    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); setPlay(false); setT(ys[Math.min(ys.length - 1, i + 1)]) }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); setPlay(false); setT(ys[Math.max(0, i - 1)]) }
-  }
-  // Graduations : toutes les années publiées, libellées si la place le permet.
-  const pos = y => (y - y0) / (y1 - y0) * 100
-  let lastLab = -100
-  const ticks = ys.map(y => { const p = pos(y), gap = 4400 / tw, lab = p - lastLab >= gap || y === y1; if (lab) lastLab = p; return { y, p, lab: lab && (pos(y1) - p >= gap || y === y1) } })
-
   return (
     <Card title={T('D’où viennent les immigrés', 'Where immigrants come from')}
       sub={mode === 'stock'
@@ -130,18 +88,7 @@ function OriginMap() {
         <Seg small value={mode} onChange={setMode} options={[[T('Immigrés installés', 'Immigrants living in France'), 'stock'], [T('Arrivées : premiers titres de séjour', 'Arrivals: first residence permits'), 'permits']]} />
         <Seg small value={view} onChange={setView} options={[[T('Monde', 'World'), 'world'], [T('Europe et Méditerranée', 'Europe and Mediterranean'), 'eur']]} />
       </div>
-      <div className="im-time">
-        <button type="button" className="im-play" onClick={() => { if (play) { setPlay(false); snap() } else { if (t >= y1) setT(y0); setPlay(true) } }} aria-label={play ? T('Pause', 'Pause') : T('Lecture', 'Play')}>
-          {play ? <svg viewBox="0 0 12 12" width="12" height="12"><rect x="2" y="1.5" width="3" height="9" rx="1" fill="currentColor" /><rect x="7" y="1.5" width="3" height="9" rx="1" fill="currentColor" /></svg>
-            : <svg viewBox="0 0 12 12" width="12" height="12"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor" /></svg>}
-        </button>
-        <div className="im-track" ref={track}>
-          <input type="range" min={y0} max={y1} step="any" value={t} aria-label={T('Année', 'Year')} aria-valuetext={String(year)}
-            onChange={e => { setPlay(false); setT(+e.target.value) }} onPointerUp={snap} onTouchEnd={snap} onKeyDown={key} />
-          <div className="im-ticks" aria-hidden="true">{ticks.map(x => <span key={x.y} style={{ left: `${x.p}%` }} className={x.lab ? 'lab' : ''}><i />{x.lab && <b>{x.y}</b>}</span>)}</div>
-        </div>
-        <span className="im-year">{year}</span>
-      </div>
+      <Timeline years={ys} t={t} setT={setT} play={play} setPlay={setPlay} />
       <div className="im-grid">
         <div className="im-map" ref={wrap} onMouseLeave={() => setHover(null)}>
           <svg viewBox={vb.join(' ')} role="img" aria-label={T(`Carte des pays d’origine en ${year}`, `Map of countries of origin in ${year}`)}>
@@ -306,6 +253,7 @@ export default function Immigration() {
   const pl = data.permits.years.at(-1)
   return (
     <>
+      <Pyramid />
       <div className="kpis k4">
         <Kpi label={T(`Immigrés en ${y1}`, `Immigrants in ${y1}`)} value={mill(S.total[y1])} sub={T(`${pct(S.total[y1] / S.pop[y1] * 100, 1)} de la population`, `${pct(S.total[y1] / S.pop[y1] * 100, 1)} of the population`)} />
         <Kpi label={T(`Immigrés en ${y0}`, `Immigrants in ${y0}`)} value={mill(S.total[y0])} sub={T(`${pct(S.total[y0] / S.pop[y0] * 100, 1)} de la population`, `${pct(S.total[y0] / S.pop[y0] * 100, 1)} of the population`)} />

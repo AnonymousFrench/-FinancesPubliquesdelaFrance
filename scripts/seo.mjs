@@ -26,9 +26,12 @@ const fact = (lbl, id, unit, d = 1) => { const [y, v] = lastOf(id); return `${lb
 // Contenu statique par rubrique : quelques faits clés, en texte, pour les moteurs et les aperçus.
 const IM = JSON.parse(fs.readFileSync('src/data/immig.json', 'utf8'))
 const imTop = y => Object.entries(IM.stock.by).filter(([, o]) => o[y]).sort((a, b) => b[1][y] - a[1][y]).slice(0, 5).map(([c, o]) => `${IM.places[c].fr} ${nf(o[y] / 1000, 0)} 000`).join(', ')
+const PY = JSON.parse(fs.readFileSync('src/data/pyramid.json', 'utf8'))
+const pyOld = y => { const d = PY.data[y], t = d.M.map((v, k) => v + d.F[k]), n = t.reduce((a, b) => a + b, 0); return t.slice(65).reduce((a, b) => a + b, 0) / n * 100 }
 const imY0 = IM.stock.years[0], imY1 = IM.stock.years.at(-1), imP = IM.permits.years.at(-1)
 const FACTS = {
   immigration: [
+    `Part des 65 ans et plus : ${nf(pyOld(PY.years[0]), 1)} % en ${PY.years[0]}, ${nf(pyOld(PY.lastObs), 1)} % en ${PY.lastObs}, ${nf(pyOld(PY.years.at(-1)), 1)} % en ${PY.years.at(-1)} selon la projection d’Eurostat.`,
     `Immigrés en ${imY1} : ${nf(IM.stock.total[imY1] / 1e6, 1)} millions, soit ${nf(IM.stock.total[imY1] / IM.stock.pop[imY1] * 100, 1)} % de la population (${nf(IM.stock.total[imY0] / 1e6, 1)} millions en ${imY0}).`,
     `Principaux pays de naissance en ${imY1} : ${imTop(imY1)}.`,
     `Principaux pays de naissance en ${imY0} : ${imTop(imY0)}.`,
