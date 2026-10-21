@@ -7,18 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: |
-          mkdir -p data-raw/immig
-          cd data-raw/immig
-          curl -sSL -A "Mozilla/5.0" -o insee_pays_1968_2019.xlsx https://www.insee.fr/fr/statistiques/fichier/6478091/pays_naissance_detaille_1968_2019.xlsx || true
-          curl -sSL -A "Mozilla/5.0" -o insee_essentiel.xlsx https://www.insee.fr/fr/statistiques/fichier/3633212/Essentiel_Immigres-Etrangers_donnees.xlsx || true
-          E=https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data
-          curl -sSL -o es_pop3ctb.json "$E/migr_pop3ctb?geo=FR&sex=T&age=TOTAL&unit=NR&format=JSON" || true
-          curl -sSL -o es_imm3ctb.json "$E/migr_imm3ctb?geo=FR&sex=T&age=TOTAL&agedef=COMPLET&unit=NR&format=JSON" || true
-          curl -sSL -o es_resfirst.json "$E/migr_resfirst?geo=FR&reason=TOTAL&duration=TOTAL&unit=PER&format=JSON" || true
-          curl -sSL -o es_resfirst_reason.json "$E/migr_resfirst?geo=FR&citizen=EXT_EU27_2020&duration=TOTAL&unit=PER&format=JSON" || true
-          ls -la
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/build-immig.mjs 2>&1 | tee data-raw/immig/log.txt || true
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add data-raw/immig && git commit -m "tmp: données immigration brutes" && git push
+          git add -A data-raw/immig src/data && git commit -m "tmp: test build-immig" && git push
