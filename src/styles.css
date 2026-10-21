@@ -395,14 +395,20 @@ a.ind:hover { border-color: #c7ccd4 }
 /* Page Immigration : carte des origines */
 .im-ctl { display: flex; flex-wrap: wrap; gap: 8px 12px; justify-content: space-between; margin-bottom: 10px }
 .im-time { display: flex; align-items: center; gap: 10px; margin-bottom: 6px }
-.im-time input[type=range] { flex: 1; accent-color: var(--tx); min-width: 0 }
+.im-track { flex: 1; min-width: 0; padding-bottom: 16px; position: relative }
+.im-track input[type=range] { width: 100%; margin: 0; accent-color: var(--tx); display: block }
+.im-ticks { position: absolute; left: 8px; right: 8px; top: 20px; height: 14px }
+.im-ticks span { position: absolute; top: 0; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center }
+.im-ticks i { width: 1px; height: 4px; background: #b6bdc7 } .im-ticks .lab i { height: 6px; background: var(--mut) }
+.im-ticks b { font-size: 10.5px; font-weight: 400; color: var(--mut); line-height: 13px; white-space: nowrap; font-variant-numeric: tabular-nums }
 .im-play { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--soft); color: var(--tx); display: grid; place-items: center; cursor: pointer; flex: none }
 .im-play:hover { border-color: var(--mut) }
 .im-year { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 52px; text-align: right }
 .im-grid { display: grid; grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr); gap: 18px; align-items: start }
 .im-map { position: relative; min-width: 0 }
 .im-map > svg { width: 100%; height: auto; display: block; background: #f3f6fa; border-radius: 8px }
-.im-map circle { cursor: pointer; transition: r .45s ease }
+.im-map circle { cursor: pointer }
+.im-wm { fill: #14181f; opacity: .07; font-weight: 800; font-variant-numeric: tabular-nums; pointer-events: none }
 .im-land { fill: #dfe4ea } .im-borders { fill: none; stroke: #f3f6fa }
 .im-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-size: 12px; color: var(--mut); margin-top: 8px }
 .im-legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: -1px }

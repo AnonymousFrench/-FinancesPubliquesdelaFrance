@@ -42,38 +42,82 @@ const viewOf = v => {
   return [x + w / 2 - W / 2, y, W, h]
 }
 
+// Interpolation linéaire entre deux années publiées, pour une frise continue.
+// Dernière année du stock : l'Insee ne détaille que les principaux pays ; les autres gardent leur dernière valeur connue (2019).
+const KEYF = Object.fromEntries(Object.entries(MODES).map(([mode, m]) => {
+  const vals = {}
+  for (const [c, o] of Object.entries(m.by)) {
+    if (!data.places[c]) continue
+    const v = m.years.map(y => o[y] || 0), n = v.length
+    if (mode === 'stock' && !v[n - 1] && v[n - 2]) v[n - 1] = v[n - 2]
+    vals[c] = v
+  }
+  const ty = Object.keys(m.total).map(Number).sort((a, b) => a - b)
+  return [mode, { years: m.years, vals, ty, tv: ty.map(y => m.total[y]) }]
+}))
+const lerp = (xs, vs, t) => {
+  if (t <= xs[0]) return vs[0]
+  for (let i = 0; i < xs.length - 1; i++) if (t <= xs[i + 1]) { const f = (t - xs[i]) / (xs[i + 1] - xs[i]); return vs[i] * (1 - f) + vs[i + 1] * f }
+  return vs.at(-1)
+}
+const nearest = (xs, t) => xs.reduce((b, y) => Math.abs(y - t) < Math.abs(b - t) ? y : b, xs[0])
+
 function OriginMap() {
   const [mode, setMode] = useState('stock')
   const [view, setView] = useState('world')
-  const m = MODES[mode]
-  const [yi, setYi] = useState(m.years.length - 1)
+  const K = KEYF[mode], ys = K.years, y0 = ys[0], y1 = ys.at(-1)
+  const [t, setT] = useState(y1)
   const [play, setPlay] = useState(false)
   const [hover, setHover] = useState(null) // { c, x, y }
-  const year = m.years[Math.min(yi, m.years.length - 1)]
   const wrap = useRef(null)
+  const track = useRef(null)
+  const [tw, setTw] = useState(600)
+  useEffect(() => {
+    const ro = new ResizeObserver(([e]) => setTw(e.contentRect.width || 600))
+    ro.observe(track.current); return () => ro.disconnect()
+  }, [])
+  const year = Math.round(t)
 
-  useEffect(() => { setYi(MODES[mode].years.length - 1); setPlay(false) }, [mode])
+  useEffect(() => { setT(KEYF[mode].years.at(-1)); setPlay(false) }, [mode])
+  // Lecture : le temps avance en continu, la frise entière en une dizaine de secondes.
   useEffect(() => {
     if (!play) return
-    const id = setInterval(() => setYi(i => {
-      if (i >= m.years.length - 1) { setPlay(false); return i }
-      return i + 1
-    }), 850)
-    return () => clearInterval(id)
-  }, [play, m.years.length])
+    let raf, last = performance.now()
+    const speed = (y1 - y0) / 11
+    const tick = now => {
+      const dt = (now - last) / 1000; last = now
+      setT(v => {
+        const n = Math.min(y1, v + dt * speed)
+        if (n >= y1) setPlay(false)
+        return n
+      })
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [play, y0, y1])
 
-  const rows = useMemo(() => Object.entries(m.by).filter(([c, o]) => o[year] > 0 && data.places[c])
-    .map(([c, o]) => ({ c, v: o[year] })).sort((a, b) => b.v - a.v), [mode, year])
-  const total = m.total[year]
+  const rows = useMemo(() => Object.entries(K.vals).map(([c, v]) => ({ c, v: lerp(ys, v, t) })).filter(r => r.v >= 1).sort((a, b) => b.v - a.v), [mode, t])
+  const total = lerp(K.ty, K.tv, t)
   const vb = viewOf(view), k = vb[2] / map.views.world[2] // rayon constant à l'écran quand on zoome
-  const first = m.years[0]
+  const val = c => rows.find(r => r.c === c)?.v || 0
 
   const onMove = (e, c) => {
     const r = wrap.current.getBoundingClientRect()
     setHover({ c, x: e.clientX - r.left, y: e.clientY - r.top, w: r.width })
   }
-  const tipRow = hover && m.by[hover.c]
   const top = rows.slice(0, 10), topMax = top[0]?.v || 1
+  // Relâcher le curseur ou mettre en pause : retour sur l'année publiée la plus proche.
+  const snap = () => setT(v => nearest(ys, v))
+  const key = e => {
+    const i = ys.indexOf(nearest(ys, t))
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { e.preventDefault(); setPlay(false); setT(ys[Math.min(ys.length - 1, i + 1)]) }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { e.preventDefault(); setPlay(false); setT(ys[Math.max(0, i - 1)]) }
+  }
+  // Graduations : toutes les années publiées, libellées si la place le permet.
+  const pos = y => (y - y0) / (y1 - y0) * 100
+  let lastLab = -100
+  const ticks = ys.map(y => { const p = pos(y), gap = 4400 / tw, lab = p - lastLab >= gap || y === y1; if (lab) lastLab = p; return { y, p, lab: lab && (pos(y1) - p >= gap || y === y1) } })
 
   return (
     <Card title={T('D’où viennent les immigrés', 'Where immigrants come from')}
@@ -86,11 +130,15 @@ function OriginMap() {
         <Seg small value={view} onChange={setView} options={[[T('Monde', 'World'), 'world'], [T('Europe et Méditerranée', 'Europe and Mediterranean'), 'eur']]} />
       </div>
       <div className="im-time">
-        <button type="button" className="im-play" onClick={() => { if (yi >= m.years.length - 1) setYi(0); setPlay(p => !p) }} aria-label={play ? T('Pause', 'Pause') : T('Lecture', 'Play')}>
+        <button type="button" className="im-play" onClick={() => { if (play) { setPlay(false); snap() } else { if (t >= y1) setT(y0); setPlay(true) } }} aria-label={play ? T('Pause', 'Pause') : T('Lecture', 'Play')}>
           {play ? <svg viewBox="0 0 12 12" width="12" height="12"><rect x="2" y="1.5" width="3" height="9" rx="1" fill="currentColor" /><rect x="7" y="1.5" width="3" height="9" rx="1" fill="currentColor" /></svg>
             : <svg viewBox="0 0 12 12" width="12" height="12"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor" /></svg>}
         </button>
-        <input type="range" min="0" max={m.years.length - 1} step="1" value={yi} onChange={e => { setPlay(false); setYi(+e.target.value) }} aria-label={T('Année', 'Year')} />
+        <div className="im-track" ref={track}>
+          <input type="range" min={y0} max={y1} step="any" value={t} aria-label={T('Année', 'Year')} aria-valuetext={String(year)}
+            onChange={e => { setPlay(false); setT(+e.target.value) }} onPointerUp={snap} onTouchEnd={snap} onKeyDown={key} />
+          <div className="im-ticks" aria-hidden="true">{ticks.map(x => <span key={x.y} style={{ left: `${x.p}%` }} className={x.lab ? 'lab' : ''}><i />{x.lab && <b>{x.y}</b>}</span>)}</div>
+        </div>
         <span className="im-year">{year}</span>
       </div>
       <div className="im-grid">
@@ -98,6 +146,7 @@ function OriginMap() {
           <svg viewBox={vb.join(' ')} role="img" aria-label={T(`Carte des pays d’origine en ${year}`, `Map of countries of origin in ${year}`)}>
             <path d={map.land} className="im-land" />
             <path d={map.borders} className="im-borders" strokeWidth={0.5 * k} />
+            <text x={vb[0] + vb[2] * 0.02} y={vb[1] + vb[3] * 0.96} className="im-wm" fontSize={vb[3] * 0.17}>{year}</text>
             {rows.map(({ c, v }) => {
               const p = data.places[c], r = radius(mode, v) * k
               const on = hover?.c === c
@@ -106,12 +155,12 @@ function OriginMap() {
                 onMouseMove={e => onMove(e, c)} onClick={e => onMove(e, c)} />
             })}
           </svg>
-          {hover && !hover.list && tipRow && (
+          {hover && !hover.list && val(hover.c) > 0 && (
             <div className={'tip' + (hover.x > hover.w * 0.5 ? ' flip' : '')} style={{ left: hover.x, top: hover.y + 10 }}>
               <div className="tip-t">{pName(hover.c)}</div>
-              <div className="tip-r"><i style={{ background: COLOR[data.places[hover.c].c] }} /><span>{year}</span><b>{num(tipRow[year] || 0)}</b></div>
-              {total > 0 && tipRow[year] > 0 && <div className="tip-r"><i /><span>{T('Part du total', 'Share of total')}</span><b>{pct(tipRow[year] / total * 100, 1)}</b></div>}
-              {year !== first && tipRow[first] > 0 && <div className="tip-r"><i /><span>{first}</span><b>{num(tipRow[first])}</b></div>}
+              <div className="tip-r"><i style={{ background: COLOR[data.places[hover.c].c] }} /><span>{year}</span><b>{num(Math.round(val(hover.c) / 100) * 100)}</b></div>
+              {total > 0 && <div className="tip-r"><i /><span>{T('Part du total', 'Share of total')}</span><b>{pct(val(hover.c) / total * 100, 1)}</b></div>}
+              {year !== y0 && K.vals[hover.c][0] > 0 && <div className="tip-r"><i /><span>{y0}</span><b>{num(K.vals[hover.c][0])}</b></div>}
             </div>
           )}
           <div className="im-legend">
@@ -124,12 +173,12 @@ function OriginMap() {
         </div>
         <div className="im-top">
           <h4>{T(`Les 10 premiers en ${year}`, `Top 10 in ${year}`)}</h4>
-          <p className="sub">{mode === 'stock' ? T(`${mill(total)} d’immigrés au total`, `${mill(total)} immigrants in total`) : T(`${num(total)} premiers titres au total`, `${num(total)} first permits in total`)}</p>
+          <p className="sub">{mode === 'stock' ? T(`${mill(total)} d’immigrés au total`, `${mill(total)} immigrants in total`) : T(`${num(Math.round(total / 100) * 100)} premiers titres au total`, `${num(Math.round(total / 100) * 100)} first permits in total`)}</p>
           <ol>
             {top.map(({ c, v }) => (
               <li key={c} className={hover?.c === c ? 'on' : ''} onMouseEnter={() => setHover({ c, list: true })} onMouseLeave={() => setHover(null)}>
                 <span className="im-n">{pName(c)}</span>
-                <span className="im-v">{num(v)}</span>
+                <span className="im-v">{num(Math.round(v / 100) * 100)}</span>
                 <span className="im-bar"><i style={{ width: `${v / topMax * 100}%`, background: COLOR[data.places[c].c] }} /></span>
                 <span className="im-s">{pct(v / total * 100, 1)}</span>
               </li>
