@@ -89,7 +89,7 @@ export default function Election({ route }) {
 
   return (
     <>
-      <Intro onPick={pick} />
+      <Intro onPick={pick} selected={pid} />
 
       <Card title={T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')} className="group">
         <div className="ctl-row">
@@ -107,47 +107,22 @@ export default function Election({ route }) {
           'Independent review: for each programme, a line-by-line synthesis built by this page from published assessments (Institut de l’Entreprise, Terra Nova, Institut Montaigne, iFRAP, Conseil d’analyse économique, Cour des comptes, Unédic…). The same rules apply to all: costs count in full, or more when assessments find them understated; savings with no detailed measure are not retained; the others are brought down to the amounts assessments judge achievable. Details and sources are in each candidate’s deep dive.')}</p>}
 
         <Impact runs={runs} base={base} basis={basis} />
-        <Trajectories runs={runs} base={base} />
         <Size runs={runs} basis={basis} />
+        <Trajectories runs={runs} base={base} />
         <Table runs={runs} base={base} basis={basis} />
       </Card>
 
-      <Card title={T('Zoom sur un programme', 'Zoom on one programme')} sub={T('Choisissez un parti', 'Choose a party')} className="group" id="deep-dive" right={<CopyLink />}>
-        <PartyPicker value={pid} onChange={setPid} />
+      {/* Fiche du candidat choisi dans les vignettes du haut de page. */}
+      <div id="deep-dive" className="deep-dive">
         {unscored(parties[pid])
           ? <UnscoredDive key={pid} q={parties[pid]} />
           : <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />}
-      </Card>
-    </>
-  )
-}
-
-// Sélecteur de parti : grands boutons avec portrait (ou pastille aux couleurs du parti).
-function Avatar({ q, photos, size = 38 }) {
-  const ph = photos[q.candidate]
-  return ph
-    ? <img className="pk-photo" src={ph.src} alt={q.candidate} loading="lazy" width={size} height={size} />
-    : <span className="pk-badge">{q.short}</span>
-}
-
-function PartyPicker({ value, onChange }) {
-  const photos = usePhotos()
-  return (
-    <>
-      <div className="picker" role="tablist" aria-label={T('Programme à détailler', 'Programme to detail')}>
-        {LIST.map(q => (
-          <button key={q.id} role="tab" aria-selected={value === q.id} className={value === q.id ? 'on' : ''} style={{ '--pc': q.color }} onClick={() => onChange(q.id)}>
-            <Avatar q={q} photos={photos} />
-            <span className="pk-t"><b>{q.candidate}</b><em>{pName(q)}</em></span>
-          </button>
-        ))}
       </div>
-      <a className="photo-credit" href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer">{T('Photos : Wikimedia Commons', 'Photos: Wikimedia Commons')}</a>
     </>
   )
 }
 
-function Intro({ onPick }) {
+function Intro({ onPick, selected }) {
   const state = usePolls()
   const photos = usePhotos()
   const blackout = pollBlackout()
@@ -160,7 +135,7 @@ function Intro({ onPick }) {
           const p = pollOf(state.data, q.pollName)
           const v = p ? p.v : q.poll, d = p ? p.delta : q.pollDelta
           return (
-            <button key={q.id} className="cand" style={{ '--pc': q.color }} onClick={() => onPick(q.id)} title={T(`Zoom : ${q.name}`, `Zoom: ${pName(q)}`)}>
+            <button key={q.id} className={'cand' + (q.id === selected ? ' on' : '')} aria-pressed={q.id === selected} style={{ '--pc': q.color }} onClick={() => onPick(q.id)} title={T(`Voir le programme : ${q.name}`, `See the programme: ${pName(q)}`)}>
               <span className="cand-top"><span className="cand-pos">{pPosition(q)}</span>{photos[q.candidate] && <img className="cand-photo" src={photos[q.candidate].src} alt={q.candidate} loading="lazy" />}</span>
               <b className="cand-name">{q.candidate}</b>
               <span className="cand-party">{pName(q)}</span>
@@ -384,7 +359,7 @@ function Checked({ q }) {
 function UnscoredDive({ q }) {
   const u = unscoredText()
   return (
-    <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)}>
+    <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)} right={<CopyLink />}>
       <Profile q={q} />
       <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
       <p className="ctl-note"><b>{u.title}.</b> {u.text}</p>
@@ -423,7 +398,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
 
   return (
     <>
-      <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)}>
+      <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} right={<CopyLink />}>
         <Profile q={q} />
         <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
         <details className="about"><summary>{T('À propos de ce chiffrage', 'About this costing')}</summary><p className="sub">{pDocument(q)}</p></details>
@@ -563,6 +538,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
           </table>
         </div>
       </Card>
+      <Card className="src-only" src={q.src.map(S)} />
     </>
   )
 }

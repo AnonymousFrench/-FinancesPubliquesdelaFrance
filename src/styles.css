@@ -443,3 +443,5 @@ a.ind:hover { border-color: #c7ccd4 }
 .py-stats b { display: block; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.015em }
 .py-stats small { font-size: 11.5px; color: var(--mut) }
 @media (max-width: 760px) { .py-grid { grid-template-columns: minmax(0, 1fr) } .py-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 4px } .py-stats > div.py-ret-tile { grid-column: 1 / -1 } }
+.cand.on { box-shadow: 0 0 0 2px var(--pc); background: var(--soft) }
+.card.src-only .src { margin-top: 0 }
