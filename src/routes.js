@@ -54,10 +54,10 @@ export const ROUTES = [
     description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, heures travaillées, écart de taux avec l’Allemagne, défense, démographie, immigration, pauvreté, inégalités, énergie et climat.',
     en: { label: 'Key metrics', title: 'State of France: growth, jobs, population, immigration and energy since 1960',
       description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, hours worked, spread over Germany, defence, population, immigration, poverty, inequality, energy and climate.' } },
-  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/immigration', label: 'Immigration',
+  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/immigration', label: 'Population',
     title: 'Immigration en France : d’où viennent les immigrés depuis 1968',
     description: 'Carte des pays de naissance des immigrés vivant en France de 1968 à 2024 (Insee), premiers titres de séjour par nationalité et par motif depuis 2008 (Eurostat), répartition par continent.',
-    en: { label: 'Immigration', title: 'Immigration in France: where immigrants have come from since 1968',
+    en: { label: 'Population', title: 'Immigration in France: where immigrants have come from since 1968',
       description: 'Map of the countries of birth of immigrants living in France from 1968 to 2024 (Insee), first residence permits by citizenship and reason since 2008 (Eurostat), split by continent.' } },
 ]
 

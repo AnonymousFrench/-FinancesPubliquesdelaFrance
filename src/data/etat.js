@@ -42,13 +42,25 @@ export const THEMES = [
     { id: 'elecPrice', fr: 'Prix de l’électricité', en: 'Electricity price', unit: 'eur', d: 3, note: ['ménages, €/kWh toutes taxes, moyenne des deux semestres', 'households, €/kWh incl. taxes, average of both halves'], src: es('nrg_pc_204'), good: -1 },
     { id: 'rd', fr: 'Recherche (R&D)', en: 'R&D', unit: 'pct', d: 2, note: ['dépense intérieure, % du PIB', 'gross domestic spending, % of GDP'], src: es('rd_e_gerdtot'), srcUs: wb('GB.XPD.RSDV.GD.ZS'), good: 1 },
   ] },
-  { id: 'demo', fr: 'Démographie', en: 'Population', items: [
+  { id: 'demo', fr: 'Population', en: 'Population', items: [
     { id: 'pop', fr: 'Population', en: 'Population', unit: 'num', d: 1, suffix: ['millions', 'million'], note: ['France entière', 'whole of France'], src: wb('SP.POP.TOTL'), good: 0 },
     { id: 'fertility', fr: 'Fécondité', en: 'Fertility', unit: 'num', d: 2, note: ['enfants par femme', 'children per woman'], src: wb('SP.DYN.TFRT.IN'), good: 0 },
     { id: 'births', fr: 'Naissances et décès', en: 'Births and deaths', unit: 'num', d: 1, suffix: ['‰', '‰'], pair: 'deaths', note: ['pour 1 000 habitants', 'per 1,000 people'], src: wb('SP.DYN.CBRT.IN'), good: 0 },
     { id: 'lifeExp', fr: 'Espérance de vie', en: 'Life expectancy', unit: 'num', d: 1, suffix: ['ans', 'years'], note: ['à la naissance', 'at birth'], src: wb('SP.DYN.LE00.IN'), good: 1 },
     { id: 'netMig', fr: 'Solde migratoire', en: 'Net migration', unit: 'num', d: 1, suffix: ['‰', '‰'], note: ['pour 1 000 habitants, ajusté', 'per 1,000 people, adjusted'], src: es('demo_gind'), good: 0 },
     { id: 'oldDep', fr: '65 ans et plus', en: 'People aged 65+', unit: 'num', d: 0, note: ['pour 100 personnes de 15-64 ans', 'per 100 people aged 15-64'], src: wb('SP.POP.DPND.OL'), good: 0 },
+  ] },
+  // Personnes nées à l'étranger (définition Eurostat : pays de naissance), comparées aux personnes nées en France.
+  // L'Insee compte les « immigrés » (nés étrangers à l'étranger) : 7,6 millions, 11,2 % de la population en 2024.
+  { id: 'immigration', fr: 'Population née à l’étranger', en: 'Population born abroad',
+    link: { path: '/etat-de-la-france/immigration', fr: 'Carte : d’où viennent les immigrés, de 1968 à aujourd’hui →', en: 'Map: where immigrants have come from, 1968 to today →' },
+    note: ['Personnes nées à l’étranger (définition Eurostat, Français nés à l’étranger compris), comparées aux personnes nées en France (pointillés). L’Insee compte 7,6 millions d’immigrés en 2024, 11,2 % de la population, et 8,0 millions de descendants d’immigrés.', 'People born abroad (Eurostat definition, including French citizens born abroad), compared with people born in France (dotted). Insee counts 7.6 million immigrants in 2024, 11.2% of the population, and 8.0 million descendants of immigrants.'],
+    items: [
+    { id: 'immShare', fr: 'Nés à l’étranger', en: 'Born abroad', unit: 'pct', d: 1, note: ['% de la population', '% of the population'], src: es('migr_pop3ctb'), srcX: { label: 'Insee, Immigrés et descendants d’immigrés (nov. 2025)', url: 'https://www.insee.fr/fr/statistiques/8612512' }, good: 0 },
+    { id: 'immHigh', fr: 'Diplômés du supérieur', en: 'Tertiary-educated', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 25-64 ans nés à l’étranger', '% of 25-64 year-olds born abroad'], src: es('edat_lfs_9912'), good: 0 },
+    { id: 'immLow', fr: 'Sans diplôme du secondaire', en: 'Below upper secondary', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['brevet au plus, % des 25-64 ans nés à l’étranger', 'lower secondary at most, % of 25-64 year-olds born abroad'], src: es('edat_lfs_9912'), good: 0 },
+    { id: 'immEmp', fr: 'Taux d’emploi', en: 'Employment rate', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 20-64 ans nés à l’étranger', '% of 20-64 year-olds born abroad'], src: es('lfsa_ergacob'), good: 0 },
+    { id: 'immPov', fr: 'Taux de pauvreté', en: 'Poverty rate', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 18 ans et plus nés à l’étranger', '% of people 18+ born abroad'], src: es('ilc_li32'), good: 0 },
   ] },
   { id: 'social', fr: 'État et redistribution', en: 'State and redistribution', items: [
     { id: 'oat', fr: 'Taux à 10 ans (OAT)', en: '10-year yield (OAT)', unit: 'pct', d: 2, note: ['emprunt d’État, moyenne annuelle', 'government bond, annual average'], src: es('irt_lt_mcby_m'), srcUs: fred('GS10'), good: -1 },
@@ -67,18 +79,6 @@ export const THEMES = [
     { id: 'emp55', fr: 'Emploi des seniors', en: 'Older workers in jobs', unit: 'pct', d: 1, note: ['taux d’emploi des 55-64 ans', 'employment rate of 55-64 year-olds'], src: es('lfsi_emp_a'), good: 1 },
     { id: 'hours', fr: 'Heures travaillées', en: 'Hours worked', unit: 'num', d: 0, suffix: ['h/an', 'h/yr'], note: ['par personne en emploi et par an', 'per person employed, per year'], src: es('nama_10_a10_e'), good: 0 },
     { id: 'pisa', fr: 'Niveau en mathématiques', en: 'Maths performance', unit: 'num', d: 0, note: ['score PISA des élèves de 15 ans ; moyenne OCDE 2022 : 472', 'PISA score of 15-year-olds; OECD average 2022: 472'], src: oecd('PISA 2022, résultats', 'https://www.oecd.org/fr/publications/resultats-du-pisa-2022-volume-i_5a849c2a-fr.html'), good: 1, abs: true },
-  ] },
-  // Personnes nées à l'étranger (définition Eurostat : pays de naissance), comparées aux personnes nées en France.
-  // L'Insee compte les « immigrés » (nés étrangers à l'étranger) : 7,6 millions, 11,2 % de la population en 2024.
-  { id: 'immigration', fr: 'Immigration', en: 'Immigration',
-    link: { path: '/etat-de-la-france/immigration', fr: 'Carte : d’où viennent les immigrés, de 1968 à aujourd’hui →', en: 'Map: where immigrants have come from, 1968 to today →' },
-    note: ['Personnes nées à l’étranger (définition Eurostat, Français nés à l’étranger compris), comparées aux personnes nées en France (pointillés). L’Insee compte 7,6 millions d’immigrés en 2024, 11,2 % de la population, et 8,0 millions de descendants d’immigrés.', 'People born abroad (Eurostat definition, including French citizens born abroad), compared with people born in France (dotted). Insee counts 7.6 million immigrants in 2024, 11.2% of the population, and 8.0 million descendants of immigrants.'],
-    items: [
-    { id: 'immShare', fr: 'Nés à l’étranger', en: 'Born abroad', unit: 'pct', d: 1, note: ['% de la population', '% of the population'], src: es('migr_pop3ctb'), srcX: { label: 'Insee, Immigrés et descendants d’immigrés (nov. 2025)', url: 'https://www.insee.fr/fr/statistiques/8612512' }, good: 0 },
-    { id: 'immHigh', fr: 'Diplômés du supérieur', en: 'Tertiary-educated', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 25-64 ans nés à l’étranger', '% of 25-64 year-olds born abroad'], src: es('edat_lfs_9912'), good: 0 },
-    { id: 'immLow', fr: 'Sans diplôme du secondaire', en: 'Below upper secondary', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['brevet au plus, % des 25-64 ans nés à l’étranger', 'lower secondary at most, % of 25-64 year-olds born abroad'], src: es('edat_lfs_9912'), good: 0 },
-    { id: 'immEmp', fr: 'Taux d’emploi', en: 'Employment rate', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 20-64 ans nés à l’étranger', '% of 20-64 year-olds born abroad'], src: es('lfsa_ergacob'), good: 0 },
-    { id: 'immPov', fr: 'Taux de pauvreté', en: 'Poverty rate', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 18 ans et plus nés à l’étranger', '% of people 18+ born abroad'], src: es('ilc_li32'), good: 0 },
   ] },
   { id: 'energie', fr: 'Énergie et climat', en: 'Energy and climate', items: [
     { id: 'ghg', fr: 'Émissions de CO₂e', en: 'CO₂e emissions', unit: 'num', d: 0, suffix: ['Mt', 'Mt'], note: ['gaz à effet de serre, hors forêts et sols', 'greenhouse gases, excl. land use'], src: es('env_air_gge'), good: -1 },

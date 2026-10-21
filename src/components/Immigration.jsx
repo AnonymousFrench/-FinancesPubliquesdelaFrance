@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import data from '../data/immig.json'
 import map from '../data/immig-map.json'
+import etatSeries from '../data/etat-series.json'
 import { Card, Kpi, Seg } from './ui.jsx'
 import { useWidth } from '../lib/charts.jsx'
 import { fmt, pct } from '../lib/format.js'
@@ -300,14 +301,15 @@ function Permits() {
 
 export default function Immigration() {
   const S = data.stock, y0 = S.years[0], y1 = S.years.at(-1)
-  const afr = y => S.continents.AFR[y] / CONTS.reduce((s, c) => s + S.continents[c.id][y], 0) * 100
+  // Part de la population née à l'étranger, France et moyenne de l'UE (Eurostat), dernière année commune.
+  const sh = etatSeries.immShare, shY = Math.max(...Object.keys(sh.fr).filter(y => sh.eu[y] != null).map(Number))
   const pl = data.permits.years.at(-1)
   return (
     <>
       <div className="kpis k4">
         <Kpi label={T(`Immigrés en ${y1}`, `Immigrants in ${y1}`)} value={mill(S.total[y1])} sub={T(`${pct(S.total[y1] / S.pop[y1] * 100, 1)} de la population`, `${pct(S.total[y1] / S.pop[y1] * 100, 1)} of the population`)} />
         <Kpi label={T(`Immigrés en ${y0}`, `Immigrants in ${y0}`)} value={mill(S.total[y0])} sub={T(`${pct(S.total[y0] / S.pop[y0] * 100, 1)} de la population`, `${pct(S.total[y0] / S.pop[y0] * 100, 1)} of the population`)} />
-        <Kpi label={T('Nés en Afrique', 'Born in Africa')} value={pct(afr(y1), 0)} sub={T(`des immigrés en ${y1}, contre ${pct(afr(y0), 0)} en ${y0}`, `of immigrants in ${y1}, vs ${pct(afr(y0), 0)} in ${y0}`)} />
+        <Kpi label={T(`Nés à l’étranger en ${shY}`, `Born abroad in ${shY}`)} value={pct(sh.fr[shY], 1)} sub={T(`de la population ; moyenne de l’UE : ${pct(sh.eu[shY], 1)}`, `of the population; EU average: ${pct(sh.eu[shY], 1)}`)} />
         <Kpi label={T(`Premiers titres de séjour en ${pl}`, `First residence permits in ${pl}`)} value={num(data.permits.total[pl])} sub={T('ressortissants hors UE', 'non-EU nationals')} />
       </div>
       <OriginMap />
