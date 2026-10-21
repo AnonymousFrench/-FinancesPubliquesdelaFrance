@@ -53,3 +53,8 @@ Depuis le 20 octobre 2026, l'explorateur et le tableau des recettes utilisent le
 (états A à D) avec `python3 scripts/plf-pdf.py <PLF.pdf> 2027`, puis `npm run data`. Le niveau action et sous-action
 reviendra quand data.economie.gouv.fr publiera le fichier « Dépenses selon destination » : le placer dans
 `data-raw/plf27-destination.csv` (même format que `plf25-destination.csv`) et relancer `npm run data`.
+
+## Page Immigration (État de la France)
+
+- Premiers titres de séjour (Eurostat migr_resfirst) : rafraîchis chaque lundi par la tâche GitHub (`npm run immig`).
+- Immigrés par pays de naissance (Insee) : une fois par an, quand l'Insee publie une nouvelle édition. Télécharger dans `data-raw/immig/` les fichiers `pays_naissance_detaille_1968_2019.xlsx` (renommé `insee_pays_1968_2019.xlsx`, page https://www.insee.fr/fr/statistiques/6478091) et `Essentiel_Immigres-Etrangers_donnees.xlsx` (renommé `insee_essentiel.xlsx`, page https://www.insee.fr/fr/statistiques/3633212), puis lancer `python3 scripts/immig-insee.py` et `npm run immig`.

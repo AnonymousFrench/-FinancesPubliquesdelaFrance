@@ -24,7 +24,16 @@ const lastOf = id => { const o = E[id].fr, y = Object.keys(o).sort().at(-1); ret
 const fact = (lbl, id, unit, d = 1) => { const [y, v] = lastOf(id); return `${lbl} : ${nf(v, d)}${unit} (${y}).` }
 
 // Contenu statique par rubrique : quelques faits clés, en texte, pour les moteurs et les aperçus.
+const IM = JSON.parse(fs.readFileSync('src/data/immig.json', 'utf8'))
+const imTop = y => Object.entries(IM.stock.by).filter(([, o]) => o[y]).sort((a, b) => b[1][y] - a[1][y]).slice(0, 5).map(([c, o]) => `${IM.places[c].fr} ${nf(o[y] / 1000, 0)} 000`).join(', ')
+const imY0 = IM.stock.years[0], imY1 = IM.stock.years.at(-1), imP = IM.permits.years.at(-1)
 const FACTS = {
+  immigration: [
+    `Immigrés en ${imY1} : ${nf(IM.stock.total[imY1] / 1e6, 1)} millions, soit ${nf(IM.stock.total[imY1] / IM.stock.pop[imY1] * 100, 1)} % de la population (${nf(IM.stock.total[imY0] / 1e6, 1)} millions en ${imY0}).`,
+    `Principaux pays de naissance en ${imY1} : ${imTop(imY1)}.`,
+    `Principaux pays de naissance en ${imY0} : ${imTop(imY0)}.`,
+    `Premiers titres de séjour délivrés en ${imP} : ${nf(IM.permits.total[imP], 0)}.`,
+  ],
   etat: [
     fact('PIB par habitant', 'gdpPc', ' € constants de 2020', 0), fact('Taux de chômage', 'unemp', ' %'), fact('Inflation', 'inflation', ' %'),
     fact('Balance courante', 'currentAcc', ' % du PIB'), fact('Fécondité', 'fertility', ' enfant par femme', 2), fact('Espérance de vie', 'lifeExp', ' ans'),
@@ -120,6 +129,7 @@ const page = (r, { noindex = false, en = false } = {}) => {
 
 fs.mkdirSync('dist/en', { recursive: true })
 for (const r of ROUTES) {
+  fs.mkdirSync(`dist${r.path.replace(/\/[^/]*$/, '')}`, { recursive: true }); fs.mkdirSync(`dist/en${r.path.replace(/\/[^/]*$/, '')}`, { recursive: true })
   fs.writeFileSync(r.path === '/' ? 'dist/index.html' : `dist${r.path}.html`, page(r))
   fs.writeFileSync(r.path === '/' ? 'dist/en.html' : `dist/en${r.path}.html`, page(r, { en: true }))
 }

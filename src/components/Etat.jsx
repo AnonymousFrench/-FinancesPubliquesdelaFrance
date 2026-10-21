@@ -153,6 +153,7 @@ export default function Etat() {
           <section key={t.id} className="etat-t" style={{ flexGrow: t.items.length, flexBasis: t.items.length * 184 }}>
             <h4>{T(t.fr, t.en)}</h4>
             {t.note && <p className="etat-note">{T(t.note[0], t.note[1])}</p>}
+            {t.link && <a className="etat-link" href={lp(t.link.path)}>{T(t.link.fr, t.link.en)}</a>}
             <div className="inds" style={{ '--n': t.items.length }}>{t.items.map(m => <Indicator key={m.id} m={m} show={show} />)}</div>
           </section>
         ))}

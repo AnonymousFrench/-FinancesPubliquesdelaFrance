@@ -1,0 +1,2973 @@
+lieu;continent;annee;effectif
+C:EUR;EUR;1968;2478700
+C:EUR;EUR;1975;2611800
+C:EUR;EUR;1982;2312200
+C:EUR;EUR;1990;2103200
+C:EUR;EUR;1999;1940600
+Autriche;EUR;1968;10600
+Autriche;EUR;1975;10100
+Autriche;EUR;1982;9000
+Autriche;EUR;1990;8700
+Autriche;EUR;1999;8600
+Belgique;EUR;1968;122000
+Belgique;EUR;1975;104300
+Belgique;EUR;1982;95800
+Belgique;EUR;1990;92000
+Belgique;EUR;1999;94200
+Suisse;EUR;1968;50100
+Suisse;EUR;1975;43400
+Suisse;EUR;1982;28000
+Suisse;EUR;1990;37400
+Suisse;EUR;1999;45300
+Allemagne;EUR;1968;126700
+Allemagne;EUR;1975;120700
+Allemagne;EUR;1982;115600
+Allemagne;EUR;1990;114600
+Allemagne;EUR;1999;123600
+Danemark;EUR;1968;2200
+Danemark;EUR;1975;2400
+Danemark;EUR;1982;3000
+Danemark;EUR;1990;4200
+Danemark;EUR;1999;5100
+Espagne;EUR;1968;679400
+Espagne;EUR;1975;590800
+Espagne;EUR;1982;472000
+Espagne;EUR;1990;397400
+Espagne;EUR;1999;316600
+Finlande;EUR;1968;800
+Finlande;EUR;1975;1200
+Finlande;EUR;1982;1700
+Finlande;EUR;1990;2100
+Finlande;EUR;1999;3300
+Royaume-Uni;EUR;1968;19100
+Royaume-Uni;EUR;1975;26000
+Royaume-Uni;EUR;1982;34300
+Royaume-Uni;EUR;1990;52400
+Royaume-Uni;EUR;1999;75300
+Grèce;EUR;1968;13600
+Grèce;EUR;1975;14500
+Grèce;EUR;1982;13700
+Grèce;EUR;1990;11300
+Grèce;EUR;1999;10100
+Irlande;EUR;1968;1200
+Irlande;EUR;1975;1500
+Irlande;EUR;1982;2200
+Irlande;EUR;1990;3700
+Irlande;EUR;1999;4900
+Italie;EUR;1968;776300
+Italie;EUR;1975;669100
+Italie;EUR;1982;570100
+Italie;EUR;1990;484200
+Italie;EUR;1999;379300
+Luxembourg;EUR;1968;8700
+Luxembourg;EUR;1975;7300
+Luxembourg;EUR;1982;6800
+Luxembourg;EUR;1990;5900
+Luxembourg;EUR;1999;6000
+Monaco;EUR;1975;2900
+Monaco;EUR;1982;2600
+Monaco;EUR;1990;2500
+Monaco;EUR;1999;2600
+Pays-Bas;EUR;1968;10800
+Pays-Bas;EUR;1975;12400
+Pays-Bas;EUR;1982;15900
+Pays-Bas;EUR;1990;19400
+Pays-Bas;EUR;1999;25600
+Norvège;EUR;1968;1300
+Norvège;EUR;1975;1900
+Norvège;EUR;1982;1400
+Norvège;EUR;1990;2200
+Norvège;EUR;1999;2300
+Portugal;EUR;1968;281700
+Portugal;EUR;1975;655100
+Portugal;EUR;1982;638500
+Portugal;EUR;1990;599900
+Portugal;EUR;1999;572200
+Suède;EUR;1968;2300
+Suède;EUR;1975;3800
+Suède;EUR;1982;4200
+Suède;EUR;1990;5600
+Suède;EUR;1999;7700
+Bulgarie;EUR;1968;3200
+Bulgarie;EUR;1975;3400
+Bulgarie;EUR;1982;3300
+Bulgarie;EUR;1990;3500
+Bulgarie;EUR;1999;6900
+Tchécoslovaquie, République Tchèque, Slovaquie;EUR;1968;16400
+Tchécoslovaquie, République Tchèque, Slovaquie;EUR;1975;15100
+Tchécoslovaquie, République Tchèque, Slovaquie;EUR;1982;13100
+Tchécoslovaquie, République Tchèque, Slovaquie;EUR;1990;11700
+Tchécoslovaquie, République Tchèque, Slovaquie;EUR;1999;10500
+Hongrie;EUR;1968;16100
+Hongrie;EUR;1975;14600
+Hongrie;EUR;1982;13300
+Hongrie;EUR;1990;11400
+Hongrie;EUR;1999;9900
+Pologne;EUR;1968;219800
+Pologne;EUR;1975;188200
+Pologne;EUR;1982;157700
+Pologne;EUR;1990;129400
+Pologne;EUR;1999;98700
+Roumanie;EUR;1968;13700
+Roumanie;EUR;1975;12700
+Roumanie;EUR;1982;12400
+Roumanie;EUR;1990;14500
+Roumanie;EUR;1999;23300
+URSS et pays de l’ex-URSS;EUR;1968;42100
+URSS et pays de l’ex-URSS;EUR;1975;33200
+URSS et pays de l’ex-URSS;EUR;1982;25700
+URSS et pays de l’ex-URSS;EUR;1990;19400
+URSS et pays de l’ex-URSS;EUR;1999;28300
+Yougoslavie, Bosnie, Croatie, Macédoine, Slovénie, Serbie, Monténégro;EUR;1968;54100
+Yougoslavie, Bosnie, Croatie, Macédoine, Slovénie, Serbie, Monténégro;EUR;1975;73900
+Yougoslavie, Bosnie, Croatie, Macédoine, Slovénie, Serbie, Monténégro;EUR;1982;68600
+Yougoslavie, Bosnie, Croatie, Macédoine, Slovénie, Serbie, Monténégro;EUR;1990;67200
+Yougoslavie, Bosnie, Croatie, Macédoine, Slovénie, Serbie, Monténégro;EUR;1999;75300
+Autres pays d’Europe;EUR;1968;6500
+Autres pays d’Europe;EUR;1975;3300
+Autres pays d’Europe;EUR;1982;3300
+Autres pays d’Europe;EUR;1990;2600
+Autres pays d’Europe;EUR;1999;5000
+C:AFR;AFR;1968;641600
+C:AFR;AFR;1975;1087200
+C:AFR;AFR;1982;1340100
+C:AFR;AFR;1990;1501100
+C:AFR;AFR;1999;1701100
+Burkina Faso;AFR;1968;500
+Burkina Faso;AFR;1975;1600
+Burkina Faso;AFR;1982;1900
+Burkina Faso;AFR;1990;2300
+Burkina Faso;AFR;1999;2800
+Bénin;AFR;1968;1100
+Bénin;AFR;1975;3000
+Bénin;AFR;1982;4100
+Bénin;AFR;1990;5700
+Bénin;AFR;1999;8400
+Centrafrique;AFR;1968;600
+Centrafrique;AFR;1975;1300
+Centrafrique;AFR;1982;2100
+Centrafrique;AFR;1990;4100
+Centrafrique;AFR;1999;6100
+Congo;AFR;1968;1300
+Congo;AFR;1975;3500
+Congo;AFR;1982;8500
+Congo;AFR;1990;13500
+Congo;AFR;1999;35500
+Côte-d’Ivoire;AFR;1968;1900
+Côte-d’Ivoire;AFR;1975;6600
+Côte-d’Ivoire;AFR;1982;12100
+Côte-d’Ivoire;AFR;1990;19300
+Côte-d’Ivoire;AFR;1999;30000
+Cameroun;AFR;1968;2800
+Cameroun;AFR;1975;7100
+Cameroun;AFR;1982;13300
+Cameroun;AFR;1990;18200
+Cameroun;AFR;1999;26900
+Algérie;AFR;1968;377600
+Algérie;AFR;1975;555200
+Algérie;AFR;1982;597600
+Algérie;AFR;1990;555900
+Algérie;AFR;1999;574600
+Egypte;AFR;1968;10000
+Egypte;AFR;1975;10300
+Egypte;AFR;1982;12700
+Egypte;AFR;1990;14700
+Egypte;AFR;1999;16700
+Gabon;AFR;1968;700
+Gabon;AFR;1975;1800
+Gabon;AFR;1982;3100
+Gabon;AFR;1990;3300
+Gabon;AFR;1999;6000
+Guinée;AFR;1968;900
+Guinée;AFR;1975;1600
+Guinée;AFR;1982;2500
+Guinée;AFR;1990;6300
+Guinée;AFR;1999;5700
+Comores;AFR;1982;2400
+Comores;AFR;1990;7000
+Comores;AFR;1999;14800
+Maroc;AFR;1968;104600
+Maroc;AFR;1975;256800
+Maroc;AFR;1982;367900
+Maroc;AFR;1990;457700
+Maroc;AFR;1999;522800
+Madagascar;AFR;1968;3300
+Madagascar;AFR;1975;6300
+Madagascar;AFR;1982;10900
+Madagascar;AFR;1990;19800
+Madagascar;AFR;1999;31900
+Mali;AFR;1968;6400
+Mali;AFR;1975;12200
+Mali;AFR;1982;20500
+Mali;AFR;1990;28800
+Mali;AFR;1999;35600
+Mauritanie;AFR;1968;2400
+Mauritanie;AFR;1975;5400
+Mauritanie;AFR;1982;4500
+Mauritanie;AFR;1990;5200
+Mauritanie;AFR;1999;8100
+Ile Maurice;AFR;1982;14800
+Ile Maurice;AFR;1990;25800
+Ile Maurice;AFR;1999;30700
+Niger;AFR;1968;300
+Niger;AFR;1975;700
+Niger;AFR;1982;1200
+Niger;AFR;1990;1100
+Niger;AFR;1999;1300
+Tchad;AFR;1968;300
+Tchad;AFR;1975;1000
+Tchad;AFR;1982;1100
+Tchad;AFR;1990;1500
+Tchad;AFR;1999;1900
+Togo;AFR;1968;1200
+Togo;AFR;1975;3600
+Togo;AFR;1982;4800
+Togo;AFR;1990;7600
+Togo;AFR;1999;10800
+Tunisie;AFR;1968;114900
+Tunisie;AFR;1975;180900
+Tunisie;AFR;1982;202600
+Tunisie;AFR;1990;207200
+Tunisie;AFR;1999;201700
+Afrique du Sud;AFR;1968;300
+Afrique du Sud;AFR;1975;1200
+Afrique du Sud;AFR;1990;1200
+Afrique du Sud;AFR;1999;1900
+Autres pays d’Afrique;AFR;1968;10500
+Autres pays d’Afrique;AFR;1975;27100
+Autres pays d’Afrique;AFR;1982;51500
+Autres pays d’Afrique;AFR;1990;94900
+Autres pays d’Afrique;AFR;1999;126900
+C:ASI;ASI;1968;81300
+C:ASI;ASI;1975;139700
+C:ASI;ASI;1982;321500
+C:ASI;ASI;1990;477400
+C:ASI;ASI;1999;551500
+Arménie;ASI;1999;4800
+Chine (y compris Taïwan);ASI;1968;2800
+Chine (y compris Taïwan);ASI;1975;3500
+Chine (y compris Taïwan);ASI;1982;6400
+Chine (y compris Taïwan);ASI;1990;17700
+Chine (y compris Taïwan);ASI;1999;35000
+Israël;ASI;1968;1900
+Israël;ASI;1975;2400
+Israël;ASI;1982;3600
+Israël;ASI;1990;4400
+Israël;ASI;1999;4200
+Inde;ASI;1968;1500
+Inde;ASI;1975;2800
+Inde;ASI;1982;6000
+Inde;ASI;1990;11700
+Inde;ASI;1999;19200
+Iran;ASI;1968;1900
+Iran;ASI;1975;3400
+Iran;ASI;1982;11000
+Iran;ASI;1990;17100
+Iran;ASI;1999;17100
+Japon;ASI;1968;1600
+Japon;ASI;1975;4900
+Japon;ASI;1982;6600
+Japon;ASI;1990;10800
+Japon;ASI;1999;13300
+Cambodge;ASI;1968;1300
+Cambodge;ASI;1975;5600
+Cambodge;ASI;1982;39800
+Cambodge;ASI;1990;53500
+Cambodge;ASI;1999;50700
+Laos;ASI;1968;900
+Laos;ASI;1975;2000
+Laos;ASI;1982;34800
+Laos;ASI;1990;41500
+Laos;ASI;1999;37700
+Liban;ASI;1968;4100
+Liban;ASI;1975;5300
+Liban;ASI;1982;14600
+Liban;ASI;1990;30100
+Liban;ASI;1999;29200
+Syrie;ASI;1968;3200
+Syrie;ASI;1975;5000
+Syrie;ASI;1982;7200
+Syrie;ASI;1990;10400
+Syrie;ASI;1999;10400
+Turquie;ASI;1968;42700
+Turquie;ASI;1975;75600
+Turquie;ASI;1982;121200
+Turquie;ASI;1990;168400
+Turquie;ASI;1999;174200
+Vietnam;ASI;1968;16000
+Vietnam;ASI;1975;18600
+Vietnam;ASI;1982;48100
+Vietnam;ASI;1990;60500
+Vietnam;ASI;1999;72500
+Autres pays d’Asie;ASI;1968;3400
+Autres pays d’Asie;ASI;1975;10600
+Autres pays d’Asie;ASI;1982;22200
+Autres pays d’Asie;ASI;1990;51300
+Autres pays d’Asie;ASI;1999;83200
+C:AMO;AMO;1968;33700
+C:AMO;AMO;1975;48600
+C:AMO;AMO;1982;63300
+C:AMO;AMO;1990;140500
+C:AMO;AMO;1999;181300
+Australie;AMO;1968;600
+Australie;AMO;1975;1000
+Australie;AMO;1982;1400
+Australie;AMO;1990;2200
+Australie;AMO;1999;3000
+Nouvelle-Zélande;AMO;1968;100
+Nouvelle-Zélande;AMO;1975;200
+Nouvelle-Zélande;AMO;1990;600
+Nouvelle-Zélande;AMO;1999;900
+Autres pays d’Océanie;AMO;1968;100
+Autres pays d’Océanie;AMO;1975;300
+Autres pays d’Océanie;AMO;1982;400
+Autres pays d’Océanie;AMO;1990;200
+Autres pays d’Océanie;AMO;1999;300
+Argentine;AMO;1968;3800
+Argentine;AMO;1975;4200
+Argentine;AMO;1982;6500
+Argentine;AMO;1990;6700
+Argentine;AMO;1999;7200
+Brésil;AMO;1968;3500
+Brésil;AMO;1975;4500
+Brésil;AMO;1982;5300
+Brésil;AMO;1990;14800
+Brésil;AMO;1999;21700
+Canada;AMO;1968;3100
+Canada;AMO;1975;5700
+Canada;AMO;1982;5700
+Canada;AMO;1990;8500
+Canada;AMO;1999;12200
+Chili;AMO;1968;800
+Chili;AMO;1975;2500
+Chili;AMO;1982;6700
+Chili;AMO;1990;10500
+Chili;AMO;1999;9600
+Haïti;AMO;1968;1000
+Haïti;AMO;1975;1200
+Haïti;AMO;1982;4500
+Haïti;AMO;1990;27700
+Haïti;AMO;1999;36900
+Mexique;AMO;1968;700
+Mexique;AMO;1975;1400
+Mexique;AMO;1982;2300
+Mexique;AMO;1990;2700
+Mexique;AMO;1999;4500
+Etats-Unis;AMO;1968;15300
+Etats-Unis;AMO;1975;20700
+Etats-Unis;AMO;1982;17300
+Etats-Unis;AMO;1990;24900
+Etats-Unis;AMO;1999;29700
+Venezuela;AMO;1968;800
+Venezuela;AMO;1975;1000
+Venezuela;AMO;1982;1800
+Venezuela;AMO;1990;1500
+Venezuela;AMO;1999;2300
+Autres pays d’Amérique;AMO;1968;3900
+Autres pays d’Amérique;AMO;1975;5900
+Autres pays d’Amérique;AMO;1982;11400
+Autres pays d’Amérique;AMO;1990;40200
+Autres pays d’Amérique;AMO;1999;53000
+C:AFR;AFR;2019;3132300
+C:AFR;AFR;2018;3033800
+C:AFR;AFR;2017;2945100
+C:AFR;AFR;2016;2834300
+C:AFR;AFR;2015;2754300
+C:AFR;AFR;2014;2671400
+C:AFR;AFR;2013;2540200
+C:AFR;AFR;2012;2470100
+C:AFR;AFR;2011;2410500
+C:AFR;AFR;2010;2362100
+C:AFR;AFR;2009;2317300
+C:AFR;AFR;2008;2271200
+C:AFR;AFR;2007;2223600
+C:AFR;AFR;2006;2167200
+Algérie;AFR;2019;848900
+Algérie;AFR;2018;838800
+Algérie;AFR;2017;823500
+Algérie;AFR;2016;807500
+Algérie;AFR;2015;790700
+Algérie;AFR;2014;774300
+Algérie;AFR;2013;760300
+Algérie;AFR;2012;748000
+Algérie;AFR;2011;737100
+Algérie;AFR;2010;729800
+Algérie;AFR;2009;721800
+Algérie;AFR;2008;713300
+Algérie;AFR;2007;702800
+Algérie;AFR;2006;691800
+Maroc;AFR;2019;807600
+Maroc;AFR;2018;784900
+Maroc;AFR;2017;771300
+Maroc;AFR;2016;755400
+Maroc;AFR;2015;741300
+Maroc;AFR;2014;722700
+Maroc;AFR;2013;709600
+Maroc;AFR;2012;692900
+Maroc;AFR;2011;680000
+Maroc;AFR;2010;671200
+Maroc;AFR;2009;664000
+Maroc;AFR;2008;653800
+Maroc;AFR;2007;645700
+Maroc;AFR;2006;634200
+Tunisie;AFR;2019;299800
+Tunisie;AFR;2018;290900
+Tunisie;AFR;2017;283800
+Tunisie;AFR;2016;275900
+Tunisie;AFR;2015;269900
+Tunisie;AFR;2014;265800
+Tunisie;AFR;2013;258800
+Tunisie;AFR;2012;251200
+Tunisie;AFR;2011;246300
+Tunisie;AFR;2010;241900
+Tunisie;AFR;2009;236500
+Tunisie;AFR;2008;234700
+Tunisie;AFR;2007;231100
+Tunisie;AFR;2006;226900
+Comores;AFR;2019;130100
+Comores;AFR;2018;125200
+Comores;AFR;2017;119300
+Comores;AFR;2016;96300
+Comores;AFR;2015;92100
+Comores;AFR;2014;87700
+Comores;AFR;2013;31100
+Comores;AFR;2012;29900
+Comores;AFR;2011;28800
+Comores;AFR;2010;27300
+Comores;AFR;2009;25800
+Comores;AFR;2008;24800
+Comores;AFR;2007;23700
+Comores;AFR;2006;22200
+Sénégal;AFR;2019;120100
+Sénégal;AFR;2018;110500
+Sénégal;AFR;2017;105900
+Sénégal;AFR;2016;100800
+Sénégal;AFR;2015;96800
+Sénégal;AFR;2014;92300
+Sénégal;AFR;2013;89200
+Sénégal;AFR;2012;85400
+Sénégal;AFR;2011;81800
+Sénégal;AFR;2010;79700
+Sénégal;AFR;2009;78200
+Sénégal;AFR;2008;75100
+Sénégal;AFR;2007;73400
+Sénégal;AFR;2006;71100
+Côte d'Ivoire;AFR;2019;104200
+Côte d'Ivoire;AFR;2018;101200
+Côte d'Ivoire;AFR;2017;94400
+Côte d'Ivoire;AFR;2016;88500
+Côte d'Ivoire;AFR;2015;83400
+Côte d'Ivoire;AFR;2014;78800
+Côte d'Ivoire;AFR;2013;74700
+Côte d'Ivoire;AFR;2012;71200
+Côte d'Ivoire;AFR;2011;67200
+Côte d'Ivoire;AFR;2010;65000
+Côte d'Ivoire;AFR;2009;62200
+Côte d'Ivoire;AFR;2008;59800
+Côte d'Ivoire;AFR;2007;57400
+Côte d'Ivoire;AFR;2006;55000
+République démocratique du Congo;AFR;2019;91800
+République démocratique du Congo;AFR;2018;88900
+République démocratique du Congo;AFR;2017;85100
+République démocratique du Congo;AFR;2016;81700
+République démocratique du Congo;AFR;2015;77900
+République démocratique du Congo;AFR;2014;74800
+République démocratique du Congo;AFR;2013;70600
+République démocratique du Congo;AFR;2012;66800
+République démocratique du Congo;AFR;2011;63800
+République démocratique du Congo;AFR;2010;59600
+République démocratique du Congo;AFR;2009;55700
+République démocratique du Congo;AFR;2008;52800
+République démocratique du Congo;AFR;2007;49900
+République démocratique du Congo;AFR;2006;47200
+Cameroun;AFR;2019;90600
+Cameroun;AFR;2018;87800
+Cameroun;AFR;2017;84800
+Cameroun;AFR;2016;82100
+Cameroun;AFR;2015;79600
+Cameroun;AFR;2014;76600
+Cameroun;AFR;2013;74100
+Cameroun;AFR;2012;70800
+Cameroun;AFR;2011;67700
+Cameroun;AFR;2010;64500
+Cameroun;AFR;2009;61900
+Cameroun;AFR;2008;58400
+Cameroun;AFR;2007;55600
+Cameroun;AFR;2006;52300
+Mali;AFR;2019;87900
+Mali;AFR;2018;81200
+Mali;AFR;2017;78600
+Mali;AFR;2016;74600
+Mali;AFR;2015;71700
+Mali;AFR;2014;68900
+Mali;AFR;2013;66900
+Mali;AFR;2012;64200
+Mali;AFR;2011;62800
+Mali;AFR;2010;61500
+Mali;AFR;2009;60100
+Mali;AFR;2008;58400
+Mali;AFR;2007;57500
+Mali;AFR;2006;54300
+Madagascar;AFR;2019;78700
+Madagascar;AFR;2018;75700
+Madagascar;AFR;2017;73400
+Madagascar;AFR;2016;69700
+Madagascar;AFR;2015;67600
+Madagascar;AFR;2014;65400
+Madagascar;AFR;2013;59000
+Madagascar;AFR;2012;57100
+Madagascar;AFR;2011;54900
+Madagascar;AFR;2010;53100
+Madagascar;AFR;2009;51600
+Madagascar;AFR;2008;50100
+Madagascar;AFR;2007;48600
+Madagascar;AFR;2006;46700
+Congo;AFR;2019;72700
+Congo;AFR;2018;70300
+Congo;AFR;2017;68500
+Congo;AFR;2016;66800
+Congo;AFR;2015;64800
+Congo;AFR;2014;62100
+Congo;AFR;2013;59500
+Congo;AFR;2012;57600
+Congo;AFR;2011;56300
+Congo;AFR;2010;55500
+Congo;AFR;2009;54400
+Congo;AFR;2008;53500
+Congo;AFR;2007;51800
+Congo;AFR;2006;49300
+Guinée;AFR;2019;52400
+Guinée;AFR;2018;47900
+Guinée;AFR;2017;42600
+Guinée;AFR;2016;37300
+Guinée;AFR;2015;33900
+Guinée;AFR;2014;31300
+Guinée;AFR;2013;28900
+Guinée;AFR;2012;26900
+Guinée;AFR;2011;25200
+Guinée;AFR;2010;23700
+Guinée;AFR;2009;22400
+Guinée;AFR;2008;20900
+Guinée;AFR;2007;19000
+Guinée;AFR;2006;17700
+Maurice;AFR;2019;38700
+Maurice;AFR;2018;37100
+Maurice;AFR;2017;37200
+Maurice;AFR;2016;36800
+Maurice;AFR;2015;36500
+Maurice;AFR;2014;36000
+Maurice;AFR;2013;35600
+Maurice;AFR;2012;35500
+Maurice;AFR;2011;35000
+Maurice;AFR;2010;34900
+Maurice;AFR;2009;34900
+Maurice;AFR;2008;34700
+Maurice;AFR;2007;33900
+Maurice;AFR;2006;33300
+Égypte;AFR;2019;31400
+Égypte;AFR;2018;29900
+Égypte;AFR;2017;29300
+Égypte;AFR;2016;28600
+Égypte;AFR;2015;27500
+Égypte;AFR;2014;27200
+Égypte;AFR;2013;26100
+Égypte;AFR;2012;25300
+Égypte;AFR;2011;24300
+Égypte;AFR;2010;23900
+Égypte;AFR;2009;23400
+Égypte;AFR;2008;22500
+Égypte;AFR;2007;22000
+Égypte;AFR;2006;21400
+Cabo Verde;AFR;2019;31100
+Cabo Verde;AFR;2018;29700
+Cabo Verde;AFR;2017;29500
+Cabo Verde;AFR;2016;28700
+Cabo Verde;AFR;2015;28400
+Cabo Verde;AFR;2014;26900
+Cabo Verde;AFR;2013;25400
+Cabo Verde;AFR;2012;23900
+Cabo Verde;AFR;2011;22300
+Cabo Verde;AFR;2010;20800
+Cabo Verde;AFR;2009;19900
+Cabo Verde;AFR;2008;19300
+Cabo Verde;AFR;2007;18400
+Cabo Verde;AFR;2006;17500
+Angola;AFR;2019;23600
+Angola;AFR;2018;22400
+Angola;AFR;2017;22100
+Angola;AFR;2016;21100
+Angola;AFR;2015;20400
+Angola;AFR;2014;19800
+Angola;AFR;2013;19000
+Angola;AFR;2012;18100
+Angola;AFR;2011;17700
+Angola;AFR;2010;16800
+Angola;AFR;2009;16400
+Angola;AFR;2008;15900
+Angola;AFR;2007;15200
+Angola;AFR;2006;14400
+Togo;AFR;2019;23200
+Togo;AFR;2018;22500
+Togo;AFR;2017;22100
+Togo;AFR;2016;21400
+Togo;AFR;2015;21000
+Togo;AFR;2014;20300
+Togo;AFR;2013;19700
+Togo;AFR;2012;19300
+Togo;AFR;2011;18800
+Togo;AFR;2010;18100
+Togo;AFR;2009;18000
+Togo;AFR;2008;17700
+Togo;AFR;2007;16900
+Togo;AFR;2006;16200
+Gabon;AFR;2019;20400
+Gabon;AFR;2018;19600
+Gabon;AFR;2017;18000
+Gabon;AFR;2016;16600
+Gabon;AFR;2015;15600
+Gabon;AFR;2014;14800
+Gabon;AFR;2013;14200
+Gabon;AFR;2012;14000
+Gabon;AFR;2011;13400
+Gabon;AFR;2010;12800
+Gabon;AFR;2009;12300
+Gabon;AFR;2008;12000
+Gabon;AFR;2007;11600
+Gabon;AFR;2006;11100
+Mauritanie;AFR;2019;20200
+Mauritanie;AFR;2018;18600
+Mauritanie;AFR;2017;18100
+Mauritanie;AFR;2016;17400
+Mauritanie;AFR;2015;16500
+Mauritanie;AFR;2014;15800
+Mauritanie;AFR;2013;15400
+Mauritanie;AFR;2012;15200
+Mauritanie;AFR;2011;14800
+Mauritanie;AFR;2010;14200
+Mauritanie;AFR;2009;13700
+Mauritanie;AFR;2008;13100
+Mauritanie;AFR;2007;12300
+Mauritanie;AFR;2006;11800
+Bénin;AFR;2019;19900
+Bénin;AFR;2018;19300
+Bénin;AFR;2017;18300
+Bénin;AFR;2016;17700
+Bénin;AFR;2015;17100
+Bénin;AFR;2014;16400
+Bénin;AFR;2013;15500
+Bénin;AFR;2012;15000
+Bénin;AFR;2011;14500
+Bénin;AFR;2010;14000
+Bénin;AFR;2009;14000
+Bénin;AFR;2008;13800
+Bénin;AFR;2007;13400
+Bénin;AFR;2006;13000
+République centrafricaine;AFR;2019;16700
+République centrafricaine;AFR;2018;16100
+République centrafricaine;AFR;2017;15400
+République centrafricaine;AFR;2016;14600
+République centrafricaine;AFR;2015;14000
+République centrafricaine;AFR;2014;13400
+République centrafricaine;AFR;2013;12700
+République centrafricaine;AFR;2012;12400
+République centrafricaine;AFR;2011;12000
+République centrafricaine;AFR;2010;11700
+République centrafricaine;AFR;2009;11300
+République centrafricaine;AFR;2008;11100
+République centrafricaine;AFR;2007;10800
+République centrafricaine;AFR;2006;10500
+Soudan;AFR;2019;15500
+Soudan;AFR;2018;14600
+Soudan;AFR;2017;11300
+Soudan;AFR;2016;8500
+Soudan;AFR;2015;6400
+Soudan;AFR;2014;4500
+Soudan;AFR;2013;3400
+Soudan;AFR;2012;3100
+Soudan;AFR;2011;2800
+Soudan;AFR;2010;2500
+Soudan;AFR;2009;2300
+Soudan;AFR;2008;2000
+Soudan;AFR;2007;1800
+Soudan;AFR;2006;1600
+Nigéria;AFR;2019;13800
+Nigéria;AFR;2018;13300
+Nigéria;AFR;2017;11800
+Nigéria;AFR;2016;10700
+Nigéria;AFR;2015;9800
+Nigéria;AFR;2014;8600
+Nigéria;AFR;2013;7600
+Nigéria;AFR;2012;6800
+Nigéria;AFR;2011;5900
+Nigéria;AFR;2010;5300
+Nigéria;AFR;2009;4800
+Nigéria;AFR;2008;4400
+Nigéria;AFR;2007;3900
+Nigéria;AFR;2006;3600
+Burkina Faso;AFR;2019;11400
+Burkina Faso;AFR;2018;10600
+Burkina Faso;AFR;2017;9000
+Burkina Faso;AFR;2016;8400
+Burkina Faso;AFR;2015;7900
+Burkina Faso;AFR;2014;7400
+Burkina Faso;AFR;2013;7000
+Burkina Faso;AFR;2012;6500
+Burkina Faso;AFR;2011;6300
+Burkina Faso;AFR;2010;6000
+Burkina Faso;AFR;2009;5800
+Burkina Faso;AFR;2008;5600
+Burkina Faso;AFR;2007;5300
+Burkina Faso;AFR;2006;4800
+Éthiopie;AFR;2019;9800
+Éthiopie;AFR;2018;9400
+Éthiopie;AFR;2017;8900
+Éthiopie;AFR;2016;8500
+Éthiopie;AFR;2015;8300
+Éthiopie;AFR;2014;7900
+Éthiopie;AFR;2013;7500
+Éthiopie;AFR;2012;7100
+Éthiopie;AFR;2011;6800
+Éthiopie;AFR;2010;6200
+Éthiopie;AFR;2009;5800
+Éthiopie;AFR;2008;5500
+Éthiopie;AFR;2007;5100
+Éthiopie;AFR;2006;4700
+Tchad;AFR;2019;7400
+Tchad;AFR;2018;6700
+Tchad;AFR;2017;5900
+Tchad;AFR;2016;5400
+Tchad;AFR;2015;5100
+Tchad;AFR;2014;4900
+Tchad;AFR;2013;4600
+Tchad;AFR;2012;4300
+Tchad;AFR;2011;4300
+Tchad;AFR;2010;4000
+Tchad;AFR;2009;3800
+Tchad;AFR;2008;3600
+Tchad;AFR;2007;3600
+Tchad;AFR;2006;3300
+Rwanda;AFR;2019;7000
+Rwanda;AFR;2018;6700
+Rwanda;AFR;2017;6700
+Rwanda;AFR;2016;6600
+Rwanda;AFR;2015;6400
+Rwanda;AFR;2014;6200
+Rwanda;AFR;2013;5900
+Rwanda;AFR;2012;5600
+Rwanda;AFR;2011;5500
+Rwanda;AFR;2010;5400
+Rwanda;AFR;2009;5200
+Rwanda;AFR;2008;5000
+Rwanda;AFR;2007;4900
+Rwanda;AFR;2006;4500
+Ghana;AFR;2019;6900
+Ghana;AFR;2018;6700
+Ghana;AFR;2017;6400
+Ghana;AFR;2016;6300
+Ghana;AFR;2015;6200
+Ghana;AFR;2014;6100
+Ghana;AFR;2013;6000
+Ghana;AFR;2012;6100
+Ghana;AFR;2011;5900
+Ghana;AFR;2010;5800
+Ghana;AFR;2009;5500
+Ghana;AFR;2008;5500
+Ghana;AFR;2007;5100
+Ghana;AFR;2006;5000
+Guinée-Bissau;AFR;2019;6300
+Guinée-Bissau;AFR;2018;5700
+Guinée-Bissau;AFR;2017;5700
+Guinée-Bissau;AFR;2016;5300
+Guinée-Bissau;AFR;2015;5100
+Guinée-Bissau;AFR;2014;4500
+Guinée-Bissau;AFR;2013;4100
+Guinée-Bissau;AFR;2012;3600
+Guinée-Bissau;AFR;2011;3300
+Guinée-Bissau;AFR;2010;2900
+Guinée-Bissau;AFR;2009;2800
+Guinée-Bissau;AFR;2008;2600
+Guinée-Bissau;AFR;2007;2500
+Guinée-Bissau;AFR;2006;2400
+Niger;AFR;2019;5100
+Niger;AFR;2018;4600
+Niger;AFR;2017;4300
+Niger;AFR;2016;4000
+Niger;AFR;2015;3700
+Niger;AFR;2014;3500
+Niger;AFR;2013;3300
+Niger;AFR;2012;3100
+Niger;AFR;2011;2900
+Niger;AFR;2010;2900
+Niger;AFR;2009;2600
+Niger;AFR;2008;2500
+Niger;AFR;2007;2400
+Niger;AFR;2006;2300
+Afrique du Sud;AFR;2019;4900
+Afrique du Sud;AFR;2018;4600
+Afrique du Sud;AFR;2017;4300
+Afrique du Sud;AFR;2016;4000
+Afrique du Sud;AFR;2015;3800
+Afrique du Sud;AFR;2014;3500
+Afrique du Sud;AFR;2013;3300
+Afrique du Sud;AFR;2012;3300
+Afrique du Sud;AFR;2011;3300
+Afrique du Sud;AFR;2010;3300
+Afrique du Sud;AFR;2009;3200
+Afrique du Sud;AFR;2008;3000
+Afrique du Sud;AFR;2007;2800
+Afrique du Sud;AFR;2006;2700
+Libye;AFR;2019;4900
+Libye;AFR;2018;4600
+Libye;AFR;2017;4300
+Libye;AFR;2016;3800
+Libye;AFR;2015;3500
+Libye;AFR;2014;3100
+Libye;AFR;2013;2800
+Libye;AFR;2012;2400
+Libye;AFR;2011;2100
+Libye;AFR;2010;1900
+Libye;AFR;2009;1800
+Libye;AFR;2008;1600
+Libye;AFR;2007;1500
+Libye;AFR;2006;1400
+Somalie;AFR;2019;4800
+Somalie;AFR;2018;4500
+Somalie;AFR;2017;3800
+Somalie;AFR;2016;3300
+Somalie;AFR;2015;2800
+Somalie;AFR;2014;2600
+Somalie;AFR;2013;2300
+Somalie;AFR;2012;2100
+Somalie;AFR;2011;1800
+Somalie;AFR;2010;1700
+Somalie;AFR;2009;1500
+Somalie;AFR;2008;1400
+Somalie;AFR;2007;1300
+Somalie;AFR;2006;1200
+Djibouti;AFR;2019;4200
+Djibouti;AFR;2018;4000
+Djibouti;AFR;2017;3800
+Djibouti;AFR;2016;3700
+Djibouti;AFR;2015;3500
+Djibouti;AFR;2014;3200
+Djibouti;AFR;2013;3100
+Djibouti;AFR;2012;3100
+Djibouti;AFR;2011;3000
+Djibouti;AFR;2010;2900
+Djibouti;AFR;2009;2900
+Djibouti;AFR;2008;2700
+Djibouti;AFR;2007;2600
+Djibouti;AFR;2006;2500
+Érythrée;AFR;2019;3800
+Érythrée;AFR;2018;3600
+Érythrée;AFR;2017;3000
+Érythrée;AFR;2016;2300
+Érythrée;AFR;2015;1900
+Érythrée;AFR;2014;1500
+Érythrée;AFR;2013;1300
+Érythrée;AFR;2012;1100
+Érythrée;AFR;2011;1000
+Érythrée;AFR;2010;700
+Érythrée;AFR;2009;600
+Érythrée;AFR;2008;400
+Érythrée;AFR;2007;300
+Érythrée;AFR;2006;300
+Gambie;AFR;2019;2900
+Gambie;AFR;2018;2700
+Gambie;AFR;2017;2400
+Gambie;AFR;2016;2200
+Gambie;AFR;2015;2200
+Gambie;AFR;2014;2000
+Gambie;AFR;2013;1900
+Gambie;AFR;2012;1800
+Gambie;AFR;2011;1800
+Gambie;AFR;2010;1800
+Gambie;AFR;2009;1700
+Gambie;AFR;2008;1600
+Gambie;AFR;2007;1500
+Gambie;AFR;2006;1500
+Burundi;AFR;2019;2800
+Burundi;AFR;2018;2700
+Burundi;AFR;2017;2400
+Burundi;AFR;2016;2100
+Burundi;AFR;2015;2200
+Burundi;AFR;2014;2100
+Burundi;AFR;2013;1900
+Burundi;AFR;2012;1800
+Burundi;AFR;2011;1800
+Burundi;AFR;2010;1700
+Burundi;AFR;2009;1500
+Burundi;AFR;2008;1500
+Burundi;AFR;2007;1400
+Burundi;AFR;2006;1200
+Kenya;AFR;2019;2000
+Kenya;AFR;2018;1900
+Kenya;AFR;2017;1900
+Kenya;AFR;2016;1800
+Kenya;AFR;2015;1600
+Kenya;AFR;2014;1500
+Kenya;AFR;2013;1500
+Kenya;AFR;2012;1400
+Kenya;AFR;2011;1400
+Kenya;AFR;2010;1400
+Kenya;AFR;2009;1400
+Kenya;AFR;2008;1300
+Kenya;AFR;2007;1200
+Kenya;AFR;2006;1100
+Sierra Leone;AFR;2019;1900
+Sierra Leone;AFR;2018;1900
+Sierra Leone;AFR;2017;1700
+Sierra Leone;AFR;2016;1600
+Sierra Leone;AFR;2015;1500
+Sierra Leone;AFR;2014;1400
+Sierra Leone;AFR;2013;1300
+Sierra Leone;AFR;2012;1300
+Sierra Leone;AFR;2011;1200
+Sierra Leone;AFR;2010;1100
+Sierra Leone;AFR;2009;1100
+Sierra Leone;AFR;2008;1100
+Sierra Leone;AFR;2007;1000
+Sierra Leone;AFR;2006;900
+Mozambique;AFR;2019;1300
+Mozambique;AFR;2018;1300
+Mozambique;AFR;2017;1200
+Mozambique;AFR;2016;1200
+Mozambique;AFR;2015;1200
+Mozambique;AFR;2014;1200
+Mozambique;AFR;2013;1100
+Mozambique;AFR;2012;1100
+Mozambique;AFR;2011;1100
+Mozambique;AFR;2010;1000
+Mozambique;AFR;2009;1000
+Mozambique;AFR;2008;1000
+Mozambique;AFR;2007;1000
+Mozambique;AFR;2006;900
+Libéria;AFR;2019;800
+Libéria;AFR;2018;800
+Libéria;AFR;2017;800
+Libéria;AFR;2016;800
+Libéria;AFR;2015;700
+Libéria;AFR;2014;700
+Libéria;AFR;2013;700
+Libéria;AFR;2012;600
+Libéria;AFR;2011;600
+Libéria;AFR;2010;600
+Libéria;AFR;2009;600
+Libéria;AFR;2008;600
+Libéria;AFR;2007;500
+Libéria;AFR;2006;600
+Zimbabwe;AFR;2019;700
+Zimbabwe;AFR;2018;700
+Zimbabwe;AFR;2017;600
+Zimbabwe;AFR;2016;600
+Zimbabwe;AFR;2015;600
+Zimbabwe;AFR;2014;500
+Zimbabwe;AFR;2013;500
+Zimbabwe;AFR;2012;500
+Zimbabwe;AFR;2011;500
+Zimbabwe;AFR;2010;500
+Zimbabwe;AFR;2009;500
+Zimbabwe;AFR;2008;500
+Zimbabwe;AFR;2007;500
+Zimbabwe;AFR;2006;400
+Guinée équatoriale;AFR;2019;700
+Guinée équatoriale;AFR;2018;700
+Guinée équatoriale;AFR;2017;600
+Guinée équatoriale;AFR;2016;600
+Guinée équatoriale;AFR;2015;500
+Guinée équatoriale;AFR;2014;400
+Guinée équatoriale;AFR;2013;400
+Guinée équatoriale;AFR;2012;300
+Guinée équatoriale;AFR;2011;300
+Guinée équatoriale;AFR;2010;300
+Guinée équatoriale;AFR;2009;300
+Guinée équatoriale;AFR;2008;300
+Guinée équatoriale;AFR;2007;300
+Guinée équatoriale;AFR;2006;300
+Ouganda;AFR;2019;700
+Ouganda;AFR;2018;600
+Ouganda;AFR;2017;600
+Ouganda;AFR;2016;500
+Ouganda;AFR;2015;500
+Ouganda;AFR;2014;400
+Ouganda;AFR;2013;400
+Ouganda;AFR;2012;400
+Ouganda;AFR;2011;400
+Ouganda;AFR;2010;400
+Ouganda;AFR;2009;400
+Ouganda;AFR;2008;400
+Ouganda;AFR;2007;300
+Ouganda;AFR;2006;300
+République-Unie de Tanzanie;AFR;2019;600
+République-Unie de Tanzanie;AFR;2018;600
+République-Unie de Tanzanie;AFR;2017;600
+République-Unie de Tanzanie;AFR;2016;600
+République-Unie de Tanzanie;AFR;2015;600
+République-Unie de Tanzanie;AFR;2014;600
+République-Unie de Tanzanie;AFR;2013;600
+République-Unie de Tanzanie;AFR;2012;600
+République-Unie de Tanzanie;AFR;2011;500
+République-Unie de Tanzanie;AFR;2010;500
+République-Unie de Tanzanie;AFR;2009;500
+République-Unie de Tanzanie;AFR;2008;500
+République-Unie de Tanzanie;AFR;2007;400
+République-Unie de Tanzanie;AFR;2006;400
+Sao Tomé-et-Principe;AFR;2019;500
+Sao Tomé-et-Principe;AFR;2018;500
+Sao Tomé-et-Principe;AFR;2017;400
+Sao Tomé-et-Principe;AFR;2016;300
+Sao Tomé-et-Principe;AFR;2015;300
+Sao Tomé-et-Principe;AFR;2014;300
+Sao Tomé-et-Principe;AFR;2013;300
+Sao Tomé-et-Principe;AFR;2012;200
+Sao Tomé-et-Principe;AFR;2011;200
+Sao Tomé-et-Principe;AFR;2010;200
+Sao Tomé-et-Principe;AFR;2009;200
+Sao Tomé-et-Principe;AFR;2008;200
+Sao Tomé-et-Principe;AFR;2007;200
+Sao Tomé-et-Principe;AFR;2006;300
+Seychelles;AFR;2019;500
+Seychelles;AFR;2018;500
+Seychelles;AFR;2017;500
+Seychelles;AFR;2016;500
+Seychelles;AFR;2015;500
+Seychelles;AFR;2014;500
+Seychelles;AFR;2013;400
+Seychelles;AFR;2012;400
+Seychelles;AFR;2011;400
+Seychelles;AFR;2010;500
+Seychelles;AFR;2009;500
+Seychelles;AFR;2008;500
+Seychelles;AFR;2007;500
+Seychelles;AFR;2006;500
+Sahara occidental;AFR;2019;400
+Sahara occidental;AFR;2018;400
+Sahara occidental;AFR;2017;300
+Sahara occidental;AFR;2016;300
+Sahara occidental;AFR;2015;200
+Sahara occidental;AFR;2014;200
+Sahara occidental;AFR;2013;100
+Sahara occidental;AFR;2012;100
+Sahara occidental;AFR;2011;100
+Zambie;AFR;2019;300
+Zambie;AFR;2018;300
+Zambie;AFR;2017;300
+Zambie;AFR;2016;300
+Zambie;AFR;2015;300
+Zambie;AFR;2014;300
+Zambie;AFR;2013;300
+Zambie;AFR;2012;300
+Zambie;AFR;2011;300
+Zambie;AFR;2010;300
+Zambie;AFR;2009;300
+Zambie;AFR;2008;300
+Zambie;AFR;2007;300
+Zambie;AFR;2006;300
+Namibie;AFR;2019;100
+Namibie;AFR;2018;100
+Namibie;AFR;2017;100
+Namibie;AFR;2016;100
+Namibie;AFR;2015;100
+Namibie;AFR;2014;100
+Namibie;AFR;2013;100
+Namibie;AFR;2012;100
+Namibie;AFR;2011;100
+Namibie;AFR;2010;100
+Namibie;AFR;2009;100
+Namibie;AFR;2008;100
+Namibie;AFR;2007;100
+Namibie;AFR;2006;100
+Botswana;AFR;2019;100
+Botswana;AFR;2018;100
+Botswana;AFR;2017;100
+Botswana;AFR;2016;100
+Botswana;AFR;2015;100
+Botswana;AFR;2014;100
+C:EUR;EUR;2019;2298300
+C:EUR;EUR;2018;2276500
+C:EUR;EUR;2017;2266700
+C:EUR;EUR;2016;2249500
+C:EUR;EUR;2015;2230500
+C:EUR;EUR;2014;2200100
+C:EUR;EUR;2013;2166100
+C:EUR;EUR;2012;2137400
+C:EUR;EUR;2011;2111500
+C:EUR;EUR;2010;2092500
+C:EUR;EUR;2009;2077000
+C:EUR;EUR;2008;2056700
+C:EUR;EUR;2007;2039200
+C:EUR;EUR;2006;2015500
+Portugal;EUR;2019;605300
+Portugal;EUR;2018;610200
+Portugal;EUR;2017;618200
+Portugal;EUR;2016;622000
+Portugal;EUR;2015;621800
+Portugal;EUR;2014;615600
+Portugal;EUR;2013;606900
+Portugal;EUR;2012;599300
+Portugal;EUR;2011;592300
+Portugal;EUR;2010;588300
+Portugal;EUR;2009;584700
+Portugal;EUR;2008;580600
+Portugal;EUR;2007;576100
+Portugal;EUR;2006;569600
+Italie;EUR;2019;284900
+Italie;EUR;2018;286100
+Italie;EUR;2017;286500
+Italie;EUR;2016;286400
+Italie;EUR;2015;286300
+Italie;EUR;2014;286700
+Italie;EUR;2013;289000
+Italie;EUR;2012;292600
+Italie;EUR;2011;297700
+Italie;EUR;2010;303900
+Italie;EUR;2009;311200
+Italie;EUR;2008;317300
+Italie;EUR;2007;323800
+Italie;EUR;2006;330000
+Espagne;EUR;2019;243600
+Espagne;EUR;2018;245200
+Espagne;EUR;2017;247700
+Espagne;EUR;2016;248400
+Espagne;EUR;2015;248900
+Espagne;EUR;2014;247000
+Espagne;EUR;2013;245700
+Espagne;EUR;2012;245100
+Espagne;EUR;2011;245000
+Espagne;EUR;2010;248300
+Espagne;EUR;2009;252300
+Espagne;EUR;2008;257300
+Espagne;EUR;2007;262900
+Espagne;EUR;2006;269600
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2019;146400
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2018;145700
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2017;145900
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2016;147000
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2015;148300
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2014;149000
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2013;150400
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2012;152600
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2011;154000
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2010;153600
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2009;151400
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2008;148000
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2007;142700
+Royaume-Uni de Grande-Bretagne et d'Irlande du Nord;EUR;2006;133900
+Roumanie;EUR;2019;133000
+Roumanie;EUR;2018;131700
+Roumanie;EUR;2017;125600
+Roumanie;EUR;2016;118400
+Roumanie;EUR;2015;111200
+Roumanie;EUR;2014;103000
+Roumanie;EUR;2013;91600
+Roumanie;EUR;2012;82400
+Roumanie;EUR;2011;74700
+Roumanie;EUR;2010;66600
+Roumanie;EUR;2009;59700
+Roumanie;EUR;2008;50400
+Roumanie;EUR;2007;46400
+Roumanie;EUR;2006;42200
+Belgique;EUR;2019;121500
+Belgique;EUR;2018;120400
+Belgique;EUR;2017;119000
+Belgique;EUR;2016;117700
+Belgique;EUR;2015;116700
+Belgique;EUR;2014;115200
+Belgique;EUR;2013;113800
+Belgique;EUR;2012;112700
+Belgique;EUR;2011;111300
+Belgique;EUR;2010;109700
+Belgique;EUR;2009;108800
+Belgique;EUR;2008;107400
+Belgique;EUR;2007;105100
+Belgique;EUR;2006;103300
+Allemagne;EUR;2019;114800
+Allemagne;EUR;2018;113700
+Allemagne;EUR;2017;115100
+Allemagne;EUR;2016;116700
+Allemagne;EUR;2015;118000
+Allemagne;EUR;2014;119100
+Allemagne;EUR;2013;120200
+Allemagne;EUR;2012;121800
+Allemagne;EUR;2011;123300
+Allemagne;EUR;2010;124800
+Allemagne;EUR;2009;127000
+Allemagne;EUR;2008;127900
+Allemagne;EUR;2007;128400
+Allemagne;EUR;2006;128900
+Pologne;EUR;2019;88100
+Pologne;EUR;2018;87200
+Pologne;EUR;2017;89400
+Pologne;EUR;2016;90700
+Pologne;EUR;2015;91700
+Pologne;EUR;2014;92300
+Pologne;EUR;2013;92700
+Pologne;EUR;2012;92600
+Pologne;EUR;2011;92800
+Pologne;EUR;2010;92300
+Pologne;EUR;2009;92100
+Pologne;EUR;2008;91700
+Pologne;EUR;2007;91100
+Pologne;EUR;2006;90400
+Serbie;EUR;2019;85700
+Serbie;EUR;2018;81100
+Serbie;EUR;2017;79700
+Serbie;EUR;2016;78000
+Serbie;EUR;2015;76500
+Serbie;EUR;2014;75400
+Serbie;EUR;2013;74200
+Serbie;EUR;2012;72100
+Serbie;EUR;2011;70400
+Serbie;EUR;2010;69200
+Serbie;EUR;2009;68000
+Serbie;EUR;2008;66800
+Serbie;EUR;2007;66100
+Serbie;EUR;2006;65500
+Fédération de Russie;EUR;2019;74700
+Fédération de Russie;EUR;2018;70600
+Fédération de Russie;EUR;2017;69800
+Fédération de Russie;EUR;2016;68500
+Fédération de Russie;EUR;2015;66600
+Fédération de Russie;EUR;2014;63700
+Fédération de Russie;EUR;2013;60700
+Fédération de Russie;EUR;2012;57200
+Fédération de Russie;EUR;2011;53200
+Fédération de Russie;EUR;2010;49200
+Fédération de Russie;EUR;2009;45700
+Fédération de Russie;EUR;2008;42100
+Fédération de Russie;EUR;2007;37900
+Fédération de Russie;EUR;2006;34100
+Suisse;EUR;2019;63500
+Suisse;EUR;2018;59200
+Suisse;EUR;2017;58500
+Suisse;EUR;2016;58800
+Suisse;EUR;2015;59000
+Suisse;EUR;2014;58600
+Suisse;EUR;2013;58200
+Suisse;EUR;2012;57900
+Suisse;EUR;2011;56800
+Suisse;EUR;2010;55600
+Suisse;EUR;2009;55000
+Suisse;EUR;2008;54000
+Suisse;EUR;2007;52900
+Suisse;EUR;2006;51300
+Pays-Bas;EUR;2019;35600
+Pays-Bas;EUR;2018;35200
+Pays-Bas;EUR;2017;35200
+Pays-Bas;EUR;2016;35500
+Pays-Bas;EUR;2015;35800
+Pays-Bas;EUR;2014;36300
+Pays-Bas;EUR;2013;36500
+Pays-Bas;EUR;2012;36500
+Pays-Bas;EUR;2011;36600
+Pays-Bas;EUR;2010;36500
+Pays-Bas;EUR;2009;36300
+Pays-Bas;EUR;2008;35700
+Pays-Bas;EUR;2007;35100
+Pays-Bas;EUR;2006;34000
+Arménie;EUR;2019;33300
+Arménie;EUR;2018;31500
+Arménie;EUR;2017;30000
+Arménie;EUR;2016;28800
+Arménie;EUR;2015;27200
+Arménie;EUR;2014;25700
+Arménie;EUR;2013;24000
+Arménie;EUR;2012;22200
+Arménie;EUR;2011;20100
+Arménie;EUR;2010;18300
+Arménie;EUR;2009;16300
+Arménie;EUR;2008;14700
+Arménie;EUR;2007;13300
+Arménie;EUR;2006;11800
+Bulgarie;EUR;2019;29800
+Bulgarie;EUR;2018;29300
+Bulgarie;EUR;2017;28100
+Bulgarie;EUR;2016;26200
+Bulgarie;EUR;2015;24700
+Bulgarie;EUR;2014;22900
+Bulgarie;EUR;2013;21300
+Bulgarie;EUR;2012;19800
+Bulgarie;EUR;2011;18100
+Bulgarie;EUR;2010;16800
+Bulgarie;EUR;2009;15500
+Bulgarie;EUR;2008;14200
+Bulgarie;EUR;2007;13300
+Bulgarie;EUR;2006;12700
+Ukraine;EUR;2019;28000
+Ukraine;EUR;2018;26400
+Ukraine;EUR;2017;24700
+Ukraine;EUR;2016;22900
+Ukraine;EUR;2015;21200
+Ukraine;EUR;2014;19500
+Ukraine;EUR;2013;18000
+Ukraine;EUR;2012;16900
+Ukraine;EUR;2011;15700
+Ukraine;EUR;2010;15100
+Ukraine;EUR;2009;14100
+Ukraine;EUR;2008;13300
+Ukraine;EUR;2007;12400
+Ukraine;EUR;2006;11600
+Albanie;EUR;2019;27200
+Albanie;EUR;2018;25700
+Albanie;EUR;2017;22100
+Albanie;EUR;2016;18400
+Albanie;EUR;2015;15100
+Albanie;EUR;2014;12600
+Albanie;EUR;2013;10600
+Albanie;EUR;2012;9100
+Albanie;EUR;2011;7600
+Albanie;EUR;2010;6700
+Albanie;EUR;2009;6200
+Albanie;EUR;2008;5700
+Albanie;EUR;2007;5500
+Albanie;EUR;2006;5300
+République de Moldova;EUR;2019;26300
+République de Moldova;EUR;2018;24900
+République de Moldova;EUR;2017;21700
+République de Moldova;EUR;2016;18400
+République de Moldova;EUR;2015;16000
+République de Moldova;EUR;2014;13800
+République de Moldova;EUR;2013;11700
+République de Moldova;EUR;2012;9600
+République de Moldova;EUR;2011;8400
+République de Moldova;EUR;2010;7100
+République de Moldova;EUR;2009;6000
+République de Moldova;EUR;2008;5400
+République de Moldova;EUR;2007;4900
+République de Moldova;EUR;2006;4100
+Géorgie;EUR;2019;16700
+Géorgie;EUR;2018;15700
+Géorgie;EUR;2017;14500
+Géorgie;EUR;2016;13000
+Géorgie;EUR;2015;12100
+Géorgie;EUR;2014;11300
+Géorgie;EUR;2013;10300
+Géorgie;EUR;2012;9200
+Géorgie;EUR;2011;8500
+Géorgie;EUR;2010;7700
+Géorgie;EUR;2009;7000
+Géorgie;EUR;2008;6500
+Géorgie;EUR;2007;6000
+Géorgie;EUR;2006;5400
+Bosnie-Herzégovine;EUR;2019;15600
+Bosnie-Herzégovine;EUR;2018;14800
+Bosnie-Herzégovine;EUR;2017;15000
+Bosnie-Herzégovine;EUR;2016;14800
+Bosnie-Herzégovine;EUR;2015;14500
+Bosnie-Herzégovine;EUR;2014;14200
+Bosnie-Herzégovine;EUR;2013;14100
+Bosnie-Herzégovine;EUR;2012;13600
+Bosnie-Herzégovine;EUR;2011;13700
+Bosnie-Herzégovine;EUR;2010;13400
+Bosnie-Herzégovine;EUR;2009;12800
+Bosnie-Herzégovine;EUR;2008;12900
+Bosnie-Herzégovine;EUR;2007;12300
+Bosnie-Herzégovine;EUR;2006;11300
+Grèce;EUR;2019;11800
+Grèce;EUR;2018;11800
+Grèce;EUR;2017;11400
+Grèce;EUR;2016;11100
+Grèce;EUR;2015;10800
+Grèce;EUR;2014;10500
+Grèce;EUR;2013;10400
+Grèce;EUR;2012;9900
+Grèce;EUR;2011;9700
+Grèce;EUR;2010;9600
+Grèce;EUR;2009;9700
+Grèce;EUR;2008;9400
+Grèce;EUR;2007;9400
+Grèce;EUR;2006;9500
+Hongrie;EUR;2019;10100
+Hongrie;EUR;2018;10000
+Hongrie;EUR;2017;10200
+Hongrie;EUR;2016;10200
+Hongrie;EUR;2015;10300
+Hongrie;EUR;2014;10900
+Hongrie;EUR;2013;10600
+Hongrie;EUR;2012;10200
+Hongrie;EUR;2011;9900
+Hongrie;EUR;2010;9600
+Hongrie;EUR;2009;8900
+Hongrie;EUR;2008;8800
+Hongrie;EUR;2007;8600
+Hongrie;EUR;2006;8600
+Luxembourg;EUR;2019;8700
+Luxembourg;EUR;2018;8600
+Luxembourg;EUR;2017;8400
+Luxembourg;EUR;2016;8200
+Luxembourg;EUR;2015;8100
+Luxembourg;EUR;2014;7700
+Luxembourg;EUR;2013;7500
+Luxembourg;EUR;2012;7400
+Luxembourg;EUR;2011;7300
+Luxembourg;EUR;2010;7300
+Luxembourg;EUR;2009;7000
+Luxembourg;EUR;2008;7100
+Luxembourg;EUR;2007;7000
+Luxembourg;EUR;2006;6800
+Irlande;EUR;2019;8600
+Irlande;EUR;2018;8500
+Irlande;EUR;2017;8600
+Irlande;EUR;2016;8500
+Irlande;EUR;2015;8500
+Irlande;EUR;2014;8500
+Irlande;EUR;2013;8500
+Irlande;EUR;2012;8400
+Irlande;EUR;2011;8200
+Irlande;EUR;2010;8000
+Irlande;EUR;2009;8200
+Irlande;EUR;2008;8000
+Irlande;EUR;2007;7800
+Irlande;EUR;2006;7700
+Croatie;EUR;2019;8200
+Croatie;EUR;2018;8100
+Croatie;EUR;2017;8100
+Croatie;EUR;2016;8200
+Croatie;EUR;2015;8400
+Croatie;EUR;2014;8500
+Croatie;EUR;2013;8600
+Croatie;EUR;2012;8700
+Croatie;EUR;2011;8800
+Croatie;EUR;2010;8700
+Croatie;EUR;2009;8700
+Croatie;EUR;2008;8700
+Croatie;EUR;2007;8600
+Croatie;EUR;2006;8500
+Ex-République yougoslave de Macédoine;EUR;2019;8000
+Ex-République yougoslave de Macédoine;EUR;2018;7500
+Ex-République yougoslave de Macédoine;EUR;2017;7000
+Ex-République yougoslave de Macédoine;EUR;2016;6500
+Ex-République yougoslave de Macédoine;EUR;2015;6200
+Ex-République yougoslave de Macédoine;EUR;2014;5800
+Ex-République yougoslave de Macédoine;EUR;2013;5500
+Ex-République yougoslave de Macédoine;EUR;2012;5200
+Ex-République yougoslave de Macédoine;EUR;2011;4800
+Ex-République yougoslave de Macédoine;EUR;2010;4500
+Ex-République yougoslave de Macédoine;EUR;2009;4200
+Ex-République yougoslave de Macédoine;EUR;2008;4100
+Ex-République yougoslave de Macédoine;EUR;2007;4100
+Ex-République yougoslave de Macédoine;EUR;2006;3700
+République tchèque;EUR;2019;7900
+République tchèque;EUR;2018;7700
+République tchèque;EUR;2017;7700
+République tchèque;EUR;2016;7700
+République tchèque;EUR;2015;7700
+République tchèque;EUR;2014;7500
+République tchèque;EUR;2013;7400
+République tchèque;EUR;2012;7400
+République tchèque;EUR;2011;7400
+République tchèque;EUR;2010;7400
+République tchèque;EUR;2009;7500
+République tchèque;EUR;2008;7500
+République tchèque;EUR;2007;7500
+République tchèque;EUR;2006;7400
+Suède;EUR;2019;7600
+Suède;EUR;2018;7500
+Suède;EUR;2017;7600
+Suède;EUR;2016;7700
+Suède;EUR;2015;7900
+Suède;EUR;2014;8200
+Suède;EUR;2013;8200
+Suède;EUR;2012;8200
+Suède;EUR;2011;8400
+Suède;EUR;2010;8500
+Suède;EUR;2009;8600
+Suède;EUR;2008;8400
+Suède;EUR;2007;8500
+Suède;EUR;2006;8300
+Autriche;EUR;2019;6700
+Autriche;EUR;2018;6700
+Autriche;EUR;2017;6800
+Autriche;EUR;2016;6900
+Autriche;EUR;2015;7000
+Autriche;EUR;2014;7100
+Autriche;EUR;2013;7300
+Autriche;EUR;2012;7500
+Autriche;EUR;2011;7600
+Autriche;EUR;2010;7700
+Autriche;EUR;2009;7900
+Autriche;EUR;2008;8000
+Autriche;EUR;2007;8000
+Autriche;EUR;2006;8100
+Azerbaïdjan;EUR;2019;6000
+Azerbaïdjan;EUR;2018;5700
+Azerbaïdjan;EUR;2017;5700
+Azerbaïdjan;EUR;2016;5700
+Azerbaïdjan;EUR;2015;5500
+Azerbaïdjan;EUR;2014;5600
+Azerbaïdjan;EUR;2013;5200
+Azerbaïdjan;EUR;2012;4800
+Azerbaïdjan;EUR;2011;4400
+Azerbaïdjan;EUR;2010;4300
+Azerbaïdjan;EUR;2009;3700
+Azerbaïdjan;EUR;2008;3400
+Azerbaïdjan;EUR;2007;3100
+Azerbaïdjan;EUR;2006;2800
+Bélarus;EUR;2019;5100
+Bélarus;EUR;2018;4800
+Bélarus;EUR;2017;4500
+Bélarus;EUR;2016;4500
+Bélarus;EUR;2015;4300
+Bélarus;EUR;2014;4100
+Bélarus;EUR;2013;4000
+Bélarus;EUR;2012;3800
+Bélarus;EUR;2011;3400
+Bélarus;EUR;2010;3300
+Bélarus;EUR;2009;3000
+Bélarus;EUR;2008;2800
+Bélarus;EUR;2007;2600
+Bélarus;EUR;2006;2400
+Slovaquie;EUR;2019;4900
+Slovaquie;EUR;2018;4800
+Slovaquie;EUR;2017;4900
+Slovaquie;EUR;2016;5000
+Slovaquie;EUR;2015;5100
+Slovaquie;EUR;2014;4900
+Slovaquie;EUR;2013;4700
+Slovaquie;EUR;2012;4600
+Slovaquie;EUR;2011;4400
+Slovaquie;EUR;2010;4100
+Slovaquie;EUR;2009;3900
+Slovaquie;EUR;2008;3600
+Slovaquie;EUR;2007;3500
+Slovaquie;EUR;2006;3100
+Danemark;EUR;2019;4900
+Danemark;EUR;2018;4800
+Danemark;EUR;2017;4900
+Danemark;EUR;2016;4900
+Danemark;EUR;2015;4900
+Danemark;EUR;2014;5200
+Danemark;EUR;2013;5300
+Danemark;EUR;2012;5400
+Danemark;EUR;2011;5400
+Danemark;EUR;2010;5600
+Danemark;EUR;2009;5600
+Danemark;EUR;2008;5600
+Danemark;EUR;2007;5700
+Danemark;EUR;2006;5800
+Monaco;EUR;2019;3800
+Monaco;EUR;2018;3600
+Monaco;EUR;2017;3600
+Monaco;EUR;2016;3400
+Monaco;EUR;2015;3300
+Monaco;EUR;2014;3200
+Monaco;EUR;2013;3100
+Monaco;EUR;2012;3000
+Monaco;EUR;2011;3100
+Monaco;EUR;2010;3000
+Monaco;EUR;2009;3000
+Monaco;EUR;2008;3000
+Monaco;EUR;2007;2700
+Monaco;EUR;2006;2200
+Lituanie;EUR;2019;3600
+Lituanie;EUR;2018;3500
+Lituanie;EUR;2017;3400
+Lituanie;EUR;2016;3300
+Lituanie;EUR;2015;3300
+Lituanie;EUR;2014;3200
+Lituanie;EUR;2013;3000
+Lituanie;EUR;2012;3000
+Lituanie;EUR;2011;2700
+Lituanie;EUR;2010;2500
+Lituanie;EUR;2009;2300
+Lituanie;EUR;2008;2100
+Lituanie;EUR;2007;2000
+Lituanie;EUR;2006;1900
+Lettonie;EUR;2019;3200
+Lettonie;EUR;2018;3200
+Lettonie;EUR;2017;3100
+Lettonie;EUR;2016;3100
+Lettonie;EUR;2015;3100
+Lettonie;EUR;2014;2900
+Lettonie;EUR;2013;2800
+Lettonie;EUR;2012;2700
+Lettonie;EUR;2011;2400
+Lettonie;EUR;2010;2200
+Lettonie;EUR;2009;2000
+Lettonie;EUR;2008;1900
+Lettonie;EUR;2007;1700
+Lettonie;EUR;2006;1600
+Finlande;EUR;2019;3100
+Finlande;EUR;2018;3000
+Finlande;EUR;2017;3000
+Finlande;EUR;2016;3100
+Finlande;EUR;2015;3300
+Finlande;EUR;2014;3400
+Finlande;EUR;2013;3400
+Finlande;EUR;2012;3500
+Finlande;EUR;2011;3400
+Finlande;EUR;2010;3300
+Finlande;EUR;2009;3300
+Finlande;EUR;2008;3200
+Finlande;EUR;2007;3200
+Finlande;EUR;2006;3200
+Monténégro;EUR;2019;3000
+Monténégro;EUR;2018;2800
+Monténégro;EUR;2017;2700
+Monténégro;EUR;2016;2400
+Monténégro;EUR;2015;2400
+Monténégro;EUR;2014;2200
+Monténégro;EUR;2013;2000
+Monténégro;EUR;2012;1800
+Monténégro;EUR;2011;1700
+Monténégro;EUR;2010;1400
+Monténégro;EUR;2009;1300
+Monténégro;EUR;2008;900
+Monténégro;EUR;2007;600
+Monténégro;EUR;2006;400
+Norvège;EUR;2019;2800
+Norvège;EUR;2018;2600
+Norvège;EUR;2017;2400
+Norvège;EUR;2016;2500
+Norvège;EUR;2015;2600
+Norvège;EUR;2014;2700
+Norvège;EUR;2013;2800
+Norvège;EUR;2012;2900
+Norvège;EUR;2011;2800
+Norvège;EUR;2010;2700
+Norvège;EUR;2009;2700
+Norvège;EUR;2008;2700
+Norvège;EUR;2007;2700
+Norvège;EUR;2006;2600
+Slovénie;EUR;2019;2200
+Slovénie;EUR;2018;2200
+Slovénie;EUR;2017;2200
+Slovénie;EUR;2016;2200
+Slovénie;EUR;2015;2300
+Slovénie;EUR;2014;2300
+Slovénie;EUR;2013;2300
+Slovénie;EUR;2012;2300
+Slovénie;EUR;2011;2200
+Slovénie;EUR;2010;2300
+Slovénie;EUR;2009;2300
+Slovénie;EUR;2008;2400
+Slovénie;EUR;2007;2500
+Slovénie;EUR;2006;2500
+Estonie;EUR;2019;1300
+Estonie;EUR;2018;1200
+Estonie;EUR;2017;1200
+Estonie;EUR;2016;1100
+Estonie;EUR;2015;1100
+Estonie;EUR;2014;1000
+Estonie;EUR;2013;900
+Estonie;EUR;2012;900
+Estonie;EUR;2011;800
+Estonie;EUR;2010;700
+Estonie;EUR;2009;700
+Estonie;EUR;2008;700
+Estonie;EUR;2007;700
+Estonie;EUR;2006;700
+Andorre;EUR;2019;1100
+Andorre;EUR;2018;1000
+Andorre;EUR;2017;1000
+Andorre;EUR;2016;1000
+Andorre;EUR;2015;1000
+Andorre;EUR;2014;900
+Andorre;EUR;2013;800
+Andorre;EUR;2012;700
+Andorre;EUR;2011;700
+Andorre;EUR;2010;600
+Andorre;EUR;2009;600
+Andorre;EUR;2008;600
+Andorre;EUR;2007;600
+Andorre;EUR;2006;600
+Chypre;EUR;2019;900
+Chypre;EUR;2018;900
+Chypre;EUR;2017;900
+Chypre;EUR;2016;800
+Chypre;EUR;2015;800
+Chypre;EUR;2014;800
+Chypre;EUR;2013;800
+Chypre;EUR;2012;800
+Chypre;EUR;2011;900
+Chypre;EUR;2010;900
+Chypre;EUR;2009;800
+Chypre;EUR;2008;900
+Chypre;EUR;2007;900
+Chypre;EUR;2006;800
+Malte;EUR;2019;400
+Malte;EUR;2018;400
+Malte;EUR;2017;400
+Malte;EUR;2016;400
+Malte;EUR;2015;400
+Malte;EUR;2014;400
+Malte;EUR;2013;400
+Malte;EUR;2012;400
+Malte;EUR;2011;400
+Malte;EUR;2010;400
+Malte;EUR;2009;400
+Malte;EUR;2008;400
+Malte;EUR;2007;400
+Malte;EUR;2006;400
+Islande;EUR;2019;300
+Islande;EUR;2018;300
+Islande;EUR;2017;300
+Islande;EUR;2016;300
+Islande;EUR;2015;300
+Islande;EUR;2014;300
+Islande;EUR;2013;300
+Islande;EUR;2012;300
+Islande;EUR;2011;300
+Islande;EUR;2010;300
+Islande;EUR;2009;300
+Islande;EUR;2008;300
+Islande;EUR;2007;300
+Islande;EUR;2006;300
+Jersey;EUR;2019;200
+Jersey;EUR;2018;200
+Jersey;EUR;2017;200
+Jersey;EUR;2016;200
+Jersey;EUR;2015;200
+Jersey;EUR;2014;200
+Jersey;EUR;2013;100
+Jersey;EUR;2012;200
+Jersey;EUR;2011;100
+Jersey;EUR;2010;200
+Jersey;EUR;2009;200
+Jersey;EUR;2008;200
+Jersey;EUR;2007;100
+Jersey;EUR;2006;100
+Saint-Marin;EUR;2019;100
+Saint-Marin;EUR;2018;100
+Saint-Marin;EUR;2017;100
+Saint-Marin;EUR;2016;100
+Saint-Marin;EUR;2015;100
+Saint-Marin;EUR;2014;100
+Saint-Marin;EUR;2013;100
+Saint-Marin;EUR;2012;100
+Saint-Marin;EUR;2011;100
+Saint-Marin;EUR;2010;100
+Saint-Marin;EUR;2009;100
+Saint-Marin;EUR;2008;100
+Saint-Marin;EUR;2007;200
+Saint-Marin;EUR;2006;200
+C:ASI;ASI;2019;932800
+C:ASI;ASI;2018;892300
+C:ASI;ASI;2017;873500
+C:ASI;ASI;2016;851700
+C:ASI;ASI;2015;837800
+C:ASI;ASI;2014;820400
+C:ASI;ASI;2013;800800
+C:ASI;ASI;2012;787300
+C:ASI;ASI;2011;772500
+C:ASI;ASI;2010;760900
+C:ASI;ASI;2009;746200
+C:ASI;ASI;2008;732200
+C:ASI;ASI;2007;713500
+C:ASI;ASI;2006;692400
+Turquie;ASI;2019;251900
+Turquie;ASI;2018;245200
+Turquie;ASI;2017;246300
+Turquie;ASI;2016;246900
+Turquie;ASI;2015;249100
+Turquie;ASI;2014;249600
+Turquie;ASI;2013;248600
+Turquie;ASI;2012;248200
+Turquie;ASI;2011;246900
+Turquie;ASI;2010;245700
+Turquie;ASI;2009;242300
+Turquie;ASI;2008;238900
+Turquie;ASI;2007;234500
+Turquie;ASI;2006;228600
+Chine;ASI;2019;112200
+Chine;ASI;2018;106600
+Chine;ASI;2017;105700
+Chine;ASI;2016;104100
+Chine;ASI;2015;103700
+Chine;ASI;2014;101000
+Chine;ASI;2013;99500
+Chine;ASI;2012;96500
+Chine;ASI;2011;92800
+Chine;ASI;2010;89600
+Chine;ASI;2009;84800
+Chine;ASI;2008;80000
+Chine;ASI;2007;75400
+Chine;ASI;2006;70500
+Viet Nam;ASI;2019;77100
+Viet Nam;ASI;2018;76100
+Viet Nam;ASI;2017;75700
+Viet Nam;ASI;2016;75600
+Viet Nam;ASI;2015;75500
+Viet Nam;ASI;2014;75400
+Viet Nam;ASI;2013;75200
+Viet Nam;ASI;2012;75600
+Viet Nam;ASI;2011;75200
+Viet Nam;ASI;2010;74700
+Viet Nam;ASI;2009;75000
+Viet Nam;ASI;2008;75100
+Viet Nam;ASI;2007;74500
+Viet Nam;ASI;2006;73500
+Sri Lanka;ASI;2019;55700
+Sri Lanka;ASI;2018;52300
+Sri Lanka;ASI;2017;52300
+Sri Lanka;ASI;2016;50100
+Sri Lanka;ASI;2015;48400
+Sri Lanka;ASI;2014;46700
+Sri Lanka;ASI;2013;45300
+Sri Lanka;ASI;2012;42300
+Sri Lanka;ASI;2011;39800
+Sri Lanka;ASI;2010;38100
+Sri Lanka;ASI;2009;36600
+Sri Lanka;ASI;2008;35100
+Sri Lanka;ASI;2007;33700
+Sri Lanka;ASI;2006;33000
+Cambodge;ASI;2019;49800
+Cambodge;ASI;2018;49400
+Cambodge;ASI;2017;49900
+Cambodge;ASI;2016;50300
+Cambodge;ASI;2015;50700
+Cambodge;ASI;2014;50800
+Cambodge;ASI;2013;51400
+Cambodge;ASI;2012;52000
+Cambodge;ASI;2011;52200
+Cambodge;ASI;2010;52500
+Cambodge;ASI;2009;52600
+Cambodge;ASI;2008;52600
+Cambodge;ASI;2007;51700
+Cambodge;ASI;2006;51400
+Inde;ASI;2019;45700
+Inde;ASI;2018;42900
+Inde;ASI;2017;41500
+Inde;ASI;2016;39500
+Inde;ASI;2015;38100
+Inde;ASI;2014;36800
+Inde;ASI;2013;35700
+Inde;ASI;2012;34500
+Inde;ASI;2011;33200
+Inde;ASI;2010;33000
+Inde;ASI;2009;31500
+Inde;ASI;2008;30700
+Inde;ASI;2007;29100
+Inde;ASI;2006;28200
+Liban;ASI;2019;41700
+Liban;ASI;2018;38700
+Liban;ASI;2017;37600
+Liban;ASI;2016;37100
+Liban;ASI;2015;36400
+Liban;ASI;2014;35800
+Liban;ASI;2013;35100
+Liban;ASI;2012;35400
+Liban;ASI;2011;35400
+Liban;ASI;2010;35700
+Liban;ASI;2009;36100
+Liban;ASI;2008;35900
+Liban;ASI;2007;35400
+Liban;ASI;2006;34300
+République arabe syrienne;ASI;2019;38600
+République arabe syrienne;ASI;2018;35500
+République arabe syrienne;ASI;2017;30900
+République arabe syrienne;ASI;2016;26100
+République arabe syrienne;ASI;2015;22100
+République arabe syrienne;ASI;2014;19600
+République arabe syrienne;ASI;2013;14700
+République arabe syrienne;ASI;2012;13700
+République arabe syrienne;ASI;2011;13100
+République arabe syrienne;ASI;2010;12800
+République arabe syrienne;ASI;2009;12800
+République arabe syrienne;ASI;2008;12800
+République arabe syrienne;ASI;2007;12600
+République arabe syrienne;ASI;2006;12200
+République démocratique populaire lao;ASI;2019;32900
+République démocratique populaire lao;ASI;2018;32600
+République démocratique populaire lao;ASI;2017;32800
+République démocratique populaire lao;ASI;2016;33200
+République démocratique populaire lao;ASI;2015;33600
+République démocratique populaire lao;ASI;2014;33800
+République démocratique populaire lao;ASI;2013;34200
+République démocratique populaire lao;ASI;2012;33800
+République démocratique populaire lao;ASI;2011;34200
+République démocratique populaire lao;ASI;2010;34300
+République démocratique populaire lao;ASI;2009;34500
+République démocratique populaire lao;ASI;2008;35000
+République démocratique populaire lao;ASI;2007;35900
+République démocratique populaire lao;ASI;2006;35600
+Pakistan;ASI;2019;29400
+Pakistan;ASI;2018;27600
+Pakistan;ASI;2017;26600
+Pakistan;ASI;2016;25300
+Pakistan;ASI;2015;24300
+Pakistan;ASI;2014;23000
+Pakistan;ASI;2013;21900
+Pakistan;ASI;2012;20600
+Pakistan;ASI;2011;19800
+Pakistan;ASI;2010;18900
+Pakistan;ASI;2009;18400
+Pakistan;ASI;2008;17700
+Pakistan;ASI;2007;16900
+Pakistan;ASI;2006;16300
+Iran (République islamique d');ASI;2019;23800
+Iran (République islamique d');ASI;2018;22000
+Iran (République islamique d');ASI;2017;21300
+Iran (République islamique d');ASI;2016;20600
+Iran (République islamique d');ASI;2015;20300
+Iran (République islamique d');ASI;2014;20000
+Iran (République islamique d');ASI;2013;19800
+Iran (République islamique d');ASI;2012;19500
+Iran (République islamique d');ASI;2011;19600
+Iran (République islamique d');ASI;2010;19500
+Iran (République islamique d');ASI;2009;19300
+Iran (République islamique d');ASI;2008;19500
+Iran (République islamique d');ASI;2007;19500
+Iran (République islamique d');ASI;2006;19000
+Afghanistan;ASI;2019;23300
+Afghanistan;ASI;2018;21700
+Afghanistan;ASI;2017;17200
+Afghanistan;ASI;2016;13300
+Afghanistan;ASI;2015;10600
+Afghanistan;ASI;2014;8900
+Afghanistan;ASI;2013;5700
+Afghanistan;ASI;2012;5200
+Afghanistan;ASI;2011;4600
+Afghanistan;ASI;2010;4300
+Afghanistan;ASI;2009;4200
+Afghanistan;ASI;2008;3800
+Afghanistan;ASI;2007;3400
+Afghanistan;ASI;2006;3300
+Philippines;ASI;2019;20100
+Philippines;ASI;2018;19100
+Philippines;ASI;2017;18600
+Philippines;ASI;2016;18100
+Philippines;ASI;2015;17400
+Philippines;ASI;2014;16500
+Philippines;ASI;2013;15500
+Philippines;ASI;2012;14900
+Philippines;ASI;2011;14300
+Philippines;ASI;2010;13900
+Philippines;ASI;2009;13300
+Philippines;ASI;2008;12400
+Philippines;ASI;2007;11600
+Philippines;ASI;2006;10600
+Thaïlande;ASI;2019;19700
+Thaïlande;ASI;2018;18700
+Thaïlande;ASI;2017;18300
+Thaïlande;ASI;2016;18100
+Thaïlande;ASI;2015;17800
+Thaïlande;ASI;2014;17400
+Thaïlande;ASI;2013;16800
+Thaïlande;ASI;2012;16300
+Thaïlande;ASI;2011;15900
+Thaïlande;ASI;2010;15400
+Thaïlande;ASI;2009;14800
+Thaïlande;ASI;2008;14300
+Thaïlande;ASI;2007;13600
+Thaïlande;ASI;2006;12800
+Japon;ASI;2019;19300
+Japon;ASI;2018;18200
+Japon;ASI;2017;18300
+Japon;ASI;2016;18400
+Japon;ASI;2015;18500
+Japon;ASI;2014;18400
+Japon;ASI;2013;18400
+Japon;ASI;2012;18100
+Japon;ASI;2011;17800
+Japon;ASI;2010;17600
+Japon;ASI;2009;17500
+Japon;ASI;2008;17500
+Japon;ASI;2007;17300
+Japon;ASI;2006;16800
+République de Corée;ASI;2019;17300
+République de Corée;ASI;2018;16400
+République de Corée;ASI;2017;16000
+République de Corée;ASI;2016;15900
+République de Corée;ASI;2015;15800
+République de Corée;ASI;2014;15400
+République de Corée;ASI;2013;15200
+République de Corée;ASI;2012;15500
+République de Corée;ASI;2011;15500
+République de Corée;ASI;2010;15500
+République de Corée;ASI;2009;15600
+République de Corée;ASI;2008;15500
+République de Corée;ASI;2007;15000
+République de Corée;ASI;2006;14600
+Bangladesh;ASI;2019;17200
+Bangladesh;ASI;2018;16000
+Bangladesh;ASI;2017;14400
+Bangladesh;ASI;2016;12700
+Bangladesh;ASI;2015;11600
+Bangladesh;ASI;2014;10400
+Bangladesh;ASI;2013;9000
+Bangladesh;ASI;2012;8100
+Bangladesh;ASI;2011;7000
+Bangladesh;ASI;2010;5800
+Bangladesh;ASI;2009;4500
+Bangladesh;ASI;2008;4100
+Bangladesh;ASI;2007;3600
+Bangladesh;ASI;2006;3300
+Iraq;ASI;2019;14500
+Iraq;ASI;2018;13200
+Iraq;ASI;2017;11900
+Iraq;ASI;2016;10200
+Iraq;ASI;2015;8800
+Iraq;ASI;2014;7400
+Iraq;ASI;2013;6600
+Iraq;ASI;2012;6300
+Iraq;ASI;2011;5800
+Iraq;ASI;2010;5800
+Iraq;ASI;2009;5400
+Iraq;ASI;2008;5100
+Iraq;ASI;2007;5000
+Iraq;ASI;2006;4900
+Indonésie;ASI;2019;5100
+Indonésie;ASI;2018;4800
+Indonésie;ASI;2017;4700
+Indonésie;ASI;2016;4600
+Indonésie;ASI;2015;4600
+Indonésie;ASI;2014;4500
+Indonésie;ASI;2013;4300
+Indonésie;ASI;2012;4200
+Indonésie;ASI;2011;4000
+Indonésie;ASI;2010;3800
+Indonésie;ASI;2009;3700
+Indonésie;ASI;2008;3800
+Indonésie;ASI;2007;3600
+Indonésie;ASI;2006;3400
+Israël;ASI;2019;4800
+Israël;ASI;2018;4500
+Israël;ASI;2017;4500
+Israël;ASI;2016;4500
+Israël;ASI;2015;4600
+Israël;ASI;2014;4600
+Israël;ASI;2013;4600
+Israël;ASI;2012;4500
+Israël;ASI;2011;4600
+Israël;ASI;2010;4600
+Israël;ASI;2009;4600
+Israël;ASI;2008;4600
+Israël;ASI;2007;4700
+Israël;ASI;2006;4600
+Taïwan;ASI;2019;4500
+Taïwan;ASI;2018;4200
+Taïwan;ASI;2017;4100
+Taïwan;ASI;2016;3900
+Taïwan;ASI;2015;3800
+Taïwan;ASI;2014;3700
+Taïwan;ASI;2013;3600
+Taïwan;ASI;2012;3400
+Taïwan;ASI;2011;3300
+Taïwan;ASI;2010;3200
+Taïwan;ASI;2009;3100
+Taïwan;ASI;2008;3000
+Taïwan;ASI;2007;2800
+Taïwan;ASI;2006;2800
+Kazakhstan;ASI;2019;4100
+Kazakhstan;ASI;2018;3900
+Kazakhstan;ASI;2017;3700
+Kazakhstan;ASI;2016;3500
+Kazakhstan;ASI;2015;3400
+Kazakhstan;ASI;2014;3200
+Kazakhstan;ASI;2013;3000
+Kazakhstan;ASI;2012;2800
+Kazakhstan;ASI;2011;2600
+Kazakhstan;ASI;2010;2400
+Kazakhstan;ASI;2009;2300
+Kazakhstan;ASI;2008;2100
+Kazakhstan;ASI;2007;2000
+Kazakhstan;ASI;2006;1900
+Mongolie;ASI;2019;2900
+Mongolie;ASI;2018;2800
+Mongolie;ASI;2017;2500
+Mongolie;ASI;2016;2300
+Mongolie;ASI;2015;2200
+Mongolie;ASI;2014;2000
+Mongolie;ASI;2013;1900
+Mongolie;ASI;2012;1800
+Mongolie;ASI;2011;1500
+Mongolie;ASI;2010;1400
+Mongolie;ASI;2009;1300
+Mongolie;ASI;2008;1100
+Mongolie;ASI;2007;900
+Mongolie;ASI;2006;700
+Népal;ASI;2019;2700
+Népal;ASI;2018;2500
+Népal;ASI;2017;2200
+Népal;ASI;2016;1900
+Népal;ASI;2015;1800
+Népal;ASI;2014;1700
+Népal;ASI;2013;1600
+Népal;ASI;2012;1300
+Népal;ASI;2011;1200
+Népal;ASI;2010;1100
+Népal;ASI;2009;1100
+Népal;ASI;2008;1000
+Népal;ASI;2007;900
+Népal;ASI;2006;900
+Malaisie;ASI;2019;2600
+Malaisie;ASI;2018;2400
+Malaisie;ASI;2017;2400
+Malaisie;ASI;2016;2500
+Malaisie;ASI;2015;2300
+Malaisie;ASI;2014;2300
+Malaisie;ASI;2013;2300
+Malaisie;ASI;2012;2200
+Malaisie;ASI;2011;2100
+Malaisie;ASI;2010;2000
+Malaisie;ASI;2009;2000
+Malaisie;ASI;2008;2000
+Malaisie;ASI;2007;1900
+Malaisie;ASI;2006;1800
+Arabie saoudite;ASI;2019;2200
+Arabie saoudite;ASI;2018;2000
+Arabie saoudite;ASI;2017;2100
+Arabie saoudite;ASI;2016;2000
+Arabie saoudite;ASI;2015;2000
+Arabie saoudite;ASI;2014;2000
+Arabie saoudite;ASI;2013;2000
+Arabie saoudite;ASI;2012;2100
+Arabie saoudite;ASI;2011;2000
+Arabie saoudite;ASI;2010;1900
+Arabie saoudite;ASI;2009;1600
+Arabie saoudite;ASI;2008;1400
+Arabie saoudite;ASI;2007;1100
+Arabie saoudite;ASI;2006;1000
+Singapour;ASI;2019;1600
+Singapour;ASI;2018;1500
+Singapour;ASI;2017;1600
+Singapour;ASI;2016;1500
+Singapour;ASI;2015;1500
+Singapour;ASI;2014;1400
+Singapour;ASI;2013;1400
+Singapour;ASI;2012;1300
+Singapour;ASI;2011;1200
+Singapour;ASI;2010;1100
+Singapour;ASI;2009;1200
+Singapour;ASI;2008;1300
+Singapour;ASI;2007;1300
+Singapour;ASI;2006;1300
+Ouzbékistan;ASI;2019;1500
+Ouzbékistan;ASI;2018;1400
+Ouzbékistan;ASI;2017;1400
+Ouzbékistan;ASI;2016;1300
+Ouzbékistan;ASI;2015;1300
+Ouzbékistan;ASI;2014;1300
+Ouzbékistan;ASI;2013;1200
+Ouzbékistan;ASI;2012;1200
+Ouzbékistan;ASI;2011;1200
+Ouzbékistan;ASI;2010;1100
+Ouzbékistan;ASI;2009;1000
+Ouzbékistan;ASI;2008;900
+Ouzbékistan;ASI;2007;900
+Ouzbékistan;ASI;2006;700
+Jordanie;ASI;2019;1400
+Jordanie;ASI;2018;1300
+Jordanie;ASI;2017;1200
+Jordanie;ASI;2016;1100
+Jordanie;ASI;2015;1000
+Jordanie;ASI;2014;1000
+Jordanie;ASI;2013;1000
+Jordanie;ASI;2012;1000
+Jordanie;ASI;2011;1000
+Jordanie;ASI;2010;1000
+Jordanie;ASI;2009;1000
+Jordanie;ASI;2008;1000
+Jordanie;ASI;2007;1000
+Jordanie;ASI;2006;1000
+Chine, région administrative spéciale de Hong Kong;ASI;2019;1400
+Chine, région administrative spéciale de Hong Kong;ASI;2018;1300
+Chine, région administrative spéciale de Hong Kong;ASI;2017;1100
+Chine, région administrative spéciale de Hong Kong;ASI;2016;1000
+Chine, région administrative spéciale de Hong Kong;ASI;2015;900
+Chine, région administrative spéciale de Hong Kong;ASI;2014;700
+Chine, région administrative spéciale de Hong Kong;ASI;2013;600
+Chine, région administrative spéciale de Hong Kong;ASI;2012;600
+Chine, région administrative spéciale de Hong Kong;ASI;2011;500
+Chine, région administrative spéciale de Hong Kong;ASI;2010;400
+Chine, région administrative spéciale de Hong Kong;ASI;2009;300
+Chine, région administrative spéciale de Hong Kong;ASI;2008;300
+Chine, région administrative spéciale de Hong Kong;ASI;2007;300
+Chine, région administrative spéciale de Hong Kong;ASI;2006;400
+État de Palestine;ASI;2019;1200
+État de Palestine;ASI;2018;1200
+État de Palestine;ASI;2017;1100
+État de Palestine;ASI;2016;1000
+État de Palestine;ASI;2015;900
+État de Palestine;ASI;2014;800
+État de Palestine;ASI;2013;700
+État de Palestine;ASI;2012;700
+État de Palestine;ASI;2011;700
+État de Palestine;ASI;2010;700
+État de Palestine;ASI;2009;800
+État de Palestine;ASI;2008;800
+État de Palestine;ASI;2007;800
+État de Palestine;ASI;2006;700
+Koweït;ASI;2019;1200
+Koweït;ASI;2018;1100
+Koweït;ASI;2017;1000
+Koweït;ASI;2016;900
+Koweït;ASI;2015;800
+Koweït;ASI;2014;700
+Koweït;ASI;2013;700
+Koweït;ASI;2012;600
+Koweït;ASI;2011;600
+Koweït;ASI;2010;500
+Koweït;ASI;2009;500
+Koweït;ASI;2008;500
+Koweït;ASI;2007;500
+Koweït;ASI;2006;500
+Kirghizistan;ASI;2019;1100
+Kirghizistan;ASI;2018;1000
+Kirghizistan;ASI;2017;1000
+Kirghizistan;ASI;2016;1000
+Kirghizistan;ASI;2015;900
+Kirghizistan;ASI;2014;800
+Kirghizistan;ASI;2013;800
+Kirghizistan;ASI;2012;800
+Kirghizistan;ASI;2011;800
+Kirghizistan;ASI;2010;700
+Kirghizistan;ASI;2009;700
+Kirghizistan;ASI;2008;600
+Kirghizistan;ASI;2007;600
+Kirghizistan;ASI;2006;400
+Yémen;ASI;2019;1100
+Yémen;ASI;2018;1000
+Yémen;ASI;2017;800
+Yémen;ASI;2016;700
+Yémen;ASI;2015;600
+Yémen;ASI;2014;500
+Yémen;ASI;2013;400
+Yémen;ASI;2012;400
+Yémen;ASI;2011;400
+Yémen;ASI;2010;300
+Yémen;ASI;2009;300
+Yémen;ASI;2008;300
+Yémen;ASI;2007;300
+Yémen;ASI;2006;300
+Myanmar;ASI;2019;600
+Myanmar;ASI;2018;600
+Myanmar;ASI;2017;600
+Myanmar;ASI;2016;600
+Myanmar;ASI;2015;500
+Myanmar;ASI;2014;500
+Myanmar;ASI;2013;500
+Myanmar;ASI;2012;500
+Myanmar;ASI;2011;400
+Myanmar;ASI;2010;400
+Myanmar;ASI;2009;400
+Myanmar;ASI;2008;400
+Myanmar;ASI;2007;300
+Myanmar;ASI;2006;300
+Émirats arabes unis;ASI;2019;600
+Émirats arabes unis;ASI;2018;600
+Émirats arabes unis;ASI;2017;500
+Émirats arabes unis;ASI;2016;500
+Émirats arabes unis;ASI;2015;400
+Émirats arabes unis;ASI;2014;400
+Émirats arabes unis;ASI;2013;400
+Émirats arabes unis;ASI;2012;400
+Émirats arabes unis;ASI;2011;300
+Émirats arabes unis;ASI;2010;300
+Émirats arabes unis;ASI;2009;300
+Émirats arabes unis;ASI;2008;200
+Émirats arabes unis;ASI;2007;300
+Émirats arabes unis;ASI;2006;200
+Tadjikistan;ASI;2019;500
+Tadjikistan;ASI;2018;400
+Tadjikistan;ASI;2017;400
+Tadjikistan;ASI;2016;400
+Tadjikistan;ASI;2015;300
+Tadjikistan;ASI;2014;300
+Tadjikistan;ASI;2013;300
+Tadjikistan;ASI;2012;200
+Tadjikistan;ASI;2011;200
+Tadjikistan;ASI;2010;200
+Tadjikistan;ASI;2009;200
+Tadjikistan;ASI;2008;200
+Tadjikistan;ASI;2007;200
+Tadjikistan;ASI;2006;200
+Turkménistan;ASI;2019;400
+Turkménistan;ASI;2018;400
+Turkménistan;ASI;2017;400
+Turkménistan;ASI;2016;300
+Turkménistan;ASI;2015;300
+Turkménistan;ASI;2014;300
+Turkménistan;ASI;2013;300
+Turkménistan;ASI;2012;200
+Turkménistan;ASI;2011;200
+Turkménistan;ASI;2010;200
+Turkménistan;ASI;2009;200
+Turkménistan;ASI;2008;200
+Turkménistan;ASI;2007;100
+Turkménistan;ASI;2006;200
+Qatar;ASI;2019;300
+Qatar;ASI;2018;300
+Qatar;ASI;2017;300
+Qatar;ASI;2016;200
+Qatar;ASI;2015;200
+Qatar;ASI;2014;200
+Qatar;ASI;2013;100
+Qatar;ASI;2012;100
+Qatar;ASI;2011;100
+Qatar;ASI;2010;100
+Qatar;ASI;2009;100
+Qatar;ASI;2008;100
+Qatar;ASI;2007;100
+Qatar;ASI;2006;100
+Oman;ASI;2019;200
+Oman;ASI;2018;200
+Oman;ASI;2017;100
+Oman;ASI;2016;100
+Oman;ASI;2015;100
+Oman;ASI;2014;100
+Oman;ASI;2013;100
+Oman;ASI;2012;100
+Oman;ASI;2011;100
+Oman;ASI;2010;100
+Oman;ASI;2009;100
+Oman;ASI;2008;100
+Oman;ASI;2007;100
+Oman;ASI;2006;100
+Bhoutan;ASI;2019;200
+Bhoutan;ASI;2018;200
+Bhoutan;ASI;2017;100
+Bhoutan;ASI;2016;200
+Bhoutan;ASI;2015;200
+Bhoutan;ASI;2014;200
+Bhoutan;ASI;2013;200
+Bhoutan;ASI;2012;200
+Bhoutan;ASI;2011;100
+Bhoutan;ASI;2010;100
+Bhoutan;ASI;2009;100
+Bhoutan;ASI;2008;100
+Bhoutan;ASI;2007;100
+Bhoutan;ASI;2006;100
+Bahreïn;ASI;2019;100
+Bahreïn;ASI;2018;100
+Bahreïn;ASI;2017;100
+Bahreïn;ASI;2016;100
+Bahreïn;ASI;2015;100
+Bahreïn;ASI;2014;100
+Bahreïn;ASI;2013;100
+Bahreïn;ASI;2012;100
+Bahreïn;ASI;2011;100
+Bahreïn;ASI;2010;100
+Bahreïn;ASI;2009;100
+Bahreïn;ASI;2008;100
+Bahreïn;ASI;2007;100
+Bahreïn;ASI;2006;100
+République populaire démocratique de Corée;ASI;2019;100
+République populaire démocratique de Corée;ASI;2018;100
+République populaire démocratique de Corée;ASI;2017;200
+République populaire démocratique de Corée;ASI;2016;200
+République populaire démocratique de Corée;ASI;2015;200
+République populaire démocratique de Corée;ASI;2014;200
+République populaire démocratique de Corée;ASI;2013;100
+République populaire démocratique de Corée;ASI;2012;100
+République populaire démocratique de Corée;ASI;2011;100
+République populaire démocratique de Corée;ASI;2010;100
+République populaire démocratique de Corée;ASI;2009;100
+République populaire démocratique de Corée;ASI;2008;100
+République populaire démocratique de Corée;ASI;2007;100
+C:AMO;AMO;2019;370200
+C:AMO;AMO;2018;376500
+C:AMO;AMO;2017;363500
+C:AMO;AMO;2016;355900
+C:AMO;AMO;2015;346500
+C:AMO;AMO;2014;335600
+C:AMO;AMO;2013;328300
+C:AMO;AMO;2012;319200
+C:AMO;AMO;2011;310700
+C:AMO;AMO;2010;298600
+C:AMO;AMO;2009;292200
+C:AMO;AMO;2008;282200
+C:AMO;AMO;2007;275300
+C:AMO;AMO;2006;261200
+Haïti;AMO;2019;92200
+Haïti;AMO;2018;91500
+Haïti;AMO;2017;87000
+Haïti;AMO;2016;83900
+Haïti;AMO;2015;81700
+Haïti;AMO;2014;78000
+Haïti;AMO;2013;76200
+Haïti;AMO;2012;73800
+Haïti;AMO;2011;72000
+Haïti;AMO;2010;67100
+Haïti;AMO;2009;65100
+Haïti;AMO;2008;62700
+Haïti;AMO;2007;61700
+Haïti;AMO;2006;59400
+Brésil;AMO;2019;60900
+Brésil;AMO;2018;63600
+Brésil;AMO;2017;61000
+Brésil;AMO;2016;62400
+Brésil;AMO;2015;59800
+Brésil;AMO;2014;57100
+Brésil;AMO;2013;55100
+Brésil;AMO;2012;53400
+Brésil;AMO;2011;49600
+Brésil;AMO;2010;47700
+Brésil;AMO;2009;46700
+Brésil;AMO;2008;44500
+Brésil;AMO;2007;42200
+Brésil;AMO;2006;37800
+États-Unis d'Amérique;AMO;2019;38000
+États-Unis d'Amérique;AMO;2018;37600
+États-Unis d'Amérique;AMO;2017;37200
+États-Unis d'Amérique;AMO;2016;37000
+États-Unis d'Amérique;AMO;2015;37100
+États-Unis d'Amérique;AMO;2014;37400
+États-Unis d'Amérique;AMO;2013;37400
+États-Unis d'Amérique;AMO;2012;37500
+États-Unis d'Amérique;AMO;2011;36700
+États-Unis d'Amérique;AMO;2010;36500
+États-Unis d'Amérique;AMO;2009;36000
+États-Unis d'Amérique;AMO;2008;35400
+États-Unis d'Amérique;AMO;2007;34700
+États-Unis d'Amérique;AMO;2006;34300
+Colombie;AMO;2019;28300
+Colombie;AMO;2018;30100
+Colombie;AMO;2017;28600
+Colombie;AMO;2016;27500
+Colombie;AMO;2015;26600
+Colombie;AMO;2014;25900
+Colombie;AMO;2013;25000
+Colombie;AMO;2012;24100
+Colombie;AMO;2011;23000
+Colombie;AMO;2010;22100
+Colombie;AMO;2009;21500
+Colombie;AMO;2008;20600
+Colombie;AMO;2007;19900
+Colombie;AMO;2006;19000
+Suriname;AMO;2019;23800
+Suriname;AMO;2018;24500
+Suriname;AMO;2017;25000
+Suriname;AMO;2016;24700
+Suriname;AMO;2015;24000
+Suriname;AMO;2014;23300
+Suriname;AMO;2013;22800
+Suriname;AMO;2012;22400
+Suriname;AMO;2011;22800
+Suriname;AMO;2010;22200
+Suriname;AMO;2009;22200
+Suriname;AMO;2008;21300
+Suriname;AMO;2007;21200
+Suriname;AMO;2006;19900
+Canada;AMO;2019;16600
+Canada;AMO;2018;16500
+Canada;AMO;2017;16400
+Canada;AMO;2016;16300
+Canada;AMO;2015;16300
+Canada;AMO;2014;16400
+Canada;AMO;2013;16500
+Canada;AMO;2012;16400
+Canada;AMO;2011;16400
+Canada;AMO;2010;16000
+Canada;AMO;2009;15600
+Canada;AMO;2008;15200
+Canada;AMO;2007;15000
+Canada;AMO;2006;14500
+Mexique;AMO;2019;13000
+Mexique;AMO;2018;12900
+Mexique;AMO;2017;12400
+Mexique;AMO;2016;11700
+Mexique;AMO;2015;11200
+Mexique;AMO;2014;10800
+Mexique;AMO;2013;10400
+Mexique;AMO;2012;9700
+Mexique;AMO;2011;10000
+Mexique;AMO;2010;9500
+Mexique;AMO;2009;9000
+Mexique;AMO;2008;8600
+Mexique;AMO;2007;8200
+Mexique;AMO;2006;7200
+Pérou;AMO;2019;12100
+Pérou;AMO;2018;12900
+Pérou;AMO;2017;12500
+Pérou;AMO;2016;12000
+Pérou;AMO;2015;11600
+Pérou;AMO;2014;11500
+Pérou;AMO;2013;11300
+Pérou;AMO;2012;10800
+Pérou;AMO;2011;10500
+Pérou;AMO;2010;10100
+Pérou;AMO;2009;9900
+Pérou;AMO;2008;9500
+Pérou;AMO;2007;9300
+Pérou;AMO;2006;8800
+Argentine;AMO;2019;11700
+Argentine;AMO;2018;12400
+Argentine;AMO;2017;11900
+Argentine;AMO;2016;11600
+Argentine;AMO;2015;11300
+Argentine;AMO;2014;10800
+Argentine;AMO;2013;10500
+Argentine;AMO;2012;10300
+Argentine;AMO;2011;10100
+Argentine;AMO;2010;10000
+Argentine;AMO;2009;9900
+Argentine;AMO;2008;9600
+Argentine;AMO;2007;9400
+Argentine;AMO;2006;9400
+Chili;AMO;2019;11300
+Chili;AMO;2018;11900
+Chili;AMO;2017;11800
+Chili;AMO;2016;11700
+Chili;AMO;2015;11800
+Chili;AMO;2014;11700
+Chili;AMO;2013;11900
+Chili;AMO;2012;11600
+Chili;AMO;2011;11500
+Chili;AMO;2010;11200
+Chili;AMO;2009;11300
+Chili;AMO;2008;11100
+Chili;AMO;2007;11100
+Chili;AMO;2006;10800
+Venezuela (République bolivarienne du);AMO;2019;8000
+Venezuela (République bolivarienne du);AMO;2018;8400
+Venezuela (République bolivarienne du);AMO;2017;7700
+Venezuela (République bolivarienne du);AMO;2016;7200
+Venezuela (République bolivarienne du);AMO;2015;6800
+Venezuela (République bolivarienne du);AMO;2014;6300
+Venezuela (République bolivarienne du);AMO;2013;6000
+Venezuela (République bolivarienne du);AMO;2012;5600
+Venezuela (République bolivarienne du);AMO;2011;5200
+Venezuela (République bolivarienne du);AMO;2010;4800
+Venezuela (République bolivarienne du);AMO;2009;4400
+Venezuela (République bolivarienne du);AMO;2008;4300
+Venezuela (République bolivarienne du);AMO;2007;4000
+Venezuela (République bolivarienne du);AMO;2006;3800
+Dominique;AMO;2019;7600
+Dominique;AMO;2018;7500
+Dominique;AMO;2017;7200
+Dominique;AMO;2016;6600
+Dominique;AMO;2015;6100
+Dominique;AMO;2014;5700
+Dominique;AMO;2013;5600
+Dominique;AMO;2012;5500
+Dominique;AMO;2011;5700
+Dominique;AMO;2010;5400
+Dominique;AMO;2009;5300
+Dominique;AMO;2008;5100
+Dominique;AMO;2007;5000
+Dominique;AMO;2006;4700
+République dominicaine;AMO;2019;5800
+République dominicaine;AMO;2018;5200
+République dominicaine;AMO;2017;5000
+République dominicaine;AMO;2016;4700
+République dominicaine;AMO;2015;4300
+République dominicaine;AMO;2014;4100
+République dominicaine;AMO;2013;3800
+République dominicaine;AMO;2012;3400
+République dominicaine;AMO;2011;3300
+République dominicaine;AMO;2010;2900
+République dominicaine;AMO;2009;2800
+République dominicaine;AMO;2008;2700
+République dominicaine;AMO;2007;2700
+République dominicaine;AMO;2006;2500
+Équateur;AMO;2019;5500
+Équateur;AMO;2018;5800
+Équateur;AMO;2017;5400
+Équateur;AMO;2016;5100
+Équateur;AMO;2015;4800
+Équateur;AMO;2014;4600
+Équateur;AMO;2013;4200
+Équateur;AMO;2012;4000
+Équateur;AMO;2011;3900
+Équateur;AMO;2010;3600
+Équateur;AMO;2009;3400
+Équateur;AMO;2008;3400
+Équateur;AMO;2007;3200
+Équateur;AMO;2006;3000
+Cuba;AMO;2019;5300
+Cuba;AMO;2018;5200
+Cuba;AMO;2017;5000
+Cuba;AMO;2016;4900
+Cuba;AMO;2015;4900
+Cuba;AMO;2014;4600
+Cuba;AMO;2013;4500
+Cuba;AMO;2012;4400
+Cuba;AMO;2011;4200
+Cuba;AMO;2010;4100
+Cuba;AMO;2009;4000
+Cuba;AMO;2008;3900
+Cuba;AMO;2007;3600
+Cuba;AMO;2006;3400
+Australie;AMO;2019;5200
+Australie;AMO;2018;5400
+Australie;AMO;2017;5200
+Australie;AMO;2016;5000
+Australie;AMO;2015;5000
+Australie;AMO;2014;5000
+Australie;AMO;2013;4900
+Australie;AMO;2012;4800
+Australie;AMO;2011;4800
+Australie;AMO;2010;4700
+Australie;AMO;2009;4500
+Australie;AMO;2008;4400
+Australie;AMO;2007;4200
+Australie;AMO;2006;4000
+Guyana;AMO;2019;4100
+Guyana;AMO;2018;4200
+Guyana;AMO;2017;4100
+Guyana;AMO;2016;4000
+Guyana;AMO;2015;3900
+Guyana;AMO;2014;3900
+Guyana;AMO;2013;3800
+Guyana;AMO;2012;3900
+Guyana;AMO;2011;4000
+Guyana;AMO;2010;3900
+Guyana;AMO;2009;3900
+Guyana;AMO;2008;4000
+Guyana;AMO;2007;4000
+Guyana;AMO;2006;3800
+Sainte-Lucie;AMO;2019;3900
+Sainte-Lucie;AMO;2018;3900
+Sainte-Lucie;AMO;2017;4000
+Sainte-Lucie;AMO;2016;4000
+Sainte-Lucie;AMO;2015;4100
+Sainte-Lucie;AMO;2014;4100
+Sainte-Lucie;AMO;2013;4000
+Sainte-Lucie;AMO;2012;3900
+Sainte-Lucie;AMO;2011;3900
+Sainte-Lucie;AMO;2010;3800
+Sainte-Lucie;AMO;2009;4000
+Sainte-Lucie;AMO;2008;3900
+Sainte-Lucie;AMO;2007;3800
+Sainte-Lucie;AMO;2006;3500
+Bolivie (État plurinational de);AMO;2019;3400
+Bolivie (État plurinational de);AMO;2018;3600
+Bolivie (État plurinational de);AMO;2017;3400
+Bolivie (État plurinational de);AMO;2016;3300
+Bolivie (État plurinational de);AMO;2015;3200
+Bolivie (État plurinational de);AMO;2014;3100
+Bolivie (État plurinational de);AMO;2013;2900
+Bolivie (État plurinational de);AMO;2012;2800
+Bolivie (État plurinational de);AMO;2011;2600
+Bolivie (État plurinational de);AMO;2010;2500
+Bolivie (État plurinational de);AMO;2009;2400
+Bolivie (État plurinational de);AMO;2008;2300
+Bolivie (État plurinational de);AMO;2007;2100
+Bolivie (État plurinational de);AMO;2006;1800
+Guatemala;AMO;2019;2400
+Guatemala;AMO;2018;2200
+Guatemala;AMO;2017;2200
+Guatemala;AMO;2016;2100
+Guatemala;AMO;2015;2100
+Guatemala;AMO;2014;2200
+Guatemala;AMO;2013;2200
+Guatemala;AMO;2012;2000
+Guatemala;AMO;2011;2000
+Guatemala;AMO;2010;2000
+Guatemala;AMO;2009;2000
+Guatemala;AMO;2008;2000
+Guatemala;AMO;2007;2100
+Guatemala;AMO;2006;2100
+Nouvelle-Zélande;AMO;2019;1800
+Nouvelle-Zélande;AMO;2018;1900
+Nouvelle-Zélande;AMO;2017;1900
+Nouvelle-Zélande;AMO;2016;2000
+Nouvelle-Zélande;AMO;2015;1900
+Nouvelle-Zélande;AMO;2014;1800
+Nouvelle-Zélande;AMO;2013;1900
+Nouvelle-Zélande;AMO;2012;1700
+Nouvelle-Zélande;AMO;2011;1700
+Nouvelle-Zélande;AMO;2010;1600
+Nouvelle-Zélande;AMO;2009;1600
+Nouvelle-Zélande;AMO;2008;1500
+Nouvelle-Zélande;AMO;2007;1400
+Nouvelle-Zélande;AMO;2006;1400
+Uruguay;AMO;2019;1700
+Uruguay;AMO;2018;1800
+Uruguay;AMO;2017;1800
+Uruguay;AMO;2016;1800
+Uruguay;AMO;2015;1900
+Uruguay;AMO;2014;1800
+Uruguay;AMO;2013;1900
+Uruguay;AMO;2012;1800
+Uruguay;AMO;2011;1700
+Uruguay;AMO;2010;1700
+Uruguay;AMO;2009;1700
+Uruguay;AMO;2008;1700
+Uruguay;AMO;2007;1700
+Uruguay;AMO;2006;1800
+El Salvador;AMO;2019;1400
+El Salvador;AMO;2018;1300
+El Salvador;AMO;2017;1200
+El Salvador;AMO;2016;1100
+El Salvador;AMO;2015;1000
+El Salvador;AMO;2014;1000
+El Salvador;AMO;2013;1000
+El Salvador;AMO;2012;900
+El Salvador;AMO;2011;900
+El Salvador;AMO;2010;900
+El Salvador;AMO;2009;800
+El Salvador;AMO;2008;800
+El Salvador;AMO;2007;1100
+El Salvador;AMO;2006;1100
+Paraguay;AMO;2019;1200
+Paraguay;AMO;2018;1300
+Paraguay;AMO;2017;1200
+Paraguay;AMO;2016;1100
+Paraguay;AMO;2015;1100
+Paraguay;AMO;2014;1000
+Paraguay;AMO;2013;1000
+Paraguay;AMO;2012;900
+Paraguay;AMO;2011;900
+Paraguay;AMO;2010;900
+Paraguay;AMO;2009;800
+Paraguay;AMO;2008;700
+Paraguay;AMO;2007;600
+Paraguay;AMO;2006;600
+Costa Rica;AMO;2019;900
+Costa Rica;AMO;2018;800
+Costa Rica;AMO;2017;800
+Costa Rica;AMO;2016;700
+Costa Rica;AMO;2015;700
+Costa Rica;AMO;2014;600
+Costa Rica;AMO;2013;600
+Costa Rica;AMO;2012;500
+Costa Rica;AMO;2011;500
+Costa Rica;AMO;2010;400
+Costa Rica;AMO;2009;500
+Costa Rica;AMO;2008;500
+Costa Rica;AMO;2007;500
+Costa Rica;AMO;2006;400
+Honduras;AMO;2019;700
+Honduras;AMO;2018;600
+Honduras;AMO;2017;600
+Honduras;AMO;2016;500
+Honduras;AMO;2015;500
+Honduras;AMO;2014;500
+Honduras;AMO;2013;500
+Honduras;AMO;2012;400
+Honduras;AMO;2011;400
+Honduras;AMO;2010;400
+Honduras;AMO;2009;400
+Honduras;AMO;2008;300
+Honduras;AMO;2007;300
+Honduras;AMO;2006;300
+Nicaragua;AMO;2019;700
+Nicaragua;AMO;2018;600
+Nicaragua;AMO;2017;600
+Nicaragua;AMO;2016;500
+Nicaragua;AMO;2015;500
+Nicaragua;AMO;2014;500
+Nicaragua;AMO;2013;500
+Nicaragua;AMO;2012;500
+Nicaragua;AMO;2011;500
+Nicaragua;AMO;2010;500
+Nicaragua;AMO;2009;500
+Nicaragua;AMO;2008;500
+Nicaragua;AMO;2007;400
+Nicaragua;AMO;2006;400
+Jamaïque;AMO;2019;500
+Jamaïque;AMO;2018;500
+Jamaïque;AMO;2017;500
+Jamaïque;AMO;2016;500
+Jamaïque;AMO;2015;400
+Jamaïque;AMO;2014;500
+Jamaïque;AMO;2013;500
+Jamaïque;AMO;2012;500
+Jamaïque;AMO;2011;500
+Jamaïque;AMO;2010;500
+Jamaïque;AMO;2009;400
+Jamaïque;AMO;2008;400
+Jamaïque;AMO;2007;400
+Jamaïque;AMO;2006;300
+Trinité-et-Tobago;AMO;2019;400
+Trinité-et-Tobago;AMO;2018;400
+Trinité-et-Tobago;AMO;2017;400
+Trinité-et-Tobago;AMO;2016;400
+Trinité-et-Tobago;AMO;2015;400
+Trinité-et-Tobago;AMO;2014;400
+Trinité-et-Tobago;AMO;2013;300
+Trinité-et-Tobago;AMO;2012;300
+Trinité-et-Tobago;AMO;2011;300
+Trinité-et-Tobago;AMO;2010;300
+Trinité-et-Tobago;AMO;2009;300
+Trinité-et-Tobago;AMO;2008;300
+Trinité-et-Tobago;AMO;2007;300
+Trinité-et-Tobago;AMO;2006;300
+Panama;AMO;2019;400
+Panama;AMO;2018;400
+Panama;AMO;2017;400
+Panama;AMO;2016;400
+Panama;AMO;2015;400
+Panama;AMO;2014;300
+Panama;AMO;2013;300
+Panama;AMO;2012;400
+Panama;AMO;2011;400
+Panama;AMO;2010;400
+Panama;AMO;2009;400
+Panama;AMO;2008;400
+Panama;AMO;2007;300
+Panama;AMO;2006;300
+Fidji;AMO;2019;300
+Fidji;AMO;2018;300
+Fidji;AMO;2017;200
+Fidji;AMO;2016;200
+Fidji;AMO;2015;200
+Fidji;AMO;2014;200
+Fidji;AMO;2013;200
+Fidji;AMO;2012;200
+Fidji;AMO;2011;200
+Fidji;AMO;2010;200
+Fidji;AMO;2009;100
+Fidji;AMO;2008;100
+Fidji;AMO;2007;100
+Vanuatu;AMO;2019;200
+Vanuatu;AMO;2018;200
+Vanuatu;AMO;2017;100
+Vanuatu;AMO;2016;100
+Vanuatu;AMO;2015;100
+Vanuatu;AMO;2014;100
+Vanuatu;AMO;2013;100
+Vanuatu;AMO;2012;100
+Vanuatu;AMO;2011;100
+Vanuatu;AMO;2010;100
+Vanuatu;AMO;2009;100
+Vanuatu;AMO;2008;100
+Vanuatu;AMO;2007;100
+Vanuatu;AMO;2006;100
+Porto Rico;AMO;2019;100
+Porto Rico;AMO;2018;100
+Porto Rico;AMO;2017;100
+Porto Rico;AMO;2016;100
+Porto Rico;AMO;2015;100
+Porto Rico;AMO;2014;100
+Tonga;AMO;2019;100
+Tonga;AMO;2018;100
+Tonga;AMO;2017;100
+Tonga;AMO;2016;100
+Tonga;AMO;2015;100
+Tonga;AMO;2014;100
+Tonga;AMO;2013;100
+Tonga;AMO;2012;100
+Tonga;AMO;2011;100
+Tonga;AMO;2010;100
+Tonga;AMO;2009;100
+Tonga;AMO;2008;100
+C:AFR;AFR;2024;3776000
+Algérie;AFR;2024;961300
+Maroc;AFR;2024;902300
+Tunisie;AFR;2024;378300
+Comores;AFR;2024;161200
+Côte d'Ivoire;AFR;2024;159400
+Sénégal;AFR;2024;151800
+Cameroun;AFR;2024;119600
+Mali;AFR;2024;107400
+Congo (République démocratique);AFR;2024;101300
+Congo;AFR;2024;93200
+Madagascar;AFR;2024;91400
+Guinée;AFR;2024;87300
+Maurice;AFR;2024;43100
+Égypte;AFR;2024;39000
+Cap-Vert;AFR;2024;36200
+Togo;AFR;2024;32800
+Bénin;AFR;2024;31900
+Gabon;AFR;2024;31100
+Angola;AFR;2024;29300
+Mauritanie;AFR;2024;24800
+C:ASI;ASI;2024;1106000
+Turquie;ASI;2024;263400
+Chine;ASI;2024;119800
+Viêt Nam;ASI;2024;79200
+Afghanistan;ASI;2024;67900
+Sri Lanka;ASI;2024;62600
+Liban;ASI;2024;62100
+Inde;ASI;2024;58400
+Syrie;ASI;2024;54000
+Cambodge;ASI;2024;51900
+Pakistan;ASI;2024;36100
+Bangladesh;ASI;2024;32400
+Laos;ASI;2024;32400
+Iran;ASI;2024;27500
+Philippines;ASI;2024;25300
+Thaïlande;ASI;2024;23300
+Japon;ASI;2024;21400
+Corée du Sud;ASI;2024;18200
+Iraq;ASI;2024;15400
+Indonésie;ASI;2024;6500
+Kazakhstan;ASI;2024;6300
+C:EUR;EUR;2024;2387000
+Portugal;EUR;2024;564300
+Italie;EUR;2024;279100
+Espagne;EUR;2024;242500
+Royaume-Uni;EUR;2024;145700
+Roumanie;EUR;2024;145500
+Belgique;EUR;2024;132900
+Allemagne;EUR;2024;114300
+Ukraine;EUR;2024;87700
+Russie;EUR;2024;86700
+Pologne;EUR;2024;78900
+Serbie;EUR;2024;78900
+Suisse;EUR;2024;62900
+Moldavie;EUR;2024;47900
+Arménie;EUR;2024;40700
+Pays-Bas;EUR;2024;40300
+Albanie;EUR;2024;37600
+Bulgarie;EUR;2024;32000
+Géorgie;EUR;2024;25300
+Bosnie-Herzégovine;EUR;2024;15400
+Grèce;EUR;2024;13500
+C:AMO;AMO;2024;458000
+Haïti;AMO;2024;104700
+Brésil;AMO;2024;78200
+États-Unis;AMO;2024;45100
+Colombie;AMO;2024;44900
+Canada;AMO;2024;18300
+Mexique;AMO;2024;18200
+Suriname;AMO;2024;18100
+Pérou;AMO;2024;17800
+Argentine;AMO;2024;17100
+Chili;AMO;2024;13800
+TOTAL;;2024;7726000
+POP;;2024;68437000
+TOTAL;;2023;7292000
+POP;;2023;68246000
+TOTAL;;2022;7029100
+POP;;2022;68060000
+TOTAL;;2021;6932400
+POP;;2021;67697100
+TOTAL;;2020;6847100
+POP;;2020;67441900
+TOTAL;;2019;6733500
+POP;;2019;67258000
+TOTAL;;2018;6578900
+POP;;2018;66992200
+TOTAL;;2017;6448800
+POP;;2017;66774500
+TOTAL;;2016;6291400
+POP;;2016;66602600
+TOTAL;;2015;6169100
+POP;;2015;66422500
+TOTAL;;2014;6027500
+POP;;2014;66130900
+TOTAL;;2013;5835300
+POP;;2013;65564800
+TOTAL;;2012;5714000
+POP;;2012;65241200
+TOTAL;;2011;5605200
+POP;;2011;64933400
+TOTAL;;2010;5514200
+POP;;2010;64612900
+TOTAL;;2009;5432800
+POP;;2009;64304500
+TOTAL;;2008;5342300
+POP;;2008;63961900
+TOTAL;;2007;5251600
+POP;;2007;63600700
+TOTAL;;2006;5136300
+POP;;2006;63186100
+TOTAL;;1999;4374000
+POP;;1999;60144000
+TOTAL;;1990;4222000
+POP;;1990;58078000
+TOTAL;;1982;4037000
+POP;;1982;54296000
+TOTAL;;1975;3887000
+POP;;1975;52599000
+TOTAL;;1968;3238000
+POP;;1968;49655000
+TOTAL;;1962;2861300
+POP;;1962;46459000
+TOTAL;;1954;2293000
+POP;;1954;42781000
+TOTAL;;1946;1985900
+POP;;1946;39848000
+TOTAL;;1936;2326100
+POP;;1936;41183000
+TOTAL;;1931;2729300
+POP;;1931;41228000
+TOTAL;;1926;2288200
+POP;;1926;40228000
+TOTAL;;1921;1429100
+POP;;1921;38798000

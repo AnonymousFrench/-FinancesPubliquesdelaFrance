@@ -54,6 +54,11 @@ export const ROUTES = [
     description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, heures travaillées, écart de taux avec l’Allemagne, défense, démographie, immigration, pauvreté, inégalités, énergie et climat.',
     en: { label: 'State of France', title: 'State of France: growth, jobs, population, immigration and energy since 1960',
       description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, hours worked, spread over Germany, defence, population, immigration, poverty, inequality, energy and climate.' } },
+  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/immigration', label: 'Immigration',
+    title: 'Immigration en France : d’où viennent les immigrés depuis 1968',
+    description: 'Carte des pays de naissance des immigrés vivant en France de 1968 à 2024 (Insee), premiers titres de séjour par nationalité et par motif depuis 2008 (Eurostat), répartition par continent.',
+    en: { label: 'Immigration', title: 'Immigration in France: where immigrants have come from since 1968',
+      description: 'Map of the countries of birth of immigrants living in France from 1968 to 2024 (Insee), first residence permits by citizenship and reason since 2008 (Eurostat), split by continent.' } },
 ]
 
 // Libellés dans la langue courante.
@@ -66,7 +71,7 @@ export const sLabel = s => T(s.label, s.en)
 export const ALIAS = {
   overview: '/', 'vue-ensemble': '/', synthese: '/', map: '/', carte: '/', revenue: '/recettes', recettes: '/recettes', spending: '/depenses', depenses: '/depenses',
   debt: '/dette', dette: '/dette', financing: '/financement', financement: '/financement',
-  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france',
+  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france', immigration: '/etat-de-la-france/immigration',
 }
 
 // Langue portée par l'adresse : /en/... pour l'anglais, sans préfixe pour le français.
