@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: node scripts/build-pyramid.mjs 2>&1 | tee data-raw/immig/log.txt || true
+      - run: curl -sSL -o data-raw/immig/es_pjan_fx.json "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_pjan?geo=FX&unit=NR&sex=M&sex=F&format=JSON" || true
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
