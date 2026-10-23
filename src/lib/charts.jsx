@@ -37,7 +37,8 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
   const padX = bars ? (x1 - x0) / (bars.values.length || 1) * 0.6 : 0
   const X = v => m.l + (v - x0 + padX) / (x1 - x0 + 2 * padX || 1) * iw
 
-  const leftVals = series.flatMap(s => s.points.filter(valid).map(p => p[1])).concat(refLines.map(r => r.y))
+  // hidden : série non tracée, seulement lue dans l'infobulle (par exemple des Md€ à côté d'une courbe en % du PIB).
+  const leftVals = series.filter(s => !s.hidden).flatMap(s => s.points.filter(valid).map(p => p[1])).concat(refLines.map(r => r.y))
   const barVals = bars ? bars.values.filter(valid).map(p => p[1]) : []
   const yL = domain(bars?.sameScale ? leftVals.concat(barVals, 0) : leftVals, yMin, yMax)
   const yR = bars ? (bars.sameScale ? yL : domain(barVals.concat(0))) : null
@@ -59,7 +60,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
 
   const tip = hover == null ? null : {
     rows: [
-      ...series.map(s => { const p = s.points.find(q => q[0] === hover); return p && valid(p) ? { name: s.name, color: s.color, v: (axes.left?.tipFmt || fmtL)(p[1]) } : null }),
+      ...series.map(s => { const p = s.points.find(q => q[0] === hover); return p && valid(p) ? { name: s.name, color: s.color, v: (s.tipFmt || axes.left?.tipFmt || fmtL)(p[1]) } : null }),
       ...(bars ? [bars.values.find(q => q[0] === hover)].filter(p => p && valid(p)).map(p => ({ name: bars.name, color: bars.color, v: (bars.sameScale ? (axes.left?.tipFmt || fmtL) : (axes.right?.tipFmt || fmtR))(p[1]), bar: true })) : []),
     ].filter(Boolean),
   }
@@ -71,7 +72,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
   return (
     <div className="lc">
       {legend && <div className="legend top">
-        {series.filter(s => !s.hideLegend).map(s => (
+        {series.filter(s => !s.hideLegend && !s.hidden).map(s => (
           <span key={s.name}>
             {/* Même marqueur que sur le graphique : cercle creux pour les points, trait plein ou pointillé pour les courbes. */}
             {s.line === false ? <i className="dot" style={{ borderColor: s.color }} /> : <i className={s.dash ? 'dash' : 'line'} style={s.dash ? { borderColor: s.color } : { background: s.color }} />}
@@ -108,7 +109,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
               <text x={W - m.r - 4} y={YL(r.y) - 5} textAnchor="end" className="ax ref-l">{r.label}</text>
             </g>
           ))}
-          {series.map(s => {
+          {series.filter(s => !s.hidden).map(s => {
             const p = s.points.filter(valid)
             return (
               <g key={s.name}>
@@ -125,7 +126,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
           ))}
           {xt.map(v => <text key={v} x={X(v)} y={H - 7} textAnchor="middle" className="ax">{xFmt(v)}</text>)}
           {hover != null && <line x1={X(hover)} x2={X(hover)} y1={m.t} y2={m.t + ih} stroke="var(--tx)" opacity={0.25} />}
-          {hover != null && series.map(s => { const p = s.points.find(q => q[0] === hover); return p && valid(p) && s.line !== false ? <circle key={s.name} cx={X(hover)} cy={YL(p[1])} r={3.5} fill={s.color} stroke="var(--card)" strokeWidth={1.5} /> : null })}
+          {hover != null && series.filter(s => !s.hidden).map(s => { const p = s.points.find(q => q[0] === hover); return p && valid(p) && s.line !== false ? <circle key={s.name} cx={X(hover)} cy={YL(p[1])} r={3.5} fill={s.color} stroke="var(--card)" strokeWidth={1.5} /> : null })}
         </svg>
         {tip && tip.rows.length > 0 && (
           <div className={'tip' + (tipLeft > 62 ? ' flip' : '')} style={{ left: `${tipLeft}%` }}>

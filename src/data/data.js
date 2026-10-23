@@ -14,6 +14,7 @@ export const SRC = {
   plf25rec: { label: 'data.economie.gouv.fr : PLF 2025, recettes du budget général', url: 'https://data.economie.gouv.fr/explore/dataset/plf25-recettes-du-budget-general/' },
   lfi2026: { label: 'Loi de finances initiale pour 2026 (loi 2026-103 du 19 févr. 2026) : tableau de financement et plafonds par mission', url: 'https://www.legifrance.gouv.fr/' },
   aft: { label: 'Agence France Trésor : programme de financement et bulletin mensuel', url: 'https://www.aft.gouv.fr/' },
+  bdfTec10: { label: 'Banque de France : indices obligataires, TEC 10 (taux de l’échéance constante 10 ans), quotidien', url: 'https://www.banque-france.fr/fr/statistiques/taux-et-cours/indices-obligataires' },
 }
 
 // ---------- Dernière dette connue (Insee, trimestrielle) ----------
@@ -88,8 +89,8 @@ export const aft = {
   negotiableEnd2024: { total: 2541.7, oat: 2340.5, btf: 201.2 },
   negotiableSep2026: 2909.4,
   avgMaturity: { v: '8 ans et 158 jours', date: '30 sept. 2026' },
-  tec10: { v: 4.93, date: '20 oct. 2026' },
-  spot10: { v: 4.75, date: '30 sept. 2026' },
+  // Dernier taux à 10 ans de marché, seul chiffre utilisé par la Synthèse, la Dette et le Financement (à mettre à jour chaque semaine).
+  rate10: { v: 4.93, date: '20 oct. 2026' },
   nonResidents: '≈ 56 %',
   issuance: [
     { year: 2023, v: 270.0, tag: 'réalisé' }, { year: 2024, v: 285.0, tag: 'réalisé' },

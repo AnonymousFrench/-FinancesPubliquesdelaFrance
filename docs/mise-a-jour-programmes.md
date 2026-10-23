@@ -58,3 +58,17 @@ reviendra quand data.economie.gouv.fr publiera le fichier « Dépenses selon des
 
 - Premiers titres de séjour (Eurostat migr_resfirst) : rafraîchis chaque lundi par la tâche GitHub (`npm run immig`).
 - Immigrés par pays de naissance (Insee) : une fois par an, quand l'Insee publie une nouvelle édition. Télécharger dans `data-raw/immig/` les fichiers `pays_naissance_detaille_1968_2019.xlsx` (renommé `insee_pays_1968_2019.xlsx`, page https://www.insee.fr/fr/statistiques/6478091) et `Essentiel_Immigres-Etrangers_donnees.xlsx` (renommé `insee_essentiel.xlsx`, page https://www.insee.fr/fr/statistiques/3633212), puis lancer `python3 scripts/immig-insee.py` et `npm run immig`.
+
+## Dette et financement (taux à 10 ans)
+
+- Un seul taux de marché pour tout le site : `aft.rate10` dans `src/data/data.js` (TEC 10 de la Banque de France, valeur et date),
+  utilisé par la Synthèse, l'onglet Dette et financement et les pages statiques (`scripts/seo.mjs`).
+- Séries mensuelles (France et pays de comparaison) : `npm run yields` (Eurostat irt_lt_mcby_m pour l'UE, OCDE via FRED pour le
+  Royaume-Uni, les États-Unis et le Japon), lancé aussi chaque lundi par la tâche GitHub ; il réécrit `data-raw/oat10y_monthly.json`
+  puis `src/data/taux.js`.
+- Les trimestres de dette de l'Insee (`debtLatest.quarters`) prolongent d'eux-mêmes le graphique « La dette depuis 1995 » après la
+  dernière année Eurostat : ajouter chaque nouveau trimestre à la liste.
+
+## État de la France : comparaison avec un pays de l'UE
+
+- `npm run etat-pays` écrit `public/data/etat/<code>.json` pour les 26 autres pays (mêmes sources que la France), chaque lundi par la tâche GitHub.

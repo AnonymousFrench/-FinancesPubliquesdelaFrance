@@ -1,4 +1,5 @@
-# Rafraîchit chaque lundi les séries « État de la France » (Eurostat, Insee, Banque mondiale, FMI, Réserve fédérale),
+# Rafraîchit chaque lundi les séries « État de la France » (Eurostat, Insee, Banque mondiale, FMI, Réserve fédérale) et celles des 26 autres pays de l'UE,
+# les taux à 10 ans mensuels (France et pays de comparaison : Eurostat, OCDE via FRED),
 # les premiers titres de séjour et la pyramide des âges de la page Population (Eurostat)
 # et l'instantané des sondages, puis pousse un commit si quelque chose a changé : Vercel redéploie alors le site.
 name: Rafraîchir les données
@@ -23,6 +24,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run etat
+      - run: npm run etat-pays
+      - run: npm run yields
       - run: npm run polls
       - run: npm run immig
       - name: Vérifier que le site compile
@@ -31,5 +34,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add src/data/etat-series.json data-raw/etat.json src/data/polls-snapshot.json src/data/immig.json data-raw/immig/es_resfirst.json data-raw/immig/es_resfirst_reason.json src/data/pyramid.json data-raw/immig/es_pjan.json data-raw/immig/es_pjan_fx.json data-raw/immig/es_proj.json
+          git add src/data/etat-series.json data-raw/etat.json src/data/polls-snapshot.json src/data/immig.json data-raw/immig/es_resfirst.json data-raw/immig/es_resfirst_reason.json src/data/pyramid.json data-raw/immig/es_pjan.json data-raw/immig/es_pjan_fx.json data-raw/immig/es_proj.json public/data/etat src/data/yields.json data-raw/oat10y_monthly.json src/data/taux.js
           if git diff --cached --quiet; then echo "Aucun changement."; else git commit -m "Données : rafraîchissement hebdomadaire" && git push; fi

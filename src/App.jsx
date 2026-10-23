@@ -13,8 +13,8 @@ const VIEWS = {
   synthese: Overview,
   recettes: lazy(() => import('./components/Revenue.jsx')),
   depenses: lazy(() => import('./components/Spending.jsx')),
-  dette: lazy(() => import('./components/Debt.jsx')),
-  financement: lazy(() => import('./components/Financing.jsx')),
+  dette: lazy(() => import('./components/DebtFinancing.jsx')),
+  financement: lazy(() => import('./components/DebtFinancing.jsx')),
   presidentielle: lazy(() => import('./components/Election.jsx')),
   sondages: lazy(() => import('./components/Polls.jsx')),
   etat: lazy(() => import('./components/Etat.jsx')),
@@ -121,7 +121,7 @@ export default function App() {
       </nav>
       {ROUTES.filter(r => r.section === route.section).length > 1 && (
         <nav className="subnav" aria-label={sLabel(SECTIONS.find(x => x.id === route.section))}>
-          {ROUTES.filter(r => r.section === route.section).map(r => <a key={r.id} href={withLang(r.path, lang)} className={(r.id === route.id ? 'on' : '') + (r.badge ? ' ' + r.badge : '')} aria-current={r.id === route.id ? 'page' : undefined}>{rLabel(r)}</a>)}
+          {ROUTES.filter(r => r.section === route.section && !r.inside).map(r => { const on = r.id === route.id || route.inside === r.id; return <a key={r.id} href={withLang(r.path, lang)} className={(on ? 'on' : '') + (r.badge ? ' ' + r.badge : '')} aria-current={on ? 'page' : undefined}>{rLabel(r)}</a> })}
         </nav>
       )}
       <main key={lang}>
