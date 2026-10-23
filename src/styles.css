@@ -446,9 +446,9 @@ a.ind:hover { border-color: #c7ccd4 }
 .cand.on { box-shadow: 0 0 0 2px var(--pc); background: var(--soft) }
 .card.src-only .src { margin-top: 0 }
 /* Dette et financement : une zone grise par partie, cartes blanches à l'intérieur ; puces de comparaison des taux à 10 ans */
-.zone { background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px 0; margin-bottom: 16px; scroll-margin-top: 10px }
+.zone { background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px 0; margin-bottom: 16px; scroll-margin-top: 54px }
 .zone > h2 { font-size: 17px; font-weight: 700; letter-spacing: -.01em; margin: 2px 2px 10px }
-.zone .card { margin-bottom: 14px }
+.zone .card { margin-bottom: 14px } .zone > .kpis { margin-bottom: 14px }
 .kpis.k3 { grid-template-columns: repeat(3, 1fr); margin: 4px 0 0 }
 .card .emissions.small { height: 150px; padding-top: 20px }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; font-size: 12.5px } .chips .ind-key { margin-left: 0 }

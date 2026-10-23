@@ -33,16 +33,6 @@
       "source": "/carte",
       "destination": "/finances-publiques",
       "permanent": true
-    },
-    {
-      "source": "/etat-de-la-france/immigration",
-      "destination": "/etat-de-la-france/population",
-      "permanent": true
-    },
-    {
-      "source": "/en/etat-de-la-france/immigration",
-      "destination": "/en/etat-de-la-france/population",
-      "permanent": true
     }
   ]
 }
