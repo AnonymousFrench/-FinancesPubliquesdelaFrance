@@ -12,6 +12,7 @@ export const SRC_EN = {
   'data.economie.gouv.fr : PLF 2025, recettes du budget général': 'data.economie.gouv.fr: 2025 draft budget, general budget revenue',
   'Loi de finances initiale pour 2026 (loi 2026-103 du 19 févr. 2026) : tableau de financement et plafonds par mission': '2026 initial budget law (law 2026-103 of 19 Feb 2026): financing table and mission ceilings',
   'Banque de France : indices obligataires, TEC 10 (taux de l’échéance constante 10 ans), quotidien': 'Banque de France: bond indices, TEC 10 (10-year constant maturity rate), daily',
+  'OCDE, taux d’intérêt à long terme (Royaume-Uni, États-Unis, Japon), via la Réserve fédérale de Saint-Louis (FRED)': 'OECD, long-term interest rates (United Kingdom, United States, Japan), via the St. Louis Federal Reserve (FRED)',
   'Agence France Trésor : programme de financement et bulletin mensuel': 'Agence France Trésor: financing programme and monthly bulletin',
   'La finance pour tous, « PLF 2027 : le budget sous haute tension » (8 oct. 2026)': 'La finance pour tous, “PLF 2027: le budget sous haute tension” (8 Oct 2026)',
   'Public Sénat, présentation du contre-budget du RN (6 oct. 2026)': 'Public Sénat, presentation of the RN counter-budget (6 Oct 2026)',

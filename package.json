@@ -12,6 +12,8 @@
     "preview": "vite preview --host",
     "og": "node scripts/og-image.mjs",
     "etat": "node scripts/fetch-etat.mjs",
+    "etat-pays": "node scripts/fetch-etat-countries.mjs",
+    "yields": "node scripts/fetch-yields.mjs && node scripts/build-data.mjs",
     "immig": "node scripts/build-immig.mjs && node scripts/build-pyramid.mjs"
   },
   "dependencies": {
