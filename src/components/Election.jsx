@@ -6,7 +6,7 @@ import { usePolls, pollOf } from '../lib/usePolls.js'
 import { WIKI_PAGE, pollBlackout } from '../lib/polls.js'
 import { PollStatus, PollMentions } from './Polls.jsx'
 import { usePhotos } from '../lib/usePhotos.js'
-import { Card, Kpi, Seg } from './ui.jsx'
+import { Card, Kpi, Seg, Sources } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, signed, unitBn, dateFr } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
@@ -477,7 +477,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
         </Card>
       </div>
 
-      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} src={[...new Set([...q.measuresSrc, ...q.src])].map(S)}>
+      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} >
         <div className="t-wrap">
           <table className="t mt">
             <thead><tr><th>{T('Mesure', 'Measure')}</th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
@@ -513,7 +513,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
             </tbody>
           </table>
         </div>
-        <details className="about"><summary>{T('Origine des montants', 'Where the amounts come from')}</summary><p className="sub">{pMeasuresNote(q)}</p></details>
+        <details className="about"><summary>{T('Origine des montants et sources', 'Where the amounts come from, and sources')}</summary><p className="sub">{pMeasuresNote(q)}</p><Sources src={[...new Set([...q.measuresSrc, ...q.src])].map(S)} /></details>
       </Card>
 
       <Card title={T('Année par année', 'Year by year')} sub={T(`${q.short}, administrations publiques`, `${q.short}, general government`)}>

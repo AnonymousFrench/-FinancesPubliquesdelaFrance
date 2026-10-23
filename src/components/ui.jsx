@@ -4,6 +4,15 @@ import { SRC_EN } from '../data/sourcesEn.js'
 
 const srcLabel = l => (isEn() ? SRC_EN[l] || l.replace('Banque mondiale', 'World Bank').replace('Insee, série', 'Insee, series') : l)
 
+// Ligne « Sources : … » (cartes, menus dépliants).
+export function Sources({ src }) {
+  return (
+    <p className="src">{T('Source', 'Source')}{[].concat(src).length > 1 ? 's' : ''}{T(' : ', ': ')}{[].concat(src).map((s, i) => (
+        <React.Fragment key={i}>{i > 0 && ' · '}{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{srcLabel(s.label)}</a> : s.label || s}</React.Fragment>
+      ))}</p>
+  )
+}
+
 export function Card({ title, sub, children, src, right, tag, className, id }) {
   return (
     <section className={'card' + (className ? ' ' + className : '')} id={id}>
@@ -17,9 +26,7 @@ export function Card({ title, sub, children, src, right, tag, className, id }) {
         </div>
       )}
       {children}
-      {src && <p className="src">{T('Source', 'Source')}{[].concat(src).length > 1 ? 's' : ''}{T(' : ', ': ')}{[].concat(src).map((s, i) => (
-        <React.Fragment key={i}>{i > 0 && ' · '}{s.url ? <a href={s.url} target="_blank" rel="noreferrer">{srcLabel(s.label)}</a> : s.label || s}</React.Fragment>
-      ))}</p>}
+      {src && <Sources src={src} />}
     </section>
   )
 }
