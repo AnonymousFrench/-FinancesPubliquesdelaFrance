@@ -17,6 +17,7 @@ export const SRC_EN = {
   'Planète Grandes Écoles, mesures du budget RN 2027 et analyse de l’Institut de l’Entreprise': 'Planète Grandes Écoles, RN 2027 budget measures and Institut de l’Entreprise review',
   'Acteurs publics, les économies sur l’État et les collectivités dans le plan du RN': 'Acteurs publics, savings on the State and local authorities in the RN plan',
   'LFI / NFP, « Notre proposition macroéconomique » (juin 2024, cadrage chiffré)': 'LFI / NFP, “Notre proposition macroéconomique” (June 2024, costed framework)',
+  'melenchon2027.fr, « Comment nous allons remettre de l’ordre dans les comptes publics », contre-budget 2027 de LFI (14 oct. 2026, PDF)': 'melenchon2027.fr, “Comment nous allons remettre de l’ordre dans les comptes publics”, LFI 2027 counter-budget (14 Oct 2026, PDF)',
   'melenchon2027.fr, L’Avenir en commun (édition 2025, mise à jour annoncée)': 'melenchon2027.fr, L’Avenir en commun (2025 edition, update announced)',
   'iFRAP, « Le vrai coût du programme du Nouveau Front populaire » (juin 2024)': 'iFRAP, “Le vrai coût du programme du Nouveau Front populaire” (June 2024)',
   'Institut Montaigne, chiffrage du programme du NFP (juin 2024)': 'Institut Montaigne, costing of the NFP programme (June 2024)',
