@@ -465,3 +465,16 @@ a.ind:hover { border-color: #c7ccd4 }
 .kpis.compact .kpi { padding: 6px 10px }
 .kpis.compact .kpi-v { font-size: 16px; line-height: 1.35 }
 .kpis.compact .kpi-l, .kpis.compact .kpi-s { font-size: 11px }
+/* En-tête de carte : le sélecteur reste en haut à droite, le texte se replie à sa gauche (graphiques alignés d'une carte à l'autre) */
+.card-h { flex-wrap: nowrap }
+.card-h > div:first-child { flex: 1 1 0; min-width: 0 }
+.card-h > :not(:first-child) { flex: none }
+@media (max-width: 760px) { .card-h { flex-wrap: wrap } }
+/* Pyramide : colonne de droite en 2 colonnes pour ne pas dépasser la hauteur de la pyramide */
+@media (min-width: 761px) {
+  .py-grid { grid-template-columns: minmax(0, 1fr) 270px }
+  .py-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; margin-top: 18px }
+  .py-stats > div.py-ret-tile { grid-column: 1 / -1 }
+  .py-stats > div:not(.py-ret-tile) b { font-size: 17px }
+  .py-stats > div:not(.py-ret-tile) small { font-size: 11px }
+}
