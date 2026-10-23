@@ -486,14 +486,13 @@ a.ind:hover { border-color: #c7ccd4 }
 
 /* Page d'accueil */
 .home { display: flex; flex-direction: column; gap: 26px; margin-bottom: 14px }
-.home-h { font-family: 'Source Serif 4', Georgia, serif; font-size: 42px; line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin: 6px 0 18px; max-width: 880px }
-.home-hero-row { display: flex; flex-wrap: wrap; gap: 28px; align-items: stretch }
-.home-stats { flex: 1 1 260px; max-width: 330px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 18px; align-content: start }
+.home-h { font-family: 'Source Serif 4', Georgia, serif; font-size: 44px; line-height: 1.1; letter-spacing: -.02em; font-weight: 700; margin: 6px 0 18px }
+.home-hero-row { display: flex; flex-direction: column; gap: 16px }
+.home-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 24px }
 .home-stats > div { display: flex; flex-direction: column; gap: 2px; border-top: 1px solid var(--line); padding-top: 10px }
 .home-stats b { white-space: nowrap; font-size: 23px; font-weight: 720; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.15 }
 .home-stats span { font-size: 12px; color: var(--mut); line-height: 1.35 }
-.home-more { grid-column: 1 / -1; font-weight: 600; font-size: 13.5px }
-.home-fig { flex: 999 1 540px; min-width: 0; margin: 0; background: var(--soft); border-radius: 14px; padding: 14px 16px 10px }
+.home-fig { min-width: 0; margin: 0; background: var(--soft); border-radius: 14px; padding: 14px 16px 10px }
 .home-fig figcaption { display: flex; justify-content: space-between; gap: 6px 14px; flex-wrap: wrap; font-size: 13px; margin-bottom: 6px }
 .home-leg { display: inline-flex; flex-wrap: wrap; gap: 4px 14px; color: var(--mut); font-size: 12px }
 .home-leg i { display: inline-block; width: 14px; margin-right: 5px; vertical-align: 3px }
@@ -530,7 +529,7 @@ a.ind:hover { border-color: #c7ccd4 }
 .di-track i { position: absolute; top: -3px; width: 2px; height: 12px; background: var(--tx) }
 @media (max-width: 640px) {
   .home-h { font-size: 29px; margin-bottom: 12px }
-  .home-stats { max-width: none } .home-stats b { font-size: 21px }
+  .home-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px } .home-stats b { font-size: 21px }
   .home-fig { padding: 12px 10px 8px; margin: 0 -4px }
   .door-t { font-size: 20px }
 }

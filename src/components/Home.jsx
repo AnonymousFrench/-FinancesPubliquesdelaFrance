@@ -141,7 +141,6 @@ export default function Home() {
             <div><b>{isEn() ? '€' + fmt(apu.depenses[i] / apu.recettes[i] * 100, 0) : fmt(apu.depenses[i] / apu.recettes[i] * 100, 0) + ' €'}</b><span>{T(`dépensés pour 100 € de recettes en ${Y}`, `spent per €100 of revenue in ${Y}`)}</span></div>
             <div><b>{bn(apu.interets[i], 0)}</b><span>{T(`d’intérêts payés en ${Y}`, `of interest paid in ${Y}`)}</span></div>
             <div><b>{perHead ? (isEn() ? '€' + fmt(perHead, 0) : fmt(perHead, 0) + ' €') : '…'}</b><span>{T('de dette par habitant', 'of debt per resident')}</span></div>
-            <a href={lp('/dette')} className="home-more">{T('Dette, taux et financement de l’État', 'Debt, rates and State financing')} →</a>
           </div>
           <figure className="home-fig">
             <figcaption>
@@ -153,7 +152,7 @@ export default function Home() {
               </span>
             </figcaption>
             <DebtChart fan={d?.fan} />
-            <p className="home-src">{T('Insee, Eurostat. Projection du site, analyse centrale : illustrative, pas une prévision. Programmes d’Arthaud et Roussel non chiffrés.', 'Insee, Eurostat. Site projection, central review: illustrative, not a forecast. Arthaud’s and Roussel’s programmes are not costed.')} <a href={lp('/presidentielle-2027')}>{T('Méthode et hypothèses', 'Method and assumptions')}</a></p>
+            <p className="home-src">{T('Insee, Eurostat. Projection du site, analyse centrale : illustrative, pas une prévision. Programmes d’Arthaud et Roussel non chiffrés.', 'Insee, Eurostat. Site projection, central review: illustrative, not a forecast. Arthaud’s and Roussel’s programmes are not costed.')} <a href={lp('/presidentielle-2027')}>{T('Méthode et hypothèses', 'Method and assumptions')}</a> · <a href={lp('/dette')}>{T('Dette, taux et financement de l’État', 'Debt, rates and State financing')} →</a></p>
           </figure>
         </div>
       </section>
