@@ -66,7 +66,7 @@ const FACTS = {
   ],
   financement: [
     `Besoin de financement de l’État en 2026 : ${nf(financing2026.needs.reduce((s, x) => s + x.v, 0), 0)} Md€, couvert par ${nf(financing2026.issuance, 0)} Md€ d’émissions.`,
-    `Taux de l’OAT à 10 ans : ${nf(aft.spot10.v, 2)} % au ${aft.spot10.date}.`,
+    `Taux de l’OAT à 10 ans (TEC 10, Banque de France) : ${nf(aft.rate10.v, 2)} % au ${aft.rate10.date}.`,
   ],
   presidentielle: ORDER.map(id => { const q = parties[id]; return `${q.candidate} (${q.name}) : ${q.headline.slice(0, 2).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}.` }),
   // Fiche candidat : bandeau chiffré, présentation du chiffrage et sources (texte du parti, pas de sondage).

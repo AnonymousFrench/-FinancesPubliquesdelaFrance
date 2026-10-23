@@ -1,12 +1,16 @@
 import React from 'react'
 import { apu } from '../data/apu.js'
 import { oat10 } from '../data/taux.js'
-import { debtLatest, aft, SRC } from '../data/data.js'
+import { debtLatest, SRC } from '../data/data.js'
 import { Card, Kpi } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, unitBn } from '../lib/format.js'
 import { T } from '../i18n.js'
 import { dt } from '../data/dataEn.js'
+import { withLang } from '../routes.js'
+import { getLang } from '../i18n.js'
+
+const lp = p => withLang(p, getLang())
 
 const i = apu.years.length - 1
 const Y = +apu.years[i]
@@ -70,18 +74,7 @@ export default function Debt() {
           bars={{ name: T('Intérêts, Md€', `Interest, ${unitBn()}`), color: '#7a5af8', values: years.map((y, k) => [y, apu.interets[k]]) }}
           axes={{ left: { label: T('% (courbes)', '% (lines)'), fmt: v => pct(v, 0), tipFmt: v => pct(v, 2) }, right: { label: T('Md€ (barres)', `${unitBn()} (bars)`), fmt: v => fmt(v, 0), tipFmt: v => bn(v) } }}
         />
-      </Card>
-
-      <Card title={T('Ce que l’État emprunte sur les marchés', 'What the State borrows on the markets')} sub={T('Dette négociable de l’État (obligations et bons)', 'Negotiable State debt (bonds and bills)')} src={SRC.aft}>
-        <div className="kpis k4">
-          <Kpi label={T('Dette négociable, fin sept. 2026', 'Negotiable debt, end Sep 2026')} value={bn(aft.negotiableSep2026, 0)} sub={T(`fin 2024 : ${bn(aft.negotiableEnd2024.oat, 0)} d’obligations (OAT) + ${bn(aft.negotiableEnd2024.btf, 0)} de bons du Trésor (BTF)`, `end 2024: ${bn(aft.negotiableEnd2024.oat, 0)} of bonds (OAT) + ${bn(aft.negotiableEnd2024.btf, 0)} of Treasury bills (BTF)`)} />
-          <Kpi label={T('Durée de vie moyenne', 'Average maturity')} value={dt(aft.avgMaturity.v)} sub={dt(aft.avgMaturity.date)} />
-          <Kpi label={T('Taux à 10 ans (TEC 10)', '10-year yield (TEC 10)')} value={pct(aft.tec10.v, 2)} sub={T(`${aft.tec10.date} · ${pct(aft.spot10.v, 2)} au ${aft.spot10.date}`, `${dt(aft.tec10.date)} · ${pct(aft.spot10.v, 2)} on ${dt(aft.spot10.date)}`)} tone="bad" />
-          <Kpi label={T('Détenue par des non-résidents', 'Held by non-residents')} value={dt(aft.nonResidents)} sub={dt(aft.rating)} />
-        </div>
-        <h4>{T('Écart de taux avec l’obligation allemande à 10 ans (Bund)', 'Spread over the German 10-year bond (Bund)')}</h4>
-        <table className="t"><tbody>{aft.spread.map(r => <tr key={r[0]}><td>{dt(r[0])}</td><td>{dt(r[1])}</td></tr>)}</tbody></table>
-        <p className="src">{T('Écarts de taux : presse, ordres de grandeur.', 'Spreads: press reports, orders of magnitude.')}</p>
+        <p className="hint">{T('Le taux du jour, ce que l’État emprunte cette année et auprès de qui : ', 'Today’s rate, what the State borrows this year and from whom: ')}<a href={lp('/financement')}>{T('Financement →', 'Financing →')}</a></p>
       </Card>
     </>
   )

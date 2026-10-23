@@ -124,7 +124,7 @@ export default function Overview() {
             spark={apu.depensesPct} items={[[T('Prestations sociales', 'Social benefits'), bn(apu.prestationsSociales[i], 0)], [T('Rémunérations', 'Public pay'), bn(apu.remunerations[i], 0)], [T('Investissement', 'Investment'), bn(apu.fbcf[i], 0)]]} />
           <span className="eq-op">=</span>
           <Tile href={lp('/financement')} title={T('Déficit', 'Deficit')} value={'−' + fmt(gap)} unit sub={`${pct(-apu.soldePct[i])} ${gdp} · ${T('financé par l’emprunt', 'financed by borrowing')}`} color="var(--orange)" tone="bad"
-            spark={apu.soldePct.map(v => -v)} items={[[T('À emprunter en 2026', 'To borrow in 2026'), bn(need, 0)], [T('dont dette à rembourser', 'of which maturing debt'), bn(financing2026.needs[0].v, 0)], [T('Obligation à 10 ans (OAT)', '10-year bond (OAT)'), pct(aft.spot10.v, 2)]]} />
+            spark={apu.soldePct.map(v => -v)} items={[[T('À emprunter en 2026', 'To borrow in 2026'), bn(need, 0)], [T('dont dette à rembourser', 'of which maturing debt'), bn(financing2026.needs[0].v, 0)], [T('Obligation à 10 ans (OAT)', '10-year bond (OAT)'), pct(aft.rate10.v, 2)]]} />
           <span className="eq-op">→</span>
           <Tile href={lp('/dette')} title={T('Dette', 'Debt')} value={fmt(debtLatest.total, 0)} unit sub={`${pct(debtLatest.pct)} ${gdp} · ${dl}`} color="var(--red)" tone="bad"
             spark={[...apu.dettePct, debtLatest.pct]} items={[[T('Intérêts ', 'Interest ') + Y, bn(apu.interets[i])], [T('Taux moyen', 'Average rate'), pct(apu.tauxApparent[i], 2)], [T('Hausse en ', 'Rise in ') + Y, bn(apu.dette[i] - apu.dette[i - 1], 0)]]} />
