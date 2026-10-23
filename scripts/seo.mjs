@@ -30,8 +30,10 @@ const PY = JSON.parse(fs.readFileSync('src/data/pyramid.json', 'utf8'))
 const pyOld = y => { const d = PY.data[y], t = d.M.map((v, k) => v + d.F[k]), n = t.reduce((a, b) => a + b, 0); return t.slice(65).reduce((a, b) => a + b, 0) / n * 100 }
 const imY0 = IM.stock.years[0], imY1 = IM.stock.years.at(-1), imP = IM.permits.years.at(-1)
 const FACTS = {
-  immigration: [
+  population: [
     `Part des 65 ans et plus : ${nf(pyOld(PY.years[0]), 1)} % en ${PY.years[0]}, ${nf(pyOld(PY.lastObs), 1)} % en ${PY.lastObs}, ${nf(pyOld(PY.years.at(-1)), 1)} % en ${PY.years.at(-1)} selon la projection d’Eurostat.`,
+  ],
+  immigration: [
     `Immigrés en ${imY1} : ${nf(IM.stock.total[imY1] / 1e6, 1)} millions, soit ${nf(IM.stock.total[imY1] / IM.stock.pop[imY1] * 100, 1)} % de la population (${nf(IM.stock.total[imY0] / 1e6, 1)} millions en ${imY0}).`,
     `Principaux pays de naissance en ${imY1} : ${imTop(imY1)}.`,
     `Principaux pays de naissance en ${imY0} : ${imTop(imY0)}.`,
@@ -41,6 +43,12 @@ const FACTS = {
     fact('PIB par habitant', 'gdpPc', ' € constants de 2020', 0), fact('Taux de chômage', 'unemp', ' %'), fact('Inflation', 'inflation', ' %'),
     fact('Balance courante', 'currentAcc', ' % du PIB'), fact('Fécondité', 'fertility', ' enfant par femme', 2), fact('Espérance de vie', 'lifeExp', ' ans'),
     fact('Taux de pauvreté', 'poverty', ' %'), fact('Émissions de gaz à effet de serre', 'ghg', ' Mt CO2e', 0),
+  ],
+  accueil: [
+    `Dette publique au ${debtLatest.label} : ${nf(debtLatest.total, 1)} Md€, soit ${nf(debtLatest.pct, 1)} % du PIB (${nf(apu.dettePct[0], 1)} % en ${apu.years[0]}).`,
+    `Déficit public ${Y} : ${nf(-apu.soldePct[i], 1)} % du PIB. Charge d’intérêts ${Y} : ${nf(apu.interets[i], 1)} Md€.`,
+    `Présidentielle 2027 : ${ORDER.length} candidatures, dont les programmes chiffrés sont passés au même modèle de projection de la dette jusqu’en 2032.`,
+    `État de la France : une quarantaine d’indicateurs macroéconomiques depuis 1960, comparés à l’Union européenne.`,
   ],
   synthese: [
     `Dépenses publiques ${Y} : ${nf(apu.depenses[i], 1)} Md€, soit ${nf(apu.depensesPct[i], 1)} % du PIB.`,
@@ -106,7 +114,7 @@ const prerender = (r, en) => `
 <main><h1>${esc(en ? r.en.title : r.title)}</h1><p>${esc(en ? r.en.description : r.description)}</p>${r.candidate ? candidateFacts(r, en) : `${en ? '' : `<ul>${(FACTS[r.id] || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>`}${r.id === 'presidentielle' ? candidateLinks(en) : ''}`}</main></div>`
 
 const tpl = fs.readFileSync('dist/index.html', 'utf8')
-const ogOf = (r, en) => r.candidate ? `/og-${candidateOf(r.candidate).slug}${en ? '-en' : ''}.png` : `/og${r.section === 'finances' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
+const ogOf = (r, en) => r.candidate ? `/og-${candidateOf(r.candidate).slug}${en ? '-en' : ''}.png` : `/og${r.section === 'finances' || r.section === 'accueil' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
 const page = (r, { noindex = false, en = false } = {}) => {
   const url = `${SITE}${withLang(r.path, en ? 'en' : 'fr')}`
   const t = en ? r.en.title : r.title, d = en ? r.en.description : r.description

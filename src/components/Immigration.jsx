@@ -168,7 +168,7 @@ function Continents() {
   }
   const a = years[0], z = years.at(-1)
   return (
-    <Card title={T('Par continent de naissance, 1968-2024', 'By continent of birth, 1968-2024')}
+    <Card className="head-stack" title={T('Par continent de naissance, 1968-2024', 'By continent of birth, 1968-2024')}
       sub={T(`En ${a}, ${pct(val('EUR', a) / sum(a) * 100, 0)} des immigrés étaient nés en Europe et ${pct(val('AFR', a) / sum(a) * 100, 0)} en Afrique. En ${z}, ${pct(val('EUR', z) / sum(z) * 100, 0)} sont nés en Europe et ${pct(val('AFR', z) / sum(z) * 100, 0)} en Afrique.`,
         `In ${a}, ${pct(val('EUR', a) / sum(a) * 100, 0)} of immigrants were born in Europe and ${pct(val('AFR', a) / sum(a) * 100, 0)} in Africa. In ${z}, ${pct(val('EUR', z) / sum(z) * 100, 0)} were born in Europe and ${pct(val('AFR', z) / sum(z) * 100, 0)} in Africa.`)}
       right={<Seg small value={share} onChange={setShare} options={[[T('Effectifs', 'Number'), false], [T('Parts', 'Shares'), true]]} />}
@@ -214,7 +214,7 @@ function Permits() {
   const last = years.at(-1)
   const sh = id => pct((R[id][last] || 0) / sum(last) * 100, 0)
   return (
-    <Card title={T(`Premiers titres de séjour par motif, ${years[0]}-${last}`, `First residence permits by reason, ${years[0]}-${last}`)}
+    <Card title={T(`Premiers titres de séjour, ${years[0]}-${last}`, `First residence permits, ${years[0]}-${last}`)}
       sub={T(`${num(sum(last))} premiers titres en ${last} : ${sh('FAM')} pour motif familial, ${sh('EDUC')} pour études, ${sh('EMP')} pour travail, ${sh('OTH')} pour d’autres motifs (asile, raisons humanitaires, autres).`,
         `${num(sum(last))} first permits in ${last}: ${sh('FAM')} for family, ${sh('EDUC')} for studies, ${sh('EMP')} for work, ${sh('OTH')} for other reasons (asylum, humanitarian, other).`)}
       src={[SRC_PERMITS]}>
@@ -246,25 +246,38 @@ function Permits() {
   )
 }
 
-export default function Immigration() {
+export default function PopulationImmigration({ route }) {
+  const imm = route?.id === 'immigration'
+  useEffect(() => {
+    if (!imm) return
+    // Attendre l'affichage des deux zones avant de défiler (même principe que Dette et financement).
+    const t = setTimeout(() => document.getElementById('immigration')?.scrollIntoView({ block: 'start' }), 120)
+    return () => clearTimeout(t)
+  }, [imm])
   const S = data.stock, y0 = S.years[0], y1 = S.years.at(-1)
   // Part de la population née à l'étranger, France et moyenne de l'UE (Eurostat), dernière année commune.
   const sh = etatSeries.immShare, shY = Math.max(...Object.keys(sh.fr).filter(y => sh.eu[y] != null).map(Number))
   const pl = data.permits.years.at(-1)
   return (
     <>
-      <div className="kpis k4">
-        <Kpi label={T(`Immigrés en ${y1}`, `Immigrants in ${y1}`)} value={mill(S.total[y1])} sub={T(`${pct(S.total[y1] / S.pop[y1] * 100, 1)} de la population`, `${pct(S.total[y1] / S.pop[y1] * 100, 1)} of the population`)} />
-        <Kpi label={T(`Immigrés en ${y0}`, `Immigrants in ${y0}`)} value={mill(S.total[y0])} sub={T(`${pct(S.total[y0] / S.pop[y0] * 100, 1)} de la population`, `${pct(S.total[y0] / S.pop[y0] * 100, 1)} of the population`)} />
-        <Kpi label={T(`Nés à l’étranger en ${shY}`, `Born abroad in ${shY}`)} value={pct(sh.fr[shY], 1)} sub={T(`de la population ; moyenne de l’UE : ${pct(sh.eu[shY], 1)}`, `of the population; EU average: ${pct(sh.eu[shY], 1)}`)} />
-        <Kpi label={T(`Premiers titres de séjour en ${pl}`, `First residence permits in ${pl}`)} value={num(data.permits.total[pl])} sub={T('ressortissants hors UE', 'non-EU nationals')} />
-      </div>
-      <OriginMap />
-      <Pyramid />
-      <div className="grid2 aligned">
-        <Continents />
-        <Permits />
-      </div>
+      <section className="zone" id="population" aria-labelledby="h-pop">
+        <h2 id="h-pop">{T('Population', 'Population')}</h2>
+        <Pyramid />
+      </section>
+      <section className="zone" id="immigration" aria-labelledby="h-imm">
+        <h2 id="h-imm">{T('Immigration', 'Immigration')}</h2>
+        <div className="kpis k4">
+          <Kpi label={T(`Immigrés en ${y1}`, `Immigrants in ${y1}`)} value={mill(S.total[y1])} sub={T(`${pct(S.total[y1] / S.pop[y1] * 100, 1)} de la population`, `${pct(S.total[y1] / S.pop[y1] * 100, 1)} of the population`)} />
+          <Kpi label={T(`Immigrés en ${y0}`, `Immigrants in ${y0}`)} value={mill(S.total[y0])} sub={T(`${pct(S.total[y0] / S.pop[y0] * 100, 1)} de la population`, `${pct(S.total[y0] / S.pop[y0] * 100, 1)} of the population`)} />
+          <Kpi label={T(`Nés à l’étranger en ${shY}`, `Born abroad in ${shY}`)} value={pct(sh.fr[shY], 1)} sub={T(`de la population ; moyenne de l’UE : ${pct(sh.eu[shY], 1)}`, `of the population; EU average: ${pct(sh.eu[shY], 1)}`)} />
+          <Kpi label={T(`Premiers titres de séjour en ${pl}`, `First residence permits in ${pl}`)} value={num(data.permits.total[pl])} sub={T('ressortissants hors UE', 'non-EU nationals')} />
+        </div>
+        <OriginMap />
+        <div className="grid2 aligned">
+          <Continents />
+          <Permits />
+        </div>
+      </section>
     </>
   )
 }

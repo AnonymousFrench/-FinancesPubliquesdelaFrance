@@ -57,7 +57,7 @@ export const cofog = [
   { name: 'Logement et équipements collectifs', total: 42, nature: [9, 8, 8, 0, 0, 0, 18], level: [6, 36, 0] },
   { name: 'Protection de l’environnement', total: 30, nature: [6, 12, 5, 0, 0, 0, 7], level: [5, 26, 0] },
 ]
-export const cofogMeta = { total: 1672, pctGdp: 57.0, levels: ['État', 'Collectivités', 'Sécurité sociale'] }
+export const cofogMeta = { year: 2024, total: 1672, pctGdp: 57.0, levels: ['État', 'Collectivités', 'Sécurité sociale'] }
 
 // ---------- Missions du budget de l'État : plafonds 2025 et 2026 (Md€, budget général hors CAS Pensions) ----------
 export const missionsLfi = [

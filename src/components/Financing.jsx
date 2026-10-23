@@ -50,11 +50,11 @@ export default function Financing() {
       <div className="grid2">
         <Card title={T('Comment l’État couvre ses besoins 2026', 'How the State covers its 2026 needs')} sub={T('Md€, loi de finances 2026', `${unitBn()}, 2026 budget law`)} src={SRC.lfi2026}>
           <Waterfall height={250} fmt={v => fmt(v, v < 10 ? 1 : 0)} items={[
-            { label: T('Dette à rembourser', 'Maturing debt'), value: n[0].v, sub: T('obligations à échéance', 'bonds to repay'), color: 'var(--blue)' },
-            { label: T('Déficit de l’État', 'State deficit'), value: n[1].v, sub: T('État seul, budget 2026', 'State only, 2026 budget'), color: 'var(--red)' },
-            { label: T('Autres besoins', 'Other needs'), value: +(n[2].v + n[3].v).toFixed(1), sub: T('SNCF Réseau, trésorerie', 'SNCF Réseau, cash'), color: 'var(--orange)' },
-            { label: T('Besoin total', 'Total need'), value: +need.toFixed(1), kind: 'total', color: 'var(--tx)' },
-            { label: T('Émissions', 'Issuance'), value: financing2026.issuance, kind: 'total', sub: T('nettes des rachats', 'net of buybacks'), color: 'var(--green)' },
+            { label: T('Dette à rembourser', 'Maturing debt'), short: T('Dette', 'Debt'), value: n[0].v, sub: T('obligations à échéance', 'bonds to repay'), color: 'var(--blue)' },
+            { label: T('Déficit de l’État', 'State deficit'), short: T('Déficit', 'Deficit'), value: n[1].v, sub: T('État seul, budget 2026', 'State only, 2026 budget'), color: 'var(--red)' },
+            { label: T('Autres besoins', 'Other needs'), short: T('Autres', 'Other'), value: +(n[2].v + n[3].v).toFixed(1), sub: T('SNCF Réseau, trésorerie', 'SNCF Réseau, cash'), color: 'var(--orange)' },
+            { label: T('Besoin total', 'Total need'), short: T('Total', 'Total'), value: +need.toFixed(1), kind: 'total', color: 'var(--tx)' },
+            { label: T('Émissions', 'Issuance'), short: T('Émissions', 'Issued'), value: financing2026.issuance, kind: 'total', sub: T('nettes des rachats', 'net of buybacks'), color: 'var(--green)' },
           ]} />
           <p className="hint">{T(`Plus de la moitié des ${bn(need, 0)} sert à rembourser de la dette ancienne.`, `More than half of the ${bn(need, 0)} only repays old debt.`)}</p>
         </Card>

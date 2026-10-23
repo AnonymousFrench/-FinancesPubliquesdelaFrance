@@ -8,13 +8,19 @@ export const siteName = () => T(SITE_NAME, SITE_NAME_EN)
 
 // Deux rubriques principales, chacune déclinée en sous-pages.
 export const SECTIONS = [
-  { id: 'finances', label: 'Finances publiques', en: 'Public finances', path: '/' },
+  { id: 'finances', label: 'Finances publiques', en: 'Public finances', path: '/finances-publiques' },
   { id: 'presidentielle', label: 'Présidentielle 2027', en: '2027 presidential election', path: '/presidentielle-2027' },
   { id: 'etat', label: 'État de la France', en: 'State of France', path: '/etat-de-la-france' },
 ]
 
 export const ROUTES = [
-  { id: 'synthese', section: 'finances', path: '/', label: 'Synthèse',
+  // Page d'accueil : hors rubriques (aucun onglet actif), oriente vers les trois rubriques.
+  { id: 'accueil', section: 'accueil', path: '/', label: 'Accueil',
+    title: 'Finances publiques de la France et présidentielle 2027 : dette, budget et programmes',
+    description: 'Dette, déficit et budget de la France à partir des données officielles, effet des programmes de la présidentielle 2027 sur la dette jusqu’en 2032, sondages en direct et une quarantaine d’indicateurs comparés à l’UE.',
+    en: { label: 'Home', title: 'French public finances and the 2027 election: debt, budget and programmes',
+      description: 'France’s debt, deficit and budget from official data, what the 2027 presidential programmes would do to the debt to 2032, live polls and some forty indicators compared with the EU.' } },
+  { id: 'synthese', section: 'finances', path: '/finances-publiques', label: 'Synthèse',
     title: 'Finances publiques de la France : dette, déficit, dépenses et recettes',
     description: 'Dette publique, déficit, dépenses et recettes de la France en chiffres et en graphiques, à partir des données officielles d’Eurostat, de l’Insee et de l’Agence France Trésor.',
     en: { label: 'Overview', title: 'French public finances: debt, deficit, spending and revenue',
@@ -55,11 +61,17 @@ export const ROUTES = [
     description: 'Les grands indicateurs macroéconomiques de la France sur longue période, comparés à l’Union européenne : PIB par habitant, chômage, heures travaillées, écart de taux avec l’Allemagne, défense, démographie, immigration, pauvreté, inégalités, énergie et climat.',
     en: { label: 'Key metrics', title: 'State of France: growth, jobs, population, immigration and energy since 1960',
       description: 'France’s key macroeconomic indicators over the long run, compared with the EU: GDP per person, unemployment, hours worked, spread over Germany, defence, population, immigration, poverty, inequality, energy and climate.' } },
-  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/population', label: 'Population',
-    title: 'Population de la France : pyramide des âges depuis 1960 et origines des immigrés',
-    description: 'Pyramide des âges animée de 1960 aux projections 2070 (Eurostat), carte des pays de naissance des immigrés depuis 1968 (Insee), premiers titres de séjour par nationalité et par motif (Eurostat).',
-    en: { label: 'Population', title: 'France’s population: age pyramid since 1960 and where immigrants come from',
-      description: 'Animated age pyramid from 1960 to 2070 projections (Eurostat), map of immigrants’ countries of birth since 1968 (Insee), first residence permits by citizenship and reason (Eurostat).' } },
+  // Population et immigration : un seul onglet ; /etat-de-la-france/immigration est une sous-page (inside) qui défile jusqu'à la zone Immigration.
+  { id: 'population', section: 'etat', path: '/etat-de-la-france/population', label: 'Population et immigration',
+    title: 'Population de la France : pyramide des âges depuis 1960 et projections jusqu’en 2070',
+    description: 'Pyramide des âges animée de 1960 aux projections 2070 (Eurostat), vieillissement de la population, puis l’immigration : pays de naissance des immigrés depuis 1968 et premiers titres de séjour.',
+    en: { label: 'Population and immigration', title: 'France’s population: age pyramid since 1960 and projections to 2070',
+      description: 'Animated age pyramid from 1960 to the 2070 projections (Eurostat), population ageing, then immigration: immigrants’ countries of birth since 1968 and first residence permits.' } },
+  { id: 'immigration', section: 'etat', path: '/etat-de-la-france/immigration', label: 'Immigration', inside: 'population',
+    title: 'Immigration en France : pays de naissance des immigrés depuis 1968 et titres de séjour',
+    description: 'Carte des pays de naissance des immigrés depuis 1968 (Insee), immigrés par continent, part de la population née à l’étranger comparée à l’UE, premiers titres de séjour par nationalité et par motif (Eurostat).',
+    en: { label: 'Immigration', title: 'Immigration in France: immigrants’ countries of birth since 1968 and residence permits',
+      description: 'Map of immigrants’ countries of birth since 1968 (Insee), immigrants by continent, share of the population born abroad compared with the EU, first residence permits by citizenship and reason (Eurostat).' } },
 ]
 
 // Libellés dans la langue courante.
@@ -70,9 +82,9 @@ export const sLabel = s => T(s.label, s.en)
 
 // Anciennes adresses (#ancre, version anglaise, carte supprimée) redirigées vers les pages actuelles.
 export const ALIAS = {
-  overview: '/', 'vue-ensemble': '/', synthese: '/', map: '/', carte: '/', revenue: '/recettes', recettes: '/recettes', spending: '/depenses', depenses: '/depenses',
+  overview: '/finances-publiques', 'vue-ensemble': '/finances-publiques', synthese: '/finances-publiques', map: '/finances-publiques', carte: '/finances-publiques', revenue: '/recettes', recettes: '/recettes', spending: '/depenses', depenses: '/depenses',
   debt: '/dette', dette: '/dette', financing: '/financement', financement: '/financement',
-  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france', immigration: '/etat-de-la-france/population', population: '/etat-de-la-france/population',
+  election: '/presidentielle-2027', presidentielle: '/presidentielle-2027', polls: '/sondages-presidentielle-2027', sondages: '/sondages-presidentielle-2027', etat: '/etat-de-la-france', immigration: '/etat-de-la-france/immigration', population: '/etat-de-la-france/population',
 }
 
 // Langue portée par l'adresse : /en/... pour l'anglais, sans préfixe pour le français.
@@ -121,6 +133,5 @@ export const CANDIDATE_ROUTES = CANDIDATES.map(candidateRoute)
 export const routeOf = path => {
   const p = stripLang(path).replace(/\/+$/, '') || '/'
   if (p.startsWith(ELECTION_PATH + '/')) return CANDIDATE_ROUTES.find(r => r.path === p)
-  if (p === '/etat-de-la-france/immigration') return ROUTES.find(r => r.id === 'immigration') // ancienne adresse
-  return ROUTES.find(r => r.path === p) || (p === '/carte' ? ROUTES[0] : undefined)
+  return ROUTES.find(r => r.path === p) || (p === '/carte' ? ROUTES.find(r => r.id === 'synthese') : undefined)
 }

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react'
-import Overview from './components/Overview.jsx'
+import Home from './components/Home.jsx'
 import { apu } from './data/apu.js'
 import { debtLatest } from './data/data.js'
 import { ROUTES, SECTIONS, ALIAS, routeOf, rLabel, rTitle, rDescription, sLabel, siteName, langOf, withLang } from './routes.js'
@@ -10,7 +10,8 @@ import { Analytics } from '@vercel/analytics/react'
 const i = apu.years.length - 1
 // Chaque onglet est chargé à la demande : la première page reste légère.
 const VIEWS = {
-  synthese: Overview,
+  accueil: Home,
+  synthese: lazy(() => import('./components/Overview.jsx')),
   recettes: lazy(() => import('./components/Revenue.jsx')),
   depenses: lazy(() => import('./components/Spending.jsx')),
   dette: lazy(() => import('./components/DebtFinancing.jsx')),
@@ -18,6 +19,7 @@ const VIEWS = {
   presidentielle: lazy(() => import('./components/Election.jsx')),
   sondages: lazy(() => import('./components/Polls.jsx')),
   etat: lazy(() => import('./components/Etat.jsx')),
+  population: lazy(() => import('./components/Immigration.jsx')),
   immigration: lazy(() => import('./components/Immigration.jsx')),
 }
 
@@ -108,13 +110,13 @@ export default function App() {
           <button className={lang === 'fr' ? 'on' : ''} onClick={() => switchLang('fr')} title="Français" aria-label="Français" aria-pressed={lang === 'fr'}><FlagFR /></button>
           <button className={lang === 'en' ? 'on' : ''} onClick={() => switchLang('en')} title="English" aria-label="English" aria-pressed={lang === 'en'}><FlagEN /></button>
         </span>
-        <div className="banner">
+        {route.id !== 'accueil' && <div className="banner">
           <span>{T('Dépenses', 'Spending')} <b>{bn(apu.depenses[i], 0)}</b> {pct(apu.depensesPct[i])} {T('du PIB', 'of GDP')}</span>
           <span>{T('Recettes', 'Revenue')} <b className="good">{bn(apu.recettes[i], 0)}</b></span>
           <span>{T('Déficit', 'Deficit')} <b className="bad">{pct(-apu.soldePct[i])}</b></span>
           <span>{T('Dette', 'Debt')} <b className="bad">{bn(debtLatest.total, 0)}</b> {pct(debtLatest.pct)}</span>
           <span>{T('Intérêts', 'Interest')} <b>{bn(apu.interets[i])}</b></span>
-        </div>
+        </div>}
       </header>
       <nav aria-label={T('Rubriques', 'Sections')}>
         {SECTIONS.map(x => <a key={x.id} href={withLang(x.path, lang)} className={x.id === route.section ? 'on' : ''} aria-current={x.id === route.section ? 'page' : undefined}>{sLabel(x)}</a>)}
@@ -128,7 +130,7 @@ export default function App() {
         <h1 className="sr-only">{rTitle(route)}</h1>
         <Boundary key={route.id}><Suspense fallback={<div className="card loading">{T('Chargement…', 'Loading…')}</div>}><View route={route} /></Suspense></Boundary>
       </main>
-      <footer className="disclaimer"><span>{T('Site indépendant, sans lien avec un parti. Projections illustratives, non des prévisions. Hébergeur : Vercel Inc.', 'Independent site, not affiliated with any party. Projections are illustrative, not forecasts. Host: Vercel Inc.')}</span><a href="https://www.linkedin.com/in/thibaultmaillet/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true" style={{ verticalAlign: '-1px', marginRight: 4 }}><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Contact</a></footer>
+      <footer className="disclaimer"><span>{T('Site indépendant, sans lien avec un parti. Projections illustratives, non des prévisions.', 'Independent site, not affiliated with any party. Projections are illustrative, not forecasts.')}</span><a href="https://www.linkedin.com/in/thibaultmaillet/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true" style={{ verticalAlign: '-1px', marginRight: 4 }}><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Contact</a></footer>
       <Analytics />
     </div>
   )

@@ -113,7 +113,7 @@ export default function Pyramid() {
   ].map(m => ({ ...m, age: t - m.born })).filter(m => m.age >= 1 && m.age <= 99)
 
   return (
-    <Card title={T('Pyramide des âges', 'Population pyramid')}
+    <Card className="head-stack" title={T('Pyramide des âges', 'Population pyramid')}
       sub={T(`Population au 1er janvier par âge et par sexe, de ${YEARS[0]} à ${LAST}, puis projection d’Eurostat jusqu’en ${YEARS.at(-1)}. France métropolitaine avant ${P.firstFR}.`, `Population on 1 January by age and sex, from ${YEARS[0]} to ${LAST}, then Eurostat projection to ${YEARS.at(-1)}. Metropolitan France before ${P.firstFR}.`)}
       right={<Seg small value={cmp} onChange={setCmp} options={[[T(`Contour ${YEARS[0]}`, `${YEARS[0]} outline`), YEARS[0]], [T(`Contour ${LAST}`, `${LAST} outline`), LAST], [T('Sans contour', 'No outline'), 0]]} />}
       src={SRC}>

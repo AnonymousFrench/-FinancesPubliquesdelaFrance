@@ -225,3 +225,9 @@ export const pollBlackout = (now = new Date()) => BLACKOUTS.find(b => now >= new
 // Marge d'erreur à 95 %, par référence à la méthode aléatoire, pour un score de 50 % (cas le plus défavorable).
 export const marginOfError = n => n ? 1.96 * Math.sqrt(0.25 / n) * 100 : null
 export const COMMISSION_URL = 'https://www.commission-des-sondages.fr/notices/'
+
+// Couleur de chaque parti (graphiques des sondages et page d'accueil).
+export const PARTY_COLOR = {
+  LFI: '#c0392b', PP: '#d6457a', PS: '#d6457a', RE: '#e0a100', EPR: '#e0a100', HOR: '#0e9aa7', LR: '#2d6cdf', RN: '#1b2a6b',
+  REC: '#6b4423', NE: '#8e44ad', LE: '#2a9d4a', EELV: '#2a9d4a', PCF: '#a4161a', LO: '#7a1010', DLF: '#5566aa', LFH: '#8e7cc3', 'NPA-A': '#a33', RES: '#8a7a5a', 'D!': '#e07a5f',
+}

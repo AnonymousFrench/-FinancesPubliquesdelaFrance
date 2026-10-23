@@ -67,7 +67,12 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
   const tipLeft = hover != null ? X(hover) / W * 100 : 0
 
   const ticks = niceTicks(yL[0], yL[1])
-  const xt = xTicks || autoXTicks(x0, x1)
+  // Étiquettes d'années espacées d'au moins 38 px (téléphone) : on n'en garde qu'une sur deux, trois…, en gardant la dernière.
+  const xt0 = xTicks || autoXTicks(x0, x1)
+  const gap = xt0.length > 1 ? (X(xt0[1]) - X(xt0[0])) : 1e9
+  const every = Math.max(1, Math.ceil(38 / gap))
+  const xt = every === 1 ? xt0 : xt0.filter((_, k) => (xt0.length - 1 - k) % every === 0)
+  const narrow = W < 520
 
   return (
     <div className="lc">
@@ -121,7 +126,7 @@ export function LineChart({ series = [], bars, band, axes = {}, height = 260, ma
           {markers.map(mk => (
             <g key={mk.x + mk.label}>
               <line x1={X(mk.x)} x2={X(mk.x)} y1={m.t} y2={m.t + ih} stroke="var(--mut)" strokeDasharray="3 4" opacity={0.5} />
-              <text x={X(mk.x) + (mk.side === 'r' ? 6 : -6)} y={m.t + 11} textAnchor={mk.side === 'r' ? 'start' : 'end'} className="ax mk">{mk.label}</text>
+              {!narrow && <text x={X(mk.x) + (mk.side === 'r' ? 6 : -6)} y={m.t + 11} textAnchor={mk.side === 'r' ? 'start' : 'end'} className="ax mk">{mk.label}</text>}
             </g>
           ))}
           {xt.map(v => <text key={v} x={X(v)} y={H - 7} textAnchor="middle" className="ax">{xFmt(v)}</text>)}
@@ -196,7 +201,9 @@ export function Waterfall({ items, fmt = v => v, height = 240 }) {
     if (cur) out.push(cur)
     return out
   }
-  const lab = items.map(it => ({ l: wrap1(it.label, 12.5, 6.4), s: it.sub ? wrap1(it.sub, 11, 5.6) : [] }))
+  // Colonnes étroites (téléphone) : libellé court, sans sous-titre, police réduite.
+  const tight = iw / items.length < 72
+  const lab = items.map(it => ({ l: wrap1(tight ? it.short || it.label : it.label, 12.5, tight ? 5.6 : 6.4), s: it.sub && !tight ? wrap1(it.sub, 11, 5.6) : [] }))
   const nLines = Math.max(...lab.map(x => x.l.length + x.s.length))
   m.b = Math.max(42, 12 + nLines * 14)
   const H = height + (m.b - 42), ih = H - m.t - m.b
@@ -222,7 +229,7 @@ export function Waterfall({ items, fmt = v => v, height = 240 }) {
           {i > 0 && <line x1={Xc(i - 1) + bw / 2} x2={Xc(i) - bw / 2} y1={Y(bars[i - 1].end)} y2={Y(bars[i - 1].end)} stroke="var(--mut)" strokeDasharray="3 3" opacity={0.6} />}
           <rect x={Xc(i) - bw / 2} width={bw} y={Y(b.hi)} height={Math.max(2, Y(b.lo) - Y(b.hi))} rx={3} fill={b.color} opacity={b.kind === 'total' ? 1 : 0.82} />
           <text x={Xc(i)} y={Y(b.hi) - 7} textAnchor="middle" className="wf-v">{fmt(b.value)}</text>
-          {lab[i].l.map((ln, k) => <text key={'l' + k} x={Xc(i)} y={H - m.b + 16 + k * 14} textAnchor="middle" className="wf-l">{ln}</text>)}
+          {lab[i].l.map((ln, k) => <text key={'l' + k} x={Xc(i)} y={H - m.b + 16 + k * 14} textAnchor="middle" className={'wf-l' + (tight ? ' tight' : '')}>{ln}</text>)}
           {lab[i].s.map((ln, k) => <text key={'s' + k} x={Xc(i)} y={H - m.b + 16 + (lab[i].l.length + k) * 14} textAnchor="middle" className="wf-s">{ln}</text>)}
         </g>
       ))}

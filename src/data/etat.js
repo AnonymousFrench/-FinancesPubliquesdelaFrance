@@ -51,10 +51,10 @@ export const THEMES = [
     { id: 'oldDep', fr: '65 ans et plus', en: 'People aged 65+', unit: 'num', d: 0, note: ['pour 100 personnes de 15-64 ans', 'per 100 people aged 15-64'], src: wb('SP.POP.DPND.OL'), good: 0 },
   ] },
   // Personnes nées à l'étranger (définition Eurostat : pays de naissance), comparées aux personnes nées en France.
-  // L'Insee compte les « immigrés » (nés étrangers à l'étranger) : 7,6 millions, 11,2 % de la population en 2024.
+  // L'Insee compte les « immigrés » (nés étrangers à l'étranger) : 7,7 millions, 11,3 % de la population en 2024 (L'essentiel, figure 1).
   { id: 'immigration', fr: 'Population née à l’étranger', en: 'Population born abroad',
-    link: { path: '/etat-de-la-france/population', fr: 'Carte : d’où viennent les immigrés, de 1968 à aujourd’hui →', en: 'Map: where immigrants have come from, 1968 to today →' },
-    note: ['Personnes nées à l’étranger (définition Eurostat, Français nés à l’étranger compris), comparées aux personnes nées en France (pointillés). L’Insee compte 7,6 millions d’immigrés en 2024, 11,2 % de la population, et 8,0 millions de descendants d’immigrés.', 'People born abroad (Eurostat definition, including French citizens born abroad), compared with people born in France (dotted). Insee counts 7.6 million immigrants in 2024, 11.2% of the population, and 8.0 million descendants of immigrants.'],
+    link: { path: '/etat-de-la-france/immigration', fr: 'Carte : d’où viennent les immigrés, de 1968 à aujourd’hui →', en: 'Map: where immigrants have come from, 1968 to today →' },
+    note: ['Personnes nées à l’étranger (définition Eurostat, Français nés à l’étranger compris), comparées aux personnes nées en France (pointillés). L’Insee compte 7,7 millions d’immigrés en 2024, 11,3 % de la population, et 8,0 millions de descendants d’immigrés.', 'People born abroad (Eurostat definition, including French citizens born abroad), compared with people born in France (dotted). Insee counts 7.7 million immigrants in 2024, 11.3% of the population, and 8.0 million descendants of immigrants.'],
     items: [
     { id: 'immShare', fr: 'Nés à l’étranger', en: 'Born abroad', unit: 'pct', d: 1, note: ['% de la population', '% of the population'], src: es('migr_pop3ctb'), srcX: { label: 'Insee, Immigrés et descendants d’immigrés (nov. 2025)', url: 'https://www.insee.fr/fr/statistiques/8612512' }, good: 0 },
     { id: 'immHigh', fr: 'Diplômés du supérieur', en: 'Tertiary-educated', unit: 'pct', d: 1, vs: ['nés en France', 'born in France'], note: ['% des 25-64 ans nés à l’étranger', '% of 25-64 year-olds born abroad'], src: es('edat_lfs_9912'), good: 0 },

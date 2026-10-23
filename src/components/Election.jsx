@@ -6,7 +6,7 @@ import { usePolls, pollOf } from '../lib/usePolls.js'
 import { WIKI_PAGE, pollBlackout } from '../lib/polls.js'
 import { PollStatus, PollMentions } from './Polls.jsx'
 import { usePhotos } from '../lib/usePhotos.js'
-import { Card, Kpi, Seg } from './ui.jsx'
+import { Card, Kpi, Seg, Sources } from './ui.jsx'
 import { LineChart } from '../lib/charts.jsx'
 import { bn, fmt, pct, signed, unitBn, dateFr } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
@@ -91,7 +91,9 @@ export default function Election({ route }) {
     <>
       <Intro onPick={pick} selected={pid} />
 
-      <Card title={T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')} className="group">
+      <section className="zone" id="comparer" aria-labelledby="h-comparer">
+      <h2 id="h-comparer">{T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')}</h2>
+      <Card className="group">
         <div className="ctl-row">
           <div className="ctl">
             <span className="ctl-l">{T('Mesures retenues', 'Measures counted')}</span>
@@ -111,13 +113,15 @@ export default function Election({ route }) {
         <Trajectories runs={runs} base={base} />
         <Table runs={runs} base={base} basis={basis} />
       </Card>
+      </section>
 
       {/* Fiche du candidat choisi dans les vignettes du haut de page. */}
-      <div id="deep-dive" className="deep-dive">
+      <section id="deep-dive" className="zone deep-dive" aria-labelledby="h-programme">
+        <div className="zone-h"><h2 id="h-programme">{T(`Programme ${parties[pid].short}`, `${parties[pid].short} programme`)}</h2><CopyLink /></div>
         {unscored(parties[pid])
           ? <UnscoredDive key={pid} q={parties[pid]} />
           : <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />}
-      </div>
+      </section>
     </>
   )
 }
@@ -236,7 +240,6 @@ function Trajectories({ runs, base }) {
           )
         })}
       </div>
-      <p className="hint">{T('Écart en 2032 avec la politique inchangée : ', 'Gap in 2032 vs unchanged policy: ')}<span className="dn">{T('vert', 'green')}</span> = {isDebt ? T('moins de dette', 'less debt') : T('moins de déficit', 'less deficit')}, <span className="up">{T('rouge', 'red')}</span> = {T('davantage', 'more')}.</p>
     </Card>
   )
 }
@@ -264,7 +267,7 @@ function Size({ runs, basis }) {
   const X = v => 50 + v / max * 50
   const CATS = sizeCats()
   return (
-    <Card title={T('Ampleur des programmes', 'Scale of the programmes')}
+    <Card className="head-stack" title={T('Ampleur des programmes', 'Scale of the programmes')}
       sub={T('Montants bruts annoncés pour 2032, Md€ par an : coûts à gauche, gains à droite.', `Gross amounts announced for 2032, ${unitBn()} a year: costs on the left, gains on the right.`)}
       right={<div className="legend">{CATS.map(([k, n, c]) => <span key={k}><i style={{ background: c }} />{n}</span>)}<span><i className="net-key" />{T('Net annoncé', 'Net announced')}</span>{basis !== 'claimed' && <span><i className="cnt-key" />{T('Net retenu', 'Net counted')}</span>}</div>}>
       <div className="div size">
@@ -296,21 +299,21 @@ function Table({ runs, base, basis }) {
   const b = at(base, 2032)
   const all = [{ name: UNCH(), rows: base, review: '–' }, ...runs.map(({ q, rows }) => ({ name: pName(q), q, rows, review: basis === 'claimed' ? T('tel qu’annoncé', 'as announced') : reviewName(q, basis === 'standard' ? 'standard' : q.reviewDefault) }))]
   return (
-    <Card title={T('2032 en chiffres', '2032 in figures')}>
+    <Card>
       <div className="t-wrap">
         <table className="t">
-          <thead><tr><th></th><th>{T('Déficit', 'Deficit')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dette', 'Debt')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dépenses', 'Spending')}</th><th>{T('Recettes', 'Revenue')}</th><th>{T('Intérêts', 'Interest')}</th><th>{T('Mesures nettes', 'Net measures')}</th><th>{T('Évalué par', 'Assessed by')}</th></tr></thead>
+          <thead><tr><th className="t-title" scope="col">{T('2032 en chiffres', '2032 in figures')}</th><th>{T('Déficit', 'Deficit')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dette', 'Debt')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dépenses', 'Spending')}</th><th>{T('Recettes', 'Revenue')}</th><th>{T('Intérêts', 'Interest')}</th><th>{T('Mesures nettes', 'Net measures')}</th><th>{T('Évalué par', 'Assessed by')}</th></tr></thead>
           <tbody>
             {all.map(({ name, q, rows, review }) => {
               const r = at(rows, 2032)
               const dd = r.deficitPct - b.deficitPct, db = r.debtPct - b.debtPct
               return (
                 <tr key={name} className={q ? '' : 'mutrow'}>
-                  <td>{q && <i className="dot-c" style={{ background: q.color }} />}{name}</td>
+                  <td className="t-name">{q && <i className="dot-c" style={{ background: q.color }} />}{name}</td>
                   <td>{pct(r.deficitPct)}</td><td className={q ? (dd < -0.05 ? 'dn' : dd > 0.05 ? 'up' : '') : ''}>{q ? signed(dd) : '–'}</td>
                   <td>{pct(r.debtPct)}</td><td className={q ? (db < -0.05 ? 'dn' : db > 0.05 ? 'up' : '') : ''}>{q ? signed(db) : '–'}</td>
                   <td>{pct(r.spendingPct)}</td><td>{pct(r.revenuePct)}</td><td>{bn(r.interest, 0)}</td>
-                  <td>{q ? (isEn() ? `${signed(r.measures, 0)}bn` : `${signed(r.measures, 0)} Md€`) : '–'}</td><td className="mut">{review}</td>
+                  <td>{q ? (isEn() ? `${signed(r.measures, 0)}bn` : `${signed(r.measures, 0)} Md€`) : '–'}</td><td className="mut t-review">{review}</td>
                 </tr>
               )
             })}
@@ -359,7 +362,7 @@ function Checked({ q }) {
 function UnscoredDive({ q }) {
   const u = unscoredText()
   return (
-    <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)} right={<CopyLink />}>
+    <Card src={q.src.map(S)}>
       <Profile q={q} />
       <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
       <p className="ctl-note"><b>{u.title}.</b> {u.text}</p>
@@ -398,7 +401,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
 
   return (
     <>
-      <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} right={<CopyLink />}>
+      <Card>
         <Profile q={q} />
         <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
         <details className="about"><summary>{T('À propos de ce chiffrage', 'About this costing')}</summary><p className="sub">{pDocument(q)}</p></details>
@@ -474,10 +477,10 @@ function DeepDive({ q, basis, base, opts, growth }) {
         </Card>
       </div>
 
-      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} src={q.measuresSrc.map(S)}>
+      <Card>
         <div className="t-wrap">
           <table className="t mt">
-            <thead><tr><th>{T('Mesure', 'Measure')}</th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
+            <thead><tr><th className="t-title" scope="col">{T('Mesure par mesure', 'Measure by measure')}<span className="t-sub">{T('Md€ par an, effet sur le solde', `${unitBn()} a year, effect on the balance`)}</span></th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
             <tbody>
               {q.measures.map(m => {
                 const c = cred[m.id] ?? 1
@@ -510,13 +513,13 @@ function DeepDive({ q, basis, base, opts, growth }) {
             </tbody>
           </table>
         </div>
-        <details className="about"><summary>{T('Origine des montants', 'Where the amounts come from')}</summary><p className="sub">{pMeasuresNote(q)}</p></details>
+        <details className="about"><summary>{T('Origine des montants et sources', 'Where the amounts come from, and sources')}</summary><p className="sub">{pMeasuresNote(q)}</p><Sources src={[...new Set([...q.measuresSrc, ...q.src])].map(S)} /></details>
       </Card>
 
-      <Card title={T('Année par année', 'Year by year')} sub={T(`${q.short}, administrations publiques`, `${q.short}, general government`)}>
+      <Card>
         <div className="t-wrap">
           <table className="t">
-            <thead><tr><th></th>{PROJ.map(y => <th key={y}>{y}</th>)}</tr></thead>
+            <thead><tr><th className="t-title" scope="col">{T('Année par année', 'Year by year')}<span className="t-sub">{T(`${q.short}, administrations publiques`, `${q.short}, general government`)}</span></th>{PROJ.map(y => <th key={y}>{y}</th>)}</tr></thead>
             <tbody>
               {[
                 [T('Mesures nettes, Md€', `Net measures, ${unitBn()}`), r => r.year > 2026 ? fmt(r.measures) : '–'],
@@ -538,7 +541,6 @@ function DeepDive({ q, basis, base, opts, growth }) {
           </table>
         </div>
       </Card>
-      <Card className="src-only" src={q.src.map(S)} />
     </>
   )
 }
