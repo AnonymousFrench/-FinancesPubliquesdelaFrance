@@ -205,7 +205,7 @@ function Permits() {
   const [ref, W] = useWidth(900)
   const [hi, setHi] = useState(null)
   const years = data.permits.years, R = data.permits.reasons
-  const H = 240, L = 44, Rr = 8, Tp = 10, B = 24
+  const H = 260, L = 44, Rr = 8, Tp = 10, B = 24
   const sum = y => REASONS.reduce((s, r) => s + (R[r.id][y] || 0), 0)
   const top = Math.ceil(Math.max(...years.map(sum)) / 1e5) * 1e5
   const step = (W - L - Rr) / years.length, bw = Math.max(4, step - 3)
@@ -261,7 +261,7 @@ export default function Immigration() {
       </div>
       <OriginMap />
       <Pyramid />
-      <div className="grid2">
+      <div className="grid2 aligned">
         <Continents />
         <Permits />
       </div>

@@ -478,3 +478,8 @@ a.ind:hover { border-color: #c7ccd4 }
   .py-stats > div:not(.py-ret-tile) b { font-size: 17px }
   .py-stats > div:not(.py-ret-tile) small { font-size: 11px }
 }
+/* Deux graphiques côte à côte : en-tête, graphique et source partagent les mêmes lignes (alignement exact quelle que soit la longueur du texte) */
+.grid2.aligned > .card { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0 }
+.grid2.aligned > .card > .card-h { align-self: start }
+.grid2.aligned > .card > .src { align-self: start }
+.grid2.aligned > .card { grid-template-columns: minmax(0, 1fr) } .grid2.aligned > .card > * { min-width: 0 }
