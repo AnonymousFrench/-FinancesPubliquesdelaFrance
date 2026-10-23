@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react'
-import Overview from './components/Overview.jsx'
+import Home from './components/Home.jsx'
 import { apu } from './data/apu.js'
 import { debtLatest } from './data/data.js'
 import { ROUTES, SECTIONS, ALIAS, routeOf, rLabel, rTitle, rDescription, sLabel, siteName, langOf, withLang } from './routes.js'
@@ -10,7 +10,8 @@ import { Analytics } from '@vercel/analytics/react'
 const i = apu.years.length - 1
 // Chaque onglet est chargé à la demande : la première page reste légère.
 const VIEWS = {
-  synthese: Overview,
+  accueil: Home,
+  synthese: lazy(() => import('./components/Overview.jsx')),
   recettes: lazy(() => import('./components/Revenue.jsx')),
   depenses: lazy(() => import('./components/Spending.jsx')),
   dette: lazy(() => import('./components/DebtFinancing.jsx')),
@@ -108,13 +109,13 @@ export default function App() {
           <button className={lang === 'fr' ? 'on' : ''} onClick={() => switchLang('fr')} title="Français" aria-label="Français" aria-pressed={lang === 'fr'}><FlagFR /></button>
           <button className={lang === 'en' ? 'on' : ''} onClick={() => switchLang('en')} title="English" aria-label="English" aria-pressed={lang === 'en'}><FlagEN /></button>
         </span>
-        <div className="banner">
+        {route.id !== 'accueil' && <div className="banner">
           <span>{T('Dépenses', 'Spending')} <b>{bn(apu.depenses[i], 0)}</b> {pct(apu.depensesPct[i])} {T('du PIB', 'of GDP')}</span>
           <span>{T('Recettes', 'Revenue')} <b className="good">{bn(apu.recettes[i], 0)}</b></span>
           <span>{T('Déficit', 'Deficit')} <b className="bad">{pct(-apu.soldePct[i])}</b></span>
           <span>{T('Dette', 'Debt')} <b className="bad">{bn(debtLatest.total, 0)}</b> {pct(debtLatest.pct)}</span>
           <span>{T('Intérêts', 'Interest')} <b>{bn(apu.interets[i])}</b></span>
-        </div>
+        </div>}
       </header>
       <nav aria-label={T('Rubriques', 'Sections')}>
         {SECTIONS.map(x => <a key={x.id} href={withLang(x.path, lang)} className={x.id === route.section ? 'on' : ''} aria-current={x.id === route.section ? 'page' : undefined}>{sLabel(x)}</a>)}

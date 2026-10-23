@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { usePolls, today, daysBefore } from '../lib/usePolls.js'
-import { average, trend, WIKI_PAGE, pollBlackout, marginOfError, COMMISSION_URL } from '../lib/polls.js'
+import { PARTY_COLOR, average, trend, WIKI_PAGE, pollBlackout, marginOfError, COMMISSION_URL } from '../lib/polls.js'
 import { SOURCES } from '../data/election2027.js'
 import { Card, Seg } from './ui.jsx'
 import { INSTITUTES, INSTITUTE_STANCE, INSTITUTE_STANCE_EN } from '../data/institutes.js'
@@ -11,10 +11,7 @@ import { fmt, pct, signed, dateFr, monthFr } from '../lib/format.js'
 
 const FIRST_ROUND = '2027-04-18'
 const WINDOW = 45
-export const PARTY_COLOR = {
-  LFI: '#c0392b', PP: '#d6457a', PS: '#d6457a', RE: '#e0a100', EPR: '#e0a100', HOR: '#0e9aa7', LR: '#2d6cdf', RN: '#1b2a6b',
-  REC: '#6b4423', LE: '#2a9d4a', EELV: '#2a9d4a', PCF: '#a4161a', LO: '#7a1010', DLF: '#5566aa', LFH: '#8e7cc3', 'NPA-A': '#a33', RES: '#8a7a5a', 'D!': '#e07a5f',
-}
+export { PARTY_COLOR }
 const colorOf = party => PARTY_COLOR[party] || '#9aa4b2'
 const SRC_WIKI = { label: 'Wikipédia, « Liste de sondages sur l’élection présidentielle française de 2027 »', url: WIKI_PAGE }
 const yearFrac = iso => { const d = new Date(iso + 'T00:00:00Z'); const y = d.getUTCFullYear(); return y + (d - Date.UTC(y, 0, 1)) / (Date.UTC(y + 1, 0, 1) - Date.UTC(y, 0, 1)) }

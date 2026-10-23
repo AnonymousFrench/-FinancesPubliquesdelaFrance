@@ -42,6 +42,12 @@ const FACTS = {
     fact('Balance courante', 'currentAcc', ' % du PIB'), fact('Fécondité', 'fertility', ' enfant par femme', 2), fact('Espérance de vie', 'lifeExp', ' ans'),
     fact('Taux de pauvreté', 'poverty', ' %'), fact('Émissions de gaz à effet de serre', 'ghg', ' Mt CO2e', 0),
   ],
+  accueil: [
+    `Dette publique au ${debtLatest.label} : ${nf(debtLatest.total, 1)} Md€, soit ${nf(debtLatest.pct, 1)} % du PIB (${nf(apu.dettePct[0], 1)} % en ${apu.years[0]}).`,
+    `Déficit public ${Y} : ${nf(-apu.soldePct[i], 1)} % du PIB. Charge d’intérêts ${Y} : ${nf(apu.interets[i], 1)} Md€.`,
+    `Présidentielle 2027 : ${ORDER.length} candidatures, dont les programmes chiffrés sont passés au même modèle de projection de la dette jusqu’en 2032.`,
+    `État de la France : 26 indicateurs macroéconomiques depuis 1960, comparés à l’Union européenne.`,
+  ],
   synthese: [
     `Dépenses publiques ${Y} : ${nf(apu.depenses[i], 1)} Md€, soit ${nf(apu.depensesPct[i], 1)} % du PIB.`,
     `Recettes publiques ${Y} : ${nf(apu.recettes[i], 1)} Md€, soit ${nf(apu.recettesPct[i], 1)} % du PIB.`,
@@ -106,7 +112,7 @@ const prerender = (r, en) => `
 <main><h1>${esc(en ? r.en.title : r.title)}</h1><p>${esc(en ? r.en.description : r.description)}</p>${r.candidate ? candidateFacts(r, en) : `${en ? '' : `<ul>${(FACTS[r.id] || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>`}${r.id === 'presidentielle' ? candidateLinks(en) : ''}`}</main></div>`
 
 const tpl = fs.readFileSync('dist/index.html', 'utf8')
-const ogOf = (r, en) => r.candidate ? `/og-${candidateOf(r.candidate).slug}${en ? '-en' : ''}.png` : `/og${r.section === 'finances' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
+const ogOf = (r, en) => r.candidate ? `/og-${candidateOf(r.candidate).slug}${en ? '-en' : ''}.png` : `/og${r.section === 'finances' || r.section === 'accueil' ? '' : '-' + r.section}${en ? '-en' : ''}.png`
 const page = (r, { noindex = false, en = false } = {}) => {
   const url = `${SITE}${withLang(r.path, en ? 'en' : 'fr')}`
   const t = en ? r.en.title : r.title, d = en ? r.en.description : r.description

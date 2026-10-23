@@ -31,7 +31,7 @@
   "redirects": [
     {
       "source": "/carte",
-      "destination": "/",
+      "destination": "/finances-publiques",
       "permanent": true
     },
     {
