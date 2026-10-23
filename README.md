@@ -1,6 +1,6 @@
 # Finances publiques de la France
 
-Dette, déficit, recettes et dépenses de la France à partir des données officielles, budget de l’État ligne par ligne, simulateur des programmes de la présidentielle 2027, sondages en direct et « État de la France » : 26 indicateurs macroéconomiques sur longue période comparés à l’UE, aux États-Unis et à la Chine.
+Dette, déficit, recettes et dépenses de la France à partir des données officielles, budget de l’État ligne par ligne, simulateur des programmes de la présidentielle 2027, sondages en direct et « État de la France » : une quarantaine d’indicateurs macroéconomiques sur longue période comparés à l’UE, aux États-Unis et à la Chine.
 
 ## Lancer en local
 

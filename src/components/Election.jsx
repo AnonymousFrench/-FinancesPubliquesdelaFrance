@@ -309,11 +309,11 @@ function Table({ runs, base, basis }) {
               const dd = r.deficitPct - b.deficitPct, db = r.debtPct - b.debtPct
               return (
                 <tr key={name} className={q ? '' : 'mutrow'}>
-                  <td>{q && <i className="dot-c" style={{ background: q.color }} />}{name}</td>
+                  <td className="t-name">{q && <i className="dot-c" style={{ background: q.color }} />}{name}</td>
                   <td>{pct(r.deficitPct)}</td><td className={q ? (dd < -0.05 ? 'dn' : dd > 0.05 ? 'up' : '') : ''}>{q ? signed(dd) : '–'}</td>
                   <td>{pct(r.debtPct)}</td><td className={q ? (db < -0.05 ? 'dn' : db > 0.05 ? 'up' : '') : ''}>{q ? signed(db) : '–'}</td>
                   <td>{pct(r.spendingPct)}</td><td>{pct(r.revenuePct)}</td><td>{bn(r.interest, 0)}</td>
-                  <td>{q ? (isEn() ? `${signed(r.measures, 0)}bn` : `${signed(r.measures, 0)} Md€`) : '–'}</td><td className="mut">{review}</td>
+                  <td>{q ? (isEn() ? `${signed(r.measures, 0)}bn` : `${signed(r.measures, 0)} Md€`) : '–'}</td><td className="mut t-review">{review}</td>
                 </tr>
               )
             })}

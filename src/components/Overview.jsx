@@ -63,7 +63,7 @@ function Flows() {
     ]
     return sankey().nodeWidth(12).nodePadding(10).nodeSort(null)
       .nodeAlign(n => n.side === 'hub' ? 1 : n.side === 'in' || n.side === 'debt' ? 0 : 2)
-      .extent([[230, 6], [W - 215, H - 6]])({ nodes: ns.map(n => ({ ...n })), links: ls.map(l => ({ ...l })) })
+      .extent([[275, 6], [W - 215, H - 6]])({ nodes: ns.map(n => ({ ...n })), links: ls.map(l => ({ ...l })) })
   }, [])
   const color = n => n.side === 'debt' ? 'var(--red)' : n.side === 'int' ? '#7a5af8' : n.side === 'hub' ? 'var(--tx)' : n.side === 'in' ? 'var(--green)' : 'var(--blue)'
   return (

@@ -48,7 +48,7 @@ const FACTS = {
     `Dette publique au ${debtLatest.label} : ${nf(debtLatest.total, 1)} Md€, soit ${nf(debtLatest.pct, 1)} % du PIB (${nf(apu.dettePct[0], 1)} % en ${apu.years[0]}).`,
     `Déficit public ${Y} : ${nf(-apu.soldePct[i], 1)} % du PIB. Charge d’intérêts ${Y} : ${nf(apu.interets[i], 1)} Md€.`,
     `Présidentielle 2027 : ${ORDER.length} candidatures, dont les programmes chiffrés sont passés au même modèle de projection de la dette jusqu’en 2032.`,
-    `État de la France : 26 indicateurs macroéconomiques depuis 1960, comparés à l’Union européenne.`,
+    `État de la France : une quarantaine d’indicateurs macroéconomiques depuis 1960, comparés à l’Union européenne.`,
   ],
   synthese: [
     `Dépenses publiques ${Y} : ${nf(apu.depenses[i], 1)} Md€, soit ${nf(apu.depensesPct[i], 1)} % du PIB.`,

@@ -114,7 +114,7 @@ export default function Home() {
     let on = true
     import('../lib/homeData.js').then(m => {
       if (!on) return
-      setD({ fan: m.debtFan(), polls: m.pollSnapshot(), ind: m.indicators(), pop: m.population(), live: false })
+      setD({ fan: m.debtFan(), polls: m.pollSnapshot(), ind: m.indicators(), pop: m.population(), count: m.indicatorCount, live: false })
       m.pollLive().then(p => on && setD(s => ({ ...s, polls: p, live: true }))).catch(() => {})
     })
     return () => { on = false }
@@ -158,7 +158,7 @@ export default function Home() {
       </section>
 
       <section className="doors" aria-label={T('Rubriques', 'Sections')}>
-        <Door href={lp('/presidentielle-2027')} kicker={T('Présidentielle 2027', '2027 election') + (days > 0 ? ` · J-${days}` : '')} live={d?.live && !d?.polls.blackout}
+        <Door href={lp('/presidentielle-2027')} kicker={T('Présidentielle 2027', '2027 election') + (days > 0 ? ` · ${T('J−', 'D−')}${days}` : '')} live={d?.live && !d?.polls.blackout}
           title={T('Qui mène, et que coûte son programme ?', 'Who leads, and what would their programme cost?')} cta={T('Les 12 programmes au même barème', 'All 12 programmes on the same model')}>
           {d?.polls.blackout
             ? <span className="door-note">{T('Sondages suspendus la veille et le jour du scrutin (loi du 19 juillet 1977).', 'Polls are suspended the day before and the day of the vote (law of 19 July 1977).')}</span>
@@ -180,7 +180,7 @@ export default function Home() {
         </Door>
 
         <Door href={lp('/etat-de-la-france')} kicker={T('État de la France', 'State of France')}
-          title={T('Où en est la France face à l’Europe ?', 'How does France compare with the EU?')} cta={T('26 indicateurs depuis 1960, population', '26 indicators since 1960, population')}>
+          title={T('Où en est la France face à l’Europe ?', 'How does France compare with the EU?')} cta={d?.count ? T(`${d.count} indicateurs depuis 1960, population`, `${d.count} indicators since 1960, population`) : T('Indicateurs depuis 1960, population', 'Indicators since 1960, population')}>
           <span className="door-ind">{(d?.ind || []).map(m => {
             const top = Math.max(m.fr, m.eu) * 1.25
             return (

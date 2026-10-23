@@ -17,9 +17,9 @@ export const ROUTES = [
   // Page d'accueil : hors rubriques (aucun onglet actif), oriente vers les trois rubriques.
   { id: 'accueil', section: 'accueil', path: '/', label: 'Accueil',
     title: 'Finances publiques de la France et présidentielle 2027 : dette, budget et programmes',
-    description: 'Dette, déficit et budget de la France à partir des données officielles, effet des programmes de la présidentielle 2027 sur la dette jusqu’en 2032, sondages en direct et 26 indicateurs comparés à l’UE.',
+    description: 'Dette, déficit et budget de la France à partir des données officielles, effet des programmes de la présidentielle 2027 sur la dette jusqu’en 2032, sondages en direct et une quarantaine d’indicateurs comparés à l’UE.',
     en: { label: 'Home', title: 'French public finances and the 2027 election: debt, budget and programmes',
-      description: 'France’s debt, deficit and budget from official data, what the 2027 presidential programmes would do to the debt to 2032, live polls and 26 indicators compared with the EU.' } },
+      description: 'France’s debt, deficit and budget from official data, what the 2027 presidential programmes would do to the debt to 2032, live polls and some forty indicators compared with the EU.' } },
   { id: 'synthese', section: 'finances', path: '/finances-publiques', label: 'Synthèse',
     title: 'Finances publiques de la France : dette, déficit, dépenses et recettes',
     description: 'Dette publique, déficit, dépenses et recettes de la France en chiffres et en graphiques, à partir des données officielles d’Eurostat, de l’Insee et de l’Agence France Trésor.',

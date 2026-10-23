@@ -2,7 +2,8 @@
 // moyenne des sondages et indicateurs « État de la France ». Module à part pour garder la première page légère.
 import { baseline, parties, SCORED, reviewCredibility, FIRST_YEAR_SHARE } from '../data/election2027.js'
 import { project, YEARS } from './projection.js'
-import { series } from '../data/etat.js'
+import { series, COUNT } from '../data/etat.js'
+export const indicatorCount = COUNT
 import snapshot from '../data/polls-snapshot.json'
 import { average, fetchLivePolls, pollBlackout } from './polls.js'
 

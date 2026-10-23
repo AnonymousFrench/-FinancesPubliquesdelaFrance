@@ -168,7 +168,7 @@ function Continents() {
   }
   const a = years[0], z = years.at(-1)
   return (
-    <Card title={T('Par continent de naissance, 1968-2024', 'By continent of birth, 1968-2024')}
+    <Card className="head-stack" title={T('Par continent de naissance, 1968-2024', 'By continent of birth, 1968-2024')}
       sub={T(`En ${a}, ${pct(val('EUR', a) / sum(a) * 100, 0)} des immigrés étaient nés en Europe et ${pct(val('AFR', a) / sum(a) * 100, 0)} en Afrique. En ${z}, ${pct(val('EUR', z) / sum(z) * 100, 0)} sont nés en Europe et ${pct(val('AFR', z) / sum(z) * 100, 0)} en Afrique.`,
         `In ${a}, ${pct(val('EUR', a) / sum(a) * 100, 0)} of immigrants were born in Europe and ${pct(val('AFR', a) / sum(a) * 100, 0)} in Africa. In ${z}, ${pct(val('EUR', z) / sum(z) * 100, 0)} were born in Europe and ${pct(val('AFR', z) / sum(z) * 100, 0)} in Africa.`)}
       right={<Seg small value={share} onChange={setShare} options={[[T('Effectifs', 'Number'), false], [T('Parts', 'Shares'), true]]} />}
