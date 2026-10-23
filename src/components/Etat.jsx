@@ -7,7 +7,7 @@ import { withLang } from '../routes.js'
 import { getLang } from '../i18n.js'
 const lp = p => withLang(p, getLang())
 
-const FR_C = 'var(--blue)', EU_C = '#9aa4b2', US_C = '#e08a2c', CN_C = '#c8102e', PAIR_C = 'var(--red)', X_C = '#7a5af8'
+const FR_C = 'var(--blue)', EU_C = '#9aa4b2', US_C = '#e08a2c', CN_C = '#c8102e', PAIR_C = 'var(--red)', X_C = '#16a34a'
 // Pays de l'UE au choix (menu déroulant) : séries dans public/data/etat/<code>.json (npm run etat-pays), chargées à la demande.
 const EU26 = [['DE', 'Allemagne', 'Germany'], ['AT', 'Autriche', 'Austria'], ['BE', 'Belgique', 'Belgium'], ['BG', 'Bulgarie', 'Bulgaria'], ['CY', 'Chypre', 'Cyprus'], ['HR', 'Croatie', 'Croatia'], ['DK', 'Danemark', 'Denmark'], ['ES', 'Espagne', 'Spain'], ['EE', 'Estonie', 'Estonia'], ['FI', 'Finlande', 'Finland'], ['GR', 'Grèce', 'Greece'], ['HU', 'Hongrie', 'Hungary'], ['IE', 'Irlande', 'Ireland'], ['IT', 'Italie', 'Italy'], ['LV', 'Lettonie', 'Latvia'], ['LT', 'Lituanie', 'Lithuania'], ['LU', 'Luxembourg', 'Luxembourg'], ['MT', 'Malte', 'Malta'], ['NL', 'Pays-Bas', 'Netherlands'], ['PL', 'Pologne', 'Poland'], ['PT', 'Portugal', 'Portugal'], ['CZ', 'Tchéquie', 'Czechia'], ['RO', 'Roumanie', 'Romania'], ['SK', 'Slovaquie', 'Slovakia'], ['SI', 'Slovénie', 'Slovenia'], ['SE', 'Suède', 'Sweden']]
 const L = (fr, en) => T(fr, en)
