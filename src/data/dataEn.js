@@ -24,7 +24,7 @@ const DT = {
   // AFT
   '8 ans et 158 jours': '8 years 158 days', '30 sept. 2026': '30 Sep 2026', 'oct. 2026': 'Oct 2026', '20 oct. 2026': '20 Oct 2026', '≈ 56 %': '≈ 56%',
   'réalisé': 'actual', 'programme': 'programme', 'prévision AFT': 'AFT forecast',
-  'Moody’s Aa3, perspective négative (10 avr. 2026) ; décision attendue le 23 oct. 2026 au soir.': 'Moody’s Aa3, negative outlook (10 Apr 2026); decision due on the evening of 23 Oct 2026.',
+  'Moody’s Aa3, perspective négative (10 avr. 2026) ; décision attendue le 23 oct. 2026 vers 22 h (heure de Paris) ; en 2026, revues les 10 avr. et 23 oct., calendrier 2027 pas encore publié.': 'Moody’s Aa3, negative outlook (10 Apr 2026); decision due on 23 Oct 2026 around 10 pm Paris time; 2026 reviews on 10 Apr and 23 Oct, 2027 calendar not yet published.',
   'Févr. 2026': 'Feb 2026', 'Fin juil. 2026': 'End Jul 2026', 'Début oct. 2026': 'Early Oct 2026', '55 points de base': '55 basis points', '74 points de base': '74 basis points', '159 points de base, plus haut depuis nov. 2011 (Reuters)': '159 basis points, widest since Nov 2011 (Reuters)', '22 oct. 2026': '22 Oct 2026', '≈ 170 points de base (presse)': '≈ 170 basis points (press)',
   // Budget : ministères
   'Budget et comptes publics': 'Budget and public accounts', 'Éducation nationale': 'National education', 'Économie, finances et industrie': 'Economy, finance and industry',

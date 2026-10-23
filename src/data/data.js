@@ -96,6 +96,6 @@ export const aft = {
     { year: 2025, v: 347.7, tag: 'réalisé' }, { year: 2026, v: 310.0, tag: 'programme' },
     { year: 2027, v: 340.0, tag: 'prévision AFT' },
   ],
-  rating: 'Moody’s Aa3, perspective négative (10 avr. 2026) ; décision attendue le 23 oct. 2026 au soir.',
+  rating: 'Moody’s Aa3, perspective négative (10 avr. 2026) ; décision attendue le 23 oct. 2026 vers 22 h (heure de Paris) ; en 2026, revues les 10 avr. et 23 oct., calendrier 2027 pas encore publié.',
   spread: [['Févr. 2026', '55 points de base'], ['Fin juil. 2026', '74 points de base'], ['Début oct. 2026', '159 points de base, plus haut depuis nov. 2011 (Reuters)'], ['22 oct. 2026', '≈ 170 points de base (presse)']],
 }
