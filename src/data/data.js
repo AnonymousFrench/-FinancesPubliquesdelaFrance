@@ -88,7 +88,7 @@ export const aft = {
   negotiableEnd2024: { total: 2541.7, oat: 2340.5, btf: 201.2 },
   negotiableSep2026: 2909.4,
   avgMaturity: { v: '8 ans et 158 jours', date: '30 sept. 2026' },
-  tec10: { v: 4.86, date: 'oct. 2026' },
+  tec10: { v: 4.93, date: '20 oct. 2026' },
   spot10: { v: 4.75, date: '30 sept. 2026' },
   nonResidents: '≈ 56 %',
   issuance: [
@@ -96,6 +96,6 @@ export const aft = {
     { year: 2025, v: 347.7, tag: 'réalisé' }, { year: 2026, v: 310.0, tag: 'programme' },
     { year: 2027, v: 340.0, tag: 'prévision AFT' },
   ],
-  rating: 'Moody’s Aa3, perspective négative (10 avr. 2026) ; prochaine revue le 23 oct. 2026.',
-  spread: [['Févr. 2026', '55 points de base'], ['Fin juil. 2026', '74 points de base'], ['Début oct. 2026', '> 100 points de base (presse)']],
+  rating: 'Moody’s Aa3, perspective négative (10 avr. 2026) ; décision attendue le 23 oct. 2026 vers 22 h (heure de Paris) ; en 2026, revues les 10 avr. et 23 oct., calendrier 2027 pas encore publié.',
+  spread: [['Févr. 2026', '55 points de base'], ['Fin juil. 2026', '74 points de base'], ['Début oct. 2026', '159 points de base, plus haut depuis nov. 2011 (Reuters)'], ['22 oct. 2026', '≈ 170 points de base (presse)']],
 }
