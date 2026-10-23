@@ -539,3 +539,4 @@ a.ind:hover { border-color: #c7ccd4 }
 }
 /* Titre d'un tableau dans sa première cellule d'en-tête (gagne une ligne). */
 .t th.t-title { text-align: left; text-transform: none; letter-spacing: -.01em; font-size: 15px; font-weight: 700; color: var(--tx); white-space: nowrap }
+.t th.t-title .t-sub { font-size: 12.5px; font-weight: 400; color: var(--mut); letter-spacing: 0; margin-left: 10px }

@@ -477,10 +477,10 @@ function DeepDive({ q, basis, base, opts, growth }) {
         </Card>
       </div>
 
-      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} >
+      <Card>
         <div className="t-wrap">
           <table className="t mt">
-            <thead><tr><th>{T('Mesure', 'Measure')}</th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
+            <thead><tr><th className="t-title" scope="col">{T('Mesure par mesure', 'Measure by measure')}<span className="t-sub">{T('Md€ par an, effet sur le solde', `${unitBn()} a year, effect on the balance`)}</span></th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
             <tbody>
               {q.measures.map(m => {
                 const c = cred[m.id] ?? 1
@@ -516,10 +516,10 @@ function DeepDive({ q, basis, base, opts, growth }) {
         <details className="about"><summary>{T('Origine des montants et sources', 'Where the amounts come from, and sources')}</summary><p className="sub">{pMeasuresNote(q)}</p><Sources src={[...new Set([...q.measuresSrc, ...q.src])].map(S)} /></details>
       </Card>
 
-      <Card title={T('Année par année', 'Year by year')} sub={T(`${q.short}, administrations publiques`, `${q.short}, general government`)}>
+      <Card>
         <div className="t-wrap">
           <table className="t">
-            <thead><tr><th></th>{PROJ.map(y => <th key={y}>{y}</th>)}</tr></thead>
+            <thead><tr><th className="t-title" scope="col">{T('Année par année', 'Year by year')}<span className="t-sub">{T(`${q.short}, administrations publiques`, `${q.short}, general government`)}</span></th>{PROJ.map(y => <th key={y}>{y}</th>)}</tr></thead>
             <tbody>
               {[
                 [T('Mesures nettes, Md€', `Net measures, ${unitBn()}`), r => r.year > 2026 ? fmt(r.measures) : '–'],
