@@ -470,6 +470,9 @@ a.ind:hover { border-color: #c7ccd4 }
 .card-h > div:first-child { flex: 1 1 0; min-width: 0 }
 .card-h > :not(:first-child) { flex: none }
 @media (max-width: 760px) { .card-h { flex-wrap: wrap } }
+/* En-tête empilé : titre et sous-titre sur toute la largeur, légende en dessous (légende longue). */
+.card.head-stack > .card-h { flex-direction: column; gap: 8px }
+.card.head-stack > .card-h > div:first-child { flex: none; width: 100% }
 /* Pyramide : colonne de droite en 2 colonnes pour ne pas dépasser la hauteur de la pyramide */
 @media (min-width: 761px) {
   .py-grid { grid-template-columns: minmax(0, 1fr) 270px }

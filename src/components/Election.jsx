@@ -264,7 +264,7 @@ function Size({ runs, basis }) {
   const X = v => 50 + v / max * 50
   const CATS = sizeCats()
   return (
-    <Card title={T('Ampleur des programmes', 'Scale of the programmes')}
+    <Card className="head-stack" title={T('Ampleur des programmes', 'Scale of the programmes')}
       sub={T('Montants bruts annoncés pour 2032, Md€ par an : coûts à gauche, gains à droite.', `Gross amounts announced for 2032, ${unitBn()} a year: costs on the left, gains on the right.`)}
       right={<div className="legend">{CATS.map(([k, n, c]) => <span key={k}><i style={{ background: c }} />{n}</span>)}<span><i className="net-key" />{T('Net annoncé', 'Net announced')}</span>{basis !== 'claimed' && <span><i className="cnt-key" />{T('Net retenu', 'Net counted')}</span>}</div>}>
       <div className="div size">
