@@ -91,7 +91,9 @@ export default function Election({ route }) {
     <>
       <Intro onPick={pick} selected={pid} />
 
-      <Card title={T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')} className="group">
+      <section className="zone" id="comparer" aria-labelledby="h-comparer">
+      <h2 id="h-comparer">{T('Comparer les programmes, 2027-2032', 'Compare the programmes, 2027-2032')}</h2>
+      <Card className="group">
         <div className="ctl-row">
           <div className="ctl">
             <span className="ctl-l">{T('Mesures retenues', 'Measures counted')}</span>
@@ -111,13 +113,15 @@ export default function Election({ route }) {
         <Trajectories runs={runs} base={base} />
         <Table runs={runs} base={base} basis={basis} />
       </Card>
+      </section>
 
       {/* Fiche du candidat choisi dans les vignettes du haut de page. */}
-      <div id="deep-dive" className="deep-dive">
+      <section id="deep-dive" className="zone deep-dive" aria-labelledby="h-programme">
+        <div className="zone-h"><h2 id="h-programme">{T(`Programme ${parties[pid].short}`, `${parties[pid].short} programme`)}</h2><CopyLink /></div>
         {unscored(parties[pid])
           ? <UnscoredDive key={pid} q={parties[pid]} />
           : <DeepDive key={pid + basis} q={parties[pid]} basis={basis} base={base} opts={opts} growth={growthOf(parties[pid])} />}
-      </div>
+      </section>
     </>
   )
 }
@@ -359,7 +363,7 @@ function Checked({ q }) {
 function UnscoredDive({ q }) {
   const u = unscoredText()
   return (
-    <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} src={q.src.map(S)} right={<CopyLink />}>
+    <Card src={q.src.map(S)}>
       <Profile q={q} />
       <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
       <p className="ctl-note"><b>{u.title}.</b> {u.text}</p>
@@ -398,7 +402,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
 
   return (
     <>
-      <Card title={T(`Programme ${q.short}`, `${q.short} programme`)} right={<CopyLink />}>
+      <Card>
         <Profile q={q} />
         <div className="claims">{pHeadline(q).map(([k, v]) => <div key={k} className="claim"><span>{k}</span><b>{v}</b></div>)}</div>
         <details className="about"><summary>{T('À propos de ce chiffrage', 'About this costing')}</summary><p className="sub">{pDocument(q)}</p></details>
