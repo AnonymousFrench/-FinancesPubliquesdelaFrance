@@ -299,10 +299,10 @@ function Table({ runs, base, basis }) {
   const b = at(base, 2032)
   const all = [{ name: UNCH(), rows: base, review: '–' }, ...runs.map(({ q, rows }) => ({ name: pName(q), q, rows, review: basis === 'claimed' ? T('tel qu’annoncé', 'as announced') : reviewName(q, basis === 'standard' ? 'standard' : q.reviewDefault) }))]
   return (
-    <Card title={T('2032 en chiffres', '2032 in figures')}>
+    <Card>
       <div className="t-wrap">
         <table className="t">
-          <thead><tr><th></th><th>{T('Déficit', 'Deficit')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dette', 'Debt')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dépenses', 'Spending')}</th><th>{T('Recettes', 'Revenue')}</th><th>{T('Intérêts', 'Interest')}</th><th>{T('Mesures nettes', 'Net measures')}</th><th>{T('Évalué par', 'Assessed by')}</th></tr></thead>
+          <thead><tr><th className="t-title" scope="col">{T('2032 en chiffres', '2032 in figures')}</th><th>{T('Déficit', 'Deficit')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dette', 'Debt')}</th><th>{T('Écart', 'Gap')}</th><th>{T('Dépenses', 'Spending')}</th><th>{T('Recettes', 'Revenue')}</th><th>{T('Intérêts', 'Interest')}</th><th>{T('Mesures nettes', 'Net measures')}</th><th>{T('Évalué par', 'Assessed by')}</th></tr></thead>
           <tbody>
             {all.map(({ name, q, rows, review }) => {
               const r = at(rows, 2032)
@@ -477,7 +477,7 @@ function DeepDive({ q, basis, base, opts, growth }) {
         </Card>
       </div>
 
-      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} src={q.measuresSrc.map(S)}>
+      <Card title={T('Mesure par mesure', 'Measure by measure')} sub={T('Md€ par an, effet sur le solde. Curseur : part retenue ; clic : détail.', `${unitBn()} a year, effect on the balance. Slider: share counted; click: details.`)} src={[...new Set([...q.measuresSrc, ...q.src])].map(S)}>
         <div className="t-wrap">
           <table className="t mt">
             <thead><tr><th>{T('Mesure', 'Measure')}</th><th>{T('Nature', 'Type')}</th><th title={T('Classe selon le barème commun', 'Class under the common scale')}>{T('Classe', 'Class')}</th><th>2027</th><th>2032</th><th>{T('Retenu', 'Counted')}</th><th>{T('Modélisé 2032', 'Modelled 2032')}</th></tr></thead>
@@ -541,7 +541,6 @@ function DeepDive({ q, basis, base, opts, growth }) {
           </table>
         </div>
       </Card>
-      <Card className="src-only" src={q.src.map(S)} />
     </>
   )
 }
