@@ -455,3 +455,13 @@ a.ind:hover { border-color: #c7ccd4 }
 .ind-c .xc { color: #15803d }
 .ind-key.pick { display: inline-flex; align-items: center } .ind-key.pick select { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 0 4px 0 7px; height: 21px; cursor: pointer; max-width: 150px }
 @media (max-width: 760px) { .kpis.k3 { grid-template-columns: 1fr } }
+/* Taux à 10 ans : pays de comparaison dans un menu déroulant ; tuiles compactes du financement */
+.cmp { position: relative; display: inline-block }
+.cmp > summary { list-style: none; display: inline-block; user-select: none } .cmp > summary::-webkit-details-marker { display: none }
+.cmp-menu { position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.12); padding: 6px; min-width: 220px; max-height: 320px; overflow-y: auto }
+.cmp-menu label { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-radius: 6px; cursor: pointer; white-space: nowrap }
+.cmp-menu label:hover { background: var(--soft) }
+.cmp-menu i { display: inline-block; width: 14px; height: 2px; flex: none }
+.kpis.compact .kpi { padding: 6px 10px }
+.kpis.compact .kpi-v { font-size: 16px; line-height: 1.35 }
+.kpis.compact .kpi-l, .kpis.compact .kpi-s { font-size: 11px }

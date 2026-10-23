@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { apu } from '../data/apu.js'
 import { oat10 } from '../data/taux.js'
 import { financing2026, aft, SRC } from '../data/data.js'
@@ -32,7 +32,14 @@ export default function Financing() {
   const flip = k => setOn(v => ({ ...v, [k]: !v[k] }))
   const de = Y10.series.DE ? new Map(Y10.series.DE) : null
   const spread = de ? pts.filter(([d]) => de.has(d)).map(([d, v]) => [mx(d), +(v - de.get(d)).toFixed(2)]) : []
-  const lastSpread = aft.spread.at(-1)
+  const menu = useRef(null)
+  useEffect(() => {
+    const close = e => { if (menu.current?.open && !menu.current.contains(e.target)) menu.current.open = false }
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [])
+  const opts = [...PEERS.map(([c, fr, en, col]) => [c, T(fr, en), col, false]), ...(spread.length > 0 ? [['spread', T('Écart France-Allemagne (points)', 'France-Germany spread (points)'), 'var(--red)', true]] : [])]
+  const nSel = opts.filter(([k]) => on[k]).length
   const chip = (k, label, color, dash) => (
     <button key={k} type="button" className={'ind-key tog' + (dash ? ' dash' : '') + (on[k] ? '' : ' off')} aria-pressed={!!on[k]} onClick={() => flip(k)}>
       <i style={dash ? { background: `repeating-linear-gradient(90deg, ${color} 0 3px, transparent 3px 5px)` } : { background: color }} />{label}
@@ -60,7 +67,7 @@ export default function Financing() {
               </div>
             ))}
           </div>
-          <div className="kpis k3">
+          <div className="kpis k3 compact">
             <Kpi label={T('Dette négociable, fin sept. 2026', 'Negotiable debt, end Sep 2026')} value={bn(aft.negotiableSep2026, 0)} sub={T(`fin 2024 : ${bn(aft.negotiableEnd2024.oat, 0)} d’OAT + ${bn(aft.negotiableEnd2024.btf, 0)} de BTF`, `end 2024: ${bn(aft.negotiableEnd2024.oat, 0)} of OATs + ${bn(aft.negotiableEnd2024.btf, 0)} of BTFs`)} />
             <Kpi label={T('Durée de vie moyenne', 'Average maturity')} value={dt(aft.avgMaturity.v)} sub={dt(aft.avgMaturity.date)} />
             <Kpi label={T('Détenue par des non-résidents', 'Held by non-residents')} value={dt(aft.nonResidents)} sub={T('part de la dette négociable', 'share of negotiable debt')} />
@@ -72,8 +79,15 @@ export default function Financing() {
       <Card title={T('Le taux qui décide de tout : l’obligation à 10 ans (OAT) depuis 1993', 'The rate that decides everything: the 10-year bond (OAT) since 1993')} sub={T('Moyenne de chaque mois, en % ; cliquez pour comparer avec d’autres pays', 'Monthly average, in %; click to compare with other countries')} src={[SRC.eurostatRates, ...(PEERS.some(p => ['UK', 'US', 'JP'].includes(p[0])) ? [SRC_OECD] : []), SRC.eurostatMain, SRC.bdfTec10]}>
         <div className="chips">
           <span className="ind-key"><i style={{ background: 'var(--blue)', height: 3 }} />France</span>
-          {PEERS.map(([c, fr, en, col]) => chip(c, T(fr, en), col))}
-          {spread.length > 0 && chip('spread', T('Écart France-Allemagne (points)', 'France-Germany spread (points)'), 'var(--red)', true)}
+          <details className="cmp" ref={menu}>
+            <summary className="ind-key tog">{T('Comparer', 'Compare')}{nSel ? ` (${nSel})` : ''} ▾</summary>
+            <div className="cmp-menu">
+              {opts.map(([k, label, col, dash]) => (
+                <label key={k}><input type="checkbox" checked={!!on[k]} onChange={() => flip(k)} /><i style={dash ? { background: `repeating-linear-gradient(90deg, ${col} 0 3px, transparent 3px 5px)` } : { background: col }} />{label}</label>
+              ))}
+            </div>
+          </details>
+          {opts.filter(([k]) => on[k]).map(([k, label, col, dash]) => chip(k, label, col, dash))}
           {chip('deficit', T('Déficit français, % du PIB', 'French deficit, % of GDP'), '#f1a1a8')}
         </div>
         <LineChart height={320} legend={false}
@@ -94,7 +108,6 @@ export default function Financing() {
           <Kpi label={T('Dernier mois publié', 'Latest published month')} value={pct(last[1], 2)} sub={T(`moyenne de ${month(last[0])} (Eurostat)`, `average of ${month(last[0])} (Eurostat)`)} tone="warn" />
           <Kpi label={T('Dernier taux de marché (TEC 10)', 'Latest market rate (TEC 10)')} value={pct(aft.rate10.v, 2)} sub={T(`le ${aft.rate10.date} (Banque de France)${prevHigh ? `, au-dessus de toute moyenne mensuelle depuis ${month(prevHigh[0])}` : ''}`, `on ${dt(aft.rate10.date)} (Banque de France)${prevHigh ? `, above every monthly average since ${month(prevHigh[0])}` : ''}`)} tone="bad" />
         </div>
-        {lastSpread && <p className="hint">{T(`Dernier écart connu avec l’Allemagne : ${lastSpread[1]}, ${lastSpread[0]}. Les courbes mensuelles s’arrêtent au dernier mois publié.`, `Latest known spread over Germany: ${dt(lastSpread[1])}, ${dt(lastSpread[0])}. Monthly lines stop at the latest published month.`)}</p>}
       </Card>
 
     </>
