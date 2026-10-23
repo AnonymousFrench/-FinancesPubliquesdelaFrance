@@ -240,7 +240,6 @@ function Trajectories({ runs, base }) {
           )
         })}
       </div>
-      <p className="hint">{T('Écart en 2032 avec la politique inchangée : ', 'Gap in 2032 vs unchanged policy: ')}<span className="dn">{T('vert', 'green')}</span> = {isDebt ? T('moins de dette', 'less debt') : T('moins de déficit', 'less deficit')}, <span className="up">{T('rouge', 'red')}</span> = {T('davantage', 'more')}.</p>
     </Card>
   )
 }
