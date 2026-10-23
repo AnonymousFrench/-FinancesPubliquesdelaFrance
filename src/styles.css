@@ -455,7 +455,10 @@ a.ind:hover { border-color: #c7ccd4 }
 .card .emissions.small { height: 150px; padding-top: 20px }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; font-size: 12.5px } .chips .ind-key { margin-left: 0 }
 .ind-c .xc { color: #15803d }
-.ind-key.pick { display: inline-flex; align-items: center } .ind-key.pick select { font: inherit; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 0 4px 0 7px; height: 21px; cursor: pointer; max-width: 150px }
+/* Choix d'un pays : le trait de couleur et le menu dans une même bulle, comme les autres boutons de légende. */
+.ind-key.pick { display: inline-flex; align-items: center; gap: 0; flex-wrap: nowrap; margin-bottom: 0; background: var(--card); border: 1px solid var(--line); border-radius: 99px; padding: 0 2px 0 9px; height: 23px; margin-left: 4px; cursor: pointer } .ind-key.pick:hover { border-color: #c7ccd4 }
+.ind-key.pick select { font: inherit; color: inherit; border: 0; height: 21px; cursor: pointer; max-width: 170px; outline-offset: 2px; appearance: none; -webkit-appearance: none; field-sizing: content; padding: 0 18px 0 0;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2366707e' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 5px center }
 @media (max-width: 760px) { .kpis.k3 { grid-template-columns: 1fr } }
 /* Taux à 10 ans : pays de comparaison dans un menu déroulant ; tuiles compactes du financement */
 .cmp { position: relative; display: inline-block }
