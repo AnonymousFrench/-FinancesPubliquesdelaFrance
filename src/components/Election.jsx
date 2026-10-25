@@ -12,6 +12,7 @@ import { bn, fmt, pct, signed, unitBn, dateFr } from '../lib/format.js'
 import { T, isEn } from '../i18n.js'
 import { withLang, candidatePath, CANDIDATES, ELECTION_PATH } from '../routes.js'
 import { getLang } from '../i18n.js'
+import { track } from '../lib/track.js'
 const lp = p => withLang(p, getLang())
 
 const S = k => SOURCES[k]
@@ -51,6 +52,7 @@ const pidFromPath = () => CANDIDATES.find(c => location.pathname.replace(/\/+$/,
 function CopyLink() {
   const [done, setDone] = useState(false)
   const copy = () => {
+    track('Copier le lien', { page: location.pathname })
     const ok = () => { setDone(true); setTimeout(() => setDone(false), 1800) }
     try { navigator.clipboard.writeText(location.href).then(ok, () => {}) } catch { /* presse-papiers indisponible */ }
   }
@@ -60,14 +62,15 @@ function CopyLink() {
 export default function Election({ route }) {
   const [basis, setBasisState] = useState(() => VUE_IN[param('vue')] || 'central')
   const [growthMode, setGrowthState] = useState(() => (param('croissance') === 'partis' ? 'party' : 'consensus'))
-  const setBasis = v => { setBasisState(v); setParams({ vue: VUE[v], analyse: null }) }
-  const setGrowthMode = v => { setGrowthState(v); setParams({ croissance: v === 'party' ? 'partis' : null }) }
+  const setBasis = v => { track('Présidentielle : chiffrage', { vue: v }); setBasisState(v); setParams({ vue: VUE[v], analyse: null }) }
+  const setGrowthMode = v => { track('Présidentielle : croissance', { hypothese: v }); setGrowthState(v); setParams({ croissance: v === 'party' ? 'partis' : null }) }
   const marketRate = baseline.marketRate, spreadBp = 0, multiplier = 0
   const [pid, setPidState] = useState(() => pidFromPath() || 'rn')
   // Choisir un candidat change l'adresse (nouvelle entrée d'historique) ; l'en-tête met à jour le titre de la page.
   const setPid = id => {
     if (id === pid && pidFromPath() === id) return
     setPidState(id)
+    track('Présidentielle : candidat', { candidat: id })
     const sp = new URLSearchParams(location.search); sp.delete('analyse')
     const s = sp.toString()
     history.pushState(null, '', withLang(candidatePath(id), getLang()) + (s ? '?' + s : ''))

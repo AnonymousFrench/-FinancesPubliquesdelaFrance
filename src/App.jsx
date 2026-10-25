@@ -6,6 +6,7 @@ import { ROUTES, SECTIONS, ALIAS, routeOf, rLabel, rTitle, rDescription, sLabel,
 import { fmt, pct, bn } from './lib/format.js'
 import { T, getLang, setLang } from './i18n.js'
 import { Analytics } from '@vercel/analytics/react'
+import { track } from './lib/track.js'
 
 const i = apu.years.length - 1
 // Chaque onglet est chargé à la demande : la première page reste légère.
@@ -72,7 +73,7 @@ export default function App() {
     if (want !== location.pathname || q) history.replaceState(null, '', want + search + location.hash)
     return l
   })
-  const switchLang = l => { setLang(l); setLangState(l); history.pushState(null, '', withLang(route.path, l) + location.search) }
+  const switchLang = l => { if (l !== lang) track('Langue', { langue: l }); setLang(l); setLangState(l); history.pushState(null, '', withLang(route.path, l) + location.search) }
 
   useEffect(() => {
     // Anciennes adresses en #ancre -> vraie page.
@@ -85,6 +86,8 @@ export default function App() {
     }
     // Navigation interne sans rechargement pour tous les liens du site.
     const onClick = e => {
+      const out = e.target.closest('a[href^="http"]')
+      if (out) { try { const u = new URL(out.href); if (u.hostname !== location.hostname) track('Lien externe', { site: u.hostname }) } catch { /* adresse invalide */ } }
       const a = e.target.closest('a[href^="/"]')
       if (!a || a.target || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return
       const r = routeOf(a.getAttribute('href'))
