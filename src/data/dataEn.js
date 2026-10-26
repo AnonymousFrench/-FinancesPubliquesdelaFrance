@@ -24,8 +24,8 @@ const DT = {
   // AFT
   '8 ans et 158 jours': '8 years 158 days', '30 sept. 2026': '30 Sep 2026', 'oct. 2026': 'Oct 2026', '20 oct. 2026': '20 Oct 2026', '≈ 56 %': '≈ 56%',
   'réalisé': 'actual', 'programme': 'programme', 'prévision AFT': 'AFT forecast',
-  'Moody’s Aa3, perspective négative, maintenue lors de la revue du 23 oct. 2026 ; prochaine revue : calendrier 2027 de Moody’s pas encore publié.': 'Moody’s Aa3, negative outlook, unchanged after the 23 Oct 2026 review; next review: Moody’s 2027 calendar not yet published.',
-  'Févr. 2026': 'Feb 2026', 'Fin juil. 2026': 'End Jul 2026', 'Début oct. 2026': 'Early Oct 2026', '55 points de base': '55 basis points', '74 points de base': '74 basis points', '159 points de base, plus haut depuis nov. 2011 (Reuters)': '159 basis points, widest since Nov 2011 (Reuters)', '22 oct. 2026': '22 Oct 2026', '≈ 170 points de base (presse)': '≈ 170 basis points (press)',
+  'Moody’s Aa3, perspective négative, maintenue lors de la revue du 23 oct. 2026 ; prochaines revues programmées : S&P le 27 nov. 2026 (A+, perspective stable), KBRA le 11 déc. 2026 (calendrier de l’Agence France Trésor).': 'Moody’s Aa3, negative outlook, unchanged after the 23 Oct 2026 review; next scheduled reviews: S&P on 27 Nov 2026 (A+, stable outlook), KBRA on 11 Dec 2026 (Agence France Trésor calendar).',
+  'Févr. 2026': 'Feb 2026', 'Fin juil. 2026': 'End Jul 2026', 'Début oct. 2026': 'Early Oct 2026', '55 points de base': '55 basis points', '74 points de base': '74 basis points', '159 points de base, plus haut depuis nov. 2011 (Reuters)': '159 basis points, widest since Nov 2011 (Reuters)', '22 oct. 2026': '22 Oct 2026', '167,8 points de base, plus haut depuis 2011 (Reuters)': '167.8 basis points, widest since 2011 (Reuters)',
   // Budget : ministères
   'Budget et comptes publics': 'Budget and public accounts', 'Éducation nationale': 'National education', 'Économie, finances et industrie': 'Economy, finance and industry',
   'Armées et anciens combattants': 'Armed forces and veterans', 'Transition écologique, énergie, climat et prévention des risques': 'Ecological transition, energy, climate and risk prevention',
