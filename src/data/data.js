@@ -90,13 +90,13 @@ export const aft = {
   negotiableSep2026: 2909.4,
   avgMaturity: { v: '8 ans et 158 jours', date: '30 sept. 2026' },
   // Dernier taux à 10 ans de marché, seul chiffre utilisé par la Synthèse, la Dette et le Financement (à mettre à jour chaque semaine).
-  rate10: { v: 4.93, date: '20 oct. 2026' },
+  rate10: { v: 4.93, date: '30 oct. 2026' },
   nonResidents: '≈ 56 %',
   issuance: [
     { year: 2023, v: 270.0, tag: 'réalisé' }, { year: 2024, v: 285.0, tag: 'réalisé' },
     { year: 2025, v: 347.7, tag: 'réalisé' }, { year: 2026, v: 310.0, tag: 'programme' },
     { year: 2027, v: 340.0, tag: 'prévision AFT' },
   ],
-  rating: 'Moody’s Aa3, perspective négative, maintenue lors de la revue du 23 oct. 2026 ; prochaines revues programmées : S&P le 27 nov. 2026 (A+, perspective stable), KBRA le 11 déc. 2026 (calendrier de l’Agence France Trésor).',
+  rating: 'Fitch A+, perspective abaissée de stable à négative le 30 oct. 2026 ; Moody’s Aa3, perspective négative, maintenue lors de la revue du 23 oct. 2026 ; prochaines revues programmées : S&P le 27 nov. 2026 (A+, perspective stable), KBRA le 11 déc. 2026 (calendrier de l’Agence France Trésor).',
   spread: [['Févr. 2026', '55 points de base'], ['Fin juil. 2026', '74 points de base'], ['Début oct. 2026', '159 points de base, plus haut depuis nov. 2011 (Reuters)'], ['22 oct. 2026', '167,8 points de base, plus haut depuis 2011 (Reuters)']],
 }
