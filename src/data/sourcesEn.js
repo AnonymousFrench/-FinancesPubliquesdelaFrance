@@ -77,4 +77,6 @@ export const SRC_EN = {
   "Public Sénat, combien rapporterait le report de l’âge légal à 65 ans (chiffrages du gouvernement, 2022)": "Public Sénat, what raising the legal retirement age to 65 would yield (government costings, 2022)",
   "Économie Matin, chiffrage par l’Unédic de la réforme de l’assurance chômage de 2024 (durée maximale ramenée à 15 mois) (12 juin 2024)": "Économie Matin, Unédic’s costing of the 2024 unemployment-insurance reform (maximum duration cut to 15 months) (12 June 2024)",
   'LCP, « Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon » (6 nov. 2026)': 'LCP, “Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon” (6 Nov 2026)',
+  'Assemblée nationale, projet de loi de finances de fin de gestion pour 2026, article liminaire (4 nov. 2026)': 'National Assembly, end-of-year amending budget bill for 2026, preliminary article (4 Nov 2026)',
+  'Haut Conseil des finances publiques, avis n° HCFP-2026-6 sur le projet de loi de finances de fin de gestion 2026 (2 nov. 2026)': 'High Council of Public Finance, opinion HCFP-2026-6 on the 2026 end-of-year amending budget bill (2 Nov 2026)',
 }

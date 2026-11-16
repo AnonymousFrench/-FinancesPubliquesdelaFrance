@@ -1,7 +1,7 @@
 // Textes anglais des programmes (src/data/election2027.js), par parti. Les montants viennent du fichier français.
 export const EN = {
   baseline: [
-    '2026 anchored on the government’s revised estimate: deficit 5.4% of GDP, debt 119.3% (2027 draft budget).',
+    '2026 anchored on the government’s revised estimate: deficit 5.4% of GDP, debt 119.4% (end-of-year amending budget bill, 4 Nov 2026; 119.3% in the 2027 draft budget).',
     'Growth 0.5% in 2026 and 1.0% in 2027 (2027 draft budget; the HCFP calls 2027 optimistic), then 1.1%, close to potential-growth estimates.',
     'With no new measures, primary spending grows 1.2% a year in real terms; revenue keeps its 2026 share of GDP.',
     'New borrowing costs 3.8%. Each year about 6% of the stock plus the new deficit is refinanced at that rate.',

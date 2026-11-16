@@ -10,6 +10,8 @@ const i = apu.years.length - 1
 export const SOURCES = {
   plf27: { label: 'La finance pour tous, « PLF 2027 : le budget sous haute tension » (8 oct. 2026)', url: 'https://www.lafinancepourtous.com/2026/10/08/projet-de-loi-de-finances-le-budget-2027-sous-haute-tension/' },
   hcfp: { label: 'Public Sénat, avis du Haut Conseil des finances publiques sur le PLF 2027 : croissance « optimiste » (7 oct. 2026)', url: 'https://www.publicsenat.fr/actualites/economie/budget-2027-le-haut-conseil-des-finances-publiques-pointe-des-previsions-optimistes-du-gouvernement' },
+  plfg26: { label: 'Assemblée nationale, projet de loi de finances de fin de gestion pour 2026, article liminaire (4 nov. 2026)', url: 'https://www.assemblee-nationale.fr/dyn/17/textes/l17b3434_projet-loi.pdf' },
+  hcfpPlfg: { label: 'Haut Conseil des finances publiques, avis n° HCFP-2026-6 sur le projet de loi de finances de fin de gestion 2026 (2 nov. 2026)', url: 'https://www.hcfp.fr/sites/default/files/2026-11/Avis%20HCFP-2026-6%20-%20PLFG%202026.pdf' },
   chiffresCles: { label: 'Ministère de l’Économie, « Chiffres clés du PLF 2027 » (oct. 2026)', url: 'https://www.budget.gouv.fr/documentation/documents-budgetaires' },
   rnPress: { label: 'Public Sénat, présentation du contre-budget du RN (6 oct. 2026)', url: 'https://www.publicsenat.fr/actualites/politique/140-milliards-deuros-deconomies-dici-2032-leffort-radical-propose-par-marine-le-pen-pour-redresser-les-f' },
   rnPge: { label: 'Planète Grandes Écoles, mesures du budget RN 2027 et analyse de l’Institut de l’Entreprise', url: 'https://www.planetegrandesecoles.com/budget-marine-le-pen-2027-mesures-contre-budget-rn' },
@@ -79,15 +81,15 @@ export const FIRST_YEAR_SHARE = 0.5
 // ---------- Scénario de référence : politique inchangée ----------
 export const baseline = {
   actual2025: { gdp: apu.gdp[i], revenue: apu.recettes[i], spending: apu.depenses[i], interest: apu.interets[i], debt: apu.dette[i], debtPrev: apu.dette[i - 1] },
-  // Dernière estimation officielle pour 2026 (PLF 2027, oct. 2026). 2026 est figé avant l'arrivée d'un nouveau gouvernement.
-  anchor2026: { deficitPct: 5.4, debtPct: 119.3 },
+  // Dernière estimation officielle pour 2026 (PLFG 2026, 4 nov. 2026). 2026 est figé avant l'arrivée d'un nouveau gouvernement.
+  anchor2026: { deficitPct: 5.4, debtPct: 119.4 },
   growth: { 2026: 0.5, 2027: 1.0, 2028: 1.1, 2029: 1.1, 2030: 1.1, 2031: 1.1, 2032: 1.1 },
   deflator: { 2026: 2.1, 2027: 1.8, 2028: 1.75, 2029: 1.75, 2030: 1.75, 2031: 1.75, 2032: 1.75 },
   spendTrend: 1.2,   // croissance réelle des dépenses primaires sans mesure nouvelle (vieillissement, indexation, LPM)
   marketRate: 3.8,   // taux moyen des emprunts nouveaux, % (mélange d'OAT à 10 ans vers 4-4,8 % et de titres courts)
   rollover: 0.06,    // part du stock refinancée chaque année, en plus du déficit nouveau (≈ échéances / dette)
   notes: [
-    '2026 calé sur l’estimation révisée du gouvernement : déficit de 5,4 % du PIB, dette de 119,3 % (PLF 2027).',
+    '2026 calé sur l’estimation révisée du gouvernement : déficit de 5,4 % du PIB, dette de 119,4 % (projet de loi de finances de fin de gestion, 4 nov. 2026 ; 119,3 % dans le PLF 2027).',
     'Croissance de 0,5 % en 2026 et 1,0 % en 2027 (PLF 2027 ; le HCFP juge 2027 optimiste), puis 1,1 %, proche des estimations de croissance potentielle.',
     'Sans mesure nouvelle, les dépenses primaires progressent de 1,2 % par an en volume ; les recettes gardent leur part de PIB de 2026.',
     'Les emprunts nouveaux coûtent 3,8 %. Chaque année, environ 6 % du stock plus le déficit nouveau sont refinancés à ce taux.',
@@ -98,9 +100,9 @@ export const baseline = {
 export const governmentPlan = {
   label: 'Plan du gouvernement (PLF 2027)',
   deficit: { 2026: 5.4, 2027: 5.0 },
-  debt: { 2026: 119.3, 2027: 121.7 },
-  note: 'Déficit de 5,4 % en 2026 et 5,0 % en 2027 après 54 Md€ d’effort, dette de 121,7 % en 2027 (chiffres clés du PLF 2027). Le HCFP juge la croissance de 1 % « optimiste » : avec la prévision consensuelle, le déficit 2027 serait de 5,2 à 5,3 %.',
-  src: ['plf27', 'chiffresCles', 'hcfp'],
+  debt: { 2026: 119.4, 2027: 121.7 },
+  note: 'Déficit de 5,4 % en 2026 et 5,0 % en 2027 après 54 Md€ d’effort, dette de 121,7 % en 2027 (chiffres clés du PLF 2027). Le projet de loi de finances de fin de gestion du 4 nov. 2026 maintient 5,4 % pour 2026 mais porte la dette 2026 à 119,4 % ; le HCFP juge que le déficit 2026 « passerait mécaniquement à −5,5 points de PIB » avec une croissance de 0,3 %. Le HCFP juge la croissance de 1 % « optimiste » : avec la prévision consensuelle, le déficit 2027 serait de 5,2 à 5,3 %.',
+  src: ['plf27', 'chiffresCles', 'hcfp', 'plfg26', 'hcfpPlfg'],
 }
 
 // ---------- Partis ----------
