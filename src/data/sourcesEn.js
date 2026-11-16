@@ -79,4 +79,6 @@ export const SRC_EN = {
   'LCP, « Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon » (6 nov. 2026)': 'LCP, “Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon” (6 Nov 2026)',
   'Assemblée nationale, projet de loi de finances de fin de gestion pour 2026, article liminaire (4 nov. 2026)': 'National Assembly, end-of-year amending budget bill for 2026, preliminary article (4 Nov 2026)',
   'Haut Conseil des finances publiques, avis n° HCFP-2026-6 sur le projet de loi de finances de fin de gestion 2026 (2 nov. 2026)': 'High Council of Public Finance, opinion HCFP-2026-6 on the 2026 end-of-year amending budget bill (2 Nov 2026)',
+  'Boulevard Voltaire, Nicolas Dupont-Aignan présente les 30 mesures économiques de son projet, chiffres du candidat (12 nov. 2026)': 'Boulevard Voltaire, Nicolas Dupont-Aignan presents the 30 economic measures of his project, candidate’s figures (12 Nov 2026)',
+  'AFP via Boursedirect, Éric Zemmour annonce sa candidature à la présidentielle sur TF1 (10 nov. 2026)': 'AFP via Boursedirect, Éric Zemmour announces his presidential candidacy on TF1 (10 Nov 2026)',
 }
