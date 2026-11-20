@@ -20,7 +20,7 @@ export const SRC_EN = {
   'Acteurs publics, les économies sur l’État et les collectivités dans le plan du RN': 'Acteurs publics, savings on the State and local authorities in the RN plan',
   'LFI / NFP, « Notre proposition macroéconomique » (juin 2024, cadrage chiffré)': 'LFI / NFP, “Notre proposition macroéconomique” (June 2024, costed framework)',
   'melenchon2027.fr, « Comment nous allons remettre de l’ordre dans les comptes publics », contre-budget 2027 de LFI (14 oct. 2026, PDF)': 'melenchon2027.fr, “Comment nous allons remettre de l’ordre dans les comptes publics”, LFI 2027 counter-budget (14 Oct 2026, PDF)',
-  'melenchon2027.fr, L’Avenir en commun (édition 2025, mise à jour annoncée)': 'melenchon2027.fr, L’Avenir en commun (2025 edition, update announced)',
+  'melenchon2027.fr, L’Avenir en commun, programme 2027 (6 nov. 2026)': 'melenchon2027.fr, L’Avenir en commun, 2027 programme (6 Nov 2026)',
   'iFRAP, « Le vrai coût du programme du Nouveau Front populaire » (juin 2024)': 'iFRAP, “Le vrai coût du programme du Nouveau Front populaire” (June 2024)',
   'Institut Montaigne, chiffrage du programme du NFP (juin 2024)': 'Institut Montaigne, costing of the NFP programme (June 2024)',
   'Asterès, note sur le chiffrage du NFP (juin 2024)': 'Asterès, note on the NFP costing (June 2024)',
@@ -76,4 +76,5 @@ export const SRC_EN = {
   "Institut Montaigne, chiffrage de la TVA à 5,5 % sur les carburants, l’électricité, le gaz et le fioul (législatives 2024)": "Institut Montaigne, costing of 5.5% VAT on motor fuels, electricity, gas and heating oil (2024 legislative elections)",
   "Public Sénat, combien rapporterait le report de l’âge légal à 65 ans (chiffrages du gouvernement, 2022)": "Public Sénat, what raising the legal retirement age to 65 would yield (government costings, 2022)",
   "Économie Matin, chiffrage par l’Unédic de la réforme de l’assurance chômage de 2024 (durée maximale ramenée à 15 mois) (12 juin 2024)": "Économie Matin, Unédic’s costing of the 2024 unemployment-insurance reform (maximum duration cut to 15 months) (12 June 2024)",
+  'LCP, « Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon » (6 nov. 2026)': 'LCP, “Présidentielle 2027 : ce qui change dans le nouveau programme de Jean-Luc Mélenchon” (6 Nov 2026)',
 }
