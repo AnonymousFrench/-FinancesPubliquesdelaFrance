@@ -50,6 +50,8 @@ export const SOURCES = {
   recJKN: { label: 'JKN, Sarah Knafo détaille son programme : fonction publique et succession (16 oct. 2026)', url: 'https://news.jkn.co.kr/editions/french/post/1028628' },
   recBFM: { label: 'BFMTV, Éric Zemmour annonce qu’il « sera candidat » (17 sept. 2026)', url: 'https://actu.orange.fr/videos/politique/presidentielle-eric-zemmour-annonce-sur-bfmtv-qu-il-sera-candidat-en-2027-CNT000002rXmTk.html' },
   fuelTax: { label: 'Journal de l’Automobile, « L’État peut-il se priver des 30 milliards d’euros de la TICPE ? »', url: 'https://journalauto.com/industrie/letat-peut-il-se-priver-des-30-milliards-deuros-de-la-ticpe/' },
+  rnRetraites: { label: 'Public Sénat, Marine Le Pen présente la réforme des retraites du RN, chiffres du parti (17 nov. 2026)', url: 'https://www.publicsenat.fr/actualites/politique/presidentielle-2027-que-contient-la-reforme-des-retraites-presentee-par-marine-le-pen' },
+  ecoLCP: { label: 'LCP, Marine Tondelier prête à une coalition autour de Jean-Luc Mélenchon (18 nov. 2026)', url: 'https://lcp.fr/actualites/presidentielle-2027-marine-tondelier-prete-a-une-coalition-autour-de-jean-luc-melenchon' },
   dlfBV: { label: 'Boulevard Voltaire, Nicolas Dupont-Aignan présente les 30 mesures économiques de son projet, chiffres du candidat (12 nov. 2026)', url: 'https://www.bvoltaire.fr/il-faut-reprendre-notre-liberte-nicolas-dupont-aignan-veut-un-choc-productif/' },
   recAFP: { label: 'AFP via Boursedirect, Éric Zemmour annonce sa candidature à la présidentielle sur TF1 (10 nov. 2026)', url: 'https://www.boursedirect.fr/fr/actualites/categorie/politique/eric-zemmour-annonce-sa-candidature-a-la-presidentielle-pour-conserver-une-france-francaise-afp-dcca1927083a5022886baece996ff880e3dcc100' },
   dlfJDD: { label: 'Le JDD, Nicolas Dupont-Aignan officialise sa candidature (19 sept. 2026)', url: 'https://www.lejdd.fr/politique/presidentielle-nicolas-dupont-aignan-officialise-sa-candidature-et-fait-le-pari-du-frexit-183876' },
@@ -110,7 +112,7 @@ export const governmentPlan = {
 // ---------- Partis ----------
 export const parties = {
   rn: {
-    id: 'rn', name: 'Rassemblement national', short: 'RN', color: '#1b2a6b', status: 'ready', checked: '2026-11-16', officialSite: 'https://rassemblementnational.fr',
+    id: 'rn', name: 'Rassemblement national', short: 'RN', color: '#1b2a6b', status: 'ready', checked: '2026-11-22', officialSite: 'https://rassemblementnational.fr',
     profile: { born: '1968-08-05', role: 'Députée du Pas-de-Calais', wiki: 'Marine_Le_Pen' },
     candidate: 'Marine Le Pen', pollName: 'Le Pen', position: 'Extrême droite', poll: 33.9, pollDelta: 1.9, deputies: 121,
     document: 'Contre-budget et trajectoire des finances publiques 2027-2032, présentés par Marine Le Pen et Jean-Philippe Tanguy le 6 octobre 2026. Le RN annonce 141,7 Md€ d’amélioration nette du solde en 2031 (71,6 Md€ en 2027), un déficit de 3,7 % du PIB en 2027 et de 2,2 % en 2032. Le dossier n’étant pas publié en entier, les montants ligne par ligne sont ceux recalculés par l’Institut de l’Entreprise à partir des chiffres du RN. Ce programme est jugé ici sur pièces : la vue « Analyse indépendante » applique, ligne par ligne, les corrections publiées par l’Institut de l’Entreprise, Terra Nova et l’Institut Montaigne, et non les chiffres du parti.',
@@ -169,8 +171,8 @@ export const parties = {
         detail: 'TVA à 5,5 % sur l’énergie (12,2 Md€ selon le RN), TVA nulle sur cent produits essentiels (3,5 Md€), exonération d’impôt sur le revenu des moins de 30 ans (2,0 Md€), demi-part pleine dès le deuxième enfant.',
         flag: 'L’Institut Montaigne chiffre la TVA à 5,5 % sur l’énergie à 11,3 Md€ par an (9 à 13,6 Md€), proche du chiffre du RN, mais l’exonération des moins de 30 ans à 3,7 Md€ (2022) contre 2,0 Md€ annoncés. Sur les carburants, la mesure exige une révision de la directive TVA à l’unanimité. L’analyse indépendante compte ce poste à 110 %.' },
       { id: 'rn-pension', name: 'Retraite entre 60 et 62 ans selon l’âge de début de carrière', kind: 'spending', points: { 2027: -1.9, 2031: -9.5 }, cost: true,
-        detail: 'Retour de l’âge légal à 62 ans avec 42 annuités, départ dès 60 ans pour les carrières commencées tôt. Le RN chiffre la mesure à 9 Md€ par an.',
-        flag: 'Largement sous-estimé : l’Institut Montaigne chiffre la seule abrogation de la réforme de 2023 à 14,1 Md€ en 2030, et chiffrait à 34,7 Md€ par an la version 2024 du RN, proche (31,5 à 44,7 Md€). L’analyse indépendante compte ce poste à 200 %, environ 19 Md€ en 2031.' },
+        detail: 'Retour de l’âge légal à 62 ans avec 42 annuités, départ dès 60 ans (40 annuités) pour les carrières commencées avant 20 ans, en cinq paliers de six mois ; abrogation de la réforme de 2023 au 1er janv. 2028, montée en charge jusqu’en 2032. Le RN chiffrait la mesure à 9 Md€ par an dans son contre-budget ; le 17 nov. 2026, il en donne un coût brut de 18,6 Md€ en 2032, qu’il dit financer dans le système de retraite (plancher de 160 trimestres 5,8 Md€, décote portée à 5 % par trimestre manquant 2,7 Md€, moitié des excédents de l’Unédic et suspension de l’APA et de l’Aspa au-delà de 3 000 € de pension 9,7 Md€), plus une capitalisation obligatoire financée par environ 12 Md€ par an de contributions des employeurs.',
+        flag: 'Largement sous-estimé : l’Institut Montaigne chiffre la seule abrogation de la réforme de 2023 à 14,1 Md€ en 2030, et chiffrait à 34,7 Md€ par an la version 2024 du RN, proche (31,5 à 44,7 Md€). L’analyse indépendante compte ce poste à 200 %, environ 19 Md€ en 2031, proche du coût brut de 18,6 Md€ en 2032 que le RN donne lui-même le 17 nov. 2026. Les financements annoncés ce jour-là (environ 18 Md€) ne sont pas retenus : aucune évaluation indépendante n’en a été publiée.' },
       { id: 'rn-hhother', name: 'Autres prestations et droits des ménages (net)', kind: 'spending', points: { 2027: 2.0, 2031: -9.6 }, cost: true,
         detail: 'Indexation des pensions, programmes de rénovation et de recherche, nets de quelques économies en 2027.',
         flag: 'Reste du poste « Ménages : prestations et droits » de l’IDEP (+0,1 Md€ en 2027, −19,1 Md€ en 2031) après la ligne retraites.' },
@@ -192,11 +194,11 @@ export const parties = {
     ],
     measuresNote: 'Montants du RN recalculés par l’Institut de l’Entreprise (69,3 Md€ nets en 2027 et 140,3 Md€ en 2031, contre 71,6 et 141,7 Md€ annoncés), interpolés entre les deux et maintenus en 2032. Quatre postes de l’IDEP sont scindés pour isoler les sous-lignes chiffrées par Terra Nova et l’Institut Montaigne (retraites, électricité, CEE, TVA à la source) ; les totaux par poste sont inchangés. Les lignes « mixtes » sont réparties à parts égales entre dépenses et recettes.',
     measuresSrc: ['idep', 'terraNova', 'montaigneRet', 'montaigneTva'],
-    src: ['idep', 'terraNova', 'montaigneRet', 'montaigneTva', 'montaigneAbrog', 'martinot', 'ecalle', 'rnPress'],
+    src: ['idep', 'terraNova', 'montaigneRet', 'montaigneTva', 'montaigneAbrog', 'martinot', 'ecalle', 'rnPress', 'rnRetraites'],
   },
 
   lfi: {
-    id: 'lfi', name: 'La France insoumise', short: 'LFI', color: '#c0392b', status: 'ready', checked: '2026-11-16', officialSite: 'https://lafranceinsoumise.fr',
+    id: 'lfi', name: 'La France insoumise', short: 'LFI', color: '#c0392b', status: 'ready', checked: '2026-11-22', officialSite: 'https://lafranceinsoumise.fr',
     profile: { born: '1951-08-19', role: 'Député, fondateur de LFI', wiki: 'Jean-Luc_Mélenchon' },
     candidate: 'Jean-Luc Mélenchon', pollName: 'Mélenchon', position: 'Gauche radicale', poll: 16.7, pollDelta: 1.8, deputies: 70,
     document: 'LFI a publié le 6 novembre 2026 son programme pour 2027 (« L’Avenir en commun », 1 069 mesures dont 238 nouvelles) : SMIC à 1 700 € net, retour à 62 ans puis à 60 ans à taux plein avec 40 annuités, ISF climatique, impôt sur le revenu à 14 tranches, impôt plancher de 2 % sur les patrimoines de plus de 100 M€, gel de la dette détenue par la BCE. Le chiffrage complet n’est annoncé que pour le début de 2027. Le 14 octobre 2026, LFI a publié un contre-budget pour la seule année 2027 (106,4 Md€ de recettes nouvelles, 81,7 Md€ de dépenses nouvelles, soit 24,7 Md€ de réduction du déficit), sans trajectoire au-delà ; il n’est pas encore intégré ici. En attendant, cet onglet utilise le cadrage chiffré publié par LFI pour le programme du Nouveau Front populaire de 2024, avec les mêmes trois phases décalées à mi-2027 : le nouveau SMIC (1 700 € au lieu de 1 600 €) et le calendrier plus progressif des retraites n’y sont pas encore pris en compte.',
@@ -276,7 +278,7 @@ export const parties = {
   },
 
   hor: {
-    id: 'hor', name: 'Horizons', short: 'HOR', color: '#0e9aa7', status: 'ready', checked: '2026-11-16', officialSite: 'https://horizonsleparti.fr',
+    id: 'hor', name: 'Horizons', short: 'HOR', color: '#0e9aa7', status: 'ready', checked: '2026-11-22', officialSite: 'https://horizonsleparti.fr',
     profile: { born: '1970-11-28', role: 'Maire du Havre, ancien Premier ministre', wiki: 'Édouard_Philippe' },
     candidate: 'Édouard Philippe', pollName: 'Philippe', position: 'Centre droit', poll: 14.4, pollDelta: 2.2, deputies: 35,
     document: 'Le programme d’Édouard Philippe fixe un déficit de 2 % du PIB en 2032, sans nouvel impôt et avec une règle d’or constitutionnelle, mais ne publie pas de total d’économies. Détaillés ici : la réforme des retraites (65 ans, 45 annuités), l’assurance chômage, le « deal fiscal » des entreprises et les 10 Md€ d’économies 2027 du budget alternatif d’Horizons (13 oct. 2026). Le reste de l’effort nécessaire pour atteindre 2 % figure sur une ligne non détaillée.',
@@ -332,7 +334,7 @@ export const parties = {
   },
 
   lr: {
-    id: 'lr', name: 'Les Républicains', short: 'LR', color: '#2d6cdf', status: 'ready', checked: '2026-11-16', officialSite: 'https://republicains.fr',
+    id: 'lr', name: 'Les Républicains', short: 'LR', color: '#2d6cdf', status: 'ready', checked: '2026-11-22', officialSite: 'https://republicains.fr',
     profile: { born: '1960-11-20', role: 'Ancien ministre de l’Intérieur, sénateur', wiki: 'Bruno_Retailleau' },
     candidate: 'Bruno Retailleau', pollName: 'Retailleau', position: 'Droite', poll: 8.1, pollDelta: 1.7, deputies: 47,
     document: 'Plan de Bruno Retailleau présenté le 12 octobre 2026 : 197 Md€ d’économies sur cinq ans (État 96 Md€, social 91 Md€, collectivités 10 Md€), dont 51 Md€ rendus en baisses d’impôts, pour un excédent primaire en 2030, un déficit sous 3 % en 2031 et 2,2 % en fin de mandat. Les lignes détaillées ci-dessous totalisent 202 Md€, un peu plus que les 197 Md€ annoncés.',
@@ -386,7 +388,7 @@ export const parties = {
   },
 
   re: {
-    id: 're', name: 'Renaissance', short: 'RE', color: '#e0a100', status: 'ready', checked: '2026-11-16', officialSite: 'https://parti-renaissance.fr',
+    id: 're', name: 'Renaissance', short: 'RE', color: '#e0a100', status: 'ready', checked: '2026-11-22', officialSite: 'https://parti-renaissance.fr',
     profile: { born: '1989-03-16', role: 'Ancien Premier ministre, secrétaire général de Renaissance', wiki: 'Gabriel_Attal' },
     candidate: 'Gabriel Attal', pollName: 'Attal', position: 'Centre', poll: 9.1, pollDelta: 3.4, deputies: 90,
     document: 'Le plan de Gabriel Attal : environ 150 Md€ d’économies d’ici 2032, aux deux tiers sur les dépenses sociales, sans hausse d’impôts ; un déficit sous 3 % « avant 2032 » et l’équilibre en 2037, inscrit dans la Constitution. Peu de lignes sont détaillées : 100 000 départs volontaires de fonctionnaires, l’assurance chômage et une « année blanche » des prestations dans le budget 2028.',
@@ -430,7 +432,7 @@ export const parties = {
   },
 
   ps: {
-    id: 'ps', name: 'PS – Place publique', short: 'PS-PP', color: '#d6457a', status: 'ready', checked: '2026-11-16', officialSite: 'https://place-publique.eu',
+    id: 'ps', name: 'PS – Place publique', short: 'PS-PP', color: '#d6457a', status: 'ready', checked: '2026-11-22', officialSite: 'https://place-publique.eu',
     profile: { born: '1979-10-15', role: 'Eurodéputé, cofondateur de Place publique', wiki: 'Raphaël_Glucksmann' },
     candidate: 'Raphaël Glucksmann', pollName: 'Glucksmann', position: 'Centre gauche', poll: 9.5, pollDelta: -2.0, deputies: 68,
     document: 'Raphaël Glucksmann a remporté la primaire PS / Place publique le 11 octobre 2026 ; son programme (78 mesures) n’est pas chiffré. Le cadrage chiffré utilisé ici est le contre-budget 2027 des députés socialistes (16 septembre 2026) : environ 39,5 Md€ de recettes nouvelles portées par un impôt plancher de 2 % sur les patrimoines de plus de 100 M€, 17,5 Md€ d’économies et de lutte contre la fraude, 22 Md€ de dépenses nouvelles et une CSG progressive, pour un déficit réduit d’environ 24 Md€ en 2027. L’abrogation de la réforme des retraites de 2023, inscrite au programme de Raphaël Glucksmann, est ajoutée.',
@@ -472,10 +474,10 @@ export const parties = {
   },
 
   eco: {
-    id: 'eco', name: 'Les Écologistes', short: 'LE', color: '#2a9d4a', status: 'ready', checked: '2026-11-16', officialSite: 'https://lesecologistes.fr',
+    id: 'eco', name: 'Les Écologistes', short: 'LE', color: '#2a9d4a', status: 'ready', checked: '2026-11-22', officialSite: 'https://lesecologistes.fr',
     profile: { born: '1986-08-23', role: 'Secrétaire nationale des Écologistes', wiki: 'Marine_Tondelier' },
     candidate: 'Marine Tondelier', pollName: 'Tondelier', position: 'Gauche écologiste', poll: 2.8, pollDelta: 0, deputies: 38,
-    document: 'Le programme des Écologistes, « Pour une prospérité écologique » (557 mesures, adopté le 13 juillet 2026), n’est pas chiffré dans son ensemble ; la candidature de Marine Tondelier doit être confirmée par un vote des adhérents en décembre 2026. Le seul cadrage chiffré publié par le parti est son « plan de sortie de crise » du 4 septembre 2025 : 28,5 Md€ d’impôts nouveaux, 16,6 Md€ d’économies et 33,4 Md€ de dépenses nouvelles, pour un déficit ramené à 3,7 % du PIB en 2030. Il est repris ici en montants annuels à partir de 2027.',
+    document: 'Le programme des Écologistes, « Pour une prospérité écologique » (557 mesures, adopté le 13 juillet 2026), n’est pas chiffré dans son ensemble ; la candidature de Marine Tondelier doit être confirmée par un vote des adhérents du 10 au 13 décembre 2026 (le 18 nov., elle s’est dite prête à une coalition autour de Jean-Luc Mélenchon, tout en restant candidate). Le seul cadrage chiffré publié par le parti est son « plan de sortie de crise » du 4 septembre 2025 : 28,5 Md€ d’impôts nouveaux, 16,6 Md€ d’économies et 33,4 Md€ de dépenses nouvelles, pour un déficit ramené à 3,7 % du PIB en 2030. Il est repris ici en montants annuels à partir de 2027.',
     headline: [
       ['Impôts nouveaux', '≈ 28,5 Md€ par an, dont un impôt « Zucman »'],
       ['Économies', '≈ 16,6 Md€ (aides aux entreprises, niches)'],
@@ -516,11 +518,11 @@ export const parties = {
     ],
     measuresNote: 'Montants du « plan de sortie de crise » des Écologistes (septembre 2025), conçu pour le budget 2026, repris en montants annuels dès 2027 et maintenus ensuite : 28,5 + 16,6 − 33,4 = +11,7 Md€.',
     measuresSrc: ['ecoPS', 'ifrapComp'],
-    src: ['ecoPS', 'ecoProg', 'ifrapComp', 'caeWealth', 'zucmanVote', 'montaigneAbrog', 'touteleurope'],
+    src: ['ecoPS', 'ecoLCP', 'ecoProg', 'ifrapComp', 'caeWealth', 'zucmanVote', 'montaigneAbrog', 'touteleurope'],
   },
 
   rec: {
-    id: 'rec', name: 'Reconquête', short: 'REC', color: '#6b4423', status: 'ready', checked: '2026-11-16', officialSite: 'https://www.parti-reconquete.fr',
+    id: 'rec', name: 'Reconquête', short: 'REC', color: '#6b4423', status: 'ready', checked: '2026-11-22', officialSite: 'https://www.parti-reconquete.fr',
     profile: { born: '1958-08-31', role: 'Président de Reconquête', wiki: 'Éric_Zemmour' },
     candidate: 'Éric Zemmour', pollName: 'Zemmour', position: 'Extrême droite', poll: 4.0, pollDelta: 0, deputies: 0,
     document: 'Éric Zemmour, qui avait fait savoir mi-septembre qu’il serait candidat, a officialisé sa candidature le 10 novembre 2026 au journal de TF1 (AFP) ; son programme présidentiel chiffré n’est pas encore publié. Le chiffrage le plus détaillé de Reconquête est le plan de Sarah Knafo, eurodéputée Reconquête (« Le Casse du siècle », septembre 2026, et budget2027.fr) : au moins 140 Md€ d’économies par an, sans hausse d’impôts, dont 40 Md€ sur 800 000 postes de fonctionnaires non remplacés. Les baisses d’impôts annoncées (suppression des droits de succession, accise sur les carburants réduite d’un tiers) ne sont pas chiffrées par le parti.',
@@ -584,7 +586,7 @@ export const parties = {
   },
 
   ne: {
-    id: 'ne', name: 'Nouvelle Énergie', short: 'NÉ', color: '#8e44ad', status: 'ready', checked: '2026-11-16', officialSite: 'https://www.unenouvelleenergie.fr',
+    id: 'ne', name: 'Nouvelle Énergie', short: 'NÉ', color: '#8e44ad', status: 'ready', checked: '2026-11-22', officialSite: 'https://www.unenouvelleenergie.fr',
     profile: { born: '1969-02-02', role: 'Maire de Cannes, président de Nouvelle Énergie', wiki: 'David_Lisnard' },
     candidate: 'David Lisnard', pollName: 'Lisnard', position: 'Droite libérale', poll: 3.5, pollDelta: 0, deputies: 0,
     document: 'David Lisnard, maire de Cannes, a déclaré sa candidature le 31 mars 2026 en quittant Les Républicains ; il porte un projet libéral sous la bannière de Nouvelle Énergie, le mouvement qu’il a fondé en 2021. Il est crédité de 2 à 5 % dans les sondages où il est testé (3,5 % pour l’Ifop fin septembre 2026). Son programme n’est pas finalisé : il annonce 80 Md€ d’économies dès la première année et 200 Md€ par an en fin de mandat, rendus à 60 % en salaire net par la baisse des cotisations, à 20 % aux entreprises et affectés à 20 % à la dette, et dit viser à terme 300 Md€. Seule la condition de résidence pour les prestations non contributives est chiffrée (8 Md€). Aucune analyse indépendante de ce plan n’a été publiée.',
@@ -630,7 +632,7 @@ export const parties = {
   },
 
   dlf: {
-    id: 'dlf', name: 'Debout la France', short: 'DLF', color: '#5566aa', status: 'ready', checked: '2026-11-16', officialSite: 'https://www.debout-la-france.fr',
+    id: 'dlf', name: 'Debout la France', short: 'DLF', color: '#5566aa', status: 'ready', checked: '2026-11-22', officialSite: 'https://www.debout-la-france.fr',
     profile: { born: '1961-03-07', role: 'Maire de Yerres, président de Debout la France', wiki: 'Nicolas_Dupont-Aignan' },
     candidate: 'Nicolas Dupont-Aignan', pollName: 'Dupont-Aignan', position: 'Droite souverainiste', poll: 2.0, pollDelta: 0, deputies: 0,
     document: 'Nicolas Dupont-Aignan a déclaré sa candidature le 19 septembre 2026 à Yerres, avec une sortie de l’UE soumise à référendum. Le 12 novembre 2026, il a présenté les 30 mesures économiques de son projet : selon le candidat, 140 Md€ par an d’économies (100 Md€ : fraude sociale, fin de l’AME, de la contribution à l’UE et des aides à l’éolien et au solaire) et de recettes nouvelles (40 Md€ : fraude fiscale, bénéfices des multinationales), dont 90 Md€ financent des baisses d’impôts et des dépenses nouvelles (16 Md€ pour les entreprises, 25 Md€ pour le pouvoir d’achat, dont un SMIC à 1 600 € net) et 50 Md€ réduisent le déficit, pour le ramener sous 3 % du PIB. Le détail ligne par ligne n’est pas publié : les montants ci-dessous restent ceux du comparateur de l’iFRAP. Le comparateur de l’iFRAP recense environ 130 Md€ d’économies annoncées, dont 127 Md€ détaillés ; les baisses d’impôts et dépenses nouvelles (carburants, livret de naissance, impôts de production, sécurité) n’ont pas de montant publié et sont estimées ici à partir de ce que le candidat dit de leur financement.',
@@ -684,7 +686,7 @@ export const parties = {
   },
 
   pcf: {
-    id: 'pcf', name: 'Parti communiste français', short: 'PCF', color: '#a4161a', status: 'unscored', checked: '2026-11-16', officialSite: 'https://www.pcf.fr',
+    id: 'pcf', name: 'Parti communiste français', short: 'PCF', color: '#a4161a', status: 'unscored', checked: '2026-11-22', officialSite: 'https://www.pcf.fr',
     profile: { born: '1969-04-16', role: 'Maire de Saint-Amand-les-Eaux, secrétaire national du PCF', wiki: 'Fabien_Roussel' },
     candidate: 'Fabien Roussel', pollName: 'Roussel', position: 'Gauche', poll: 2.0, pollDelta: 0, deputies: 17,
     document: 'Fabien Roussel a annoncé sa candidature le 6 septembre 2026, investi par 72 % des militants. Le PCF n’a pas encore publié de programme chiffré pour 2027 : ce programme n’est donc pas modélisé. En 2022, son programme « La France des jours heureux » comptait 180 propositions. Les 17 députés indiqués sont ceux du groupe Gauche démocrate et républicaine, qui ne compte pas que des communistes.',
@@ -707,7 +709,7 @@ export const parties = {
   },
 
   lo: {
-    id: 'lo', name: 'Lutte ouvrière', short: 'LO', color: '#7a1010', status: 'unscored', checked: '2026-11-16', officialSite: 'https://www.lutte-ouvriere.org',
+    id: 'lo', name: 'Lutte ouvrière', short: 'LO', color: '#7a1010', status: 'unscored', checked: '2026-11-22', officialSite: 'https://www.lutte-ouvriere.org',
     profile: { born: '1970-02-23', role: 'Porte-parole de Lutte ouvrière, professeure d’économie', wiki: 'Nathalie_Arthaud' },
     candidate: 'Nathalie Arthaud', pollName: 'Arthaud', position: 'Extrême gauche', poll: 0.6, pollDelta: 0, deputies: 0,
     document: 'Nathalie Arthaud est candidate pour la quatrième fois. Lutte ouvrière défend un programme de revendications ouvrières plutôt qu’un budget : il n’est pas chiffré et n’est donc pas modélisé. Ses mesures portent surtout sur les entreprises (salaires, expropriations), dont l’effet sur les comptes publics dépend de leur mise en œuvre.',

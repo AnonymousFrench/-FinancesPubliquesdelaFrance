@@ -15,6 +15,8 @@ export const SRC_EN = {
   'OCDE, taux d’intérêt à long terme (Royaume-Uni, États-Unis, Japon), via la Réserve fédérale de Saint-Louis (FRED)': 'OECD, long-term interest rates (United Kingdom, United States, Japan), via the St. Louis Federal Reserve (FRED)',
   'Agence France Trésor : programme de financement et bulletin mensuel': 'Agence France Trésor: financing programme and monthly bulletin',
   'La finance pour tous, « PLF 2027 : le budget sous haute tension » (8 oct. 2026)': 'La finance pour tous, “PLF 2027: le budget sous haute tension” (8 Oct 2026)',
+  'LCP, Marine Tondelier prête à une coalition autour de Jean-Luc Mélenchon (18 nov. 2026)': 'LCP, Marine Tondelier ready for a coalition around Jean-Luc Mélenchon (18 Nov 2026)',
+  'Public Sénat, Marine Le Pen présente la réforme des retraites du RN, chiffres du parti (17 nov. 2026)': 'Public Sénat, Marine Le Pen presents the RN pension reform, party figures (17 Nov 2026)',
   'Public Sénat, présentation du contre-budget du RN (6 oct. 2026)': 'Public Sénat, presentation of the RN counter-budget (6 Oct 2026)',
   'Planète Grandes Écoles, mesures du budget RN 2027 et analyse de l’Institut de l’Entreprise': 'Planète Grandes Écoles, RN 2027 budget measures and Institut de l’Entreprise review',
   'Acteurs publics, les économies sur l’État et les collectivités dans le plan du RN': 'Acteurs publics, savings on the State and local authorities in the RN plan',
